@@ -1,4 +1,4 @@
-#OneGraphWebApp
+# OneGraphWebApp
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).     
 This repo is a web app frontend based on [Ark One Graph](https://github.com/SQRPI/ArkOneGraph) by @SQRPI. And would be deployed on Heroku soon!   
 
