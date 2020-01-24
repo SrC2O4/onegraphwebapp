@@ -9,7 +9,7 @@ const app = express();
 const { mongoose } = require("./db/mongoose");
 
 // import the mongoose models
-const { Material } = require("./models/material");
+const { MaterialSchema } = require("./models/material");
 
 // to validate object IDs
 const { ObjectID } = require("mongodb");
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/materials", (req, res) => {
-    Material.find().then(
+    MaterialSchema.find({}).then(
         materials => {
             res.send({ materials }); // can wrap in object if want to add more properties
         },
@@ -30,41 +30,18 @@ app.get("/materials", (req, res) => {
     );
 });
 
-
-app.get("/materials/:id", (req, res) => {
-    /// req.params has the wildcard parameters in the url, in this case, id.
-    // log(req.params.id)
-    const id = req.params.id;
-
-    // Otherwise, findById
-    Material.findById(id)
-        .then(material => {
-            if (!material) {
-                res.status(404).send(); // could not find this material
-            } else {
-                /// sometimes we wrap returned object in another object:
-                //res.send({material})
-                res.send(material);
-            }
-        })
-        .catch(error => {
-            res.status(500).send(); // server error
-        });
-});
-
-
+// Get the material list for given tier
 app.get("/materials/tier/:tier", (req, res) => {
     /// req.params has the wildcard parameters in the url, in this case, id.
     // log(req.params.id)
     const tier = req.params.tier;
     
-    Material.findById(id)
+    MaterialSchema.find({'tier': tier})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
             } else {
                 /// sometimes we wrap returned object in another object:
-                //res.send({material})
                 res.send(material);
             }
         })

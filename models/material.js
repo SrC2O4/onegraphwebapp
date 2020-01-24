@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const Stage = mongoose.model('Stage', {
+const Stage = new mongoose.Schema({
     code:{
         type: String,
         required: true
@@ -21,10 +21,9 @@ const Stage = mongoose.model('Stage', {
         type: [String],
         required: false
     }
-
 });
 
-const Material = mongoose.model('Material', {
+const Material = new mongoose.Schema( {
 	name: {
 		type: String,
 		required: true
@@ -73,6 +72,7 @@ const Material = mongoose.model('Material', {
         required: false
     }
 
-})
+} )
 
-module.exports = { Material }
+let MaterialSchema = mongoose.model('Material', Material, 'Material')
+module.exports = {MaterialSchema}
