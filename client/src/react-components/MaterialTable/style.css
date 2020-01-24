@@ -1,0 +1,38 @@
+.MT-5{
+    width: 66px;
+}
+
+.MT-4{
+    width: 55px;
+}
+
+.M5Materials{
+    width: fit-content;
+    display: inline-block;
+    float: left;
+    margin-top: 4.6rem;
+    margin-left: 8%;
+}
+.M4Materials{
+    width: fit-content;
+    display: inline-block;
+    float: left;    
+    margin-left: 3%;
+    margin-top: 0;
+
+}
+
+.outLayer::after{
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+.outLayer{
+    margin-top: 3%;
+}
+
+.MT-4-wrapper{
+    margin-top: 1.5rem;
+}

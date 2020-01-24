@@ -36,20 +36,15 @@ app.get("/materials/:id", (req, res) => {
     // log(req.params.id)
     const id = req.params.id;
 
-    // Good practise: Validate id immediately.
-    if (!ObjectID.isValid(id)) {
-        res.status(404).send(); // if invalid id, definitely can't find resource, 404.
-    }
-
     // Otherwise, findById
-    Student.findById(id)
-        .then(student => {
-            if (!student) {
-                res.status(404).send(); // could not find this student
+    Material.findById(id)
+        .then(material => {
+            if (!material) {
+                res.status(404).send(); // could not find this material
             } else {
                 /// sometimes we wrap returned object in another object:
-                //res.send({student})
-                res.send(student);
+                //res.send({material})
+                res.send(material);
             }
         })
         .catch(error => {
@@ -57,77 +52,27 @@ app.get("/materials/:id", (req, res) => {
         });
 });
 
-/// a DELETE route to remove a student by their id.
-app.delete("/students/:id", (req, res) => {
-    const id = req.params.id;
 
-    // Validate id
-    if (!ObjectID.isValid(id)) {
-        res.status(404).send();
-    }
-
-    // Delete a student by their id
-    Student.findByIdAndRemove(id)
-        .then(student => {
-            if (!student) {
-                res.status(404).send();
+app.get("/materials/tier/:tier", (req, res) => {
+    /// req.params has the wildcard parameters in the url, in this case, id.
+    // log(req.params.id)
+    const tier = req.params.tier;
+    
+    Material.findById(id)
+        .then(material => {
+            if (!material) {
+                res.status(404).send(); // could not find this material
             } else {
-                res.send(student);
+                /// sometimes we wrap returned object in another object:
+                //res.send({material})
+                res.send(material);
             }
         })
         .catch(error => {
-            res.status(500).send(); // server error, could not delete.
+            res.status(500).send(); // server error
         });
 });
 
-// a PATCH route for changing properties of a resource.
-// (alternatively, a PUT is used more often for replacing entire resources).
-app.patch("/students/:id", (req, res) => {
-    const id = req.params.id;
-
-    // get the updated name and year only from the request body.
-    const { name, year } = req.body;
-    const body = { name, year };
-
-    if (!ObjectID.isValid(id)) {
-        res.status(404).send();
-    }
-
-    // Update the student by their id.
-    Student.findByIdAndUpdate(id, { $set: body }, { new: true })
-        .then(student => {
-            if (!student) {
-                res.status(404).send();
-            } else {
-                res.send(student);
-            }
-        })
-        .catch(error => {
-            res.status(400).send(); // bad request for changing the student.
-        });
-});
-
-/** User routes below **/
-// Set up a POST route to *create* a user of your web app (*not* a student).
-app.post("/users", (req, res) => {
-    log(req.body);
-
-    // Create a new user
-    const user = new User({
-        email: req.body.email,
-        password: req.body.password
-    });
-
-    // Save the user
-    user.save().then(
-        user => {
-            res.send(user);
-        },
-        error => {
-            res.status(400).send(error); // 400 for bad request
-        }
-    );
-});
 
 /*** Webpage routes below **********************************/
 // Serve the build
