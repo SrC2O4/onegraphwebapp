@@ -8,7 +8,7 @@
     "start": "node server.js",
     "heroku-postbuild": "cd client && yarn install && yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1"
-},
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
