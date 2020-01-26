@@ -1,18 +1,36 @@
 import React from 'react';
 import './style.css';
+import BaseComponent from "./../Base";
+import { getT1Materials, getT2Materials, getT3Materials, getT4Materials, getT5Materials, getCatalyst} from '../../actions/material';
+import {getState} from 'statezero'
 
-
-class MaterialTable extends React.Component{
+class MaterialTable extends BaseComponent{
+    
+    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst}){
+         
+        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst};
+    }
     // TODO: Replace those with the actual db queries
-    t5Material = [{name:"D32钢", id:"30135"}, {name:"聚合剂", id:"30115"}, {name:"双极纳米片", id:"30125"}]
-    t4Material = [{name:"RMA70-24", id:"30104"},{name:"三水锰矿", id:"30084"}, {id:"30094"}, {id:"30014"}]
+   
     render(){
+           
+        getT1Materials();      
+        getT2Materials();
+        getT3Materials();
+        getT4Materials();
+        getT5Materials(); 
+        getCatalyst(); 
+
         return(
             // The 3 tier 5 materials
             <div className = 'outLayer'>
+                <div className = 'catalyst'>
+                    <img className = 'MT-4' src= {require('./static/'+'ESS-32001.png')}/>
+                    <p className = 'CatalystValue'> {`${this.state.catalyst.golden_ticket_value}`}</p>
+                </div>
                 <div className='M5Materials'>
                     {
-                        this.t5Material.map((item) => {
+                        this.state.t5Material.map((item) => {
                             return (
                             <div className = 'MT-5-wrapper'>
                                 <img className = 'MT-5' src= {require('./static/'+'MT-'+item.id+'.png')}/>
@@ -26,16 +44,41 @@ class MaterialTable extends React.Component{
                 {/* All the tier 4 materials */}
                 <div className = 'M4Materials'>
                 {
-                        this.t4Material.map((item) => {
+                        this.state.t4Material.map((item) => {
                             return (
                             <div className = 'MT-4-wrapper'>
-                                <img className = 'MT-4' src= {require('./static/'+'MT-'+item.id+'.png')}/>
+                                <img className = 'MT-4' src= {require('./static/'+'MT-'+item.id+'.png')}/> 
+                                <p className = {'M4Values'+item.Notes}>{`${item.golden_ticket_value}`}</p>
                             </div>
                             
                             )
                         } )
                     }
                 </div>
+{/* 
+                <div className = 'M4Materials'>
+                {
+                        this.state.t4Material.map((item) => {
+                            if(this.state.t4Material.indexOf(item) == 0){
+                                return (
+                                    <div >
+                                      
+                                    </div>
+                                    
+                                    )
+                            } else{
+                                return (
+                                <div className = {'M4Values'+item.Notes}>
+                                <p>{`${item.golden_ticket_value}`}</p>
+                                </div>
+                                
+                                )
+                            }
+                        } )
+                    }
+                </div> */}
+
+
             </div>
 
 

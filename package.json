@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build-run": "cd client && yarn build && cd .. && node server.js",
-    "heroku-postbuild": "cd client && yarn install && yarn build"
-  },
+    "setup": "yarn install && cd client && yarn install && cd ..",
+    "build-run": "cd client && yarn run build && cd .. && node server.js",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && yarn install && yarn run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+},
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",

@@ -4,21 +4,24 @@
 
 .MT-4{
     width: 55px;
+    vertical-align: middle;
 }
+
 
 .M5Materials{
     width: fit-content;
     display: inline-block;
-    float: left;
     margin-top: 4.6rem;
     margin-left: 8%;
+    vertical-align: top;
 }
+
 .M4Materials{
-    width: fit-content;
-    display: inline-block;
-    float: left;    
+    width: 13%;
+    display: inline-block;  
     margin-left: 3%;
     margin-top: 0;
+    vertical-align: top;
 
 }
 
@@ -35,4 +38,53 @@
 
 .MT-4-wrapper{
     margin-top: 1.5rem;
+    vertical-align: middle;
+}
+
+.M4Values{
+    margin-top: 3.6rem;
+    font-size: larger;
+    vertical-align: middle;
+    display: inline;
+    margin-left: 7%;
+}
+
+.M4Valuesgreen{
+    margin-top: 3.6rem;
+    font-size: larger;
+    color: forestgreen;
+    vertical-align: middle;
+    display: inline;
+    margin-left: 7%;
+}
+.M4Valuesred{
+    margin-top: 3.6rem;
+    font-size: larger;
+    color: red;
+    vertical-align: middle;
+    display: inline;
+    margin-left: 7%;
+}
+.M4Valuesyellow{
+    margin-top: 3.6rem;
+    font-size: larger;
+    color: goldenrod;
+    vertical-align: middle;
+    display: inline;
+    margin-left: 7%;
+
+}
+
+.catalyst{
+    margin-left: 16%;
+    vertical-align: middle;
+    width: 13%;
+}
+.catalyst p{
+    font-size: larger;
+    display: inline;
+    margin-left: 3.5%;
+    margin-top: 1rem;
+    color: goldenrod;
+    vertical-align: middle;
 }

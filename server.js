@@ -30,19 +30,34 @@ app.get("/materials", (req, res) => {
     );
 });
 
-// Get the material list for given tier
+// Get the material list by tier
 app.get("/materials/tier/:tier", (req, res) => {
-    /// req.params has the wildcard parameters in the url, in this case, id.
-    // log(req.params.id)
     const tier = req.params.tier;
-    
-    MaterialSchema.find({'tier': tier})
+
+    MaterialSchema.find({'tier': tier, 'type': 'Material'}).sort({'Order_id':1})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
             } else {
                 /// sometimes we wrap returned object in another object:
-                res.send(material);
+                res.send({material});
+            }
+        })
+        .catch(error => {
+            res.status(500).send(); // server error
+        });
+});
+
+app.get("/materials/catalyst", (req, res) => {
+    const tier = req.params.tier;
+
+    MaterialSchema.find({'id': '32001'})
+        .then(material => {
+            if (!material) {
+                res.status(404).send(); // could not find this material
+            } else {
+                /// sometimes we wrap returned object in another object:
+                res.send({material});
             }
         })
         .catch(error => {
