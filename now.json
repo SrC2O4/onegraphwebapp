@@ -1,11 +1,4 @@
 {
     "version": 2,
-    "builds": [{ "src": "*.js", "use": "@now/node-server" }],
-    "routes": [
-      {
-        "src": "/git",
-        "dest": "/server.js",
-        "methods": ["GET"]
-      }
-    ]
+    "builds": [{ "src": "*.js", "use": "@now/node-server" }]
   }
