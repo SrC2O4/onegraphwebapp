@@ -7,6 +7,3 @@ cache:
 script:
   - yarn run setup
   - yarn run build
- deploy:
-  provider: heroku
-  app: arkonegraph
