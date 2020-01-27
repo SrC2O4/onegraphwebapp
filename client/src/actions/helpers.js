@@ -11,6 +11,7 @@ export const setEmptyState = () => {
     setState("t3Material", []);
     setState("t2Material", []);
     setState("t1Material", []);
+    setState("misc", []);
     setState("catalyst", {});
     setState("gacha", {});
     setState("plan", {});

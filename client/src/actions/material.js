@@ -291,3 +291,37 @@ export const getPlan = () =>{
             console.log(error);
         })
 }
+
+
+export const getMisc = () =>{
+    const url = "/materials/misc";
+    console.log(url);        
+
+    fetch(url)
+        .then((res) =>{
+            // Handle response we get from the API.
+            // Usually check the error codes to see what happened.
+            if (res.status === 200) {
+                // If student was added successfully, tell the user.
+                setState("message", {
+                    body: "Success: Added a student.",
+                    type: "success"
+                });
+                return res.json();
+                
+            } else {
+                // If server couldn't add the student, tell the user.
+                // Here we are adding a generic message, but you could be more specific in your app.
+                setState("message", {
+                    body: "Error: Could not add student.",
+                    type: "error"
+                });
+            }
+        })
+        .then((json) =>{
+            setState('misc', json.material);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+}

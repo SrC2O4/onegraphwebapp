@@ -110,3 +110,44 @@
     color: red;
     vertical-align: middle;
 }
+
+.CreditValue{
+    font-size: larger;
+    display: inline;
+    margin-left: 1%;
+    margin-top: 1rem;
+    vertical-align: middle;
+}
+
+.CreditValuered{
+    font-size: larger;
+    display: inline;
+    margin-left: 1%;
+    margin-top: 1rem;
+    vertical-align: middle;
+    color: red;
+}
+
+.CreditValuegreen{
+    font-size: larger;
+    display: inline;
+    margin-left: 1%;
+    margin-top: 1rem;
+    vertical-align: middle;
+    color: forestgreen;
+}
+
+.CreditValueyellow{
+    font-size: larger;
+    display: inline;
+    margin-left: 1%;
+    margin-top: 1rem;
+    vertical-align: middle;
+    color: goldenrod;
+}
+
+.Credit-wrapper{
+    margin-top: 1.5rem;
+    vertical-align: middle;
+    display: inline;
+}

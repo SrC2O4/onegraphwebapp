@@ -1,14 +1,14 @@
 import React from 'react';
 import './style.css';
 import BaseComponent from "./../Base";
-import { getT1Materials, getT2Materials, getT3Materials, getT4Materials, getT5Materials, getCatalyst, getGacha, getPlan} from '../../actions/material';
+import { getT1Materials, getT2Materials, getT3Materials, getT4Materials, getT5Materials, getCatalyst, getGacha, getPlan, getMisc} from '../../actions/material';
 import {getState} from 'statezero'
 
 class MaterialTable extends BaseComponent{
     
-    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan}){
+    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc}){
          
-        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan};
+        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc};
     }
     // TODO: Replace those with the actual db queries
    
@@ -22,6 +22,7 @@ class MaterialTable extends BaseComponent{
         getCatalyst(); 
         getGacha();
         getPlan();
+        getMisc();
 
         return(
             // The 3 tier 5 materials
@@ -33,8 +34,20 @@ class MaterialTable extends BaseComponent{
                     <h4> 绿票商店-二层</h4>
                     <img className = 'MT-4' src= {require('./static/'+'GACHATICKET.png')}/>
                     <p className = {'GachaValue'}> {`${this.state.gacha.green_ticket_value}`}</p>
-                    <img className = 'MT-4' src= {require('./static/'+'ESS-7001.png')}/>
+                    <img className = 'MT-4' src= {require('./static/'+'MISC-7001.png')}/>
                     <p className = {'PlanValue'}> {`${this.state.plan.green_ticket_value}`}</p>
+                    <h4> 信用商店</h4>
+                    {
+                        this.state.misc.map((item) => {
+                            return (
+                            <div className = 'Credit-wrapper'>
+                                <img className = 'MT-4' src= {require('./static/'+'MISC-'+item.id+'.png')}/> 
+                                <p className = {'CreditValue'+item.Notes}>{`${item.credit_store_value}`}</p>
+                            </div>
+                            
+                            )
+                        } )
+                    }
                 </div>
                 <div className='M5Materials'>
                     {

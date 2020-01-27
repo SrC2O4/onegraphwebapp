@@ -99,6 +99,23 @@ app.get("/materials/plan", (req, res) => {
         });
 });
 
+app.get("/materials/misc", (req, res) => {
+    const tier = req.params.tier;
+
+    MaterialSchema.find({'credit_store_value': {$gt: 0}, 'type': { $not: { $regex: "Material" } } })
+        .then(material => {
+            if (!material) {
+                res.status(404).send(); // could not find this material
+            } else {
+                /// sometimes we wrap returned object in another object:
+                res.send({material});
+            }
+        })
+        .catch(error => {
+            res.status(500).send(); // server error
+        });
+});
+
 
 /*** Webpage routes below **********************************/
 // Serve the build
