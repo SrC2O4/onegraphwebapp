@@ -61,6 +61,9 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     width: 150,
   },
+  gitHubIcon: {
+    fontSize: 'medium',
+  }
 }));
 
 export default function AppFooter() {
@@ -102,7 +105,7 @@ export default function AppFooter() {
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                <Link href="https://github.com/ycremar/ArkPlanner">ArkPlanner<GitHubIcon style = 'fontSize: medium'/></Link>
+                <Link href="https://github.com/ycremar/ArkPlanner">ArkPlanner<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
             </ul>
           </Grid>
@@ -121,7 +124,7 @@ export default function AppFooter() {
                 <Link href="http://ak.mooncell.wiki/w/%E9%A6%96%E9%A1%B5">PTRS wiki</Link>
               </li>
               <li className={classes.listItem}>
-                <Link href="https://github.com/Evealicemier">水晶泡芙工坊<GitHubIcon style = 'fontSize: medium'/></Link>
+                <Link href="https://github.com/Evealicemier">水晶泡芙工坊<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
             </ul>
           </Grid>
@@ -131,10 +134,10 @@ export default function AppFooter() {
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                前端Repo <Link href="https://github.com/Strontium233/onegraphwebapp">Strontium233<GitHubIcon style = 'fontSize: medium'/></Link>
+                前端Repo <Link href="https://github.com/Strontium233/onegraphwebapp">Strontium233<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
               <li className={classes.listItem}>
-                后端repo <Link href="https://github.com/SQRPI/ArkOneGraph">SQRPI<GitHubIcon style = 'fontSize: medium'/></Link>
+                后端repo <Link href="https://github.com/SQRPI/ArkOneGraph">SQRPI<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
             </ul>
           </Grid>
