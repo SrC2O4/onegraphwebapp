@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Typography from './Typography';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 function Copyright() {
   return (
@@ -88,10 +89,10 @@ export default function AppFooter() {
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                <Link href="/premium-themes/onepirate/terms/">企鹅物流</Link>
+                <Link href="https://penguin-stats.io/">企鹅物流</Link>
               </li>
               <li className={classes.listItem}>
-                <Link href="/premium-themes/onepirate/privacy/">ArkTools</Link>
+                <Link href="https://gachasalt.github.io/ArkToolDemo/#/">ArkTools</Link>
               </li>
             </ul>
           </Grid>
@@ -101,7 +102,7 @@ export default function AppFooter() {
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                <Link href="/premium-themes/onepirate/terms/">ArkPlanner</Link>
+                <Link href="https://github.com/ycremar/ArkPlanner">ArkPlanner<GitHubIcon style = 'fontSize: medium'/></Link>
               </li>
             </ul>
           </Grid>
@@ -111,16 +112,16 @@ export default function AppFooter() {
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                <Link href="/premium-themes/onepirate/terms/">NGA 一图流</Link>
+                <Link href="https://bbs.nga.cn/read.php?tid=19069337">NGA 一图流</Link>
               </li>
               <li className={classes.listItem}>
-                <Link href="/premium-themes/onepirate/terms/">明日方舟工具箱</Link>
+                <Link href="https://ak.graueneko.xyz/">明日方舟工具箱</Link>
               </li>
               <li className={classes.listItem}>
-                <Link href="/premium-themes/onepirate/terms/">PTRS wiki</Link>
+                <Link href="http://ak.mooncell.wiki/w/%E9%A6%96%E9%A1%B5">PTRS wiki</Link>
               </li>
               <li className={classes.listItem}>
-                <Link href="/premium-themes/onepirate/terms/">水晶泡芙工坊</Link>
+                <Link href="https://github.com/Evealicemier">水晶泡芙工坊<GitHubIcon style = 'fontSize: medium'/></Link>
               </li>
             </ul>
           </Grid>
@@ -130,10 +131,10 @@ export default function AppFooter() {
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                前端 <Link href="/premium-themes/onepirate/terms/">Strontium233</Link>
+                前端Repo <Link href="https://github.com/Strontium233/onegraphwebapp">Strontium233<GitHubIcon style = 'fontSize: medium'/></Link>
               </li>
               <li className={classes.listItem}>
-                后端 <Link href="/premium-themes/onepirate/terms/">SQRPI</Link>
+                后端repo <Link href="https://github.com/SQRPI/ArkOneGraph">SQRPI<GitHubIcon style = 'fontSize: medium'/></Link>
               </li>
             </ul>
           </Grid>
