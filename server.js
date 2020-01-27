@@ -65,6 +65,40 @@ app.get("/materials/catalyst", (req, res) => {
         });
 });
 
+app.get("/materials/gacha", (req, res) => {
+    const tier = req.params.tier;
+
+    MaterialSchema.find({'id': '7003'})
+        .then(material => {
+            if (!material) {
+                res.status(404).send(); // could not find this material
+            } else {
+                /// sometimes we wrap returned object in another object:
+                res.send({material});
+            }
+        })
+        .catch(error => {
+            res.status(500).send(); // server error
+        });
+});
+
+app.get("/materials/plan", (req, res) => {
+    const tier = req.params.tier;
+
+    MaterialSchema.find({'id': '7001'})
+        .then(material => {
+            if (!material) {
+                res.status(404).send(); // could not find this material
+            } else {
+                /// sometimes we wrap returned object in another object:
+                res.send({material});
+            }
+        })
+        .catch(error => {
+            res.status(500).send(); // server error
+        });
+});
+
 
 /*** Webpage routes below **********************************/
 // Serve the build

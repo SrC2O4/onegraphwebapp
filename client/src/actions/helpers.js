@@ -12,6 +12,8 @@ export const setEmptyState = () => {
     setState("t2Material", []);
     setState("t1Material", []);
     setState("catalyst", {});
+    setState("gacha", {});
+    setState("plan", {});
     setState("message", {body: "",type: ""});
 
 };

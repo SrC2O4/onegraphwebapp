@@ -76,15 +76,37 @@
 }
 
 .catalyst{
-    margin-left: 16%;
+    margin-left: 10%;
     vertical-align: middle;
-    width: 13%;
 }
-.catalyst p{
+.catalyst h4{
+    margin-left: 3%;
+    display: inline;
+}
+
+.CatalystValue{
     font-size: larger;
     display: inline;
-    margin-left: 3.5%;
+    margin-left: 1%;
     margin-top: 1rem;
     color: goldenrod;
+    vertical-align: middle;
+}
+
+.PlanValue{
+    font-size: larger;
+    display: inline;
+    margin-left: 1%;
+    margin-top: 1rem;
+    color: red;
+    vertical-align: middle;
+}
+
+.GachaValue{
+    font-size: larger;
+    display: inline;
+    margin-left: 1%;
+    margin-top: 1rem;
+    color: red;
     vertical-align: middle;
 }
