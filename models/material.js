@@ -27,50 +27,66 @@ const Material = new mongoose.Schema( {
 	name: {
 		type: String,
 		required: true
-    },
-    id: {
+  },
+
+  id: {
 		type: String,
 		required: true
-	},
+  },
+  
 	green_ticket_value: {
+      type: Number,
+      required: false,
+  },
+
+  golden_ticket_value: {
 		type: Number,
 		required: false,
-		// default: 1
-    },
-    golden_ticket_value: {
-		type: Number,
-		required: false,
-		// default: 1
-    },
-    tier: {
+  },
+
+  tier: {
 		type: Number,
 		required: true,
-		// default: 1
-    },
-    credit_store_value: {
-		type: Number,
-		required: false,
-		// default: 1
-    },
-    contingency_store_value: {
-		type: Number,
-		required: false,
-		// default: 1
-    },
-    lowest_ap_stages:{
-        type: [Stage],
-        required: false
-    },
+  },
 
-    balanced_stages: {
-        type: [Stage],
-        required: false
-    },
+  credit_store_value: {
+    type: Number,
+    required: false,
+  },
+  contingency_store_value: {
+    type: Number,
+    required: false,
+  },
 
-    drop_rate_first_stages: {
-        type: [Stage],
-        required: false
-    }
+  lowest_ap_stages:{
+      type: [Stage],
+      required: false
+  },
+
+  balanced_stages: {
+      type: [Stage],
+      required: false
+  },
+
+  drop_rate_first_stages: {
+      type: [Stage],
+      required: false
+  },
+
+  Order_id:{
+      type: Number,
+      required: true
+  },
+
+  Notes:{
+    type: String,
+    required: false
+  },
+
+  type:{
+    type: String,
+    required: false
+  }
 
 } )
 
