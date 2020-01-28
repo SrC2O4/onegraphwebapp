@@ -9,7 +9,7 @@ const app = express();
 const { mongoose } = require("./db/mongoose");
 
 // import the mongoose models
-const { MaterialSchema } = require("./models/material");
+const { MaterialSchema, StageSchema } = require("./models/material");
 
 // to validate object IDs
 const { ObjectID } = require("mongodb");
@@ -19,9 +19,17 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get("/test/stages", (req, res) => {
+    StageSchema.find({}).then((stages) =>{
+        res.send({stages});
+    }
+
+    )
+});
 app.get("/materials", (req, res) => {
-    MaterialSchema.find({}).then(
-        materials => {
+    MaterialSchema.find({})
+    .then(
+        (materials) => {
             res.send({ materials }); // can wrap in object if want to add more properties
         },
         error => {

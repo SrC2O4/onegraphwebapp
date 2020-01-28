@@ -1,23 +1,41 @@
 .MT-5{
-    width: 66px;
+    width: 55px;
 }
 
 .MT-4{
-    width: 55px;
+    width: 44px;
     vertical-align: middle;
 }
 
+.catalystDiv{
+    vertical-align: middle;
+    display: inline-block;
+
+}
+
+.miscDiv{
+    vertical-align: middle;
+    display: inline;
+}
 
 .M5Materials{
     width: fit-content;
     display: inline-block;
     margin-top: 4.6rem;
-    margin-left: 8%;
+    margin-left: 2%;
     vertical-align: top;
 }
 
 .M4Materials{
-    width: 13%;
+    display: inline-block;  
+    margin-left: 3%;
+    margin-top: 0;
+    vertical-align: top;
+
+}
+
+.M3Materials{
+    width: 20%;
     display: inline-block;  
     margin-left: 3%;
     margin-top: 0;
@@ -43,15 +61,14 @@
 
 .M4Values{
     margin-top: 3.6rem;
-    font-size: larger;
+    font-size: large;
     vertical-align: middle;
     display: inline;
-    margin-left: 7%;
 }
 
 .M4Valuesgreen{
     margin-top: 3.6rem;
-    font-size: larger;
+    font-size: large;
     color: forestgreen;
     vertical-align: middle;
     display: inline;
@@ -59,7 +76,7 @@
 }
 .M4Valuesred{
     margin-top: 3.6rem;
-    font-size: larger;
+    font-size: large;
     color: red;
     vertical-align: middle;
     display: inline;
@@ -67,7 +84,7 @@
 }
 .M4Valuesyellow{
     margin-top: 3.6rem;
-    font-size: larger;
+    font-size: large;
     color: goldenrod;
     vertical-align: middle;
     display: inline;
@@ -76,7 +93,7 @@
 }
 
 .catalyst{
-    margin-left: 10%;
+    margin-left: 3%;
     vertical-align: middle;
 }
 .catalyst h4{
@@ -85,7 +102,7 @@
 }
 
 .CatalystValue{
-    font-size: larger;
+    font-size: large;
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
@@ -94,7 +111,7 @@
 }
 
 .PlanValue{
-    font-size: larger;
+    font-size: large;
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
@@ -103,7 +120,7 @@
 }
 
 .GachaValue{
-    font-size: larger;
+    font-size: large;
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
@@ -112,7 +129,7 @@
 }
 
 .CreditValue{
-    font-size: larger;
+    font-size: large;
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
@@ -120,7 +137,7 @@
 }
 
 .CreditValuered{
-    font-size: larger;
+    font-size: large;
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
@@ -129,7 +146,7 @@
 }
 
 .CreditValuegreen{
-    font-size: larger;
+    font-size: large;
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
@@ -138,7 +155,7 @@
 }
 
 .CreditValueyellow{
-    font-size: larger;
+    font-size: large;
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
@@ -151,3 +168,22 @@
     vertical-align: middle;
     display: inline;
 }
+
+.lowestAPStage{
+    display: inline;
+    margin-left: 1%;
+    color: red;
+}
+
+.balancedStage{
+    display: inline;
+    margin-left: 1%;
+    color: goldenrod;
+}
+
+.dropRateFirstStage{
+    display: inline;
+    margin-left: 1%;
+    color: blue;
+}
+

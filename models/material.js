@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
 
 const Stage = new mongoose.Schema({
+    _id:{
+        type:mongoose.Schema.Types.ObjectId,
+        required: true
+
+    },
     code:{
         type: String,
         required: true
@@ -24,6 +29,11 @@ const Stage = new mongoose.Schema({
 });
 
 const Material = new mongoose.Schema( {
+    _id:{
+        type:mongoose.Schema.Types.ObjectId,
+        required: true
+
+    },
 	name: {
 		type: String,
 		required: true
@@ -90,5 +100,6 @@ const Material = new mongoose.Schema( {
 
 } )
 
-let MaterialSchema = mongoose.model('Material', Material, 'Material')
-module.exports = {MaterialSchema}
+let MaterialSchema = mongoose.model('Material', Material, 'Material');
+let StageSchema = mongoose.model('Stage', Stage, 'Stage')
+module.exports = {MaterialSchema, StageSchema}
