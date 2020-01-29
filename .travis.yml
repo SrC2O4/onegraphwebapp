@@ -5,5 +5,4 @@ cache:
   directories:
   - node_modules
 script:
-  - yarn run setup
-  - yarn run build
+  - yarn run travis-build
