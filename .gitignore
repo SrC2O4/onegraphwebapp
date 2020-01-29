@@ -6,4 +6,3 @@ client/build/
 client/package-lock.json
 client/node_modules/
 .env
-yarn.lock

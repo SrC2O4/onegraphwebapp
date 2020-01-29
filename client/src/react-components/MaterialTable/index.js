@@ -2,7 +2,6 @@ import React from 'react';
 import './style.css';
 import BaseComponent from "./../Base";
 import { getT1Materials, getT2Materials, getT3Materials, getT4Materials, getT5Materials, getCatalyst, getGacha, getPlan, getMisc} from '../../actions/material';
-import {getState} from 'statezero'
 
 class MaterialTable extends BaseComponent{
     
@@ -31,16 +30,16 @@ class MaterialTable extends BaseComponent{
                     <div className = 'catalystDiv'>
                     <h4> 黄票商店</h4>
                     <br/>
-                    <img className = 'MT-4' src= {require('./static/'+'ESS-32001.png')}/>
-                    <p className = 'CatalystValue'> {`${this.state.catalyst.golden_ticket_value}`}</p>
+                    <img alt = "" className = 'MT-4' src= {require('./static/'+'ESS-32001.png')}/>
+                    <p className = 'CatalystValue'> {this.state.catalyst.golden_ticket_value}</p>
                     </div>
                     <div className = 'catalystDiv'>
                     <h4> 绿票商店-二层</h4>
                     <br/>
-                    <img className = 'MT-4' src= {require('./static/'+'GACHATICKET.png')}/>
-                    <p className = {'GachaValue'}> {`${this.state.gacha.green_ticket_value}`}</p>
-                    <img className = 'MT-4' src= {require('./static/'+'MISC-7001.png')}/>
-                    <p className = {'PlanValue'}> {`${this.state.plan.green_ticket_value}`}</p>
+                    <img alt = ""  className = 'MT-4' src= {require('./static/'+'GACHATICKET.png')}/>
+                    <p className = {'GachaValue'}> {this.state.gacha.green_ticket_value}</p>
+                    <img alt = ""  className = 'MT-4' src= {require('./static/'+'MISC-7001.png')}/>
+                    <p className = {'PlanValue'}> {this.state.plan.green_ticket_value}</p>
                     </div>
                     <h4> 信用商店</h4>
                     
@@ -50,7 +49,7 @@ class MaterialTable extends BaseComponent{
                         this.state.t5Material.map((item) => {
                             return (
                             <div className = 'MT-5-wrapper'>
-                                <img className = 'MT-5' src= {require('./static/'+'MT-'+item.id+'.png')}/>
+                                <img alt = "" className = 'MT-5' src= {require('./static/'+'MT-'+item.id+'.png')}/>
                                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                             </div>
                             )
@@ -64,8 +63,8 @@ class MaterialTable extends BaseComponent{
                         this.state.t4Material.map((item) => {
                             return (
                             <div className = 'MT-4-wrapper'>
-                                <img className = 'MT-4' src= {require('./static/'+'MT-'+item.id+'.png')}/> 
-                                <p className = {'M4Values'+item.Notes}>{`${item.golden_ticket_value}`}</p>
+                                <img alt = "" className = 'MT-4' src= {require('./static/'+'MT-'+item.id+'.png')}/> 
+                                <p className = {'M4Values'+item.Notes}>{item.golden_ticket_value}</p>
 
                             </div>
                             
@@ -80,7 +79,7 @@ class MaterialTable extends BaseComponent{
                         this.state.t3Material.map((item) => {
                             return (
                             <div className = 'MT-4-wrapper'>
-                                <img className = 'MT-4' src= {require('./static/'+'MT-'+item.id+'.png')}/> 
+                                <img alt = "" className = 'MT-4' src= {require('./static/'+'MT-'+item.id+'.png')}/> 
                                 <p className = {'M4Values'+item.Notes}>{`${item.green_ticket_value}`}</p>
                                     {item.lowest_ap_stages.map((stages) => {
                                         return (<p className = 'lowestAPStage'>{stages.code}</p>)
@@ -106,8 +105,8 @@ class MaterialTable extends BaseComponent{
                             this.state.t2Material.map((item) => {
                                 return (
                                 <div className = 'MT-4-wrapper'>
-                                    <img className = 'MT-4' src= {require('./static/'+'MT-'+item.id+'.png')}/> 
-                                    <p className = {'M4Values'+item.Notes}>{`${item.credit_store_value}`}</p>
+                                    <img alt = "" className = 'MT-4' src= {require('./static/'+'MT-'+item.id+'.png')}/> 
+                                    <p className = {'M4Values'+item.Notes}>{item.credit_store_value}</p>
                                 </div>
                                 
                                 )
@@ -121,8 +120,8 @@ class MaterialTable extends BaseComponent{
                             this.state.t1Material.map((item) => {
                                 return (
                                 <div className = 'MT-4-wrapper'>
-                                    <img className = 'MT-4' src= {require('./static/'+'MT-'+item.id+'.png')}/> 
-                                    <p className = {'M4Values'+item.Notes}>{`${item.credit_store_value}`}</p>
+                                    <img alt = "" className = 'MT-4' src= {require('./static/'+'MT-'+item.id+'.png')}/> 
+                                    <p className = {'M4Values'+item.Notes}>{item.credit_store_value}</p>
                                 </div>
                                 
                                 )
@@ -137,8 +136,8 @@ class MaterialTable extends BaseComponent{
                         this.state.misc.map((item) => {
                             return (
                             <div className = 'Credit-wrapper'>
-                                <img className = 'MT-4' src= {require('./static/'+'MISC-'+item.id+'.png')}/> 
-                                <p className = {'CreditValue'+item.Notes}>{`${item.credit_store_value}`}</p>
+                                <img alt = "" className = 'MT-4' src= {require('./static/'+'MISC-'+item.id+'.png')}/> 
+                                <p className = {'CreditValue'+item.Notes}>{item.credit_store_value}</p>
                             </div>
                             
                             )
