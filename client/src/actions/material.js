@@ -11,8 +11,7 @@ export const initialization = () => {
 export const getT1Materials = () => {
     
     // the URL for the request
-    const url = "/materials/tier/1";
-    console.log(url);        
+    const url = "/materials/tier/1";     
 
     fetch(url)
         .then((res) =>{
@@ -48,7 +47,6 @@ export const getT1Materials = () => {
 export const getT2Materials = () =>{
     
     const url = "/materials/tier/2";
-    console.log(url);        
 
     fetch(url)
         .then((res) =>{
@@ -84,8 +82,7 @@ export const getT2Materials = () =>{
 
 export const getT3Materials = () =>{
     
-    const url = "/materials/tier/3";
-    console.log(url);        
+    const url = "/materials/tier/3";  
 
     fetch(url)
         .then((res) =>{
@@ -121,7 +118,6 @@ export const getT3Materials = () =>{
 
 export const getT4Materials = () =>{
     const url = "/materials/tier/4";
-    console.log(url);        
 
     fetch(url)
         .then((res) =>{
@@ -158,7 +154,6 @@ export const getT4Materials = () =>{
 
 export const getT5Materials = () =>{
     const url = "/materials/tier/5";
-    console.log(url);        
 
     fetch(url)
         .then((res) =>{
@@ -192,8 +187,7 @@ export const getT5Materials = () =>{
 }
 
 export const getCatalyst = () =>{
-    const url = "/materials/catalyst";
-    console.log(url);        
+    const url = "/materials/catalyst";      
 
     fetch(url)
         .then((res) =>{
@@ -226,8 +220,7 @@ export const getCatalyst = () =>{
 
 
 export const getGacha = () =>{
-    const url = "/materials/gacha";
-    console.log(url);        
+    const url = "/materials/gacha"; 
 
     fetch(url)
         .then((res) =>{
@@ -259,8 +252,7 @@ export const getGacha = () =>{
 }
 
 export const getPlan = () =>{
-    const url = "/materials/plan";
-    console.log(url);        
+    const url = "/materials/plan";    
 
     fetch(url)
         .then((res) =>{
@@ -295,8 +287,7 @@ export const getPlan = () =>{
 
 export const getMisc = () =>{
     const url = "/materials/misc";
-    console.log(url);        
-
+    
     fetch(url)
         .then((res) =>{
             // Handle response we get from the API.
