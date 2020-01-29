@@ -1,6 +1,6 @@
 // getState is used to get the value of a state path
 // setState is used to set the value of a state path
-import { getState, setState } from "statezero";
+import {setState } from "statezero";
 import {setEmptyState} from './helpers';
 
 
