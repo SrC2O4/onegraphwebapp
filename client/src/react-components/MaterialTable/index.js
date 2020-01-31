@@ -47,12 +47,21 @@ class MaterialTable extends BaseComponent{
                 <div className='M5Materials'>
                     {
                         this.state.t5Material.map((item) => {
-                            return (
-                            <div className = 'MT-5-wrapper'>
-                                <img alt = "" className = 'MT-5' src= {require('./static/MT-'+item.id+'.png')}/>
-                                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                            </div>
-                            )
+                            if (this.state.t5Material.indexOf(item) <1){
+                                return (
+                                <div className = 'MT-5-wrapper'>
+                                    <img alt = "" className = 'MT-5' src= {require('./static/MT-'+item.id+'.png')}/>
+                                    <br/><br/><br/><br/><br/><br/><br/><br/>
+                                </div>
+                                )
+                            } else {
+                                return (
+                                    <div className = 'MT-5-wrapper'>
+                                        <img alt = "" className = 'MT-5' src= {require('./static/MT-'+item.id+'.png')}/>
+                                        <br/><br/><br/><br/><br/><br/><br/>
+                                    </div>
+                                    )
+                            }
                         } )
                     }
                 </div>
@@ -78,17 +87,50 @@ class MaterialTable extends BaseComponent{
                 {
                         this.state.t3Material.map((item) => {
                             return (
-                            <div className = 'MT-4-wrapper'>
+                            <div className = 'MT-3-wrapper'>
                                 <img alt = "" className = 'MT-4' src= {require('./static/MT-'+item.id+'.png')}/> 
                                 <p className = {'M4Values'+item.Notes}>{`${item.green_ticket_value}`}</p>
+                                {/* The stages where ap costs least to accomplish the goal */}
+                                {/* TODO: maybe make it a function to avoid duplications fot too many times */}
                                     {item.lowest_ap_stages.map((stages) => {
-                                        return (<p className = 'lowestAPStage'>{stages.code}</p>)
+                                        return (
+                                        <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                            <p className = 'lowestAPStage'>{stages.code}</p>
+                                            <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {/* TODO: refine here!!! */}
+                                                <p className = 'lowestAPStageDetails'>{stages.drop_rate}</p>
+                                                <p className = 'lowestAPStageDetails'>{stages.efficiency}</p>
+                                                
+                                                <p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p>
+                                            </div>
+                                        </div>
+                                        )
                                     })}
                                     {item.balanced_stages.map((stages) => {
-                                        return (<p className = 'balancedStage'>{stages.code}</p>)
+                                        return (
+                                            <div style = {{display: 'inline',marginLeft: '4%'}}>
+                                            <p className = 'balancedStage'>{stages.code}</p>
+                                            <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {/* TODO: refine here!!! */}
+                                                <p className = 'balancedStageDetails'>{stages.drop_rate}</p>
+                                                <p className = 'balancedStageDetails'>{stages.efficiency}</p>
+                                                <p className = 'balancedStageDetails'>{stages.ap_per_item}</p>
+                                            </div>
+                                        </div>
+                                        )
                                     })}
                                     {item.drop_rate_first_stages.map((stages) => {
-                                        return (<p className = 'dropRateFirstStage'>{stages.code}</p>)
+                                         return (
+                                            <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                            <p className = 'dropRateFirstStage'>{stages.code}</p>
+                                            <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {/* TODO: refine here!!! */}
+                                                <p className = 'dropRateFirstStageDetails'>{stages.drop_rate}</p>
+                                                <p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p>
+                                                <p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p>
+                                            </div>
+                                        </div>
+                                        )
                                     })}
                             </div>
                             
@@ -98,36 +140,130 @@ class MaterialTable extends BaseComponent{
                 </div>
 
                 {/* All the tier 2 materials */}
-                <div style = {{display: 'inline', position: 'absolute'}}>
+                <div style = {{width: '60%',display: 'inline', position: 'absolute'}}>
                     <div>
-                    <div className = 'M4Materials'>
-                    {
-                            this.state.t2Material.map((item) => {
-                                return (
-                                <div className = 'MT-4-wrapper'>
-                                    <img alt = "" className = 'MT-4' src= {require('./static/MT-'+item.id+'.png')}/> 
-                                    <p className = {'M4Values'+item.Notes}>{item.credit_store_value}</p>
-                                </div>
-                                
-                                )
-                            } )
-                        }
-                    </div>
+                    <div className = 'M2Materials'>
+                {
+                        this.state.t2Material.map((item) => {
+                            return (
+                            <div className = 'MT-3-wrapper'>
+                                <img alt = "" className = 'MT-4' src= {require('./static/MT-'+item.id+'.png')}/> 
+                                <p className = {'M4Values'+item.Notes}>{`${item.credit_store_value}`}</p>
+                                {/* The stages where ap costs least to accomplish the goal */}
+                                {/* TODO: maybe make it a function to avoid duplications fot too many times */}
+                                    {item.lowest_ap_stages.map((stages) => {
+                                        return (
+                                        <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                            <p className = 'lowestAPStage'>{stages.code}</p>
+                                            <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {/* TODO: refine here!!! */}
+                                                <p className = 'lowestAPStageDetails'>{stages.drop_rate}</p>
+                                                
+                                                <p className = 'lowestAPStageDetails'>{stages.efficiency}</p>
+                                                
+                                                <p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p>
+                                            </div>
+                                        </div>
+                                        )
+                                    })}
+                                    {item.balanced_stages.map((stages) => {
+                                        return (
+                                            <div style = {{display: 'inline',marginLeft: '4%'}}>
+                                            <p className = 'balancedStage'>{stages.code}</p>
+                                            <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {/* TODO: refine here!!! */}
+                                                <p className = 'balancedStageDetails'>{stages.drop_rate}</p>
+                                                
+                                                <p className = 'balancedStageDetails'>{stages.efficiency}</p>
+                                                
+                                                <p className = 'balancedStageDetails'>{stages.ap_per_item}</p>
+                                            </div>
+                                        </div>
+                                        )
+                                    })}
+                                    {item.drop_rate_first_stages.map((stages) => {
+                                         return (
+                                            <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                            <p className = 'dropRateFirstStage'>{stages.code}</p>
+                                            <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {/* TODO: refine here!!! */}
+                                                <p className = 'dropRateFirstStageDetails'>{stages.drop_rate}</p>
+                                                
+                                                <p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p>
+                                                
+                                                <p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p>
+                                            </div>
+                                        </div>
+                                        )
+                                    })}
+                            </div>
+                            
+                            )
+                        } )
+                    }
+                </div>
 
                     {/* All the tier 1 materials */}
-                    <div className = 'M4Materials'>
-                    {
-                            this.state.t1Material.map((item) => {
-                                return (
-                                <div className = 'MT-4-wrapper'>
-                                    <img alt = "" className = 'MT-4' src= {require('./static/MT-'+item.id+'.png')}/> 
-                                    <p className = {'M4Values'+item.Notes}>{item.credit_store_value}</p>
-                                </div>
-                                
-                                )
-                            } )
-                        }
-                    </div>
+                    <div className = 'M2Materials'>
+                {
+                        this.state.t1Material.map((item) => {
+                            return (
+                            <div className = 'MT-3-wrapper'>
+                                <img alt = "" className = 'MT-4' src= {require('./static/MT-'+item.id+'.png')}/> 
+                                <p className = {'M4Values'+item.Notes}>{`${item.credit_store_value}`}</p>
+                                {/* The stages where ap costs least to accomplish the goal */}
+                                {/* TODO: maybe make it a function to avoid duplications fot too many times */}
+                                    {item.lowest_ap_stages.map((stages) => {
+                                        return (
+                                        <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                            <p className = 'lowestAPStage'>{stages.code}</p>
+                                            <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {/* TODO: refine here!!! */}
+                                                <p className = 'lowestAPStageDetails'>{stages.drop_rate}</p>
+                                                
+                                                <p className = 'lowestAPStageDetails'>{stages.efficiency}</p>
+                                                
+                                                <p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p>
+                                            </div>
+                                        </div>
+                                        )
+                                    })}
+                                    {item.balanced_stages.map((stages) => {
+                                        return (
+                                            <div style = {{display: 'inline',marginLeft: '4%'}}>
+                                            <p className = 'balancedStage'>{stages.code}</p>
+                                            <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {/* TODO: refine here!!! */}
+                                                <p className = 'balancedStageDetails'>{stages.drop_rate}</p>
+                                                
+                                                <p className = 'balancedStageDetails'>{stages.efficiency}</p>
+                                                
+                                                <p className = 'balancedStageDetails'>{stages.ap_per_item}</p>
+                                            </div>
+                                        </div>
+                                        )
+                                    })}
+                                    {item.drop_rate_first_stages.map((stages) => {
+                                         return (
+                                            <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                            <p className = 'dropRateFirstStage'>{stages.code}</p>
+                                            <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {/* TODO: refine here!!! */}
+                                                <p className = 'dropRateFirstStageDetails'>{stages.drop_rate}</p>
+                                                
+                                                <p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p>
+                                                
+                                                <p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p>
+                                            </div>
+                                        </div>
+                                        )
+                                    })}
+                            </div>
+                            
+                            )
+                        } )
+                    }
+                </div>
                     </div>
                     <br/>
                     <div className = 'miscDiv'>

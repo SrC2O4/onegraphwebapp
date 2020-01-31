@@ -1,3 +1,6 @@
+p{
+    margin: 0;
+}
 .MT-5{
     width: 55px;
 }
@@ -10,6 +13,7 @@
 .catalystDiv{
     vertical-align: middle;
     display: inline-block;
+    width: 200px;
 
 }
 
@@ -21,23 +25,29 @@
 .M5Materials{
     width: fit-content;
     display: inline-block;
-    margin-top: 4.6rem;
-    margin-left: 2%;
+    margin-top: 5rem;
+    margin-left: 1%;
     vertical-align: top;
 }
 
 .M4Materials{
     display: inline-block;  
-    margin-left: 3%;
-    margin-top: 0;
     vertical-align: top;
 
 }
 
 .M3Materials{
-    width: 20%;
+    width: 27%;
     display: inline-block;  
-    margin-left: 3%;
+    margin-top: 0;
+    vertical-align: top;
+
+}
+
+
+.M2Materials{
+    width: 50%;
+    display: inline-block;  
     margin-top: 0;
     vertical-align: top;
 
@@ -58,7 +68,10 @@
     margin-top: 1.5rem;
     vertical-align: middle;
 }
-
+.MT-3-wrapper{
+    vertical-align: middle;
+    margin-top: 1.06rem;
+}
 .M4Values{
     margin-top: 3.6rem;
     font-size: large;
@@ -90,7 +103,7 @@
 }
 
 .catalyst{
-    margin-left: 3%;
+    margin-left: 5%;
     vertical-align: middle;
 }
 .catalyst h4{
@@ -167,20 +180,59 @@
 }
 
 .lowestAPStage{
+    margin-left: 3%;
+    font-family: 'Raleway', sans-serif;
     display: inline;
-    margin-left: 1%;
     color: red;
+    font-size: 35px;
+    /* border-left:1px solid;
+    border-image: 
+      linear-gradient(
+        to bottom, 
+        red, 
+        rgba(0, 0, 0, 0)
+      ) 1 100%; */
+}
+
+.lowestAPStageDetails{
+    margin-left: 3%;
+    /* font-family: 'Raleway', sans-serif; */
+    display: table-caption;
+    color: red;
+    font-size: x-small;
 }
 
 .balancedStage{
+    font-family: 'Raleway', sans-serif;
+    margin-left: 3%;
     display: inline;
-    margin-left: 1%;
     color: goldenrod;
+    font-size: 35px;
+}
+.balancedStageDetails{
+    /* font-family: 'Raleway', sans-serif; */
+    margin-left: 3%;
+    display:  table-caption;
+    color: goldenrod;
+    font-size: x-small;
 }
 
 .dropRateFirstStage{
+    font-family: 'Raleway', sans-serif;
+    margin-left: 3%;
     display: inline;
-    margin-left: 1%;
     color: blue;
+    font-size: 35px;
 }
 
+.dropRateFirstStageDetails{
+    /* font-family: 'Raleway', sans-serif; */
+    margin-left: 3%;
+    display:  table-caption;
+    color: blue;
+    font-size: x-small;
+}
+.stageWrapper{
+    display: 'inline';
+    margin-left: 4%
+}
