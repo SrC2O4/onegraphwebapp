@@ -13,13 +13,17 @@ p{
 .catalystDiv{
     vertical-align: middle;
     display: inline-block;
-    width: 200px;
-
 }
 
 .miscDiv{
     vertical-align: middle;
     display: inline;
+}
+
+.extraDropWrap{
+    display: inline;
+    position: absolute;
+    margin-left: 1%;
 }
 
 .M5Materials{
