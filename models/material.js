@@ -6,6 +6,9 @@ const Stage = new mongoose.Schema({
         required: true
 
     },
+
+
+
     code:{
         type: String,
         required: true
@@ -23,7 +26,7 @@ const Stage = new mongoose.Schema({
         required: true
     },
     extra_drop: {
-        type: [String],
+        type: [{'id': String, 'name': String}],
         required: false
     }
 });
