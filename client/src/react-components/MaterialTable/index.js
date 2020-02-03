@@ -5,6 +5,7 @@ import { getT1Materials, getT2Materials, getT3Materials, getT4Materials, getT5Ma
 import Tooltip from '@material-ui/core/Tooltip';
 
 
+
 class MaterialTable extends BaseComponent{
     
     filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly}){
@@ -29,29 +30,29 @@ class MaterialTable extends BaseComponent{
             // The 3 tier 5 materials
             <div className = 'outLayer'>
                 <div className = 'catalyst'>
-                    <div className = 'catalystDiv' style = {{width: '100px'}}>
-                    <h4 > 黄票商店</h4>
-                    <br/>
-                    <Tooltip title = "芯片助剂" arrow>
-                    <img alt = "" className = 'MT-4' src= {require('./static/ESS-32001.png')}/>
-                    </Tooltip>
-                    <p className = 'CatalystValue'> {this.state.catalyst.golden_ticket_value}</p>
+                    <div className = 'catalystDiv' style = {{width: '100px', border: '2px solid #000'}}>
+                        <h4 > 黄票商店</h4>
+                        <br/>
+                        <Tooltip title = "芯片助剂" arrow>
+                        <img alt = "" className = 'MT-4' src= {require('./static/ESS-32001.png')}/>
+                        </Tooltip>
+                        <p className = 'CatalystValue'> {this.state.catalyst.golden_ticket_value}</p>
                     </div>
-                    <div className = 'catalystDiv' style = {{width: '160px'}}>
-                    <h4> 绿票商店-二层</h4>
-                    <br/>
-                    <Tooltip title = "寻访凭证" arrow>
-                        <img alt = ""  className = 'MT-4' src= {require('./static/GACHATICKET.png')}/>
-                    </Tooltip>
-                    <p className = {'GachaValue'}> {this.state.gacha.green_ticket_value}</p>
-                    <Tooltip title = "招聘许可" arrow>
-                    <img alt = ""  className = 'MT-4' src= {require('./static/MISC-7001.png')}/>
-                    </Tooltip>
-                    <p className = {'PlanValue'}> {this.state.plan.green_ticket_value}</p>
+                    <div className = 'catalystDiv' style = {{width: '160px', border: '2px solid #000'}}>
+                        <h4> 绿票商店-二层</h4>
+                        <br/>
+                        <Tooltip title = "寻访凭证" arrow>
+                            <img alt = ""  className = 'MT-4' src= {require('./static/GACHATICKET.png')}/>
+                        </Tooltip>
+                        <p className = {'GachaValue'}> {this.state.gacha.green_ticket_value}</p>
+                        <Tooltip title = "招聘许可" arrow>
+                        <img alt = ""  className = 'MT-4' src= {require('./static/MISC-7001.png')}/>
+                        </Tooltip>
+                        <p className = {'PlanValue'}> {this.state.plan.green_ticket_value}</p>
                     </div>
-                    <h4 style = {{marginLeft: '20%'}}> 信用商店</h4>
-                    
+                    <h3 style = {{marginLeft: '20%', display: 'inline-block'}}> 信用商店</h3>        
                 </div>
+
                 <div className='M5Materials'>
                     {
                         this.state.t5Material.map((item) => {
@@ -61,7 +62,7 @@ class MaterialTable extends BaseComponent{
                                     <Tooltip title = {item.name} arrow>
                                     <img alt = "" className = 'MT-5' src= {require('./static/MT-'+item.id+'.png')}/>
                                     </Tooltip>
-                                    <br/><br/><br/><br/><br/><br/><br/><br/>
+                                    <br/><br/><br/><br/><br/><br/>
                                 </div>
                                 )
                             } else {
@@ -70,7 +71,7 @@ class MaterialTable extends BaseComponent{
                                         <Tooltip title = {item.name} arrow>
                                         <img alt = "" className = 'MT-5' src= {require('./static/MT-'+item.id+'.png')}/>
                                         </Tooltip>
-                                        <br/><br/><br/><br/><br/><br/><br/>
+                                        <br/><br/><br/><br/><br/><br/>
                                     </div>
                                     )
                             }
@@ -365,7 +366,6 @@ class MaterialTable extends BaseComponent{
                     }
                     </div>
                     </div>
-                    <br/>
                     <div className = 'miscDiv'>
                     
                     {
@@ -382,7 +382,6 @@ class MaterialTable extends BaseComponent{
                         } )
                     }
                     </div>
-                    <br/>
                     <div>
                         <h2>说明</h2>
                         <p>绿票，黄票，信用商店里的数值指1绿票/1黄票/100信用的理智价值<span style = {{color: 'red'}}>数值<strong>越高</strong>，则兑换优先级越高</span></p>

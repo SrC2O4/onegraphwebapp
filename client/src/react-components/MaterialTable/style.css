@@ -1,6 +1,7 @@
 p{
     margin: 0;
 }
+
 .MT-5{
     width: 55px;
 }
@@ -29,7 +30,6 @@ p{
 .M5Materials{
     width: fit-content;
     display: inline-block;
-    margin-top: 5rem;
     margin-left: 1%;
     vertical-align: top;
 }
@@ -65,16 +65,28 @@ p{
 
 
 .outLayer{
-    margin-top: 3%;
+    margin-top: 2%;
+    height: 1000px;
 }
 
 .MT-4-wrapper{
-    margin-top: 1.5rem;
+    padding-top: .55rem;
+    padding-bottom: .55rem;
     vertical-align: middle;
+    border: 2px solid #000;
+
+}
+
+.MT-5-wrapper{
+    border: 2px solid #000;
+    padding-bottom: 1.6rem;
+
 }
 .MT-3-wrapper{
     vertical-align: middle;
-    margin-top: 1.06rem;
+    padding-top: .32rem;
+    padding-bottom: .35rem;
+    border: 2px solid #000;
 }
 .M4Values{
     margin-top: 3.6rem;
@@ -146,7 +158,6 @@ p{
     font-size: large;
     display: inline;
     margin-left: 1%;
-    margin-top: 1rem;
     vertical-align: middle;
 }
 
@@ -178,9 +189,9 @@ p{
 }
 
 .Credit-wrapper{
-    margin-top: 1.5rem;
     vertical-align: middle;
-    display: inline;
+    display: inline-block;
+    border: 2px solid;
 }
 
 .lowestAPStage{
