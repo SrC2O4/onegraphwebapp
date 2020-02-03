@@ -13,6 +13,7 @@ class App extends React.Component {
         <Navigation/>
         <MaterialTable/>
         <AppFooter/>
+        
       </div>
     );
   }

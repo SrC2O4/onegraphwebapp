@@ -7,9 +7,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 class MaterialTable extends BaseComponent{
     
-    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc}){
+    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly}){
          
-        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc};
+        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly};
     }
     // TODO: Replace those with the actual db queries
    
@@ -108,6 +108,7 @@ class MaterialTable extends BaseComponent{
                                 <p className = {'M4Values'+item.Notes}>{`${item.green_ticket_value}`}</p>
                                 {/* The stages where ap costs least to accomplish the goal */}
                                 {/* TODO: maybe make it a function to avoid duplications fot too many times */}
+                                <div style = {{display : 'inline'}}>
                                     {item.lowest_ap_stages.map((stages) => {
                                         return (
                                         <div style = {{display: 'inline', marginLeft: '4%'}}>
@@ -121,17 +122,18 @@ class MaterialTable extends BaseComponent{
                                                 }
                                                 <p className = 'lowestAPStage'>{stages.code}</p>
 
-                                                <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
                                                     <p className = 'lowestAPStageDetails'>{stages.drop_rate}</p>
                                                     <p className = 'lowestAPStageDetails'>{stages.efficiency}</p>
                                                     <p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p>
                                                 </div>
+                                                }
                                             </div>
                                         </div>
                                         )
                                     })}
-                                    {item.balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly && item.balanced_stages.map((stages) => {
                                         return (
                                         <div style = {{display: 'inline', marginLeft: '4%'}}>
                                             <div style={{display: 'inline'}}>
@@ -143,18 +145,18 @@ class MaterialTable extends BaseComponent{
                                                 }
                                                 <p className = 'balancedStage'>{stages.code}</p>
 
-                                                <div style = {{display: 'inline', position: 'absolute'}}> 
+                                               {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
                                                     <p className = 'balancedStageDetails'>{stages.drop_rate}</p>
                                                     <p className = 'balancedStageDetails'>{stages.efficiency}</p>
                                                     <p className = 'balancedStageDetails'>{stages.ap_per_item}</p>
-                                                </div>
+                                                </div>}
                                             </div>
                                         </div>
                                         )
                                     })}
 
-                                    {item.drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&item.drop_rate_first_stages.map((stages) => {
                                         return (
                                         <div style = {{display: 'inline', marginLeft: '4%'}}>
                                             <div style={{display: 'inline'}}>
@@ -166,16 +168,17 @@ class MaterialTable extends BaseComponent{
                                                 }
                                                 <p className = 'dropRateFirstStage'>{stages.code}</p>
 
-                                                <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
                                                     <p className = 'dropRateFirstStageDetails'>{stages.drop_rate}</p>
                                                     <p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p>
                                                     <p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p>
-                                                </div>
+                                                </div>}
                                             </div>
                                         </div>
                                         )
                                     })}
+                                    </div>
                             </div>
                             
                             )
@@ -197,6 +200,7 @@ class MaterialTable extends BaseComponent{
                                 <p className = {'M4Values'+item.Notes}>{`${item.credit_store_value}`}</p>
                                 {/* The stages where ap costs least to accomplish the goal */}
                                 {/* TODO: maybe make it a function to avoid duplications fot too many times */}
+                                <div style = {{display: 'inline'}}>
                                     {item.lowest_ap_stages.map((stages) => {
                                         return (
                                         <div style = {{display: 'inline', marginLeft: '4%'}}>
@@ -209,17 +213,16 @@ class MaterialTable extends BaseComponent{
                                                 }
                                                 <p className = 'lowestAPStage'>{stages.code}</p>
 
-                                                <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                    {/* TODO: refine here!!! */}
+                                            {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
                                                     <p className = 'lowestAPStageDetails'>{stages.drop_rate}</p>
                                                     <p className = 'lowestAPStageDetails'>{stages.efficiency}</p>
                                                     <p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p>
-                                                </div>
+                                                </div>}
                                             </div>
                                         </div>
                                         )
                                     })}
-                                    {item.balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&item.balanced_stages.map((stages) => {
                                         return (
                                         <div style = {{display: 'inline', marginLeft: '4%'}}>
                                             <div style={{display: 'inline'}}>
@@ -231,18 +234,18 @@ class MaterialTable extends BaseComponent{
                                                 }
                                                 <p className = 'balancedStage'>{stages.code}</p>
 
-                                                <div style = {{display: 'inline', position: 'absolute'}}> 
+                                               { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
                                                     <p className = 'balancedStageDetails'>{stages.drop_rate}</p>
                                                     <p className = 'balancedStageDetails'>{stages.efficiency}</p>
                                                     <p className = 'balancedStageDetails'>{stages.ap_per_item}</p>
-                                                </div>
+                                                </div>}
                                             </div>
                                         </div>
                                         )
                                     })}
 
-                                    {item.drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&item.drop_rate_first_stages.map((stages) => {
                                         return (
                                         <div style = {{display: 'inline', marginLeft: '4%'}}>
                                             <div style={{display: 'inline'}}>
@@ -254,16 +257,17 @@ class MaterialTable extends BaseComponent{
                                                 }
                                                 <p className = 'dropRateFirstStage'>{stages.code}</p>
 
-                                                <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
                                                     <p className = 'dropRateFirstStageDetails'>{stages.drop_rate}</p>
                                                     <p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p>
                                                     <p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p>
-                                                </div>
+                                                </div>}
                                             </div>
                                         </div>
                                         )
                                     })}
+                                    </div>
                             </div>
                             
                             )
@@ -283,6 +287,7 @@ class MaterialTable extends BaseComponent{
                                 <p className = {'M4Values'+item.Notes}>{`${item.credit_store_value}`}</p>
                                 {/* The stages where ap costs least to accomplish the goal */}
                                 {/* TODO: maybe make it a function to avoid duplications fot too many times */}
+                                <div style = {{display: 'inline'}}>
                                     {item.lowest_ap_stages.map((stages) => {
                                         return (
                                         <div style = {{display: 'inline', marginLeft: '4%'}}>
@@ -295,17 +300,17 @@ class MaterialTable extends BaseComponent{
                                                 }
                                                 <p className = 'lowestAPStage'>{stages.code}</p>
 
-                                                <div style = {{display: 'inline', position: 'absolute'}}> 
+                                               { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
                                                     <p className = 'lowestAPStageDetails'>{stages.drop_rate}</p>
                                                     <p className = 'lowestAPStageDetails'>{stages.efficiency}</p>
                                                     <p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p>
-                                                </div>
+                                                </div>}
                                             </div>
                                         </div>
                                         )
                                     })}
-                                    {item.balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&item.balanced_stages.map((stages) => {
                                         return (
                                         <div style = {{display: 'inline', marginLeft: '4%'}}>
                                             <div style={{display: 'inline'}}>
@@ -317,18 +322,18 @@ class MaterialTable extends BaseComponent{
                                                 }
                                                 <p className = 'balancedStage'>{stages.code}</p>
 
-                                                <div style = {{display: 'inline', position: 'absolute'}}> 
+                                               { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
                                                     <p className = 'balancedStageDetails'>{stages.drop_rate}</p>
                                                     <p className = 'balancedStageDetails'>{stages.efficiency}</p>
                                                     <p className = 'balancedStageDetails'>{stages.ap_per_item}</p>
-                                                </div>
+                                                </div>}
                                             </div>
                                         </div>
                                         )
                                     })}
 
-                                    {item.drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&item.drop_rate_first_stages.map((stages) => {
                                         return (
                                         <div style = {{display: 'inline', marginLeft: '4%'}}>
                                             <div style={{display: 'inline'}}>
@@ -340,16 +345,18 @@ class MaterialTable extends BaseComponent{
                                                 }
                                                 <p className = 'dropRateFirstStage'>{stages.code}</p>
 
-                                                <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
                                                     <p className = 'dropRateFirstStageDetails'>{stages.drop_rate}</p>
                                                     <p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p>
                                                     <p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p>
-                                                </div>
+                                                </div>}
                                             </div>
                                         </div>
                                         )
                                     })}
+
+                                    </div>
                             </div>
                             
                             )
@@ -377,8 +384,7 @@ class MaterialTable extends BaseComponent{
                     <br/>
                     <div>
                         <h2>说明</h2>
-                        <p>绿票，黄票，信用商店里的数值指1绿票/1黄票/100信用的理智价值</p>
-                        <p style = {{color: 'red'}}>数值<strong>越高</strong>，则兑换优先级越高</p>
+                        <p>绿票，黄票，信用商店里的数值指1绿票/1黄票/100信用的理智价值<span style = {{color: 'red'}}>数值<strong>越高</strong>，则兑换优先级越高</span></p>
                         <br/>
                         <p>关卡代号后的三个数字从上到下为：材料掉落率，理智转换效率，每个物品所需的期望理智</p>
                         <br/>

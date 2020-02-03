@@ -16,5 +16,9 @@ export const setEmptyState = () => {
     setState("gacha", {});
     setState("plan", {});
     setState("message", {body: "",type: ""});
+    setState("modalOpen", false);
+    setState("detailMode", true);
+    setState("showBestOnly", false);
+
 
 };
