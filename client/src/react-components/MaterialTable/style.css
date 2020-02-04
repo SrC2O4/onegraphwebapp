@@ -147,12 +147,12 @@ h3{
     padding-top: .55rem;
     padding-bottom: .55rem;
     vertical-align: middle;
-    border: 2px solid #000;
+    border: 2px solid gainsboro;
 
 }
 
 .MT-5-wrapper{
-    border: 2px solid #000;
+    border: 2px solid gainsboro;
     padding-bottom: 1.6rem;
 
 }
@@ -160,7 +160,7 @@ h3{
     vertical-align: middle;
     padding-top: .32rem;
     padding-bottom: .35rem;
-    border: 2px solid #000;
+    border: 2px solid gainsboro;
 }
 .M4Values{
     margin-top: 3.6rem;
@@ -261,12 +261,12 @@ h3{
 .Credit-wrapper{
     vertical-align: middle;
     display: inline-block;
-    border: 2px solid;
+    border: 2px solid gainsboro;
 }
 
 .lowestAPStage{
     margin-left: 3%;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Overpass', sans-serif;
     display: inline;
     color: red;
     /* border-left:1px solid;
@@ -280,20 +280,20 @@ h3{
 
 .lowestAPStageDetails{
     margin-left: 3%;
-    /* font-family: 'Raleway', sans-serif; */
+    /* font-family: 'Overpass', sans-serif; */
     display: table-caption;
     color: red;
     font-size: x-small;
 }
 
 .balancedStage{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Overpass', sans-serif;
     margin-left: 3%;
     display: inline;
     color: goldenrod;
 }
 .balancedStageDetails{
-    /* font-family: 'Raleway', sans-serif; */
+    /* font-family: 'Overpass', sans-serif; */
     margin-left: 3%;
     display:  table-caption;
     color: goldenrod;
@@ -301,14 +301,14 @@ h3{
 }
 
 .dropRateFirstStage{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Overpass', sans-serif;
     margin-left: 3%;
     display: inline;
     color: blue;
 }
 
 .dropRateFirstStageDetails{
-    /* font-family: 'Raleway', sans-serif; */
+    /* font-family: 'Overpass', sans-serif; */
     margin-left: 3%;
     display:  table-caption;
     color: blue;
