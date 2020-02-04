@@ -1,6 +1,60 @@
 p{
     margin: 0;
 }
+h3{
+    margin-top: 0;
+}
+@media only screen and (min-width: 320px)  { body{ font-size: 10px; } 
+.M3Materials, .M2Materials{
+    width: calc(100vw - 45%);
+} 
+.lowestAPStage, .balancedStage, .dropRateFirstStage{
+    font-size: 18px;
+}
+.outLayer{
+    height: 2000px;
+}
+}
+@media only screen and (min-width: 768px)  { body{ font-size: 12px; } 
+.M3Materials, .M2Materials{
+    width: calc(100vw - 30%);
+}
+.lowestAPStage, .balancedStage, .dropRateFirstStage{
+    font-size: 20px;
+}
+.outLayer{
+    height: 2000px;
+}
+ }
+@media only screen and (min-width: 1024px) { body{ font-size: 14px; }
+.M3Materials, .M2Materials{
+    width: calc(100vw - 23%);
+} 
+.lowestAPStage, .balancedStage, .dropRateFirstStage{
+    font-size: 28px;
+}
+.outLayer{
+    height: 2100px;
+}
+}
+@media only screen and (min-width: 1300px) { body{ font-size: 16px; }
+.dividers{
+    display: none;
+}
+.M3Materials{
+    width: 27%;
+} 
+.M2Materials{
+    width: 50%;
+    
+} 
+.lowestAPStage, .balancedStage, .dropRateFirstStage{
+    font-size: 35px;
+}
+.outLayer{
+    height: 1100px;
+}}
+
 
 .MT-5{
     width: 55px;
@@ -15,6 +69,12 @@ p{
     vertical-align: middle;
     display: inline-block;
 }
+.creditOverall{
+    width: 60%;
+    display: inline;
+    position: absolute;
+}
+
 
 .miscDiv{
     vertical-align: middle;
@@ -41,7 +101,6 @@ p{
 }
 
 .M3Materials{
-    width: 27%;
     display: inline-block;  
     margin-top: 0;
     vertical-align: top;
@@ -50,23 +109,21 @@ p{
 
 
 .M2Materials{
-    width: 50%;
     display: inline-block;  
     margin-top: 0;
     vertical-align: top;
 
 }
 
-.outLayer::after{
+/* .outLayer::after{
     content: "";
     clear: both;
     display: table;
-}
+} */
 
 
 .outLayer{
     margin-top: 2%;
-    height: 1000px;
 }
 
 .MT-4-wrapper{
@@ -104,7 +161,6 @@ p{
 }
 .M4Valuesred{
     margin-top: 3.6rem;
-    font-size: large;
     color: red;
     vertical-align: middle;
     display: inline;
@@ -199,7 +255,6 @@ p{
     font-family: 'Raleway', sans-serif;
     display: inline;
     color: red;
-    font-size: 35px;
     /* border-left:1px solid;
     border-image: 
       linear-gradient(
@@ -222,7 +277,6 @@ p{
     margin-left: 3%;
     display: inline;
     color: goldenrod;
-    font-size: 35px;
 }
 .balancedStageDetails{
     /* font-family: 'Raleway', sans-serif; */
@@ -237,7 +291,6 @@ p{
     margin-left: 3%;
     display: inline;
     color: blue;
-    font-size: 35px;
 }
 
 .dropRateFirstStageDetails{

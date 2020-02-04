@@ -50,7 +50,7 @@ class MaterialTable extends BaseComponent{
                         </Tooltip>
                         <p className = {'PlanValue'}> {this.state.plan.green_ticket_value}</p>
                     </div>
-                    <h3 style = {{marginLeft: '20%', display: 'inline-block'}}> 信用商店</h3>        
+                         
                 </div>
 
                 <div className='M5Materials'>
@@ -187,9 +187,10 @@ class MaterialTable extends BaseComponent{
                         } )
                     }
                 </div>
-
+                <br className = 'dividers'/>
                 {/* All the tier 2 materials */}
-                <div style = {{width: '60%',display: 'inline', position: 'absolute'}}>
+                <div className='creditOverall'>
+                    <h3 style = {{marginLeft: '20%', display: 'inline-block'}}> 信用商店</h3>   
                     <div>
                     <div className = 'M2Materials'>
                     {
