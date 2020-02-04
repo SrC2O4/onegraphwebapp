@@ -5,25 +5,36 @@ h3{
     margin-top: 0;
 }
 @media only screen and (min-width: 320px)  { body{ font-size: 10px; } 
-.M3Materials, .M2Materials{
+.M3Materials{
     width: calc(100vw - 45%);
+} 
+
+.M2Materials{
+    width: calc(100vw - 25%);
 } 
 .lowestAPStage, .balancedStage, .dropRateFirstStage{
     font-size: 14px;
 }
 .outLayer{
-    height: 2100px;
+    height: 2700px;
+}
+
+.extraDropWrap{
+    margin-left: 2%;
 }
 }
 @media only screen and (min-width: 768px)  { body{ font-size: 12px; } 
 .M3Materials, .M2Materials{
-    width: calc(100vw - 30%);
+    width: calc(100vw - 25%);
 }
 .lowestAPStage, .balancedStage, .dropRateFirstStage{
     font-size: 20px;
 }
 .outLayer{
-    height: 2100px;
+    height: 2200px;
+}
+.extraDropWrap{
+    margin-left: 1%;
 }
  }
 @media only screen and (min-width: 1024px) { body{ font-size: 14px; }
@@ -34,7 +45,10 @@ h3{
     font-size: 28px;
 }
 .outLayer{
-    height: 2100px;
+    height: 2000px;
+}
+.extraDropWrap{
+    margin-left: 1%;
 }
 }
 @media only screen and (min-width: 1300px) { body{ font-size: 16px; }
@@ -53,7 +67,11 @@ h3{
 }
 .outLayer{
     height: 1100px;
-}}
+}
+.extraDropWrap{
+    margin-left: 1%;
+}
+}
 
 
 .MT-5{
@@ -84,7 +102,6 @@ h3{
 .extraDropWrap{
     display: inline;
     position: absolute;
-    margin-left: 1%;
 }
 
 .M5Materials{
@@ -147,14 +164,12 @@ h3{
 }
 .M4Values{
     margin-top: 3.6rem;
-    font-size: large;
     vertical-align: middle;
     display: inline;
 }
 
 .M4Valuesgreen{
     margin-top: 3.6rem;
-    font-size: large;
     color: forestgreen;
     vertical-align: middle;
     display: inline;
@@ -167,7 +182,6 @@ h3{
 }
 .M4Valuesyellow{
     margin-top: 3.6rem;
-    font-size: large;
     color: goldenrod;
     vertical-align: middle;
     display: inline;
