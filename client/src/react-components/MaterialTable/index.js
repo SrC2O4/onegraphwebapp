@@ -125,9 +125,10 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
-                                                    <p className = 'lowestAPStageDetails'>{stages.drop_rate}</p>
-                                                    <p className = 'lowestAPStageDetails'>{stages.efficiency}</p>
-                                                    <p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p>
+                                                   <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                
                                                 </div>
                                                 }
                                             </div>
@@ -149,9 +150,9 @@ class MaterialTable extends BaseComponent{
 
                                                {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
-                                                    <p className = 'balancedStageDetails'>{stages.drop_rate}</p>
-                                                    <p className = 'balancedStageDetails'>{stages.efficiency}</p>
-                                                    <p className = 'balancedStageDetails'>{stages.ap_per_item}</p>
+                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 </div>}
                                             </div>
                                         </div>
@@ -172,9 +173,9 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
-                                                    <p className = 'dropRateFirstStageDetails'>{stages.drop_rate}</p>
-                                                    <p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p>
-                                                    <p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p>
+                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 </div>}
                                             </div>
                                         </div>
@@ -217,9 +218,9 @@ class MaterialTable extends BaseComponent{
                                                 <p className = 'lowestAPStage'>{stages.code}</p>
 
                                             {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                    <p className = 'lowestAPStageDetails'>{stages.drop_rate}</p>
-                                                    <p className = 'lowestAPStageDetails'>{stages.efficiency}</p>
-                                                    <p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p>
+                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 </div>}
                                             </div>
                                         </div>
@@ -239,9 +240,10 @@ class MaterialTable extends BaseComponent{
 
                                                { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
-                                                    <p className = 'balancedStageDetails'>{stages.drop_rate}</p>
-                                                    <p className = 'balancedStageDetails'>{stages.efficiency}</p>
-                                                    <p className = 'balancedStageDetails'>{stages.ap_per_item}</p>
+                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                
                                                 </div>}
                                             </div>
                                         </div>
@@ -262,9 +264,10 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
-                                                    <p className = 'dropRateFirstStageDetails'>{stages.drop_rate}</p>
-                                                    <p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p>
-                                                    <p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p>
+                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                
                                                 </div>}
                                             </div>
                                         </div>
@@ -305,9 +308,9 @@ class MaterialTable extends BaseComponent{
 
                                                { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
-                                                    <p className = 'lowestAPStageDetails'>{stages.drop_rate}</p>
-                                                    <p className = 'lowestAPStageDetails'>{stages.efficiency}</p>
-                                                    <p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p>
+                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 </div>}
                                             </div>
                                         </div>
@@ -327,9 +330,9 @@ class MaterialTable extends BaseComponent{
 
                                                { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
-                                                    <p className = 'balancedStageDetails'>{stages.drop_rate}</p>
-                                                    <p className = 'balancedStageDetails'>{stages.efficiency}</p>
-                                                    <p className = 'balancedStageDetails'>{stages.ap_per_item}</p>
+                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 </div>}
                                             </div>
                                         </div>
@@ -350,9 +353,9 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     {/* TODO: refine here!!! */}
-                                                    <p className = 'dropRateFirstStageDetails'>{stages.drop_rate}</p>
-                                                    <p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p>
-                                                    <p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p>
+                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 </div>}
                                             </div>
                                         </div>
