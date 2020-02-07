@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+
 const Stage = new mongoose.Schema({
     _id:{
         type:mongoose.Schema.Types.ObjectId,
@@ -99,6 +100,11 @@ const Material = new mongoose.Schema( {
   type:{
     type: String,
     required: false
+  },
+
+  last_updated:{
+      type: String,
+      required: false
   }
 
 } )
