@@ -12,7 +12,10 @@ class MaterialTable extends BaseComponent{
          
         return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly};
     }
-    // TODO: Replace those with the actual db queries
+    // TODO: Actual update time, read it from mongo?
+    // TODO: refractor the layout with Table element loooollllll
+    // TODO: Switch, default on, only show best drop rate for t1 material
+    // TODO: Use cookie to store the preference of the user
    
     render(){
            
@@ -29,6 +32,7 @@ class MaterialTable extends BaseComponent{
         return(
             // The 3 tier 5 materials
             <div className = 'outLayer'>
+                <h2 style={{textAlign: "right", marginRight: "1%"}}>上次数据更新时间：{new Date(this.state.gacha.last_updated).toLocaleString('en-US', {timeZone: "Asia/Shanghai"})}</h2>
                 <div className = 'catalyst'>
                     <div className = 'catalystDiv' style = {{width: '100px', border: '2px solid #000'}}>
                         <h4 > 黄票商店</h4>
