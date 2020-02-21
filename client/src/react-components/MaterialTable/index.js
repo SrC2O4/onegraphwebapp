@@ -42,7 +42,8 @@ class MaterialTable extends BaseComponent{
             
             <div className = 'outLayer'>
              
-                <h2 style={{textAlign: "right", marginRight: "1%"}}>上次数据更新时间：{new Date(this.state.gacha.last_updated).toLocaleString('en-US', {timeZone: "Asia/Shanghai"})}</h2>
+                <h2 style={{textAlign: "right", marginRight: "1%"}}>上次数据更新时间：{new Date(this.state.gacha.last_updated).toLocaleString('zh', {hour12: true,timeZone: "Asia/Shanghai"})}</h2>
+
                 <div className = 'catalyst'>
                     <div className = 'catalystDiv' style = {{width: '100px'}}>
                         <h4 > 黄票商店</h4>
