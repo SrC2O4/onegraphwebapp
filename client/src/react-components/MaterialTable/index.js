@@ -3,19 +3,27 @@ import './style.css';
 import BaseComponent from "./../Base";
 import { getT1Materials, getT2Materials, getT3Materials, getT4Materials, getT5Materials, getCatalyst, getGacha, getPlan, getMisc} from '../../actions/material';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import StagesModal from "./../StagesModal";
+import {setState} from 'statezero';
+import { IconButton } from '@material-ui/core';
 
 
 class MaterialTable extends BaseComponent{
     
-    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly}){
+    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender}){
          
-        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly};
+        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly,stageModalOpen, itemToRender};
     }
-    // TODO: Actual update time, read it from mongo?
+    handleChange = name => event =>{
+        setState("itemToRender",  name)
+        setState("stageModalOpen", true)
+
+    }
+
     // TODO: refractor the layout with Table element loooollllll
-    // TODO: Switch, default on, only show best drop rate for t1 material
     // TODO: Use cookie to store the preference of the user
+    // TODO: 
    
     render(){
            
@@ -31,10 +39,12 @@ class MaterialTable extends BaseComponent{
 
         return(
             // The 3 tier 5 materials
+            
             <div className = 'outLayer'>
+             
                 <h2 style={{textAlign: "right", marginRight: "1%"}}>上次数据更新时间：{new Date(this.state.gacha.last_updated).toLocaleString('en-US', {timeZone: "Asia/Shanghai"})}</h2>
                 <div className = 'catalyst'>
-                    <div className = 'catalystDiv' style = {{width: '100px', border: '2px solid #000'}}>
+                    <div className = 'catalystDiv' style = {{width: '100px'}}>
                         <h4 > 黄票商店</h4>
                         <br/>
                         <Tooltip title = "芯片助剂" arrow>
@@ -42,7 +52,7 @@ class MaterialTable extends BaseComponent{
                         </Tooltip>
                         <p className = 'CatalystValue'> {this.state.catalyst.golden_ticket_value}</p>
                     </div>
-                    <div className = 'catalystDiv' style = {{width: '160px', border: '2px solid #000'}}>
+                    <div className = 'catalystDiv' style = {{width: '160px'}}>
                         <h4> 绿票商店-二层</h4>
                         <br/>
                         <Tooltip title = "寻访凭证" arrow>
@@ -53,10 +63,10 @@ class MaterialTable extends BaseComponent{
                         <img alt = ""  className = 'MT-4' src= {require('./static/MISC-7001.png')}/>
                         </Tooltip>
                         <p className = {'PlanValue'}> {this.state.plan.green_ticket_value}</p>
-                    </div>
-                         
-                </div>
-
+                    </div> 
+                </div> {/*Catalyst ends*/}
+                
+                {/* All Tier 5 materials */}
                 <div className='M5Materials'>
                     {
                         this.state.t5Material.map((item) => {
@@ -113,10 +123,12 @@ class MaterialTable extends BaseComponent{
                                 <p className = {'M4Values'+item.Notes}>{`${item.green_ticket_value}`}</p>
                                 {/* The stages where ap costs least to accomplish the goal */}
                                 {/* TODO: maybe make it a function to avoid duplications fot too many times */}
-                                <div style = {{display : 'inline'}}>
+                                <div className = 'stageWrapper'>
+                                    {item.lowest_ap_stages.length===0 && <h4 style={{display: 'inline', marginLeft: '4%'}}>建议合成</h4>}
+                                    
                                     {item.lowest_ap_stages.map((stages) => {
                                         return (
-                                        <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                        <div className = 'stageWrapper'>
                                             <div style={{display: 'inline'}}>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
@@ -141,7 +153,7 @@ class MaterialTable extends BaseComponent{
                                     })}
                                     {!this.state.showBestOnly && item.balanced_stages.map((stages) => {
                                         return (
-                                        <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                        <div className = 'stageWrapper'>
                                             <div style={{display: 'inline'}}>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
@@ -165,7 +177,7 @@ class MaterialTable extends BaseComponent{
 
                                     {!this.state.showBestOnly &&item.drop_rate_first_stages.map((stages) => {
                                         return (
-                                        <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                        <div className = 'stageWrapper'>
                                             <div style={{display: 'inline'}}>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
@@ -193,6 +205,8 @@ class MaterialTable extends BaseComponent{
                     }
                 </div>
                 <br className = 'dividers'/>
+
+
                 {/* All the tier 2 materials */}
                 <div className='creditOverall'>
                     <h3 style = {{marginLeft: '20%', display: 'inline-block'}}> 信用商店</h3>   
@@ -210,29 +224,57 @@ class MaterialTable extends BaseComponent{
                                 {/* TODO: maybe make it a function to avoid duplications fot too many times */}
                                 <div style = {{display: 'inline'}}>
                                     {item.lowest_ap_stages.map((stages) => {
-                                        return (
-                                        <div style = {{display: 'inline', marginLeft: '4%'}}>
-                                            <div style={{display: 'inline'}}>
-                                                {stages.extra_drop.map((loots)=>{
-                                                        return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <img alt = "" src= {require('./static/MT-'+loots.id+'.png')} className = 'extraDropWrap' style = {{width: '15px'}}></img>
-                                                            </Tooltip>)})
-                                                }
-                                                <p className = 'lowestAPStage'>{stages.code}</p>
+                                        if(item.lowest_ap_stages.length >=2){
+                                            if(item.lowest_ap_stages.indexOf(stages) ===1){
+                                                return (
+                                                    <div className = 'stageWrapper'>
+                                                        <div style={{display: 'inline'}}>
+                                                            {stages.extra_drop.map((loots)=>{
+                                                                    return (
+                                                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                            <img alt = "" src= {require('./static/MT-'+loots.id+'.png')} className = 'extraDropWrap' style = {{width: '15px'}}></img>
+                                                                        </Tooltip>)})
+                                                            }
+                                                            <p className = 'lowestAPStage'>{stages.code}</p>
 
-                                            {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
-                                                </div>}
-                                            </div>
-                                        </div>
-                                        )
+                                                        {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            </div>}
+                                                        </div>
+                                                        <Tooltip title="其他副本……" arrow placement='top'>
+                                                        <IconButton>
+                                                        <KeyboardArrowRightIcon onClick={this.handleChange(item)} style={{marginLeft:'25px'}}/>
+                                                        </IconButton></Tooltip>
+                                                    </div>
+                                                    
+                                                )
+                                            }
+                                        } else{
+                                            return (
+                                                <div className = 'stageWrapper'>
+                                                    <div style={{display: 'inline'}}>
+                                                        {stages.extra_drop.map((loots)=>{
+                                                                return (
+                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                        <img alt = "" src= {require('./static/MT-'+loots.id+'.png')} className = 'extraDropWrap' style = {{width: '15px'}}></img>
+                                                                    </Tooltip>)})
+                                                        }
+                                                        <p className = 'lowestAPStage'>{stages.code}</p>
+
+                                                    {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                        </div>}
+                                                    </div>
+                                                </div>
+                                                )}
                                     })}
                                     {!this.state.showBestOnly &&item.balanced_stages.map((stages) => {
                                         return (
-                                        <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                        <div className = 'stageWrapper'>
                                             <div style={{display: 'inline'}}>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
@@ -256,7 +298,7 @@ class MaterialTable extends BaseComponent{
 
                                     {!this.state.showBestOnly &&item.drop_rate_first_stages.map((stages) => {
                                         return (
-                                        <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                        <div className = 'stageWrapper'>
                                             <div style={{display: 'inline'}}>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
@@ -298,31 +340,59 @@ class MaterialTable extends BaseComponent{
                                 {/* The stages where ap costs least to accomplish the goal */}
                                 {/* TODO: maybe make it a function to avoid duplications fot too many times */}
                                 <div style = {{display: 'inline'}}>
-                                    {item.lowest_ap_stages.map((stages) => {
-                                        return (
-                                        <div style = {{display: 'inline', marginLeft: '4%'}}>
-                                            <div style={{display: 'inline'}}>
-                                                {stages.extra_drop.map((loots)=>{
-                                                        return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <img alt = "" src= {require('./static/MT-'+loots.id+'.png')} className = 'extraDropWrap' style = {{width: '15px'}}></img>
-                                                            </Tooltip>)})
-                                                }
-                                                <p className = 'lowestAPStage'>{stages.code}</p>
+                                {item.lowest_ap_stages.map((stages) => {
+                                        if(item.lowest_ap_stages.length >=2){
+                                            if(item.lowest_ap_stages.indexOf(stages) ===1){
+                                                return (
+                                                    <div className = 'stageWrapper'>
+                                                        <div style={{display: 'inline'}}>
+                                                            {stages.extra_drop.map((loots)=>{
+                                                                    return (
+                                                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                            <img alt = "" src= {require('./static/MT-'+loots.id+'.png')} className = 'extraDropWrap' style = {{width: '15px'}}></img>
+                                                                        </Tooltip>)})
+                                                            }
+                                                            <p className = 'lowestAPStage'>{stages.code}</p>
 
-                                               { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
-                                                    {/* TODO: refine here!!! */}
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
-                                                </div>}
-                                            </div>
-                                        </div>
-                                        )
+                                                        {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            </div>}
+                                                        </div>
+                                                        <Tooltip title="其他副本……" arrow placement='top'>
+                                                            <IconButton>
+                                                                <KeyboardArrowRightIcon onClick={this.handleChange(item)} style={{marginLeft:'25px'}}/>
+                                                            </IconButton>
+                                                        </Tooltip>
+                                                    </div>
+                                                    
+                                                )
+                                            }
+                                        } else{
+                                            return (
+                                                <div className = 'stageWrapper'>
+                                                    <div style={{display: 'inline'}}>
+                                                        {stages.extra_drop.map((loots)=>{
+                                                                return (
+                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                        <img alt = "" src= {require('./static/MT-'+loots.id+'.png')} className = 'extraDropWrap' style = {{width: '15px'}}></img>
+                                                                    </Tooltip>)})
+                                                        }
+                                                        <p className = 'lowestAPStage'>{stages.code}</p>
+
+                                                    {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
+                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                        </div>}
+                                                    </div>
+                                                </div>
+                                                )}
                                     })}
                                     {!this.state.showBestOnly &&item.balanced_stages.map((stages) => {
                                         return (
-                                        <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                        <div className = 'stageWrapper'>
                                             <div style={{display: 'inline'}}>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
@@ -345,7 +415,7 @@ class MaterialTable extends BaseComponent{
 
                                     {!this.state.showBestOnly &&item.drop_rate_first_stages.map((stages) => {
                                         return (
-                                        <div style = {{display: 'inline', marginLeft: '4%'}}>
+                                        <div className = 'stageWrapper'>
                                             <div style={{display: 'inline'}}>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
@@ -406,7 +476,7 @@ class MaterialTable extends BaseComponent{
                     </div>
 
                 </div>
-                
+                <StagesModal open={this.state.stageModalOpen}/>  
             </div>
         );
     }

@@ -17,8 +17,10 @@ export const setEmptyState = () => {
     setState("plan", {});
     setState("message", {body: "",type: ""});
     setState("modalOpen", false);
+    setState("stageModalOpen", false);
     setState("detailMode", true);
     setState("showBestOnly", false);
+    setState("itemToRender", {name: "", id: "",credit_store_value: 0,lowest_ap_stages:[],balanced_stages: [],drop_rate_first_stages:[]});
 
 
 };
