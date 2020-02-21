@@ -5,7 +5,6 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import {setState} from 'statezero';
 import Tooltip from '@material-ui/core/Tooltip';
-import './style.css';
 
 
 class StagesModal extends BaseComponent {
