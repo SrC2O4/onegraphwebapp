@@ -19,12 +19,13 @@ span{
 .lowestAPStage, .balancedStage, .dropRateFirstStage{
     font-size: 14px;
 }
-.outLayer{
-    height: 2700px;
-}
 
 .extraDropWrap{
     margin-left: 2%;
+}
+
+.MuiTableCell-root{
+    padding: 0;
 }
 }
 @media only screen and (min-width: 768px)  { body{ font-size: 12px; } 
@@ -34,11 +35,10 @@ span{
 .lowestAPStage, .balancedStage, .dropRateFirstStage{
     font-size: 20px;
 }
-.outLayer{
-    height: 2200px;
-}
 .extraDropWrap{
     margin-left: 1%;
+}.MuiTableCell-root{
+    padding: 0;
 }
  }
 @media only screen and (min-width: 1024px) { body{ font-size: 14px; }
@@ -48,11 +48,11 @@ span{
 .lowestAPStage, .balancedStage, .dropRateFirstStage{
     font-size: 28px;
 }
-.outLayer{
-    height: 2000px;
-}
 .extraDropWrap{
     margin-left: 1%;
+}
+.MuiTableCell-root{
+    padding: 1%;
 }
 }
 @media only screen and (min-width: 1300px) { body{ font-size: 16px; }
@@ -69,9 +69,6 @@ span{
 .lowestAPStage, .balancedStage, .dropRateFirstStage{
     font-size: 35px;
 }
-.outLayer{
-    height: 1100px;
-}
 .extraDropWrap{
     margin-left: 1%;
 }
@@ -87,9 +84,11 @@ span{
     vertical-align: middle;
 }
 
+
 .catalystDiv{
     vertical-align: middle;
     display: inline-block;
+    border: 2px solid gainsboro;
 }
 .creditOverall{
     width: 60%;
@@ -97,6 +96,9 @@ span{
     position: absolute;
 }
 
+.creditOverall h3{
+    margin-top: 0;
+}
 
 .miscDiv{
     vertical-align: middle;
@@ -195,6 +197,7 @@ span{
 .catalyst{
     margin-left: 5%;
     vertical-align: middle;
+    width: fit-content;
 }
 .catalyst h4{
     margin-left: 3%;
@@ -319,6 +322,10 @@ span{
     font-size: x-small;
 }
 .stageWrapper{
-    display: 'inline';
-    margin-left: 4%
+    display: inline;
+    margin-left: 20px;
+    white-space: nowrap;
+}
+.MuiTableCell-root{
+    border: 1px solid rgba(224, 224, 224, 1);
 }
