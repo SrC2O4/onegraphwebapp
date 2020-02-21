@@ -325,6 +325,7 @@ span{
     display: inline;
     margin-left: 20px;
     white-space: nowrap;
+    position: relative;
 }
 .MuiTableCell-root{
     border: 1px solid rgba(224, 224, 224, 1);
