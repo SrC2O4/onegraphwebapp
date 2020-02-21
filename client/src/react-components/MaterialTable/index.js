@@ -1052,7 +1052,7 @@ class MaterialTable extends BaseComponent{
                                             }
                                         }
                                             return (
-                                                this.state.t2Material[i-3].lowest_ap_stages.length <2&&
+                                                this.state.t2Material[i-4].lowest_ap_stages.length <2&&
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
