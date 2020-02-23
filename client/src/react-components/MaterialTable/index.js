@@ -131,7 +131,7 @@ class MaterialTable extends BaseComponent{
                             </TableCell>
                             <TableCell colSpan={2}>
                                     
-                                        {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline'}}>建议合成</h3>}
+                                        {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
                                         
                                         {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
                                             return (
@@ -232,7 +232,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline'}}>建议合成</h3>}
+                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
                                             
                                             {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
                                                 return (
@@ -543,7 +543,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline'}}>建议合成</h3>}
+                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
                                             
                                             {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
                                                 return (
@@ -849,7 +849,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline'}}>建议合成</h3>}
+                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
                                             
                                             {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
                                                 return (
@@ -945,7 +945,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline'}}>建议合成</h3>}
+                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
                                             
                                             {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
                                                 return (
@@ -1252,7 +1252,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline'}}>建议合成</h3>}
+                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
                                             
                                             {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
                                                 return (
@@ -1349,7 +1349,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline'}}>建议合成</h3>}
+                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
                                             
                                             {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
                                                 return (
@@ -1457,7 +1457,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline'}}>建议合成</h3>}
+                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
                                             
                                             {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
                                                 return (
@@ -1762,7 +1762,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline'}}>建议合成</h3>}
+                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
                                             
                                             {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
                                                 return (
