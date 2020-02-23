@@ -17,43 +17,75 @@ span{
     width: calc(100vw - 25%);
 } 
 .lowestAPStage, .balancedStage, .dropRateFirstStage{
-    font-size: 14px;
+    font-size: 30px;
+}
+
+.lowestAPStageDetails, .balancedStageDetails, .dropRateFirstStageDetails{
+    font-size: 0.58rem;
 }
 
 .extraDropWrap{
-    margin-left: 2%;
+    margin-left: 0;
+    width: 9px;
+}
+.MT-5{
+    width: 33px;
 }
 
-.MuiTableCell-root{
-    padding: 0;
+.MT-4{
+    width: 22px;
+    vertical-align: middle;
 }
+
 }
 @media only screen and (min-width: 768px)  { body{ font-size: 12px; } 
 .M3Materials, .M2Materials{
     width: calc(100vw - 25%);
 }
 .lowestAPStage, .balancedStage, .dropRateFirstStage{
-    font-size: 20px;
+    font-size: 30px;
+}
+
+.lowestAPStageDetails, .balancedStageDetails, .dropRateFirstStageDetails{
+    font-size: 0.58rem;
 }
 .extraDropWrap{
-    margin-left: 1%;
-}.MuiTableCell-root{
-    padding: 0;
+    margin-left: 0;
+    width: 10px;
 }
+.MT-5{
+    width: 44px;
+}
+
+.MT-4{
+    width: 33px;
+    vertical-align: middle;
+}
+
  }
 @media only screen and (min-width: 1024px) { body{ font-size: 14px; }
 .M3Materials, .M2Materials{
     width: calc(100vw - 23%);
 } 
 .lowestAPStage, .balancedStage, .dropRateFirstStage{
-    font-size: 28px;
+    font-size: 35px;
 }
 .extraDropWrap{
     margin-left: 1%;
+    width: 15px;
 }
-.MuiTableCell-root{
-    padding: 1%;
+.lowestAPStageDetails, .balancedStageDetails, .dropRateFirstStageDetails{
+    font-size: 0.7rem;
 }
+.MT-5{
+    width: 55px;
+}
+
+.MT-4{
+    width: 44px;
+    vertical-align: middle;
+}
+
 }
 @media only screen and (min-width: 1300px) { body{ font-size: 16px; }
 .dividers{
@@ -69,12 +101,14 @@ span{
 .lowestAPStage, .balancedStage, .dropRateFirstStage{
     font-size: 35px;
 }
+
+.lowestAPStageDetails, .balancedStageDetails, .dropRateFirstStageDetails{
+    font-size: 0.7rem;
+}
 .extraDropWrap{
     margin-left: 1%;
+    width: 15px;
 }
-}
-
-
 .MT-5{
     width: 55px;
 }
@@ -83,7 +117,13 @@ span{
     width: 44px;
     vertical-align: middle;
 }
+}
 
+
+.MuiIconButton-root{
+    padding: 1%;
+
+}
 
 .catalystDiv{
     vertical-align: middle;
@@ -290,7 +330,7 @@ span{
     /* font-family: 'Overpass', sans-serif; */
     display: table-caption;
     color: red;
-    font-size: x-small;
+
 }
 
 .balancedStage{
@@ -304,7 +344,7 @@ span{
     margin-left: 3%;
     display:  table-caption;
     color: goldenrod;
-    font-size: x-small;
+
 }
 
 .dropRateFirstStage{
@@ -319,7 +359,7 @@ span{
     margin-left: 3%;
     display:  table-caption;
     color: blue;
-    font-size: x-small;
+
 }
 .stageWrapper{
     display: inline;
