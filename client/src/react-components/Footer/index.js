@@ -145,8 +145,8 @@ export default function AppFooter() {
             <Typography variant="caption">
               {'明日方舟素材一图流采用'}
               <Link
-                href="https://creativecommons.org/licenses/by/3.0/"
-                title="Creative Commons BY 3.0"
+                href="https://creativecommons.org/licenses/by-nc/4.0/"
+                title="CC BY-NC 4.0"
                 target="_blank"
                 rel="noopener noreferrer"
               >
