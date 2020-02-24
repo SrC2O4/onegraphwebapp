@@ -59,7 +59,8 @@ const Material = new mongoose.Schema({
   },
 
   credit_store_value: {
-    type: { event: Number, normal: Number },
+    type: Number,
+    // type: { event: Number, normal: Number },
     required: false
   },
   contingency_store_value: {
@@ -68,17 +69,20 @@ const Material = new mongoose.Schema({
   },
 
   lowest_ap_stages: {
-    type: { event: [Stage], normal: [Stage] },
+    type: [Stage],
+    // type: { event: [Stage], normal: [Stage] },
     required: false
   },
 
   balanced_stages: {
-    type: { event: [Stage], normal: [Stage] },
+    type: [Stage],
+    // type: { event: [Stage], normal: [Stage] },
     required: false
   },
 
   drop_rate_first_stages: {
-    type: { event: [Stage], normal: [Stage] },
+    type: [Stage],
+    // type: { event: [Stage], normal: [Stage] },
     required: false
   },
 
@@ -88,7 +92,8 @@ const Material = new mongoose.Schema({
   },
 
   Notes: {
-    type: { event: String, normal: String },
+    type: String,
+    // type: { event: String, normal: String },
     required: false
   },
 

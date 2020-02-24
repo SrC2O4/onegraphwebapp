@@ -5,7 +5,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import {setState} from 'statezero';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import './../MaterialTable/sprite.css'
 
 class StagesModal extends BaseComponent {
 
@@ -39,9 +39,7 @@ class StagesModal extends BaseComponent {
               <Fade in={this.state.stageModalOpen}>
                 <div className='paper'>
                 <h2 id="transition-modal-title">{this.state.itemToRender.name}</h2>
-                  {this.state.itemToRender.id !=="" ? <img alt = "" className = 'MT-4' style={{width:'44px'}} src= {require('../MaterialTable/static/MT-'+this.state.itemToRender.id+'.png')}/> 
-                  : <img src = { require('../MaterialTable/static/placeholder.png')} alt="" style={{display:'inline-block',width:'44px'}}/>
-                  }
+                    <span className={'sprite sprite-MT-'+this.state.itemToRender.id}></span>
                   <div style={{display: "inline-block"}}>
                         
                         <p>信用商店价值：</p>
@@ -55,8 +53,7 @@ class StagesModal extends BaseComponent {
                                 {stages.extra_drop.length >0 && stages.extra_drop.map((loots)=>{
                                         return (
                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                <img alt = "" onError={(e) =>{e.target.src= require('../MaterialTable/static/placeholder.png')}}
-                  src= {require('../MaterialTable/static/MT-'+loots.id+'.png')} className = 'extraDropWrap' style = {{width: '15px'}}></img>
+                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
                                             </Tooltip>)
                                     })
                                 }
@@ -80,9 +77,7 @@ class StagesModal extends BaseComponent {
                                 {stages.extra_drop.length >0 && stages.extra_drop.map((loots)=>{
                                         return (
                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                <img alt = "" onError={(e) =>{
-                      e.target.src= require('../MaterialTable/static/placeholder.png')
-                  }} src= {require('../MaterialTable/static/MT-'+loots.id+'.png')} className = 'extraDropWrap' style = {{width: '15px'}}></img>
+                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
                                             </Tooltip>
                                         )})
                                 }
@@ -105,10 +100,8 @@ class StagesModal extends BaseComponent {
                             <div style={{marginBlockEnd:'1%' }}>
                                 {stages.extra_drop.length >0 &&stages.extra_drop.map((loots)=>{
                                         return (
-                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                            <img onError={(e) =>{
-                      e.target.src= require('../MaterialTable/static/placeholder.png')
-                  }} alt = "" src= {require('../MaterialTable/static/MT-'+loots.id+'.png')} className = 'extraDropWrap' style = {{width: '15px'}}></img>
+                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                           <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
                                         </Tooltip>)})
                                 }
                                 <p className = 'dropRateFirstStage'>{stages.code}</p>
