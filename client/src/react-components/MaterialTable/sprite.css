@@ -1,0 +1,335 @@
+.sprite {
+    background-image: url(./static/sprite.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.sprite-ESS-32001 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 0;
+}
+
+.sprite-GACHATICKET {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -45px;
+}
+
+.sprite-MISC-2002 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -90px;
+}
+
+.sprite-MISC-3003 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -135px;
+}
+
+.sprite-MISC-3112 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -180px;
+}
+
+.sprite-MISC-3113 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -225px;
+}
+
+.sprite-MISC-3301 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -270px;
+}
+
+.sprite-MISC-3302 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -315px;
+}
+
+.sprite-MISC-3401 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -360px;
+}
+
+.sprite-MISC-4001 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -405px;
+}
+
+.sprite-MISC-7001 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -450px;
+}
+
+.sprite-MT-2001 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -495px;
+}
+
+.sprite-MT-2002 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -540px;
+}
+
+.sprite-MT-2003 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -585px;
+}
+
+.sprite-MT-30011 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -630px;
+}
+
+.sprite-MT-30012 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -675px;
+}
+
+.sprite-MT-30013 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -720px;
+}
+
+.sprite-MT-30014 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -765px;
+}
+
+.sprite-MT-30021 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -810px;
+}
+
+.sprite-MT-30022 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -855px;
+}
+
+.sprite-MT-30023 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -900px;
+}
+
+.sprite-MT-30024 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -945px;
+}
+
+.sprite-MT-30031 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -990px;
+}
+
+.sprite-MT-30032 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1035px;
+}
+
+.sprite-MT-30033 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1080px;
+}
+
+.sprite-MT-30034 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1125px;
+}
+
+.sprite-MT-30041 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1170px;
+}
+
+.sprite-MT-30042 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1215px;
+}
+
+.sprite-MT-30043 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1260px;
+}
+
+.sprite-MT-30044 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1305px;
+}
+
+.sprite-MT-30051 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1350px;
+}
+
+.sprite-MT-30052 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1395px;
+}
+
+.sprite-MT-30053 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1440px;
+}
+
+.sprite-MT-30054 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1485px;
+}
+
+.sprite-MT-30061 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1530px;
+}
+
+.sprite-MT-30062 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1575px;
+}
+
+.sprite-MT-30063 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1620px;
+}
+
+.sprite-MT-30064 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1665px;
+}
+
+.sprite-MT-30073 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1710px;
+}
+
+.sprite-MT-30074 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1755px;
+}
+
+.sprite-MT-30083 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1800px;
+}
+
+.sprite-MT-30084 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1845px;
+}
+
+.sprite-MT-30093 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1890px;
+}
+
+.sprite-MT-30094 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1935px;
+}
+
+.sprite-MT-30103 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -1980px;
+}
+
+.sprite-MT-30104 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -2025px;
+}
+
+.sprite-MT-30115 {
+    width: 55px;
+    height: 55px;
+    background-position: 0 -2070px;
+}
+
+.sprite-MT-30125 {
+    width: 55px;
+    height: 55px;
+    background-position: 0 -2125px;
+}
+
+.sprite-MT-30135 {
+    width: 55px;
+    height: 55px;
+    background-position: 0 -2180px;
+}
+
+.sprite-MT-31013 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -2235px;
+}
+
+.sprite-MT-31014 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -2280px;
+}
+
+.sprite-MT-31023 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -2325px;
+}
+
+.sprite-MT-31024 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -2370px;
+}
+
+.sprite-MT-4001 {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -2415px;
+}
+
+.sprite-placeholder {
+    width: 45px;
+    height: 45px;
+    background-position: 0 -2460px;
+}

@@ -57,7 +57,6 @@ app.get("/materials/tier/:tier", (req, res) => {
 });
 
 app.get("/materials/catalyst", (req, res) => {
-    const tier = req.params.tier;
 
     MaterialSchema.find({'id': '32001'})
         .then(material => {
@@ -74,8 +73,6 @@ app.get("/materials/catalyst", (req, res) => {
 });
 
 app.get("/materials/gacha", (req, res) => {
-    const tier = req.params.tier;
-
     MaterialSchema.find({'id': '7003'})
         .then(material => {
             if (!material) {
@@ -91,8 +88,6 @@ app.get("/materials/gacha", (req, res) => {
 });
 
 app.get("/materials/plan", (req, res) => {
-    const tier = req.params.tier;
-
     MaterialSchema.find({'id': '7001'})
         .then(material => {
             if (!material) {
@@ -108,8 +103,6 @@ app.get("/materials/plan", (req, res) => {
 });
 
 app.get("/materials/misc", (req, res) => {
-    const tier = req.params.tier;
-
     MaterialSchema.find({'credit_store_value': {$gt: 0}, 'type': { $not: { $regex: "Material" } } })
         .then(material => {
             if (!material) {
