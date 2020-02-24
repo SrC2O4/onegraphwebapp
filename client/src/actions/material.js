@@ -18,22 +18,9 @@ export const getT1Materials = () => {
             // Handle response we get from the API.
             // Usually check the error codes to see what happened.
             if (res.status === 200) {
-                // If student was added successfully, tell the user.
-                setState("message", {
-                    body: "Success: Added a student.",
-                    type: "success"
-                });
                 return res.json();
-                
-            } else {
-                // If server couldn't add the student, tell the user.
-                // Here we are adding a generic message, but you could be more specific in your app.
-                setState("message", {
-                    body: "Error: Could not add student.",
-                    type: "error"
-                });
             }
-        })
+            })
         .then((json) =>{
                 const key = 't1Material';
                 setState(key, json.material);
@@ -54,19 +41,8 @@ export const getT2Materials = () =>{
             // Usually check the error codes to see what happened.
             if (res.status === 200) {
                 // If student was added successfully, tell the user.
-                setState("message", {
-                    body: "Success: Added a student.",
-                    type: "success"
-                });
                 return res.json();
                 
-            } else {
-                // If server couldn't add the student, tell the user.
-                // Here we are adding a generic message, but you could be more specific in your app.
-                setState("message", {
-                    body: "Error: Could not add student.",
-                    type: "error"
-                });
             }
         })
         .then((json) =>{
@@ -89,20 +65,8 @@ export const getT3Materials = () =>{
             // Handle response we get from the API.
             // Usually check the error codes to see what happened.
             if (res.status === 200) {
-                // If student was added successfully, tell the user.
-                setState("message", {
-                    body: "Success: Added a student.",
-                    type: "success"
-                });
                 return res.json();
                 
-            } else {
-                // If server couldn't add the student, tell the user.
-                // Here we are adding a generic message, but you could be more specific in your app.
-                setState("message", {
-                    body: "Error: Could not add student.",
-                    type: "error"
-                });
             }
         })
         .then((json) =>{
@@ -124,21 +88,9 @@ export const getT4Materials = () =>{
             // Handle response we get from the API.
             // Usually check the error codes to see what happened.
             if (res.status === 200) {
-                // If student was added successfully, tell the user.
-                setState("message", {
-                    body: "Success: Added a student.",
-                    type: "success"
-                });
                 return res.json();
                 
-            } else {
-                // If server couldn't add the student, tell the user.
-                // Here we are adding a generic message, but you could be more specific in your app.
-                setState("message", {
-                    body: "Error: Could not add student.",
-                    type: "error"
-                });
-            }
+            } 
         })
         .then((json) =>{
                 const key = 't4Material';
@@ -160,20 +112,8 @@ export const getT5Materials = () =>{
             // Handle response we get from the API.
             // Usually check the error codes to see what happened.
             if (res.status === 200) {
-                // If student was added successfully, tell the user.
-                setState("message", {
-                    body: "Success: Added a student.",
-                    type: "success"
-                });
                 return res.json();
                 
-            } else {
-                // If server couldn't add the student, tell the user.
-                // Here we are adding a generic message, but you could be more specific in your app.
-                setState("message", {
-                    body: "Error: Could not add student.",
-                    type: "error"
-                });
             }
         })
         .then((json) =>{
@@ -194,20 +134,8 @@ export const getCatalyst = () =>{
             // Handle response we get from the API.
             // Usually check the error codes to see what happened.
             if (res.status === 200) {
-                // If student was added successfully, tell the user.
-                setState("message", {
-                    body: "Success: Added a student.",
-                    type: "success"
-                });
                 return res.json();
                 
-            } else {
-                // If server couldn't add the student, tell the user.
-                // Here we are adding a generic message, but you could be more specific in your app.
-                setState("message", {
-                    body: "Error: Could not add student.",
-                    type: "error"
-                });
             }
         })
         .then((json) =>{
@@ -227,20 +155,8 @@ export const getGacha = () =>{
             // Handle response we get from the API.
             // Usually check the error codes to see what happened.
             if (res.status === 200) {
-                // If student was added successfully, tell the user.
-                setState("message", {
-                    body: "Success: Added a student.",
-                    type: "success"
-                });
                 return res.json();
                 
-            } else {
-                // If server couldn't add the student, tell the user.
-                // Here we are adding a generic message, but you could be more specific in your app.
-                setState("message", {
-                    body: "Error: Could not add student.",
-                    type: "error"
-                });
             }
         })
         .then((json) =>{
@@ -259,20 +175,8 @@ export const getPlan = () =>{
             // Handle response we get from the API.
             // Usually check the error codes to see what happened.
             if (res.status === 200) {
-                // If student was added successfully, tell the user.
-                setState("message", {
-                    body: "Success: Added a student.",
-                    type: "success"
-                });
                 return res.json();
                 
-            } else {
-                // If server couldn't add the student, tell the user.
-                // Here we are adding a generic message, but you could be more specific in your app.
-                setState("message", {
-                    body: "Error: Could not add student.",
-                    type: "error"
-                });
             }
         })
         .then((json) =>{
@@ -293,20 +197,8 @@ export const getMisc = () =>{
             // Handle response we get from the API.
             // Usually check the error codes to see what happened.
             if (res.status === 200) {
-                // If student was added successfully, tell the user.
-                setState("message", {
-                    body: "Success: Added a student.",
-                    type: "success"
-                });
                 return res.json();
                 
-            } else {
-                // If server couldn't add the student, tell the user.
-                // Here we are adding a generic message, but you could be more specific in your app.
-                setState("message", {
-                    body: "Error: Could not add student.",
-                    type: "error"
-                });
             }
         })
         .then((json) =>{
