@@ -9,10 +9,11 @@ require('dotenv').config();
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/OneGraphAPI'
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, dbName: 'Arknights_OneGraph'},
     (err, db) => {
-        if(err){
+        if (err) {
             console.log('Error!')
+        } else {
+            console.log("YAY we got to the database");
         }
-        console.log("YAY we got to the database");
     }
 )
 

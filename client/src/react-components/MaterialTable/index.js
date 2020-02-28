@@ -72,18 +72,18 @@ class MaterialTable extends BaseComponent{
                         <TableCell >
                             <h3 > 黄票商店</h3>
                             <Tooltip title = "芯片助剂" arrow>
-                                <span className='sprite sprite-ESS-32001'></span>
+                                <span className='sprite spriteMT-4 sprite-ESS-32001'></span>
                             </Tooltip>
                             <p className = 'CatalystValue'> {this.state.catalyst.golden_ticket_value}</p>
                         </TableCell>
                         <TableCell colSpan={3}>
                             <h3> 绿票商店-二层</h3>
                             <Tooltip title = "寻访凭证" arrow>
-                                <span className='sprite sprite-GACHATICKET'></span>
+                                <span className='sprite spriteMT-4 sprite-GACHATICKET'></span>
                             </Tooltip>
                             <p className = {'GachaValue'}> {this.state.gacha.green_ticket_value}</p>
                             <Tooltip title = "招聘许可" arrow>
-                                <span className='sprite sprite-MISC-7001'></span>
+                                <span className='sprite spriteMT-4 sprite-MISC-7001'></span>
                             </Tooltip>
                             <p className = {'PlanValue'}> {this.state.plan.green_ticket_value}</p>
                         </TableCell> 
@@ -112,13 +112,13 @@ class MaterialTable extends BaseComponent{
                             <TableRow>
                             <TableCell rowSpan = {3}>
                                 <Tooltip title = {this.state.t5Material[0].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t5Material[0].id}></span>
+                                    <span className={'sprite spriteMT-5 sprite-MT-'+this.state.t5Material[0].id}></span>
                                
                                 </Tooltip>
                             </TableCell>
                             <TableCell>
                                 <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                 
                                 </Tooltip>
                                 <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
@@ -126,7 +126,7 @@ class MaterialTable extends BaseComponent{
     
                             <TableCell>
                                 <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                     
                                 </Tooltip>
                                     <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
@@ -219,13 +219,13 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell rowSpan = {3}>
                                     <Tooltip title = {this.state.t5Material[1].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t5Material[1].id}></span>
+                                    <span className={'sprite spriteMT-5 sprite-MT-'+this.state.t5Material[1].id}></span>
                                    
                                     </Tooltip>
                                 </TableCell>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
@@ -233,7 +233,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
@@ -317,7 +317,7 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-3].name} arrow>
-                                <span className={'sprite sprite-MT-'+this.state.t2Material[i-3].id}/>
+                                <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-3].id}/>
                                 {/* <img alt = "" className = 'MT-4' src= {require('./static/MT-'+this.state.t2Material[i-3].id+'.png')}/> */}
                             </Tooltip>
                                 <p className = {'M4Values'+this.state.t2Material[i-3].Notes}>{`${this.state.t2Material[i-3].credit_store_value}`}</p>
@@ -426,7 +426,7 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-3].name} arrow>
-                                <span className={'sprite sprite-MT-'+this.state.t1Material[i-3].id}></span>
+                                <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-3].id}></span>
                                 
                                  </Tooltip>
                                 <p className = {'M4Values'+this.state.t1Material[i-3].Notes}>{`${this.state.t1Material[i-3].credit_store_value}`}</p>
@@ -546,13 +546,13 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell rowSpan = {2}>
                                     <Tooltip title = {this.state.t5Material[2].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t5Material[2].id}></span>
+                                    <span className={'sprite spriteMT-5 sprite-MT-'+this.state.t5Material[2].id}></span>
                                     
                                     </Tooltip>
                                 </TableCell>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
@@ -560,7 +560,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
@@ -644,7 +644,7 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-3].name} arrow>
-                                <span className={'sprite sprite-MT-'+this.state.t2Material[i-3].id}></span>
+                                <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-3].id}></span>
                                 
                                     </Tooltip>
                                 <p className = {'M4Values'+this.state.t2Material[i-3].Notes}>{`${this.state.t2Material[i-3].credit_store_value}`}</p>
@@ -753,7 +753,7 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-3].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t1Material[i-3].id}></span>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-3].id}></span>
                                 
                                     </Tooltip>
                                 <p className = {'M4Values'+this.state.t1Material[i-3].Notes}>{`${this.state.t1Material[i-3].credit_store_value}`}</p>
@@ -872,7 +872,7 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                        <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                        <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
@@ -880,7 +880,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
@@ -970,7 +970,7 @@ class MaterialTable extends BaseComponent{
                                 <TableCell rowSpan = {4}/>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                        <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                        <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     
                                     </Tooltip>
@@ -979,7 +979,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
@@ -1060,7 +1060,7 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-4].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t2Material[i-4].id}/>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-4].id}/>
                                 {/* <img alt = "" className = 'MT-4' src= {require('./static/MT-'+this.state.t2Material[i-4].id+'.png')}/> */}
                                  </Tooltip>
                                 <p className = {'M4Values'+this.state.t2Material[i-4].Notes}>{`${this.state.t2Material[i-4].credit_store_value}`}</p>
@@ -1165,7 +1165,7 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-4].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t1Material[i-4].id}></span>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-4].id}></span>
                                 
                                  </Tooltip>
                                 <p className = {'M4Values'+this.state.t1Material[i-4].Notes}>{`${this.state.t1Material[i-4].credit_store_value}`}</p>
@@ -1282,7 +1282,7 @@ class MaterialTable extends BaseComponent{
                                
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
@@ -1290,7 +1290,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
@@ -1381,7 +1381,7 @@ class MaterialTable extends BaseComponent{
                                
                                 <TableCell >
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
@@ -1389,7 +1389,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
@@ -1472,7 +1472,7 @@ class MaterialTable extends BaseComponent{
                                         return (
                                         <TableCell rowSpan={2}>
                                             <Tooltip title = {item.name} arrow>
-                                            <span className={'sprite sprite-MISC-'+item.id}></span>
+                                            <span className={'sprite spriteMT-4 sprite-MISC-'+item.id}></span>
                                             
                                                 </Tooltip>
                                             <p className = {'CreditValue'+item.Notes}>{item.credit_store_value}</p>
@@ -1492,7 +1492,7 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                        <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                        <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
@@ -1500,7 +1500,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
@@ -1581,7 +1581,7 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-3].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t2Material[i-3].id}/>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-3].id}/>
                                 {/* <img alt = "" className = 'MT-4' src= {require('./static/MT-'+this.state.t2Material[i-3].id+'.png')}/> */}
                                  </Tooltip>
                                 <p className = {'M4Values'+this.state.t2Material[i-3].Notes}>{`${this.state.t2Material[i-3].credit_store_value}`}</p>
@@ -1686,7 +1686,7 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-3].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t1Material[i-3].id}></span>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-3].id}></span>
                                 
                                  </Tooltip>
                                 <p className = {'M4Values'+this.state.t1Material[i-3].Notes}>{`${this.state.t1Material[i-3].credit_store_value}`}</p>
@@ -1801,7 +1801,7 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                        <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                        <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
@@ -1809,7 +1809,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
@@ -1890,7 +1890,7 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-4].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t2Material[i-4].id}/>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-4].id}/>
                                 
                                 {/* <img alt = "" className = 'MT-4' src= {require('./static/MT-'+this.state.t2Material[i-4].id+'.png')}/> */}
                                  </Tooltip>
@@ -1996,7 +1996,7 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-4].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t1Material[i-4].id}></span>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-4].id}></span>
                                 
                                  </Tooltip>
                                 <p className = {'M4Values'+this.state.t1Material[i-4].Notes}>{`${this.state.t1Material[i-4].credit_store_value}`}</p>

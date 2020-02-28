@@ -23,12 +23,21 @@ span{
 .lowestAPStageDetails, .balancedStageDetails, .dropRateFirstStageDetails{
     font-size: 0.58rem;
 }
+.spriteMT-5{
+    height: 55px;
+    width: 55px;
+}
 
+.spriteMT-4{
+    height: 45px;
+    width: 45px;
+}
 .extraDropWrap{
-    transform: scale(0.4);
+    height: 18px;
+    width: 18px;
     position: absolute;
-    margin-left: -13px;
-    margin-top: -13px;
+    margin-left: 0px;
+    margin-top: 0px; 
 }
 .MT-5{
     width: 33px;
@@ -51,12 +60,22 @@ span{
 .lowestAPStageDetails, .balancedStageDetails, .dropRateFirstStageDetails{
     font-size: 0.58rem;
 }
+.spriteMT-5{
+    height: 55px;
+    width: 55px;
+}
+
+.spriteMT-4{
+    height: 45px;
+    width: 45px;
+}
 .extraDropWrap{
-    transform: scale(0.4);
-    position: absolute;
+    height: 18px;
+    width: 18px;
+    position: absolute; 
     /* display: inline; */
-    margin-left: -13px;
-    margin-top: -13px;
+    margin-left: 0px;
+    margin-top: 0px; 
 }
 .MT-5{
     width: 44px;
@@ -75,12 +94,22 @@ span{
 .lowestAPStage, .balancedStage, .dropRateFirstStage{
     font-size: 35px;
 }
+.spriteMT-5{
+    height: 55px;
+    width: 55px;
+}
+
+.spriteMT-4{
+    height: 45px;
+    width: 45px;
+}
 .extraDropWrap{
-    transform: scale(0.4);
+    height: 18px;
+    width: 18px;
     position: absolute;
     /* display: inline; */
-    margin-left: -13px;
-    margin-top: -13px;
+    margin-left: 0px;
+    margin-top: 0px;
 }
 .lowestAPStageDetails, .balancedStageDetails, .dropRateFirstStageDetails{
     font-size: 0.7rem;
@@ -113,12 +142,22 @@ span{
 .lowestAPStageDetails, .balancedStageDetails, .dropRateFirstStageDetails{
     font-size: 0.7rem;
 }
+.spriteMT-5{
+    height: 55px;
+    width: 55px;
+}
+
+.spriteMT-4{
+    height: 45px;
+    width: 45px;
+}
 .extraDropWrap{
-    transform: scale(0.4);
+    height: 18px;
+    width: 18px;
     position: absolute;
     /* display: inline; */
-    margin-left: -13px;
-    margin-top: -13px;
+    margin-left: 0px;
+    margin-top: 0px;
 }
 .MT-5{
     width: 55px;
