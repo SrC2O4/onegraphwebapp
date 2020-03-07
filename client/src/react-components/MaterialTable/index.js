@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import BaseComponent from "./../Base";
-import { getT1Materials, getT2Materials, getT3Materials, getT4Materials, getT5Materials, getCatalyst, getGacha, getPlan, getMisc} from '../../actions/material';
+import { getT1Materials, getT2Materials, getT3Materials, getT4Materials, getT5Materials, getCatalyst, getGacha, getPlan, getMisc, checkIfEvent, getAll} from '../../actions/material';
 import Tooltip from '@material-ui/core/Tooltip';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import StagesModal from "./../StagesModal";
@@ -15,54 +15,53 @@ import './sprite.css';
 
 class MaterialTable extends BaseComponent{
     
-    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender}){
+    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender, considerEventStages}){
          
-        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly,stageModalOpen, itemToRender};
+        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly,stageModalOpen, itemToRender, considerEventStages};
     }
     handleChange = name => event =>{
         setState("itemToRender",  name)
         setState("stageModalOpen", true)
 
     }
+    
     componentDidMount(){
-        getT1Materials();      
-        getT2Materials();
-        getT3Materials();
-        getT4Materials();
-        getT5Materials(); 
-        getCatalyst(); 
-        getGacha();
-        getPlan();
-        getMisc();
+
+        getAll();
+       
+        
     }
 
     indices = [0,1,2,3,4,5,6,7,8,9,10,11]
     render(){
+        getAll();
+        console.log(this.state);
            
-        if(this.state.t5Material.length ===0 ||this.state.t4Material.length ===0 || this.state.t3Material.length ===0 || this.state.t2Material.length ===0 || this.state.t1Material.length ===0  ){
+        if(this.state.t4Material.length===0||this.state.t3Material.length===0 ||this.state.t1Material.length===0 || this.state.t2Material.length===0 || this.state.t5Material.length===0  ){
             return (
             <Modal
                 aria-labelledby="transition-modal-preloader"
                 className = "modal"
-                open={this.state.t5Material.length===0}
+                open={this.state.t5Material}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
-                timeout: 200,
+                timeout: 1000,
                 }}>
-                <Fade in={this.state.t5Material.length ===0}>
+                <Fade in={this.state.t5Material}>
                     <div>
                         <CircularProgress color='secondary'/>
                     </div>
                 </Fade>
             </Modal>)
-        }
+         
+    }
 
         return(
+            
             // The 3 tier 5 materials
             
             <div className = 'outLayer'>
-             
             <h2 style={{textAlign: "right", marginRight: "1%"}}>上次数据更新时间：{new Date(this.state.gacha.last_updated).toLocaleString('zh', {hour12: true,timeZone: "Asia/Shanghai"})}</h2>
             <TableContainer component = {Paper}>
                 <Table size="small" aria-label="spanning table">
@@ -72,20 +71,20 @@ class MaterialTable extends BaseComponent{
                         <TableCell >
                             <h3 > 黄票商店</h3>
                             <Tooltip title = "芯片助剂" arrow>
-                                <span className='sprite sprite-ESS-32001'></span>
+                                <span className='sprite sprite-ESS-32001 spriteMT-4'></span>
                             </Tooltip>
-                            <p className = 'CatalystValue'> {this.state.catalyst.golden_ticket_value}</p>
+                            <p className = 'CatalystValue'> {this.state.considerEventStages?this.state.catalyst.golden_ticket_value.event:this.state.catalyst.golden_ticket_value.normal}</p>
                         </TableCell>
                         <TableCell colSpan={3}>
                             <h3> 绿票商店-二层</h3>
                             <Tooltip title = "寻访凭证" arrow>
-                                <span className='sprite sprite-GACHATICKET'></span>
+                                <span className='spriteMT-4 sprite sprite-GACHATICKET'></span>
                             </Tooltip>
-                            <p className = {'GachaValue'}> {this.state.gacha.green_ticket_value}</p>
+                            <p className = {'GachaValue'}> {this.state.considerEventStages?this.state.gacha.green_ticket_value.event:this.state.gacha.green_ticket_value.normal}</p>
                             <Tooltip title = "招聘许可" arrow>
-                                <span className='sprite sprite-MISC-7001'></span>
+                                <span className='sprite sprite-MISC-7001 spriteMT-4'></span>
                             </Tooltip>
-                            <p className = {'PlanValue'}> {this.state.plan.green_ticket_value}</p>
+                            <p className = {'PlanValue'}> {this.state.considerEventStages?this.state.plan.green_ticket_value.event:this.state.plan.green_ticket_value.normal}</p>
                         </TableCell> 
                         <TableCell rowSpan={4} >
                             <h2>信用商店</h2>
@@ -103,41 +102,38 @@ class MaterialTable extends BaseComponent{
                         </TableCell>
                     </TableRow> {/*Catalyst ends*/}
 
-
+                {/* Read the matrix and then generate the table */}
                 {this.indices.map((i) => {
-                        
+                        // First row -> D32
                         if (i===0){
                         return(
                         
                             <TableRow>
                             <TableCell rowSpan = {3}>
                                 <Tooltip title = {this.state.t5Material[0].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t5Material[0].id}></span>
-                               
+                                    <span className={'sprite spriteMT-5 sprite-MT-'+this.state.t5Material[0].id}></span>
                                 </Tooltip>
                             </TableCell>
                             <TableCell>
                                 <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
-                                
+                                <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                 </Tooltip>
-                                <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
+                                <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
                             </TableCell>
     
                             <TableCell>
                                 <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                     
                                 </Tooltip>
-                                    <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
+                                    <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
                                     
                                     
                             </TableCell>
                             <TableCell colSpan={2}>
-                                    
-                                        {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
+                                        {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
                                         
-                                        {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
+                                        {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                             return (
                                                 <div className='stageWrapper'>
                                                     {stages.extra_drop.map((loots)=>{
@@ -161,7 +157,7 @@ class MaterialTable extends BaseComponent{
                                                 </div>
                                             )
                                         })}
-                                        {!this.state.showBestOnly && this.state.t3Material[i].balanced_stages.map((stages) => {
+                                        {!this.state.showBestOnly && (this.state.considerEventStages?this.state.t3Material[i].balanced_stages.event:this.state.t3Material[i].balanced_stages.normal).map((stages) => {
                                             return (
                                                 <div className='stageWrapper'>
                                                     {stages.extra_drop.map((loots)=>{
@@ -184,7 +180,7 @@ class MaterialTable extends BaseComponent{
                                             )
                                         })}
         
-                                        {!this.state.showBestOnly &&this.state.t3Material[i].drop_rate_first_stages.map((stages) => {
+                                        {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t3Material[i].drop_rate_first_stages.event:this.state.t3Material[i].drop_rate_first_stages.normal).map((stages) => {
                                             return (
                                                 <div className='stageWrapper'>
                                                     {stages.extra_drop.map((loots)=>{
@@ -213,38 +209,40 @@ class MaterialTable extends BaseComponent{
         
                             )
 
-                        } else if (i===3){
+                        }
+                        // The 
+                        else if (i===3){
                             return(
                             
                                 <TableRow>
                                 <TableCell rowSpan = {3}>
                                     <Tooltip title = {this.state.t5Material[1].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t5Material[1].id}></span>
+                                    <span className={'sprite spriteMT-5 sprite-MT-'+this.state.t5Material[1].id}></span>
                                    
                                     </Tooltip>
                                 </TableCell>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
-                                    <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
+                                    <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
                                 </TableCell>
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
-                                        <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
+                                        <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
                                         
                                         
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
                                             
-                                            {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -268,7 +266,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )
                                             })}
-                                            {!this.state.showBestOnly && this.state.t3Material[i].balanced_stages.map((stages) => {
+                                            {!this.state.showBestOnly && (this.state.considerEventStages?this.state.t3Material[i].balanced_stages.event:this.state.t3Material[i].balanced_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -291,7 +289,7 @@ class MaterialTable extends BaseComponent{
                                                 )
                                             })}
             
-                                            {!this.state.showBestOnly &&this.state.t3Material[i].drop_rate_first_stages.map((stages) => {
+                                            {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t3Material[i].drop_rate_first_stages.event:this.state.t3Material[i].drop_rate_first_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -317,16 +315,16 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-3].name} arrow>
-                                <span className={'sprite sprite-MT-'+this.state.t2Material[i-3].id}/>
-                                {/* <img alt = "" className = 'MT-4' src= {require('./static/MT-'+this.state.t2Material[i-3].id+'.png')}/> */}
+                                <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-3].id}/>
+                                {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-3].id+'.png')}/> */}
                             </Tooltip>
-                                <p className = {'M4Values'+this.state.t2Material[i-3].Notes}>{`${this.state.t2Material[i-3].credit_store_value}`}</p>
+                                <p className = {'M4Values'+(this.state.considerEventStages?this.state.t2Material[i-3].Notes.event:this.state.t2Material[i-3].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t2Material[i-3].credit_store_value.event:this.state.t2Material[i-3].credit_store_value.normal)}`}</p>
                                 
                                 
                                 <div style = {{display: 'inline'}}>
-                                    {this.state.t2Material[i-3].lowest_ap_stages.map((stages) => {
-                                        if(this.state.t2Material[i-3].lowest_ap_stages.length >=2){
-                                            if(this.state.t2Material[i-3].lowest_ap_stages.indexOf(stages) ===1){
+                                    {(this.state.considerEventStages?this.state.t2Material[i-3].lowest_ap_stages.event:this.state.t2Material[i-3].lowest_ap_stages.normal).map((stages) => {
+                                        if((this.state.considerEventStages?this.state.t2Material[i-3].lowest_ap_stages.event:this.state.t2Material[i-3].lowest_ap_stages.normal).length >=2){
+                                            if((this.state.considerEventStages?this.state.t2Material[i-3].lowest_ap_stages.event:this.state.t2Material[i-3].lowest_ap_stages.normal).indexOf(stages) ===1){
                                                 return (
 
                                                         <div className='stageWrapper'>
@@ -354,7 +352,7 @@ class MaterialTable extends BaseComponent{
                                             }
                                         } 
                                             return (
-                                                this.state.t2Material[i-3].lowest_ap_stages.length <2&&
+                                                (this.state.considerEventStages?this.state.t2Material[i-3].lowest_ap_stages.event:this.state.t2Material[i-3].lowest_ap_stages.normal).length <2&&
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
@@ -373,7 +371,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )}
                                     )}
-                                    {!this.state.showBestOnly &&this.state.t2Material[i-3].balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t2Material[i-3].balanced_stages.event:this.state.t2Material[i-3].balanced_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -397,7 +395,7 @@ class MaterialTable extends BaseComponent{
                                         )
                                     })}
 
-                                    {!this.state.showBestOnly &&this.state.t2Material[i-3].drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t2Material[i-3].drop_rate_first_stages.event:this.state.t2Material[i-3].drop_rate_first_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -426,16 +424,16 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-3].name} arrow>
-                                <span className={'sprite sprite-MT-'+this.state.t1Material[i-3].id}></span>
+                                <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-3].id}></span>
                                 
                                  </Tooltip>
-                                <p className = {'M4Values'+this.state.t1Material[i-3].Notes}>{`${this.state.t1Material[i-3].credit_store_value}`}</p>
+                                <p className = {'M4Values'+(this.state.considerEventStages?this.state.t1Material[i-3].Notes.event:this.state.t1Material[i-3].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t1Material[i-3].credit_store_value.event:this.state.t1Material[i-3].credit_store_value.normal)}`}</p>
                                 
                                 
                                 <div style = {{display: 'inline'}}>
-                                    {this.state.t1Material[i-3].lowest_ap_stages.map((stages) => {
-                                        if(this.state.t1Material[i-3].lowest_ap_stages.length >=2){
-                                            if(this.state.t1Material[i-3].lowest_ap_stages.indexOf(stages) ===1){
+                                    {(this.state.considerEventStages?this.state.t1Material[i-3].lowest_ap_stages.event:this.state.t1Material[i-3].lowest_ap_stages.normal).map((stages) => {
+                                        if((this.state.considerEventStages?this.state.t1Material[i-3].lowest_ap_stages.event:this.state.t1Material[i-3].lowest_ap_stages.normal).length >=2){
+                                            if((this.state.considerEventStages?this.state.t1Material[i-3].lowest_ap_stages.event:this.state.t1Material[i-3].lowest_ap_stages.normal).indexOf(stages) ===1){
                                                 return (
 
                                                         <div className='stageWrapper'>
@@ -463,7 +461,7 @@ class MaterialTable extends BaseComponent{
                                             }
                                         }
                                             return (
-                                                this.state.t1Material[i-3].lowest_ap_stages.length <2&&
+                                                (this.state.considerEventStages?this.state.t1Material[i-3].lowest_ap_stages.event:this.state.t1Material[i-3].lowest_ap_stages.normal).length <2&&
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
@@ -482,7 +480,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )}
                                     )}
-                                    {!this.state.showBestOnly &&this.state.t1Material[i-3].balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t1Material[i-3].balanced_stages.event:this.state.t1Material[i-3].balanced_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -506,7 +504,7 @@ class MaterialTable extends BaseComponent{
                                         )
                                     })}
 
-                                    {!this.state.showBestOnly &&this.state.t1Material[i-3].drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t1Material[i-3].drop_rate_first_stages.event:this.state.t1Material[i-3].drop_rate_first_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -540,38 +538,40 @@ class MaterialTable extends BaseComponent{
             
                                 )
     
-                        } else if (i===6){
+                        }
+                        // Microchip
+                        else if (i===6){
                             return(
                             
                                 <TableRow>
                                 <TableCell rowSpan = {2}>
                                     <Tooltip title = {this.state.t5Material[2].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t5Material[2].id}></span>
+                                    <span className={'sprite spriteMT-5 sprite-MT-'+this.state.t5Material[2].id}></span>
                                     
                                     </Tooltip>
                                 </TableCell>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
-                                    <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
+                                    <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
                                 </TableCell>
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
-                                        <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
+                                        <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
                                         
                                         
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
                                             
-                                            {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -595,7 +595,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )
                                             })}
-                                            {!this.state.showBestOnly && this.state.t3Material[i].balanced_stages.map((stages) => {
+                                            {!this.state.showBestOnly && (this.state.considerEventStages?this.state.t3Material[i].balanced_stages.event:this.state.t3Material[i].balanced_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -618,7 +618,7 @@ class MaterialTable extends BaseComponent{
                                                 )
                                             })}
             
-                                            {!this.state.showBestOnly &&this.state.t3Material[i].drop_rate_first_stages.map((stages) => {
+                                            {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t3Material[i].drop_rate_first_stages.event:this.state.t3Material[i].drop_rate_first_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -644,16 +644,16 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-3].name} arrow>
-                                <span className={'sprite sprite-MT-'+this.state.t2Material[i-3].id}></span>
+                                <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-3].id}></span>
                                 
                                     </Tooltip>
-                                <p className = {'M4Values'+this.state.t2Material[i-3].Notes}>{`${this.state.t2Material[i-3].credit_store_value}`}</p>
+                                <p className = {'M4Values'+(this.state.considerEventStages?this.state.t2Material[i-3].Notes.event:this.state.t2Material[i-3].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t2Material[i-3].credit_store_value.event:this.state.t2Material[i-3].credit_store_value.normal)}`}</p>
                                 
                                 
                                 <div style = {{display: 'inline'}}>
-                                    {this.state.t2Material[i-3].lowest_ap_stages.map((stages) => {
-                                        if(this.state.t2Material[i-3].lowest_ap_stages.length >=2){
-                                            if(this.state.t2Material[i-3].lowest_ap_stages.indexOf(stages) ===1){
+                                    {(this.state.considerEventStages?this.state.t2Material[i-3].lowest_ap_stages.event:this.state.t2Material[i-3].lowest_ap_stages.normal).map((stages) => {
+                                        if((this.state.considerEventStages?this.state.t2Material[i-3].lowest_ap_stages.event:this.state.t2Material[i-3].lowest_ap_stages.normal).length >=2){
+                                            if((this.state.considerEventStages?this.state.t2Material[i-3].lowest_ap_stages.event:this.state.t2Material[i-3].lowest_ap_stages.normal).indexOf(stages) ===1){
                                                 return (
 
                                                         <div className='stageWrapper'>
@@ -681,7 +681,7 @@ class MaterialTable extends BaseComponent{
                                             }
                                         }
                                             return (
-                                                this.state.t2Material[i-3].lowest_ap_stages.length <2&&
+                                                (this.state.considerEventStages?this.state.t2Material[i-3].lowest_ap_stages.event:this.state.t2Material[i-3].lowest_ap_stages.normal).length <2&&
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
@@ -700,7 +700,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )}
                                     )}
-                                    {!this.state.showBestOnly &&this.state.t2Material[i-3].balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t2Material[i-3].balanced_stages.event:this.state.t2Material[i-3].balanced_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -724,7 +724,7 @@ class MaterialTable extends BaseComponent{
                                         )
                                     })}
 
-                                    {!this.state.showBestOnly &&this.state.t2Material[i-3].drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t2Material[i-3].drop_rate_first_stages.event:this.state.t2Material[i-3].drop_rate_first_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -753,16 +753,16 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-3].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t1Material[i-3].id}></span>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-3].id}></span>
                                 
                                     </Tooltip>
-                                <p className = {'M4Values'+this.state.t1Material[i-3].Notes}>{`${this.state.t1Material[i-3].credit_store_value}`}</p>
+                                <p className = {'M4Values'+(this.state.considerEventStages?this.state.t1Material[i-3].Notes.event:this.state.t1Material[i-3].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t1Material[i-3].credit_store_value.event:this.state.t1Material[i-3].credit_store_value.normal)}`}</p>
                                 
                                 
                                 <div style = {{display: 'inline'}}>
-                                    {this.state.t1Material[i-3].lowest_ap_stages.map((stages) => {
-                                        if(this.state.t1Material[i-3].lowest_ap_stages.length >=2){
-                                            if(this.state.t1Material[i-3].lowest_ap_stages.indexOf(stages) ===1){
+                                    {(this.state.considerEventStages?this.state.t1Material[i-3].lowest_ap_stages.event:this.state.t1Material[i-3].lowest_ap_stages.normal).map((stages) => {
+                                        if((this.state.considerEventStages?this.state.t1Material[i-3].lowest_ap_stages.event:this.state.t1Material[i-3].lowest_ap_stages.normal).length >=2){
+                                            if((this.state.considerEventStages?this.state.t1Material[i-3].lowest_ap_stages.event:this.state.t1Material[i-3].lowest_ap_stages.normal).indexOf(stages) ===1){
                                                 return (
 
                                                         <div className='stageWrapper'>
@@ -790,7 +790,7 @@ class MaterialTable extends BaseComponent{
                                             }
                                         }
                                             return (
-                                                this.state.t1Material[i-3].lowest_ap_stages.length <2&&
+                                                (this.state.considerEventStages?this.state.t1Material[i-3].lowest_ap_stages.event:this.state.t1Material[i-3].lowest_ap_stages.normal).length <2&&
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
@@ -809,7 +809,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )}
                                     )}
-                                    {!this.state.showBestOnly &&this.state.t1Material[i-3].balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t1Material[i-3].balanced_stages.event:this.state.t1Material[i-3].balanced_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -833,7 +833,7 @@ class MaterialTable extends BaseComponent{
                                         )
                                     })}
 
-                                    {!this.state.showBestOnly &&this.state.t1Material[i-3].drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t1Material[i-3].drop_rate_first_stages.event:this.state.t1Material[i-3].drop_rate_first_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -866,32 +866,34 @@ class MaterialTable extends BaseComponent{
             
                                 )
     
-                        } else if (i===7){
+                        } 
+                        // Alignment for Kohl series
+                        else if (i===7){
                             return(
                             
                                 <TableRow>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                        <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                        <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
-                                    <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
+                                    <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
                                 </TableCell>
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
-                                        <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
+                                        <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
                                         
                                         
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
                                             
-                                            {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -914,7 +916,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )
                                             })}
-                                            {!this.state.showBestOnly && this.state.t3Material[i].balanced_stages.map((stages) => {
+                                            {!this.state.showBestOnly && (this.state.considerEventStages?this.state.t3Material[i].balanced_stages.event:this.state.t3Material[i].balanced_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -936,7 +938,7 @@ class MaterialTable extends BaseComponent{
                                                 )
                                             })}
             
-                                            {!this.state.showBestOnly &&this.state.t3Material[i].drop_rate_first_stages.map((stages) => {
+                                            {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t3Material[i].drop_rate_first_stages.event:this.state.t3Material[i].drop_rate_first_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -964,33 +966,35 @@ class MaterialTable extends BaseComponent{
             
                                 )
     
-                        } else if (i===8){
+                        }
+                         //Other t4 material that does not involve in upper synthesis
+                         else if (i===8){
                             return(
                                 <TableRow>
                                 <TableCell rowSpan = {4}/>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                        <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                        <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     
                                     </Tooltip>
-                                    <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
+                                    <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
                                 </TableCell>
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
-                                        <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
+                                        <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
                                         
                                         
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
                                             
-                                            {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1013,7 +1017,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )
                                             })}
-                                            {!this.state.showBestOnly && this.state.t3Material[i].balanced_stages.map((stages) => {
+                                            {!this.state.showBestOnly && (this.state.considerEventStages?this.state.t3Material[i].balanced_stages.event:this.state.t3Material[i].balanced_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1035,7 +1039,7 @@ class MaterialTable extends BaseComponent{
                                                 )
                                             })}
             
-                                            {!this.state.showBestOnly &&this.state.t3Material[i].drop_rate_first_stages.map((stages) => {
+                                            {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t3Material[i].drop_rate_first_stages.event:this.state.t3Material[i].drop_rate_first_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1060,16 +1064,16 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-4].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t2Material[i-4].id}/>
-                                {/* <img alt = "" className = 'MT-4' src= {require('./static/MT-'+this.state.t2Material[i-4].id+'.png')}/> */}
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-4].id}/>
+                                {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-4].id+'.png')}/> */}
                                  </Tooltip>
-                                <p className = {'M4Values'+this.state.t2Material[i-4].Notes}>{`${this.state.t2Material[i-4].credit_store_value}`}</p>
+                                <p className = {'M4Values'+(this.state.considerEventStages?this.state.t2Material[i-4].Notes.event:this.state.t2Material[i-4].Notes.normal)}>{`${this.state.considerEventStages?this.state.t2Material[i-4].credit_store_value.event:this.state.t2Material[i-4].credit_store_value.normal}`}</p>
                                 
                                 
                                 <div style = {{display: 'inline'}}>
-                                    {this.state.t2Material[i-4].lowest_ap_stages.map((stages) => {
-                                        if(this.state.t2Material[i-4].lowest_ap_stages.length >=2){
-                                            if(this.state.t2Material[i-4].lowest_ap_stages.indexOf(stages) ===1){
+                                    {(this.state.considerEventStages?this.state.t2Material[i-4].lowest_ap_stages.event:this.state.t2Material[i-4].lowest_ap_stages.normal).map((stages) => {
+                                        if((this.state.considerEventStages?this.state.t2Material[i-4].lowest_ap_stages.event:this.state.t2Material[i-4].lowest_ap_stages.normal).length >=2){
+                                            if((this.state.considerEventStages?this.state.t2Material[i-4].lowest_ap_stages.event:this.state.t2Material[i-4].lowest_ap_stages.normal).indexOf(stages) ===1){
                                                 return (
 
                                                         <div className='stageWrapper'>
@@ -1096,7 +1100,7 @@ class MaterialTable extends BaseComponent{
                                             }
                                         }
                                             return (
-                                                this.state.t2Material[i-4].lowest_ap_stages.length <2&&
+                                                (this.state.considerEventStages?this.state.t2Material[i-4].lowest_ap_stages.event:this.state.t2Material[i-4].lowest_ap_stages.normal).length <2&&
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
@@ -1114,7 +1118,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )}
                                     )}
-                                    {!this.state.showBestOnly &&this.state.t2Material[i-4].balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t2Material[i-4].balanced_stages.event:this.state.t2Material[i-4].balanced_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -1137,7 +1141,7 @@ class MaterialTable extends BaseComponent{
                                         )
                                     })}
 
-                                    {!this.state.showBestOnly &&this.state.t2Material[i-4].drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t2Material[i-4].drop_rate_first_stages.event:this.state.t2Material[i-4].drop_rate_first_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -1165,16 +1169,16 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-4].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t1Material[i-4].id}></span>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-4].id}></span>
                                 
                                  </Tooltip>
-                                <p className = {'M4Values'+this.state.t1Material[i-4].Notes}>{`${this.state.t1Material[i-4].credit_store_value}`}</p>
+                                <p className = {'M4Values'+(this.state.considerEventStages?this.state.t1Material[i-4].Notes.event:this.state.t1Material[i-4].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t1Material[i-4].credit_store_value.event:this.state.t1Material[i-4].credit_store_value.normal)}`}</p>
                                 
                                 
                                 <div style = {{display: 'inline'}}>
-                                    {this.state.t1Material[i-4].lowest_ap_stages.map((stages) => {
-                                        if(this.state.t1Material[i-4].lowest_ap_stages.length >=2){
-                                            if(this.state.t1Material[i-4].lowest_ap_stages.indexOf(stages) ===1){
+                                    {(this.state.considerEventStages?this.state.t1Material[i-4].lowest_ap_stages.event:this.state.t1Material[i-4].lowest_ap_stages.normal).map((stages) => {
+                                        if((this.state.considerEventStages?this.state.t1Material[i-4].lowest_ap_stages.event:this.state.t1Material[i-4].lowest_ap_stages.normal).length >=2){
+                                            if((this.state.considerEventStages?this.state.t1Material[i-4].lowest_ap_stages.event:this.state.t1Material[i-4].lowest_ap_stages.normal).indexOf(stages) ===1){
                                                 return (
 
                                                         <div className='stageWrapper'>
@@ -1201,7 +1205,7 @@ class MaterialTable extends BaseComponent{
                                             }
                                         } 
                                             return (
-                                                this.state.t1Material[i-3].lowest_ap_stages.length <2&&
+                                                (this.state.considerEventStages?this.state.t1Material[i-4].lowest_ap_stages.event:this.state.t1Material[i-4].lowest_ap_stages.normal).length <2&&
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
@@ -1219,7 +1223,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )}
                                     )}
-                                    {!this.state.showBestOnly &&this.state.t1Material[i-4].balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t1Material[i-4].balanced_stages.event:this.state.t1Material[i-4].balanced_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -1242,7 +1246,7 @@ class MaterialTable extends BaseComponent{
                                         )
                                     })}
 
-                                    {!this.state.showBestOnly &&this.state.t1Material[i-4].drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t1Material[i-4].drop_rate_first_stages.event:this.state.t1Material[i-4].drop_rate_first_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -1282,26 +1286,26 @@ class MaterialTable extends BaseComponent{
                                
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
-                                    <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
+                                    <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
                                 </TableCell>
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
-                                        <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
+                                        <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
                                         
                                         
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
                                             
-                                            {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1324,7 +1328,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )
                                             })}
-                                            {!this.state.showBestOnly && this.state.t3Material[i].balanced_stages.map((stages) => {
+                                            {!this.state.showBestOnly && (this.state.considerEventStages?this.state.t3Material[i].balanced_stages.event:this.state.t3Material[i].balanced_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1346,7 +1350,7 @@ class MaterialTable extends BaseComponent{
                                                 )
                                             })}
             
-                                            {!this.state.showBestOnly &&this.state.t3Material[i].drop_rate_first_stages.map((stages) => {
+                                            {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t3Material[i].drop_rate_first_stages.event:this.state.t3Material[i].drop_rate_first_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1381,26 +1385,26 @@ class MaterialTable extends BaseComponent{
                                
                                 <TableCell >
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
-                                    <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
+                                    <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
                                 </TableCell>
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
-                                        <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
+                                        <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
                                         
                                         
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
                                             
-                                            {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1423,7 +1427,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )
                                             })}
-                                            {!this.state.showBestOnly && this.state.t3Material[i].balanced_stages.map((stages) => {
+                                            {!this.state.showBestOnly && (this.state.considerEventStages?this.state.t3Material[i].balanced_stages.event:this.state.t3Material[i].balanced_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1445,7 +1449,7 @@ class MaterialTable extends BaseComponent{
                                                 )
                                             })}
             
-                                            {!this.state.showBestOnly &&this.state.t3Material[i].drop_rate_first_stages.map((stages) => {
+                                            {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t3Material[i].drop_rate_first_stages.event:this.state.t3Material[i].drop_rate_first_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1475,7 +1479,7 @@ class MaterialTable extends BaseComponent{
                                             <span className={'sprite sprite-MISC-'+item.id}></span>
                                             
                                                 </Tooltip>
-                                            <p className = {'CreditValue'+item.Notes}>{item.credit_store_value}</p>
+                                            <p className = {'CreditValue'+(this.state.considerEventStages?item.Notes.event:item.Notes.normal)}>{this.state.considerEventStages?item.credit_store_value.event:item.credit_store_value.normal}</p>
                                         </TableCell>
                                         
                                         )
@@ -1492,26 +1496,26 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                        <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                        <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
-                                    <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
+                                    <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
                                 </TableCell>
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
-                                        <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
+                                        <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
                                         
                                         
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
                                             
-                                            {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1534,7 +1538,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )
                                             })}
-                                            {!this.state.showBestOnly && this.state.t3Material[i].balanced_stages.map((stages) => {
+                                            {!this.state.showBestOnly && (this.state.considerEventStages?this.state.t3Material[i].balanced_stages.event:this.state.t3Material[i].balanced_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1556,7 +1560,7 @@ class MaterialTable extends BaseComponent{
                                                 )
                                             })}
             
-                                            {!this.state.showBestOnly &&this.state.t3Material[i].drop_rate_first_stages.map((stages) => {
+                                            {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t3Material[i].drop_rate_first_stages.event:this.state.t3Material[i].drop_rate_first_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1581,16 +1585,16 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-3].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t2Material[i-3].id}/>
-                                {/* <img alt = "" className = 'MT-4' src= {require('./static/MT-'+this.state.t2Material[i-3].id+'.png')}/> */}
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-3].id}/>
+                                {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-3].id+'.png')}/> */}
                                  </Tooltip>
-                                <p className = {'M4Values'+this.state.t2Material[i-3].Notes}>{`${this.state.t2Material[i-3].credit_store_value}`}</p>
+                                <p className = {'M4Values'+(this.state.considerEventStages?this.state.t2Material[i-3].Notes.event:this.state.t2Material[i-3].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t2Material[i-3].credit_store_value.event:this.state.t2Material[i-3].credit_store_value.normal)}`}</p>
                                 
                                 
                                 <div style = {{display: 'inline'}}>
-                                    {this.state.t2Material[i-3].lowest_ap_stages.map((stages) => {
-                                        if(this.state.t2Material[i-3].lowest_ap_stages.length >=2){
-                                            if(this.state.t2Material[i-3].lowest_ap_stages.indexOf(stages) ===1){
+                                    {(this.state.considerEventStages?this.state.t2Material[i-3].lowest_ap_stages.event:this.state.t2Material[i-3].lowest_ap_stages.normal).map((stages) => {
+                                        if((this.state.considerEventStages?this.state.t2Material[i-3].lowest_ap_stages.event:this.state.t2Material[i-3].lowest_ap_stages.normal).length >=2){
+                                            if((this.state.considerEventStages?this.state.t2Material[i-3].lowest_ap_stages.event:this.state.t2Material[i-3].lowest_ap_stages.normal).indexOf(stages) ===1){
                                                 return (
 
                                                         <div className='stageWrapper'>
@@ -1617,7 +1621,7 @@ class MaterialTable extends BaseComponent{
                                             }
                                         } 
                                             return (
-                                                this.state.t2Material[i-3].lowest_ap_stages.length <2&&
+                                                (this.state.considerEventStages?this.state.t2Material[i-3].lowest_ap_stages.event:this.state.t2Material[i-3].lowest_ap_stages.normal).length <2&&
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
@@ -1635,7 +1639,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )}
                                     )}
-                                    {!this.state.showBestOnly &&this.state.t2Material[i-3].balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t2Material[i-3].balanced_stages.event:this.state.t2Material[i-3].balanced_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -1658,7 +1662,7 @@ class MaterialTable extends BaseComponent{
                                         )
                                     })}
 
-                                    {!this.state.showBestOnly &&this.state.t2Material[i-3].drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t2Material[i-3].drop_rate_first_stages.event:this.state.t2Material[i-3].drop_rate_first_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -1686,16 +1690,16 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-3].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t1Material[i-3].id}></span>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-3].id}></span>
                                 
                                  </Tooltip>
-                                <p className = {'M4Values'+this.state.t1Material[i-3].Notes}>{`${this.state.t1Material[i-3].credit_store_value}`}</p>
+                                <p className = {'M4Values'+(this.state.considerEventStages?this.state.t1Material[i-3].Notes.event:this.state.t1Material[i-3].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t1Material[i-3].credit_store_value.event:this.state.t1Material[i-3].credit_store_value.normal)}`}</p>
                                 
                                 
                                 <div style = {{display: 'inline'}}>
-                                    {this.state.t1Material[i-3].lowest_ap_stages.map((stages) => {
-                                        if(this.state.t1Material[i-3].lowest_ap_stages.length >=2){
-                                            if(this.state.t1Material[i-3].lowest_ap_stages.indexOf(stages) ===1){
+                                    {(this.state.considerEventStages?this.state.t1Material[i-3].lowest_ap_stages.event:this.state.t1Material[i-3].lowest_ap_stages.normal).map((stages) => {
+                                        if((this.state.considerEventStages?this.state.t1Material[i-3].lowest_ap_stages.event:this.state.t1Material[i-3].lowest_ap_stages.normal).length >=2){
+                                            if((this.state.considerEventStages?this.state.t1Material[i-3].lowest_ap_stages.event:this.state.t1Material[i-3].lowest_ap_stages.normal).indexOf(stages) ===1){
                                                 return (
 
                                                         <div className='stageWrapper'>
@@ -1722,7 +1726,7 @@ class MaterialTable extends BaseComponent{
                                             }
                                         }
                                             return (
-                                                this.state.t1Material[i-3].lowest_ap_stages.length <2&&
+                                                (this.state.considerEventStages?this.state.t1Material[i-3].lowest_ap_stages.event:this.state.t1Material[i-3].lowest_ap_stages.normal).length <2&&
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
@@ -1740,7 +1744,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )}
                                     )}
-                                    {!this.state.showBestOnly &&this.state.t1Material[i-3].balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t1Material[i-3].balanced_stages.event:this.state.t1Material[i-3].balanced_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -1763,7 +1767,7 @@ class MaterialTable extends BaseComponent{
                                         )
                                     })}
 
-                                    {!this.state.showBestOnly &&this.state.t1Material[i-3].drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t1Material[i-3].drop_rate_first_stages.event:this.state.t1Material[i-3].drop_rate_first_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -1801,26 +1805,26 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                        <span className={'sprite sprite-MT-'+this.state.t4Material[i].id}></span>
+                                        <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
-                                    <p className = {'M4Values'+this.state.t4Material[i].Notes}>{this.state.t4Material[i].golden_ticket_value}</p>
+                                    <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
                                 </TableCell>
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
-                                        <p className = {'M4Values'+this.state.t3Material[i].Notes}>{`${this.state.t3Material[i].green_ticket_value}`}</p>
+                                        <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
                                         
                                         
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.t3Material[i].lowest_ap_stages.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
                                             
-                                            {this.state.t3Material[i].lowest_ap_stages.map((stages) => {
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1843,7 +1847,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )
                                             })}
-                                            {!this.state.showBestOnly && this.state.t3Material[i].balanced_stages.map((stages) => {
+                                            {!this.state.showBestOnly && (this.state.considerEventStages?this.state.t3Material[i].balanced_stages.event:this.state.t3Material[i].balanced_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1865,7 +1869,7 @@ class MaterialTable extends BaseComponent{
                                                 )
                                             })}
             
-                                            {!this.state.showBestOnly &&this.state.t3Material[i].drop_rate_first_stages.map((stages) => {
+                                            {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t3Material[i].drop_rate_first_stages.event:this.state.t3Material[i].drop_rate_first_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1890,17 +1894,17 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-4].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t2Material[i-4].id}/>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-4].id}/>
                                 
-                                {/* <img alt = "" className = 'MT-4' src= {require('./static/MT-'+this.state.t2Material[i-4].id+'.png')}/> */}
+                                {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-4].id+'.png')}/> */}
                                  </Tooltip>
-                                <p className = {'M4Values'+this.state.t2Material[i-4].Notes}>{`${this.state.t2Material[i-4].credit_store_value}`}</p>
+                                <p className = {'M4Values'+(this.state.considerEventStages?this.state.t2Material[i-4].Notes.event:this.state.t2Material[i-4].Notes.normal)}>{`${this.state.considerEventStages?this.state.t2Material[i-4].credit_store_value.event:this.state.t2Material[i-4].credit_store_value.normal}`}</p>
                                 
                                 
                                 <div style = {{display: 'inline'}}>
-                                    {this.state.t2Material[i-4].lowest_ap_stages.map((stages) => {
-                                        if(this.state.t2Material[i-4].lowest_ap_stages.length >=2){
-                                            if(this.state.t2Material[i-4].lowest_ap_stages.indexOf(stages) ===1){
+                                    {(this.state.considerEventStages?this.state.t2Material[i-4].lowest_ap_stages.event:this.state.t2Material[i-4].lowest_ap_stages.normal).map((stages) => {
+                                        if((this.state.considerEventStages?this.state.t2Material[i-4].lowest_ap_stages.event:this.state.t2Material[i-4].lowest_ap_stages.normal).length >=2){
+                                            if((this.state.considerEventStages?this.state.t2Material[i-4].lowest_ap_stages.event:this.state.t2Material[i-4].lowest_ap_stages.normal).indexOf(stages) ===1){
                                                 return (
 
                                                         <div className='stageWrapper'>
@@ -1927,7 +1931,7 @@ class MaterialTable extends BaseComponent{
                                             }
                                         }
                                             return (
-                                                this.state.t2Material[i-4].lowest_ap_stages.length <2 &&
+                                                (this.state.considerEventStages?this.state.t2Material[i-4].lowest_ap_stages.event:this.state.t2Material[i-4].lowest_ap_stages.normal).length <2 &&
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
@@ -1945,7 +1949,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )}
                                     )}
-                                    {!this.state.showBestOnly &&this.state.t2Material[i-4].balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t2Material[i-4].balanced_stages.event:this.state.t2Material[i-4].balanced_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -1968,7 +1972,7 @@ class MaterialTable extends BaseComponent{
                                         )
                                     })}
 
-                                    {!this.state.showBestOnly &&this.state.t2Material[i-4].drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t2Material[i-4].drop_rate_first_stages.event:this.state.t2Material[i-4].drop_rate_first_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -1996,16 +2000,16 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-4].name} arrow>
-                            <span className={'sprite sprite-MT-'+this.state.t1Material[i-4].id}></span>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-4].id}></span>
                                 
                                  </Tooltip>
-                                <p className = {'M4Values'+this.state.t1Material[i-4].Notes}>{`${this.state.t1Material[i-4].credit_store_value}`}</p>
+                                <p className = {'M4Values'+(this.state.considerEventStages?this.state.t1Material[i-4].Notes.event:this.state.t1Material[i-4].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t1Material[i-4].credit_store_value.event:this.state.t1Material[i-4].credit_store_value.normal)}`}</p>
                                 
                                 
                                 <div style = {{display: 'inline'}}>
-                                    {this.state.t1Material[i-4].lowest_ap_stages.map((stages) => {
-                                        if(this.state.t1Material[i-4].lowest_ap_stages.length >=2){
-                                            if(this.state.t1Material[i-4].lowest_ap_stages.indexOf(stages) ===1){
+                                    {(this.state.considerEventStages?this.state.t1Material[i-4].lowest_ap_stages.event:this.state.t1Material[i-4].lowest_ap_stages.normal).map((stages) => {
+                                        if((this.state.considerEventStages?this.state.t1Material[i-4].lowest_ap_stages.event:this.state.t1Material[i-4].lowest_ap_stages.normal).length >=2){
+                                            if((this.state.considerEventStages?this.state.t1Material[i-4].lowest_ap_stages.event:this.state.t1Material[i-4].lowest_ap_stages.normal).indexOf(stages) ===1){
                                                 return (
 
                                                         <div className='stageWrapper'>
@@ -2032,7 +2036,7 @@ class MaterialTable extends BaseComponent{
                                             }
                                         }
                                             return (
-                                                this.state.t1Material[i-4].lowest_ap_stages.length <2 &&
+                                                (this.state.considerEventStages?this.state.t1Material[i-4].lowest_ap_stages.event:this.state.t1Material[i-4].lowest_ap_stages.normal).length <2 &&
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
@@ -2050,7 +2054,7 @@ class MaterialTable extends BaseComponent{
                                                     </div>
                                                 )}
                                     )}
-                                    {!this.state.showBestOnly &&this.state.t1Material[i-4].balanced_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t1Material[i-4].balanced_stages.event:this.state.t1Material[i-4].balanced_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>
@@ -2073,7 +2077,7 @@ class MaterialTable extends BaseComponent{
                                         )
                                     })}
 
-                                    {!this.state.showBestOnly &&this.state.t1Material[i-4].drop_rate_first_stages.map((stages) => {
+                                    {!this.state.showBestOnly &&(this.state.considerEventStages?this.state.t1Material[i-4].drop_rate_first_stages.event:this.state.t1Material[i-4].drop_rate_first_stages.normal).map((stages) => {
                                         return (
                                         
                                             <div className='stageWrapper'>

@@ -7,7 +7,6 @@ import { initialization} from './actions/material';
 class App extends React.Component {
   render (){
     initialization();
-
     return(
       <div className="App">
         <Navigation/>

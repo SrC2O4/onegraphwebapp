@@ -1,5 +1,34 @@
 const mongoose = require("mongoose");
 
+const Activities = new mongoose.Schema({
+  zoneName: {
+    type: String,
+    required: true
+  },
+
+  openTime: {
+    type: Number,
+    required: false
+  },
+
+  closeTime: {
+    type: Number,
+    required: false
+  },
+})
+
+const Stages = new mongoose.Schema({
+  code: {
+    type: String,
+    required: true
+  },
+  efficiency:{
+    type: Number,
+    required: true
+  }
+});
+
+
 const Stage = new mongoose.Schema({
   _id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -29,10 +58,7 @@ const Stage = new mongoose.Schema({
 });
 
 const Material = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true
-  },
+
   name: {
     type: String,
     required: true
@@ -44,12 +70,17 @@ const Material = new mongoose.Schema({
   },
 
   green_ticket_value: {
-    type: Number,
+    type: { 
+        event: {type: 
+                Number, get: getActual}, normal: {type: 
+                  Number, get: getActual} },
     required: false
   },
 
   golden_ticket_value: {
-    type: Number,
+    type: { event: {type: 
+      Number, get: getActual}, normal: {type: 
+        Number, get: getActual} },
     required: false
   },
 
@@ -59,8 +90,10 @@ const Material = new mongoose.Schema({
   },
 
   credit_store_value: {
-    type: Number,
-    // type: { event: Number, normal: Number },
+    // type: Number,
+    type: { event: {type: 
+      Number, get: getActual}, normal: {type: 
+        Number, get: getActual} },
     required: false
   },
   contingency_store_value: {
@@ -69,20 +102,20 @@ const Material = new mongoose.Schema({
   },
 
   lowest_ap_stages: {
-    type: [Stage],
-    // type: { event: [Stage], normal: [Stage] },
+    // type: [Stage],
+    type: { event: [Stage], normal: [Stage] },
     required: false
   },
 
   balanced_stages: {
-    type: [Stage],
-    // type: { event: [Stage], normal: [Stage] },
+    // type: [Stage],
+    type: { event: [Stage], normal: [Stage] },
     required: false
   },
 
   drop_rate_first_stages: {
-    type: [Stage],
-    // type: { event: [Stage], normal: [Stage] },
+    // type: [Stage],
+    type: { event: [Stage], normal: [Stage] },
     required: false
   },
 
@@ -92,8 +125,8 @@ const Material = new mongoose.Schema({
   },
 
   Notes: {
-    type: String,
-    // type: { event: String, normal: String },
+    // type: String,
+    type: { event: String, normal: String },
     required: false
   },
 
@@ -107,7 +140,15 @@ const Material = new mongoose.Schema({
     required: false
   }
 });
+function getActual(value) {
+  if (typeof value !== 'undefined') {
+     return parseFloat(value.toString());
+  }
+  return value;
+}
 
-let MaterialSchema = mongoose.model("Material", Material, "Material");
-let StageSchema = mongoose.model("Stage", Stage, "Stage");
-module.exports = { MaterialSchema, StageSchema };
+let MaterialSchema = mongoose.model("Material_Event", Material, "Material_Event");
+let StagesSchema = mongoose.model("Stages", Stages, "Stages");
+let ActivitiesSchema = mongoose.model("Activities", Activities, "Activities")
+module.exports = { MaterialSchema, StagesSchema, ActivitiesSchema};
+

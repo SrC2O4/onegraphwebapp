@@ -9,8 +9,8 @@ import './../MaterialTable/sprite.css'
 
 class StagesModal extends BaseComponent {
 
-    filterState({stageModalOpen, itemToRender}){
-      return{stageModalOpen, itemToRender};
+    filterState({stageModalOpen, itemToRender,considerEventStages}){
+      return{stageModalOpen, itemToRender,considerEventStages};
   
     }
   
@@ -43,10 +43,10 @@ class StagesModal extends BaseComponent {
                   <div style={{display: "inline-block"}}>
                         
                         <p>信用商店价值：</p>
-                        <p className = {'CreditValue'+this.state.itemToRender.Notes}>{this.state.itemToRender.credit_store_value}</p>
+                        <p className = {'CreditValue'+this.state.considerEventStages?this.state.itemToRender.Notes.event:this.state.itemToRender.Notes.normal}>{this.state.considerEventStages?this.state.itemToRender.credit_store_value.event:this.state.itemToRender.credit_store_value.normal}</p>
                     </div>
                     <br/>
-                    {this.state.itemToRender.lowest_ap_stages.map((stages) => {
+                    {(this.state.considerEventStages?this.state.itemToRender.lowest_ap_stages.event:this.state.itemToRender.lowest_ap_stages.normal).map((stages) => {
                         return (
                         <div className = 'stageWrapper'>
                             <div style={{marginBlockEnd:'1%' }}>
@@ -70,7 +70,7 @@ class StagesModal extends BaseComponent {
                         </div>
                         )
                     })}
-                    {this.state.itemToRender.balanced_stages.map((stages) => {
+                    {(this.state.considerEventStages?this.state.itemToRender.balanced_stages.event:this.state.itemToRender.balanced_stages.normal).map((stages) => {
                         return (
                         <div className = 'stageWrapper'>
                             <div style={{marginBlockEnd:'1%' }}>
@@ -94,7 +94,7 @@ class StagesModal extends BaseComponent {
                         )
                     })}
 
-                    {this.state.itemToRender.drop_rate_first_stages.map((stages) => {
+                    {(this.state.considerEventStages?this.state.itemToRender.drop_rate_first_stages.event:this.state.itemToRender.drop_rate_first_stages.normal).map((stages) => {
                         return (
                         <div className = 'stageWrapper'>
                             <div style={{marginBlockEnd:'1%' }}>

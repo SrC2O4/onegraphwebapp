@@ -12,8 +12,8 @@ import './style.css';
 
 class SettingsModal extends BaseComponent {
   
-  filterState({modalOpen, detailMode, showBestOnly}){
-    return{modalOpen, detailMode, showBestOnly};
+  filterState({modalOpen, detailMode, showBestOnly, considerEventStages, ifEventNow}){
+    return{modalOpen, detailMode, showBestOnly, considerEventStages, ifEventNow};
 
   }
 
@@ -57,6 +57,11 @@ class SettingsModal extends BaseComponent {
                     control={<Switch className="showBestOnly" checked={this.state.showBestOnly} onChange={this.handleChange("showBestOnly")} aria-label="show best only switch" />}
                     label={this.state.showBestOnly ? '只显示最优' : '显示全部'}
                   />
+
+                  {this.state.ifEventNow && <FormControlLabel
+                    control={<Switch className="considerEventStages" checked={this.state.considerEventStages} onChange={this.handleChange("considerEventStages")} aria-label="event stages switch" />}
+                    label={this.state.showBestOnly ? '包含活动图' : '仅考虑主线'}
+                  />}
               </FormGroup>
               </div>
             </Fade>

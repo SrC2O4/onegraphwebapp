@@ -1,335 +1,172 @@
 .sprite {
-    background-image: url(./static/sprite.png);
-    background-repeat: no-repeat;
-    display: inline-block;
+	background-image: url(./static/sprite.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+	background-size: 800% 700%;
 }
 
 .sprite-ESS-32001 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 0;
+	background-position: 0% 0%;
 }
-
 .sprite-GACHATICKET {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -45px;
+	background-position: 14.2857% 0%;
 }
-
 .sprite-MISC-2002 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -90px;
+	background-position: 0% 16.6667%;
 }
-
 .sprite-MISC-3003 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -135px;
+	background-position: 14.2857% 16.6667%;
 }
-
 .sprite-MISC-3112 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -180px;
+	background-position: 28.5714% 0%;
 }
-
 .sprite-MISC-3113 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -225px;
+	background-position: 28.5714% 16.6667%;
 }
-
 .sprite-MISC-3301 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -270px;
+	background-position: 0% 33.3333%;
 }
-
 .sprite-MISC-3302 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -315px;
+	background-position: 14.2857% 33.3333%;
 }
-
 .sprite-MISC-3401 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -360px;
+	background-position: 28.5714% 33.3333%;
 }
-
 .sprite-MISC-4001 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -405px;
+	background-position: 42.8571% 0%;
 }
-
 .sprite-MISC-7001 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -450px;
+	background-position: 42.8571% 16.6667%;
 }
-
 .sprite-MT-2001 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -495px;
+	background-position: 42.8571% 33.3333%;
 }
-
 .sprite-MT-2002 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -540px;
+	background-position: 0% 50%;
 }
-
 .sprite-MT-2003 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -585px;
+	background-position: 14.2857% 50%;
 }
-
 .sprite-MT-30011 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -630px;
+	background-position: 28.5714% 50%;
 }
-
 .sprite-MT-30012 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -675px;
+	background-position: 42.8571% 50%;
 }
-
 .sprite-MT-30013 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -720px;
+	background-position: 57.1429% 0%;
 }
-
 .sprite-MT-30014 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -765px;
+	background-position: 57.1429% 16.6667%;
 }
-
 .sprite-MT-30021 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -810px;
+	background-position: 57.1429% 33.3333%;
 }
-
 .sprite-MT-30022 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -855px;
+	background-position: 57.1429% 50%;
 }
-
 .sprite-MT-30023 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -900px;
+	background-position: 0% 66.6667%;
 }
-
 .sprite-MT-30024 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -945px;
+	background-position: 14.2857% 66.6667%;
 }
-
 .sprite-MT-30031 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -990px;
+	background-position: 28.5714% 66.6667%;
 }
-
 .sprite-MT-30032 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1035px;
+	background-position: 42.8571% 66.6667%;
 }
-
 .sprite-MT-30033 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1080px;
+	background-position: 57.1429% 66.6667%;
 }
-
 .sprite-MT-30034 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1125px;
+	background-position: 71.4286% 0%;
 }
-
 .sprite-MT-30041 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1170px;
+	background-position: 71.4286% 16.6667%;
 }
-
 .sprite-MT-30042 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1215px;
+	background-position: 71.4286% 33.3333%;
 }
-
 .sprite-MT-30043 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1260px;
+	background-position: 71.4286% 50%;
 }
-
 .sprite-MT-30044 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1305px;
+	background-position: 71.4286% 66.6667%;
 }
-
 .sprite-MT-30051 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1350px;
+	background-position: 0% 83.3333%;
 }
-
 .sprite-MT-30052 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1395px;
+	background-position: 14.2857% 83.3333%;
 }
-
 .sprite-MT-30053 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1440px;
+	background-position: 28.5714% 83.3333%;
 }
-
 .sprite-MT-30054 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1485px;
+	background-position: 42.8571% 83.3333%;
 }
-
 .sprite-MT-30061 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1530px;
+	background-position: 57.1429% 83.3333%;
 }
-
 .sprite-MT-30062 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1575px;
+	background-position: 71.4286% 83.3333%;
 }
-
 .sprite-MT-30063 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1620px;
+	background-position: 85.7143% 0%;
 }
-
 .sprite-MT-30064 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1665px;
+	background-position: 85.7143% 16.6667%;
 }
-
 .sprite-MT-30073 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1710px;
+	background-position: 85.7143% 33.3333%;
 }
-
 .sprite-MT-30074 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1755px;
+	background-position: 85.7143% 50%;
 }
-
 .sprite-MT-30083 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1800px;
+	background-position: 85.7143% 66.6667%;
 }
-
 .sprite-MT-30084 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1845px;
+	background-position: 85.7143% 83.3333%;
 }
-
 .sprite-MT-30093 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1890px;
+	background-position: 0% 100%;
 }
-
 .sprite-MT-30094 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1935px;
+	background-position: 14.2857% 100%;
 }
-
 .sprite-MT-30103 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -1980px;
+	background-position: 28.5714% 100%;
 }
-
 .sprite-MT-30104 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -2025px;
+	background-position: 42.8571% 100%;
 }
-
 .sprite-MT-30115 {
-    width: 55px;
-    height: 55px;
-    background-position: 0 -2070px;
+	background-position: 57.1429% 100%;
 }
-
 .sprite-MT-30125 {
-    width: 55px;
-    height: 55px;
-    background-position: 0 -2125px;
+	background-position: 71.4286% 100%;
 }
-
 .sprite-MT-30135 {
-    width: 55px;
-    height: 55px;
-    background-position: 0 -2180px;
+	background-position: 85.7143% 100%;
 }
-
 .sprite-MT-31013 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -2235px;
+	background-position: 100% 0%;
 }
-
 .sprite-MT-31014 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -2280px;
+	background-position: 100% 16.6667%;
 }
-
 .sprite-MT-31023 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -2325px;
+	background-position: 100% 33.3333%;
 }
-
 .sprite-MT-31024 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -2370px;
+	background-position: 100% 50%;
 }
-
 .sprite-MT-4001 {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -2415px;
+	background-position: 100% 66.6667%;
 }
-
 .sprite-placeholder {
-    width: 45px;
-    height: 45px;
-    background-position: 0 -2460px;
+	background-position: 100% 83.3333%;
 }

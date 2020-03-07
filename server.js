@@ -9,7 +9,7 @@ const app = express();
 const { mongoose } = require("./db/mongoose");
 
 // import the mongoose models
-const { MaterialSchema, StageSchema } = require("./models/material");
+const { MaterialSchema, StagesSchema, ActivitiesSchema } = require("./models/material");
 
 // to validate object IDs
 const { ObjectID } = require("mongodb");
@@ -19,13 +19,31 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/test/stages", (req, res) => {
-    StageSchema.find({}).then((stages) =>{
+
+app.get("/activity", (req, res) => {
+    const currentTime = new Date().getTime();
+    console.log(currentTime)
+    ActivitiesSchema.findOne({'openTime': {$lt: currentTime}, 'closeTime':{$gt: currentTime}})
+    .then((events)=> {
+        if(events){
+            res.send({'status':true})
+        } else {
+            res.send({'status':false})
+        }
+
+    })
+});
+
+
+app.get("/stages", (req, res) => {
+    StagesSchema.find({}).then((stages) =>{
         res.send({stages});
     }
 
     )
 });
+
+
 app.get("/materials", (req, res) => {
     MaterialSchema.find({})
     .then(

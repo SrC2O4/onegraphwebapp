@@ -3,11 +3,48 @@
 import {setState } from "statezero";
 import {setEmptyState} from './helpers';
 
+export const getAll = ()=>{
+    const urls =  [fetch("/activity"), fetch("/materials/tier/1"),  fetch("/materials/tier/2"), fetch( "/materials/tier/3"),  fetch("/materials/tier/4"),  fetch("/materials/tier/5"), fetch("/materials/catalyst"), fetch("/materials/plan"), fetch("/materials/gacha"), fetch("/materials/misc")]
+    Promise.all(urls)
+    .then(([res1,res2,res3, res4, res5, res6, res7, res8, res9, res10])=>{
+        return Promise.all([res1.json(),res2.json(),res3.json(), res4.json(), res5.json(), res6.json(), res7.json(), res8.json(), res9.json(), res10.json()])
+    })
+    .then(([res1,res2,res3, res4, res5, res6, res7, res8, res9, res10])=>{
+        console.log(res1)
+        setState("ifEventNow", res1.status);
+        setState("t5Material", res6.material);
+        setState("t4Material", res5.material);
+        setState("t3Material", res4.material);
+        setState("t2Material", res3.material);
+        setState("t1Material", res2.material);
+        setState("misc", res10.material);
+        setState("catalyst", res7.material[0]);
+        setState("gacha",res9.material[0]);
+        setState("plan", res8.material[0]);
 
+    })
+}
 export const initialization = () => {
     setEmptyState();
 }
-// A function to send a POST request with a new student.
+
+export const checkIfEvent = ()=> {
+    const url = "/activity";
+    fetch(url)
+        .then((res) => {
+            if (res.status===200){
+                return res.json();
+            }
+        })
+        .then((json) => {
+            setState("considerEventStages", json.status);
+            const key = "ifEventNow";
+            setState(key, json.status)
+            
+        }).catch(err => console.log(err))
+}
+
+// A function to send a GET to get T1 materials
 export const getT1Materials = () => {
     
     // the URL for the request
@@ -139,6 +176,7 @@ export const getCatalyst = () =>{
             }
         })
         .then((json) =>{
+                console.log(json.material[0])
                 setState('catalyst', json.material[0]);
         })
         .catch(error => {
@@ -180,7 +218,7 @@ export const getPlan = () =>{
             }
         })
         .then((json) =>{
-            json.material[0].green_ticket_value.toFixed(3); // Otherwise it shows 1 lolooool
+            console.log(json.material[0])
             setState('plan', json.material[0]);
         })
         .catch(error => {
