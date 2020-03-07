@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import BaseComponent from "./../Base";
-import { getT1Materials, getT2Materials, getT3Materials, getT4Materials, getT5Materials, getCatalyst, getGacha, getPlan, getMisc, checkIfEvent, getAll} from '../../actions/material';
+import {getAll} from '../../actions/material';
 import Tooltip from '@material-ui/core/Tooltip';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import StagesModal from "./../StagesModal";
@@ -26,10 +26,7 @@ class MaterialTable extends BaseComponent{
     }
     
     componentDidMount(){
-
         getAll();
-       
-        
     }
 
     indices = [0,1,2,3,4,5,6,7,8,9,10,11]
