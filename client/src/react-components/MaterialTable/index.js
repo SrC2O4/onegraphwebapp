@@ -35,7 +35,6 @@ class MaterialTable extends BaseComponent{
     indices = [0,1,2,3,4,5,6,7,8,9,10,11]
     render(){
         getAll();
-        console.log(this.state);
            
         if(this.state.t4Material.length===0||this.state.t3Material.length===0 ||this.state.t1Material.length===0 || this.state.t2Material.length===0 || this.state.t5Material.length===0  ){
             return (

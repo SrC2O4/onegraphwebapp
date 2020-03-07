@@ -176,7 +176,6 @@ export const getCatalyst = () =>{
             }
         })
         .then((json) =>{
-                console.log(json.material[0])
                 setState('catalyst', json.material[0]);
         })
         .catch(error => {
@@ -218,7 +217,6 @@ export const getPlan = () =>{
             }
         })
         .then((json) =>{
-            console.log(json.material[0])
             setState('plan', json.material[0]);
         })
         .catch(error => {

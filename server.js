@@ -22,7 +22,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/activity", (req, res) => {
     const currentTime = new Date().getTime();
-    console.log(currentTime)
     ActivitiesSchema.findOne({'openTime': {$lt: currentTime}, 'closeTime':{$gt: currentTime}})
     .then((events)=> {
         if(events){
