@@ -30,10 +30,7 @@ const Stages = new mongoose.Schema({
 
 
 const Stage = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true
-  },
+
 
   code: {
     type: String,
@@ -41,14 +38,17 @@ const Stage = new mongoose.Schema({
   },
   drop_rate: {
     type: Number,
+    get: getActual,
     required: true
   },
   efficiency: {
     type: Number,
+    get: getActual,
     required: true
   },
   ap_per_item: {
     type: Number,
+    get: getActual,  
     required: true
   },
   extra_drop: {

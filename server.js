@@ -120,7 +120,7 @@ app.get("/materials/plan", (req, res) => {
 });
 
 app.get("/materials/misc", (req, res) => {
-    MaterialSchema.find({'credit_store_value': {$gt: 0}, 'type': { $not: { $regex: "Material" } } })
+    MaterialSchema.find({'credit_store_value': {$ne: null}, 'type': { $not: { $regex: "Material" } } })
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material

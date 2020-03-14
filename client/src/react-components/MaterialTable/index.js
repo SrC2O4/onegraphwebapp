@@ -5,7 +5,7 @@ import {getAll} from '../../actions/material';
 import Tooltip from '@material-ui/core/Tooltip';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import StagesModal from "./../StagesModal";
-import {setState} from 'statezero';
+import {setState,getState} from 'statezero';
 import { IconButton, TableContainer, Paper, Table, TableRow, TableCell, CircularProgress } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -25,27 +25,27 @@ class MaterialTable extends BaseComponent{
 
     }
     
-    componentDidMount(){
-        getAll();
-    }
-
+    
     indices = [0,1,2,3,4,5,6,7,8,9,10,11]
     render(){
         getAll();
-           
+        console.log(getState("modalOpen"))
         if(this.state.t4Material.length===0||this.state.t3Material.length===0 ||this.state.t1Material.length===0 || this.state.t2Material.length===0 || this.state.t5Material.length===0  ){
             return (
             <Modal
                 aria-labelledby="transition-modal-preloader"
-                className = "modal"
-                open={this.state.t5Material}
+                className = "modal2"
+                open={this.state.t5Material.length===0}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
                 timeout: 1000,
                 }}>
-                <Fade in={this.state.t5Material}>
-                    <div>
+                <Fade in={this.state.t5Material.length===0}>
+                    <div style={{
+        position: 'absolute', left: '50%', top: '50%',
+        transform: 'translate(-50%, -50%)'
+    }}>
                         <CircularProgress color='secondary'/>
                     </div>
                 </Fade>
@@ -1472,7 +1472,7 @@ class MaterialTable extends BaseComponent{
                                         return (
                                         <TableCell rowSpan={2}>
                                             <Tooltip title = {item.name} arrow>
-                                            <span className={'sprite sprite-MISC-'+item.id}></span>
+                                            <span className={'spriteMT-4 sprite sprite-MISC-'+item.id}></span>
                                             
                                                 </Tooltip>
                                             <p className = {'CreditValue'+(this.state.considerEventStages?item.Notes.event:item.Notes.normal)}>{this.state.considerEventStages?item.credit_store_value.event:item.credit_store_value.normal}</p>

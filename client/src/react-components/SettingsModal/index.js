@@ -34,7 +34,7 @@ class SettingsModal extends BaseComponent {
       return (
         <div>
           <Modal
-            aria-labelledby="transition-modal-title"
+            aria-labelledby="transition-modal-settings"
             className='modal'
             open={this.state.modalOpen}
             onClose={this.handleClose}
@@ -46,7 +46,7 @@ class SettingsModal extends BaseComponent {
           >
             <Fade in={this.state.modalOpen}>
               <div className='paper'>
-                <h2 id="transition-modal-title">设定</h2>
+                <h2 id="transition-modal-settings">设定</h2>
                 <FormGroup>
                   <FormControlLabel
                     control={<Switch className="detailMode" checked={this.state.detailMode} onChange={this.handleChange("detailMode")} aria-label="detail mode switch" />}

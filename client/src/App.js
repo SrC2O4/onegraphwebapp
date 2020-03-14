@@ -1,20 +1,27 @@
 import React from 'react';
-import './App.css';
 import Navigation from './react-components/Navigation/';
 import AppFooter from './react-components/Footer/';
 import MaterialTable from './react-components/MaterialTable';
-import { initialization} from './actions/material';
+import { createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
+import { getState } from "statezero";
+import { CssBaseline } from '@material-ui/core';
+
+
 class App extends React.Component {
+  
   render (){
-    initialization();
     return(
-      <div className="App">
+      <div>
+        <MuiThemeProvider muiTheme={createMuiTheme({palette: {type: getState('currentTheme')}})}> 
+        <CssBaseline/>
         <Navigation/>
         <MaterialTable/>
-        <AppFooter/>
-        
+        <AppFooter/> 
+        </MuiThemeProvider>
       </div>
     );
   }
+
+
 }
 export default App;

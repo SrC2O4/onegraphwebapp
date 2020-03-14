@@ -39,7 +39,7 @@ class StagesModal extends BaseComponent {
               <Fade in={this.state.stageModalOpen}>
                 <div className='paper'>
                 <h2 id="transition-modal-title">{this.state.itemToRender.name}</h2>
-                    <span className={'sprite sprite-MT-'+this.state.itemToRender.id}></span>
+                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.itemToRender.id}></span>
                   <div style={{display: "inline-block"}}>
                         
                         <p>信用商店价值：</p>
