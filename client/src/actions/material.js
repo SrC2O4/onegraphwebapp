@@ -3,8 +3,10 @@
 import {setState } from "statezero";
 import {setEmptyState} from './helpers';
 
+const baseUrl = process.env.NODE_ENV === 'development' ? '' : (process.env.REACT_APP_API_HOST || '');
+
 export const getAll = ()=>{
-    const urls =  [fetch("/activity"), fetch("/materials/tier/1"),  fetch("/materials/tier/2"), fetch( "/materials/tier/3"),  fetch("/materials/tier/4"),  fetch("/materials/tier/5"), fetch("/materials/catalyst"), fetch("/materials/plan"), fetch("/materials/gacha"), fetch("/materials/misc")]
+    const urls =  [fetch(baseUrl + "/activity"), fetch(baseUrl + "/materials/tier/1"),  fetch(baseUrl + "/materials/tier/2"), fetch(baseUrl + "/materials/tier/3"),  fetch(baseUrl + "/materials/tier/4"),  fetch(baseUrl + "/materials/tier/5"), fetch(baseUrl + "/materials/catalyst"), fetch(baseUrl + "/materials/plan"), fetch(baseUrl + "/materials/gacha"), fetch(baseUrl + "/materials/misc")]
     Promise.all(urls)
     .then(([res1,res2,res3, res4, res5, res6, res7, res8, res9, res10])=>{
         return Promise.all([res1.json(),res2.json(),res3.json(), res4.json(), res5.json(), res6.json(), res7.json(), res8.json(), res9.json(), res10.json()])
@@ -29,7 +31,7 @@ export const initialization = () => {
 }
 
 export const checkIfEvent = ()=> {
-    const url = "/activity";
+    const url = baseUrl + "/activity";
     fetch(url)
         .then((res) => {
             if (res.status===200){
@@ -48,7 +50,7 @@ export const checkIfEvent = ()=> {
 export const getT1Materials = () => {
     
     // the URL for the request
-    const url = "/materials/tier/1";     
+    const url = baseUrl + "/materials/tier/1";     
 
     fetch(url)
         .then((res) =>{
@@ -70,7 +72,7 @@ export const getT1Materials = () => {
 
 export const getT2Materials = () =>{
     
-    const url = "/materials/tier/2";
+    const url = baseUrl + "/materials/tier/2";
 
     fetch(url)
         .then((res) =>{
@@ -95,7 +97,7 @@ export const getT2Materials = () =>{
 
 export const getT3Materials = () =>{
     
-    const url = "/materials/tier/3";  
+    const url = baseUrl + "/materials/tier/3";  
 
     fetch(url)
         .then((res) =>{
@@ -118,7 +120,7 @@ export const getT3Materials = () =>{
 }
 
 export const getT4Materials = () =>{
-    const url = "/materials/tier/4";
+    const url = baseUrl + "/materials/tier/4";
 
     fetch(url)
         .then((res) =>{
@@ -142,7 +144,7 @@ export const getT4Materials = () =>{
 
 
 export const getT5Materials = () =>{
-    const url = "/materials/tier/5";
+    const url = baseUrl + "/materials/tier/5";
 
     fetch(url)
         .then((res) =>{
@@ -164,7 +166,7 @@ export const getT5Materials = () =>{
 }
 
 export const getCatalyst = () =>{
-    const url = "/materials/catalyst";      
+    const url = baseUrl + "/materials/catalyst";      
 
     fetch(url)
         .then((res) =>{
@@ -185,7 +187,7 @@ export const getCatalyst = () =>{
 
 
 export const getGacha = () =>{
-    const url = "/materials/gacha"; 
+    const url = baseUrl + "/materials/gacha"; 
 
     fetch(url)
         .then((res) =>{
@@ -205,7 +207,7 @@ export const getGacha = () =>{
 }
 
 export const getPlan = () =>{
-    const url = "/materials/plan";    
+    const url = baseUrl + "/materials/plan";    
 
     fetch(url)
         .then((res) =>{
@@ -226,7 +228,7 @@ export const getPlan = () =>{
 
 
 export const getMisc = () =>{
-    const url = "/materials/misc";
+    const url = baseUrl + "/materials/misc";
     
     fetch(url)
         .then((res) =>{

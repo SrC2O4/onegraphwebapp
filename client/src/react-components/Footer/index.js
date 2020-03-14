@@ -121,7 +121,7 @@ export default function AppFooter() {
                 <Link href="https://ak.graueneko.xyz/">明日方舟工具箱</Link>
               </li>
               <li className={classes.listItem}>
-                <Link href="http://ak.mooncell.wiki/w/%E9%A6%96%E9%A1%B5">PTRS wiki</Link>
+                <Link href="http://ak.mooncell.wiki/w/%E9%A6%96%E9%A1%B5">PRTS wiki</Link>
               </li>
               <li className={classes.listItem}>
                 <Link href="https://github.com/Evealicemier">水晶泡芙工坊<GitHubIcon className = {classes.gitHubIcon}/></Link>
@@ -153,6 +153,20 @@ export default function AppFooter() {
                 知识共享 署名-非商业性使用 4.0 国际 许可协议
               </Link>
               {'进行许可'}
+              {
+                process.env.REACT_APP_ICP ?
+                <div>
+                {'互联网ICP备案：'}
+                <Link
+                  href="http://www.beian.miit.gov.cn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {process.env.REACT_APP_ICP}
+                </Link>
+                </div>
+                : ''
+              }
             </Typography>
           </Grid>
         </Grid>
