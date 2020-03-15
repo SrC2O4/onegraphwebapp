@@ -35,7 +35,7 @@ app.get("/activity", (req, res) => {
 
 
 app.get("/stages", (req, res) => {
-    StagesSchema.find({}).then((stages) =>{
+    StagesSchema.find({},{'_id':0}).then((stages) =>{
         res.send({stages});
     }
 
@@ -44,7 +44,7 @@ app.get("/stages", (req, res) => {
 
 
 app.get("/materials", (req, res) => {
-    MaterialSchema.find({})
+    MaterialSchema.find({},{'_id':0,'Order_id':0,'last_updated':0})
     .then(
         (materials) => {
             res.send({ materials }); // can wrap in object if want to add more properties
@@ -59,7 +59,7 @@ app.get("/materials", (req, res) => {
 app.get("/materials/tier/:tier", (req, res) => {
     const tier = req.params.tier;
 
-    MaterialSchema.find({'tier': tier, 'type': 'Material'}).sort({'Order_id':1})
+    MaterialSchema.find({'tier': tier, 'type': 'Material'},{'_id':0,'Order_id':0,'last_updated':0}).sort({'Order_id':1})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
@@ -75,7 +75,7 @@ app.get("/materials/tier/:tier", (req, res) => {
 
 app.get("/materials/catalyst", (req, res) => {
 
-    MaterialSchema.find({'id': '32001'})
+    MaterialSchema.find({'id': '32001'},{'_id':0,'Order_id':0,'last_updated':0})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
@@ -90,7 +90,7 @@ app.get("/materials/catalyst", (req, res) => {
 });
 
 app.get("/materials/gacha", (req, res) => {
-    MaterialSchema.find({'id': '7003'})
+    MaterialSchema.find({'id': '7003'},{'_id':0,'Order_id':0})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
@@ -105,7 +105,7 @@ app.get("/materials/gacha", (req, res) => {
 });
 
 app.get("/materials/plan", (req, res) => {
-    MaterialSchema.find({'id': '7001'})
+    MaterialSchema.find({'id': '7001'},{'_id':0,'Order_id':0,'last_updated':0})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
@@ -120,7 +120,7 @@ app.get("/materials/plan", (req, res) => {
 });
 
 app.get("/materials/misc", (req, res) => {
-    MaterialSchema.find({'credit_store_value': {$ne: null}, 'type': { $not: { $regex: "Material" } } })
+    MaterialSchema.find({'credit_store_value': {$ne: null}, 'type': { $not: { $regex: "Material" } } },{'_id':0,'Order_id':0,'last_updated':0})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
