@@ -137,8 +137,12 @@ export default function AppFooter() {
                 前端Repo <Link href="https://github.com/Strontium233/onegraphwebapp">Strontium233<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
               <li className={classes.listItem}>
+                前端协助 <Link href="https://github.com/YanAndFish">YanAndFish<GitHubIcon className = {classes.gitHubIcon}/></Link>
+              </li>
+              <li className={classes.listItem}>
                 后端repo <Link href="https://github.com/SQRPI/ArkOneGraph">SQRPI<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
+              
             </ul>
           </Grid>
           <Grid item>
