@@ -140,7 +140,7 @@ export default function AppFooter() {
                 前端协助 <Link href="https://github.com/YanAndFish">YanAndFish<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
               <li className={classes.listItem}>
-                后端repo <Link href="https://github.com/SQRPI/ArkOneGraph">SQRPI<GitHubIcon className = {classes.gitHubIcon}/></Link>
+                后端Repo <Link href="https://github.com/SQRPI/ArkOneGraph">SQRPI<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
               
             </ul>

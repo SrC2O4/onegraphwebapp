@@ -24,17 +24,14 @@ span{
     font-size: 0.58rem;
 }
 .spriteMT-5{
-    height: 55px;
-    width: 55px;
+    --icon-w:55px;
 }
 
 .spriteMT-4{
-    height: 45px;
-    width: 45px;
+    --icon-w:45px;
 }
 .extraDropWrap{
-    height: 18px;
-    width: 18px;
+    --icon-w:18px;
     position: absolute;
     margin-left: 0px;
     margin-top: 0px; 
@@ -61,17 +58,14 @@ span{
     font-size: 0.58rem;
 }
 .spriteMT-5{
-    height: 55px;
-    width: 55px;
+    --icon-w:55px;
 }
 
 .spriteMT-4{
-    height: 45px;
-    width: 45px;
+    --icon-w:45px;
 }
 .extraDropWrap{
-    height: 18px;
-    width: 18px;
+    --icon-w:18px;
     position: absolute; 
     /* display: inline; */
     margin-left: 0px;
@@ -95,17 +89,14 @@ span{
     font-size: 35px;
 }
 .spriteMT-5{
-    height: 55px;
-    width: 55px;
+    --icon-w:55px;
 }
 
 .spriteMT-4{
-    height: 45px;
-    width: 45px;
+    --icon-w:45px;
 }
 .extraDropWrap{
-    height: 18px;
-    width: 18px;
+    --icon-w:18px;
     position: absolute;
     /* display: inline; */
     margin-left: 0px;
@@ -143,17 +134,14 @@ span{
     font-size: 0.7rem;
 }
 .spriteMT-5{
-    height: 55px;
-    width: 55px;
+    --icon-w:55px;
 }
 
 .spriteMT-4{
-    height: 45px;
-    width: 45px;
+    --icon-w:45px;
 }
 .extraDropWrap{
-    height: 18px;
-    width: 18px;
+    --icon-w:18px;
     position: absolute;
     /* display: inline; */
     margin-left: 0px;

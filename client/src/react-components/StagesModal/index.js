@@ -5,7 +5,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import {setState} from 'statezero';
 import Tooltip from '@material-ui/core/Tooltip';
-import './../MaterialTable/sprite.css'
+import '../MaterialTable/materials.css';
+import '../MaterialTable/chip.css';
 
 class StagesModal extends BaseComponent {
 
@@ -39,7 +40,7 @@ class StagesModal extends BaseComponent {
               <Fade in={this.state.stageModalOpen}>
                 <div className='paper'>
                 <h2 id="transition-modal-title">{this.state.itemToRender.name}</h2>
-                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.itemToRender.id}></span>
+                    <span className={'material spriteMT-4 material-MT-'+this.state.itemToRender.id}></span>
                   <div style={{display: "inline-block"}}>
                         
                         <p>信用商店价值：</p>
@@ -53,7 +54,7 @@ class StagesModal extends BaseComponent {
                                 {stages.extra_drop.length >0 && stages.extra_drop.map((loots)=>{
                                         return (
                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                             </Tooltip>)
                                     })
                                 }
@@ -77,7 +78,7 @@ class StagesModal extends BaseComponent {
                                 {stages.extra_drop.length >0 && stages.extra_drop.map((loots)=>{
                                         return (
                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                             </Tooltip>
                                         )})
                                 }
@@ -101,7 +102,7 @@ class StagesModal extends BaseComponent {
                                 {stages.extra_drop.length >0 &&stages.extra_drop.map((loots)=>{
                                         return (
                                         <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                           <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                           <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                         </Tooltip>)})
                                 }
                                 <p className = 'dropRateFirstStage'>{stages.code}</p>
