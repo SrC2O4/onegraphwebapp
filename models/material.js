@@ -97,7 +97,9 @@ const Material = new mongoose.Schema({
     required: false
   },
   contingency_store_value: {
-    type: Number,
+    type: { finite: {type: 
+      Number, get: getActual}, infinite: {type: 
+        Number, get: getActual} },
     required: false
   },
 

@@ -23,10 +23,13 @@ export const getAll = ()=>{
         return Promise.all([res1.json(),res2.json(),res3.json(), res4.json(), res5.json(), res6.json(), res7.json(), res8.json(), res9.json(), res10.json(), res11.json()])
     })
     .then(([res1,res2,res3, res4, res5, res6, res7, res8, res9, res10, res11])=>{
-        if(res1.status){
-            setState("eventType", res1.type)
+        if(res1.eventStatus.status){
+            console.log(res1.eventStatus.event.type)
+            setState("eventType", res1.eventStatus.event.type)
         }
+        if(res1.type === "Casual"){
         setState("ifEventNow", res1.status);
+        }
         setState("t5Material", res6.material);
         setState("t4Material", res5.material);
         setState("t3Material", res4.material);

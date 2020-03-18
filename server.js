@@ -25,7 +25,7 @@ app.get("/activity", (req, res) => {
     ActivitiesSchema.findOne({'openTime': {$lt: currentTime}, 'closeTime':{$gt: currentTime}})
     .then((events)=> {
         if(events){
-            res.send({'status':true})
+            res.send({eventStatus: {'status':true, 'event':events}})
         } else {
             res.send({'status':false})
         }
@@ -121,6 +121,21 @@ app.get("/materials/plan", (req, res) => {
 
 app.get("/materials/misc", (req, res) => {
     MaterialSchema.find({'credit_store_value': {$ne: null}, 'type': { $not: { $regex: "Material" } } },{'_id':0,'Order_id':0,'last_updated':0})
+        .then(material => {
+            if (!material) {
+                res.status(404).send(); // could not find this material
+            } else {
+                /// sometimes we wrap returned object in another object:
+                res.send({material});
+            }
+        })
+        .catch(error => {
+            res.status(500).send(); // server error
+        });
+});
+
+app.get("/contingency", (req, res) => {
+    MaterialSchema.find({'contingency_store_value': {$type:3}})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material

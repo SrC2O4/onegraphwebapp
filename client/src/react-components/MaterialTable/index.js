@@ -11,6 +11,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import './chip.css';
+import './contingencyMiscs.css';
 import './materials.css';
 
 
@@ -26,11 +27,10 @@ class MaterialTable extends BaseComponent{
 
     }
     
-    
     indices = [0,1,2,3,4,5,6,7,8,9,10,11]
     render(){
         getAll();
-        console.log(getState("modalOpen"))
+        
         if(this.state.t4Material.length===0||this.state.t3Material.length===0 ||this.state.t1Material.length===0 || this.state.t2Material.length===0 || this.state.t5Material.length===0  ){
             return (
             <Modal
@@ -53,6 +53,9 @@ class MaterialTable extends BaseComponent{
             </Modal>)
          
     }
+    const finite_items = this.state.contingencyStore.filter(obj => obj.contingency_store_value.finite !=="0.0");
+        const infinite_items = this.state.contingencyStore.filter(obj => obj.contingency_store_value.infinite !=="0.0");
+        console.log(this.state.eventType)
 
         return(
             
@@ -2111,31 +2114,39 @@ class MaterialTable extends BaseComponent{
                     
                 })}
 
-                {/* contingency store */}
-                {this.state.eventType ==="Contingency Contract" && 
+                                {/* contingency store */}
+                                {this.state.eventType ==="Contingency Contract" && 
                     <TableRow>
                         <TableCell>
                             <h2>有限池</h2>
                         </TableCell>
-                        {this.state.contingencyStore.filter(obj=>obj.contingency_store_values.finite !== "0.0").map((contingencyItems) =>{
+                        {finite_items.map((contingencyItems) =>{
+                            return(
                             <TableCell>
                             <Tooltip title = {contingencyItems.name} arrow>
-                            <span className={'sprite spriteMT-4 sprite-MT-'+contingencyItems.id}></span>
+                                
+                            <span className={(contingencyItems.id==="bipeak"?'contingencyMiscs spriteMT-4 material-MT-':'material spriteMT-4 material-MT-')+contingencyItems.id}></span>
                             </Tooltip>
-                            <p className = 'M4Values'>{contingencyItems.contingency_store_values.finite}</p>
+                            <p className = 'M4Values'>{contingencyItems.contingency_store_value.finite}</p>
                             </TableCell>
+                            )
                         })}
+                    </TableRow>}
 
+                    {this.state.eventType ==="Contingency Contract" && 
+                    <TableRow>
+                                                  
                             <TableCell>
                                 <h2>无限池</h2>
                             </TableCell>
-                        {this.state.contingencyStore.filter(obj=>obj.contingency_store_values.infinite !== "0.0").map((contingencyItems) =>{
+                        {infinite_items.map((contingencyItems) =>{
+                            return(
                             <TableCell>
                             <Tooltip title = {contingencyItems.name} arrow>
-                            <span className={'sprite spriteMT-4 sprite-MT-'+contingencyItems.id}></span>
+                            <span className={(contingencyItems.id==="superiors"||contingencyItems.id==="inferiors"?'contingencyMiscs spriteMT-4 material-MT-':'material spriteMT-4 material-MT-')+contingencyItems.id}></span>
                             </Tooltip>
-                            <p className = 'M4Values'>{contingencyItems.contingency_store_values.infinite}</p>
-                            </TableCell>
+                            <p className = 'M4Values'>{contingencyItems.contingency_store_value.infinite}</p>
+                            </TableCell>)
                         })}
                     </TableRow>}
                 </Table>
