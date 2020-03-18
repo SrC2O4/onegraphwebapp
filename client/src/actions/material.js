@@ -6,13 +6,26 @@ import {setEmptyState} from './helpers';
 const baseUrl = process.env.NODE_ENV === 'development' ? '' : (process.env.REACT_APP_API_HOST || '');
 
 export const getAll = ()=>{
-    const urls =  [fetch(baseUrl + "/activity"), fetch(baseUrl + "/materials/tier/1"),  fetch(baseUrl + "/materials/tier/2"), fetch(baseUrl + "/materials/tier/3"),  fetch(baseUrl + "/materials/tier/4"),  fetch(baseUrl + "/materials/tier/5"), fetch(baseUrl + "/materials/catalyst"), fetch(baseUrl + "/materials/plan"), fetch(baseUrl + "/materials/gacha"), fetch(baseUrl + "/materials/misc")]
+    const urls =  [
+        fetch(baseUrl + "/activity"), 
+        fetch(baseUrl + "/materials/tier/1"),  
+        fetch(baseUrl + "/materials/tier/2"), 
+        fetch(baseUrl + "/materials/tier/3"),  
+        fetch(baseUrl + "/materials/tier/4"),  
+        fetch(baseUrl + "/materials/tier/5"), 
+        fetch(baseUrl + "/materials/catalyst"), 
+        fetch(baseUrl + "/materials/plan"), 
+        fetch(baseUrl + "/materials/gacha"), 
+        fetch(baseUrl + "/materials/misc"),
+        fetch(baseUrl + "/contingency")]
     Promise.all(urls)
-    .then(([res1,res2,res3, res4, res5, res6, res7, res8, res9, res10])=>{
-        return Promise.all([res1.json(),res2.json(),res3.json(), res4.json(), res5.json(), res6.json(), res7.json(), res8.json(), res9.json(), res10.json()])
+    .then(([res1,res2,res3, res4, res5, res6, res7, res8, res9, res10, res11])=>{
+        return Promise.all([res1.json(),res2.json(),res3.json(), res4.json(), res5.json(), res6.json(), res7.json(), res8.json(), res9.json(), res10.json(), res11.json()])
     })
-    .then(([res1,res2,res3, res4, res5, res6, res7, res8, res9, res10])=>{
-        console.log(res1)
+    .then(([res1,res2,res3, res4, res5, res6, res7, res8, res9, res10, res11])=>{
+        if(res1.status){
+            setState("eventType", res1.type)
+        }
         setState("ifEventNow", res1.status);
         setState("t5Material", res6.material);
         setState("t4Material", res5.material);
@@ -23,6 +36,7 @@ export const getAll = ()=>{
         setState("catalyst", res7.material[0]);
         setState("gacha",res9.material[0]);
         setState("plan", res8.material[0]);
+        setState("contingencyStore", res11.material);
 
     })
 }
@@ -241,6 +255,27 @@ export const getMisc = () =>{
         })
         .then((json) =>{
             setState('misc', json.material);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+}
+
+
+export const getContingency = () =>{
+    const url = baseUrl + "/contingency";
+    
+    fetch(url)
+        .then((res) =>{
+            // Handle response we get from the API.
+            // Usually check the error codes to see what happened.
+            if (res.status === 200) {
+                return res.json();
+                
+            }
+        })
+        .then((json) =>{
+            setState('contingency_store', json.material);
         })
         .catch(error => {
             console.log(error);

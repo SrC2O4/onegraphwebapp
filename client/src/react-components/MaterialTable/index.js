@@ -15,9 +15,9 @@ import './sprite.css';
 
 class MaterialTable extends BaseComponent{
     
-    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender, considerEventStages}){
+    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender, considerEventStages, contingencyStore, eventType}){
          
-        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly,stageModalOpen, itemToRender, considerEventStages};
+        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly,stageModalOpen, itemToRender, considerEventStages, contingencyStore, eventType};
     }
     handleChange = name => event =>{
         setState("itemToRender",  name)
@@ -2110,7 +2110,33 @@ class MaterialTable extends BaseComponent{
                     
                 })}
 
+                {/* contingency store */}
+                {this.state.eventType ==="Contingency Contract" && 
+                    <TableRow>
+                        <TableCell>
+                            <h2>有限池</h2>
+                        </TableCell>
+                        {this.state.contingencyStore.filter(obj=>obj.contingency_store_values.finite !== "0.0").map((contingencyItems) =>{
+                            <TableCell>
+                            <Tooltip title = {contingencyItems.name} arrow>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+contingencyItems.id}></span>
+                            </Tooltip>
+                            <p className = 'M4Values'>{contingencyItems.contingency_store_values.finite}</p>
+                            </TableCell>
+                        })}
 
+                            <TableCell>
+                                <h2>无限池</h2>
+                            </TableCell>
+                        {this.state.contingencyStore.filter(obj=>obj.contingency_store_values.infinite !== "0.0").map((contingencyItems) =>{
+                            <TableCell>
+                            <Tooltip title = {contingencyItems.name} arrow>
+                            <span className={'sprite spriteMT-4 sprite-MT-'+contingencyItems.id}></span>
+                            </Tooltip>
+                            <p className = 'M4Values'>{contingencyItems.contingency_store_values.infinite}</p>
+                            </TableCell>
+                        })}
+                    </TableRow>}
                 </Table>
                 </TableContainer>
                     
