@@ -10,7 +10,8 @@ import { IconButton, TableContainer, Paper, Table, TableRow, TableCell, Circular
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import './sprite.css';
+import './chip.css';
+import './materials.css';
 
 
 class MaterialTable extends BaseComponent{
@@ -67,18 +68,18 @@ class MaterialTable extends BaseComponent{
                         <TableCell >
                             <h3 > 黄票商店</h3>
                             <Tooltip title = "芯片助剂" arrow>
-                                <span className='sprite sprite-ESS-32001 spriteMT-4'></span>
+                                <span className='material material-ESS-32001 spriteMT-4'></span>
                             </Tooltip>
                             <p className = 'CatalystValue'> {this.state.considerEventStages?this.state.catalyst.golden_ticket_value.event:this.state.catalyst.golden_ticket_value.normal}</p>
                         </TableCell>
                         <TableCell colSpan={3}>
                             <h3> 绿票商店-二层</h3>
                             <Tooltip title = "寻访凭证" arrow>
-                                <span className='spriteMT-4 sprite sprite-GACHATICKET'></span>
+                                <span className='spriteMT-4 material material-GACHATICKET'></span>
                             </Tooltip>
                             <p className = {'GachaValue'}> {this.state.considerEventStages?this.state.gacha.green_ticket_value.event:this.state.gacha.green_ticket_value.normal}</p>
                             <Tooltip title = "招聘许可" arrow>
-                                <span className='sprite sprite-MISC-7001 spriteMT-4'></span>
+                                <span className='material material-MISC-7001 spriteMT-4'></span>
                             </Tooltip>
                             <p className = {'PlanValue'}> {this.state.considerEventStages?this.state.plan.green_ticket_value.event:this.state.plan.green_ticket_value.normal}</p>
                         </TableCell> 
@@ -107,19 +108,19 @@ class MaterialTable extends BaseComponent{
                             <TableRow>
                             <TableCell rowSpan = {3}>
                                 <Tooltip title = {this.state.t5Material[0].name} arrow>
-                                    <span className={'sprite spriteMT-5 sprite-MT-'+this.state.t5Material[0].id}></span>
+                                    <span className={'material spriteMT-5 material-MT-'+this.state.t5Material[0].id}></span>
                                 </Tooltip>
                             </TableCell>
                             <TableCell>
                                 <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
+                                <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                 </Tooltip>
                                 <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
                             </TableCell>
     
                             <TableCell>
                                 <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                     
                                 </Tooltip>
                                     <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
@@ -135,7 +136,7 @@ class MaterialTable extends BaseComponent{
                                                     {stages.extra_drop.map((loots)=>{
                                                             return (
                                                                 <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                    <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                    <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     
                                                                 </Tooltip>)
                                                         })
@@ -159,7 +160,7 @@ class MaterialTable extends BaseComponent{
                                                     {stages.extra_drop.map((loots)=>{
                                                             return (
                                                                 <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                    <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                    <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     
                                                                 </Tooltip>
                                                             )})
@@ -182,7 +183,7 @@ class MaterialTable extends BaseComponent{
                                                     {stages.extra_drop.map((loots)=>{
                                                             return (
                                                                 <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                    <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                    <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
                                                     }
@@ -213,13 +214,13 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell rowSpan = {3}>
                                     <Tooltip title = {this.state.t5Material[1].name} arrow>
-                                    <span className={'sprite spriteMT-5 sprite-MT-'+this.state.t5Material[1].id}></span>
+                                    <span className={'material spriteMT-5 material-MT-'+this.state.t5Material[1].id}></span>
                                    
                                     </Tooltip>
                                 </TableCell>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
@@ -227,7 +228,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
@@ -244,7 +245,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>)
                                                             })
@@ -268,7 +269,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>
                                                                 )})
@@ -291,7 +292,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     
                                                                 </Tooltip>)})
                                                         }
@@ -311,7 +312,7 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-3].name} arrow>
-                                <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-3].id}/>
+                                <span className={'material spriteMT-4 material-MT-'+this.state.t2Material[i-3].id}/>
                                 {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-3].id+'.png')}/> */}
                             </Tooltip>
                                 <p className = {'M4Values'+(this.state.considerEventStages?this.state.t2Material[i-3].Notes.event:this.state.t2Material[i-3].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t2Material[i-3].credit_store_value.event:this.state.t2Material[i-3].credit_store_value.normal)}`}</p>
@@ -327,7 +328,7 @@ class MaterialTable extends BaseComponent{
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
                                                                         <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                            <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                            <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                             
                                                                         </Tooltip>)})
                                                             }
@@ -353,7 +354,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>)})
                                                         }
@@ -374,7 +375,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
                                                 }
@@ -398,7 +399,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
                                                 }
@@ -420,7 +421,7 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-3].name} arrow>
-                                <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-3].id}></span>
+                                <span className={'material spriteMT-4 material-MT-'+this.state.t1Material[i-3].id}></span>
                                 
                                  </Tooltip>
                                 <p className = {'M4Values'+(this.state.considerEventStages?this.state.t1Material[i-3].Notes.event:this.state.t1Material[i-3].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t1Material[i-3].credit_store_value.event:this.state.t1Material[i-3].credit_store_value.normal)}`}</p>
@@ -436,7 +437,7 @@ class MaterialTable extends BaseComponent{
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
                                                                         <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                            <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                            <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                             
                                                                         </Tooltip>)})
                                                             }
@@ -462,7 +463,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>)})
                                                         }
@@ -483,7 +484,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
                                                 }
@@ -507,7 +508,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
                                                 }
@@ -542,13 +543,13 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell rowSpan = {2}>
                                     <Tooltip title = {this.state.t5Material[2].name} arrow>
-                                    <span className={'sprite spriteMT-5 sprite-MT-'+this.state.t5Material[2].id}></span>
+                                    <span className={'material spriteMT-5 material-MT-'+this.state.t5Material[2].id}></span>
                                     
                                     </Tooltip>
                                 </TableCell>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
@@ -556,7 +557,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
@@ -573,7 +574,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>)
                                                             })
@@ -597,7 +598,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>
                                                                 )})
@@ -620,7 +621,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     
                                                                 </Tooltip>)})
                                                         }
@@ -640,7 +641,7 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-3].name} arrow>
-                                <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-3].id}></span>
+                                <span className={'material spriteMT-4 material-MT-'+this.state.t2Material[i-3].id}></span>
                                 
                                     </Tooltip>
                                 <p className = {'M4Values'+(this.state.considerEventStages?this.state.t2Material[i-3].Notes.event:this.state.t2Material[i-3].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t2Material[i-3].credit_store_value.event:this.state.t2Material[i-3].credit_store_value.normal)}`}</p>
@@ -656,7 +657,7 @@ class MaterialTable extends BaseComponent{
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
                                                                         <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                            <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                            <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                             
                                                                         </Tooltip>)})
                                                             }
@@ -682,7 +683,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>)})
                                                         }
@@ -703,7 +704,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
                                                 }
@@ -727,7 +728,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
                                                 }
@@ -749,7 +750,7 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-3].name} arrow>
-                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-3].id}></span>
+                            <span className={'material spriteMT-4 material-MT-'+this.state.t1Material[i-3].id}></span>
                                 
                                     </Tooltip>
                                 <p className = {'M4Values'+(this.state.considerEventStages?this.state.t1Material[i-3].Notes.event:this.state.t1Material[i-3].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t1Material[i-3].credit_store_value.event:this.state.t1Material[i-3].credit_store_value.normal)}`}</p>
@@ -765,7 +766,7 @@ class MaterialTable extends BaseComponent{
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
                                                                         <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                            <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                            <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                             
                                                                         </Tooltip>)})
                                                             }
@@ -791,7 +792,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>)})
                                                         }
@@ -812,7 +813,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
                                                 }
@@ -836,7 +837,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'dropRateFirstStage'>{stages.code}</p>
@@ -870,7 +871,7 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                        <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
+                                        <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
@@ -878,7 +879,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
@@ -895,7 +896,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)
                                                             })
                                                         }
@@ -918,7 +919,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>
                                                                 )})
                                                         }
@@ -940,7 +941,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                    <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                    <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 </Tooltip>)})
                                                         }
                                                         <p className = 'dropRateFirstStage'>{stages.code}</p>
@@ -970,7 +971,7 @@ class MaterialTable extends BaseComponent{
                                 <TableCell rowSpan = {4}/>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                        <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
+                                        <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     
                                     </Tooltip>
@@ -979,7 +980,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
@@ -996,7 +997,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)
                                                             })
                                                         }
@@ -1019,7 +1020,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>
                                                                 )})
                                                         }
@@ -1041,7 +1042,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                    <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                    <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 </Tooltip>)})
                                                         }
                                                         <p className = 'dropRateFirstStage'>{stages.code}</p>
@@ -1060,7 +1061,7 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-4].name} arrow>
-                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-4].id}/>
+                            <span className={'material spriteMT-4 material-MT-'+this.state.t2Material[i-4].id}/>
                                 {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-4].id+'.png')}/> */}
                                  </Tooltip>
                                 <p className = {'M4Values'+(this.state.considerEventStages?this.state.t2Material[i-4].Notes.event:this.state.t2Material[i-4].Notes.normal)}>{`${this.state.considerEventStages?this.state.t2Material[i-4].credit_store_value.event:this.state.t2Material[i-4].credit_store_value.normal}`}</p>
@@ -1076,7 +1077,7 @@ class MaterialTable extends BaseComponent{
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
                                                                         <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                            <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                            <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         </Tooltip>)})
                                                             }
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
@@ -1101,7 +1102,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)})
                                                         }
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
@@ -1121,7 +1122,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'balancedStage'>{stages.code}</p>
@@ -1144,7 +1145,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'dropRateFirstStage'>{stages.code}</p>
@@ -1165,7 +1166,7 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-4].name} arrow>
-                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-4].id}></span>
+                            <span className={'material spriteMT-4 material-MT-'+this.state.t1Material[i-4].id}></span>
                                 
                                  </Tooltip>
                                 <p className = {'M4Values'+(this.state.considerEventStages?this.state.t1Material[i-4].Notes.event:this.state.t1Material[i-4].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t1Material[i-4].credit_store_value.event:this.state.t1Material[i-4].credit_store_value.normal)}`}</p>
@@ -1181,7 +1182,7 @@ class MaterialTable extends BaseComponent{
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
                                                                         <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                            <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                            <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         </Tooltip>)})
                                                             }
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
@@ -1206,7 +1207,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)})
                                                         }
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
@@ -1226,7 +1227,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'balancedStage'>{stages.code}</p>
@@ -1249,7 +1250,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'dropRateFirstStage'>{stages.code}</p>
@@ -1282,7 +1283,7 @@ class MaterialTable extends BaseComponent{
                                
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
@@ -1290,7 +1291,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
@@ -1307,7 +1308,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)
                                                             })
                                                         }
@@ -1330,7 +1331,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>
                                                                 )})
                                                         }
@@ -1352,7 +1353,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                    <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                    <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 </Tooltip>)})
                                                         }
                                                         <p className = 'dropRateFirstStage'>{stages.code}</p>
@@ -1381,7 +1382,7 @@ class MaterialTable extends BaseComponent{
                                
                                 <TableCell >
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
@@ -1389,7 +1390,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
@@ -1406,7 +1407,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)
                                                             })
                                                         }
@@ -1429,7 +1430,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>
                                                                 )})
                                                         }
@@ -1451,7 +1452,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                    <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                    <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 </Tooltip>)})
                                                         }
                                                         <p className = 'dropRateFirstStage'>{stages.code}</p>
@@ -1472,7 +1473,7 @@ class MaterialTable extends BaseComponent{
                                         return (
                                         <TableCell rowSpan={2}>
                                             <Tooltip title = {item.name} arrow>
-                                            <span className={'spriteMT-4 sprite sprite-MISC-'+item.id}></span>
+                                            <span className={'spriteMT-4 material material-MISC-'+item.id}></span>
                                             
                                                 </Tooltip>
                                             <p className = {'CreditValue'+(this.state.considerEventStages?item.Notes.event:item.Notes.normal)}>{this.state.considerEventStages?item.credit_store_value.event:item.credit_store_value.normal}</p>
@@ -1492,7 +1493,7 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                        <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
+                                        <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
@@ -1500,7 +1501,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
@@ -1517,7 +1518,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)
                                                             })
                                                         }
@@ -1540,7 +1541,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>
                                                                 )})
                                                         }
@@ -1562,7 +1563,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                    <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                    <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 </Tooltip>)})
                                                         }
                                                         <p className = 'dropRateFirstStage'>{stages.code}</p>
@@ -1581,7 +1582,7 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-3].name} arrow>
-                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-3].id}/>
+                            <span className={'material spriteMT-4 material-MT-'+this.state.t2Material[i-3].id}/>
                                 {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-3].id+'.png')}/> */}
                                  </Tooltip>
                                 <p className = {'M4Values'+(this.state.considerEventStages?this.state.t2Material[i-3].Notes.event:this.state.t2Material[i-3].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t2Material[i-3].credit_store_value.event:this.state.t2Material[i-3].credit_store_value.normal)}`}</p>
@@ -1597,7 +1598,7 @@ class MaterialTable extends BaseComponent{
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
                                                                         <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                            <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                            <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         </Tooltip>)})
                                                             }
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
@@ -1622,7 +1623,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)})
                                                         }
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
@@ -1642,7 +1643,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'balancedStage'>{stages.code}</p>
@@ -1665,7 +1666,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'dropRateFirstStage'>{stages.code}</p>
@@ -1686,7 +1687,7 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-3].name} arrow>
-                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-3].id}></span>
+                            <span className={'material spriteMT-4 material-MT-'+this.state.t1Material[i-3].id}></span>
                                 
                                  </Tooltip>
                                 <p className = {'M4Values'+(this.state.considerEventStages?this.state.t1Material[i-3].Notes.event:this.state.t1Material[i-3].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t1Material[i-3].credit_store_value.event:this.state.t1Material[i-3].credit_store_value.normal)}`}</p>
@@ -1702,7 +1703,7 @@ class MaterialTable extends BaseComponent{
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
                                                                         <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                            <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                            <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         </Tooltip>)})
                                                             }
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
@@ -1727,7 +1728,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)})
                                                         }
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
@@ -1747,7 +1748,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'balancedStage'>{stages.code}</p>
@@ -1770,7 +1771,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'dropRateFirstStage'>{stages.code}</p>
@@ -1801,7 +1802,7 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell>
                                     <Tooltip title = {this.state.t4Material[i].name} arrow>
-                                        <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t4Material[i].id}></span>
+                                        <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
                                     <p className = {'M4Values'+(this.state.considerEventStages?this.state.t4Material[i].Notes.event:this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages?this.state.t4Material[i].golden_ticket_value.event:this.state.t4Material[i].golden_ticket_value.normal}</p>
@@ -1809,7 +1810,7 @@ class MaterialTable extends BaseComponent{
         
                                 <TableCell>
                                     <Tooltip title = {this.state.t3Material[i].name} arrow>
-                                    <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t3Material[i].id}></span>
+                                    <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
                                         <p className = {'M4Values'+(this.state.considerEventStages?this.state.t3Material[i].Notes.event:this.state.t3Material[i].Notes.normal)}>{`${this.state.considerEventStages?this.state.t3Material[i].green_ticket_value.event:this.state.t3Material[i].green_ticket_value.normal}`}</p>
@@ -1826,7 +1827,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)
                                                             })
                                                         }
@@ -1849,7 +1850,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>
                                                                 )})
                                                         }
@@ -1871,7 +1872,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                    <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                    <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 </Tooltip>)})
                                                         }
                                                         <p className = 'dropRateFirstStage'>{stages.code}</p>
@@ -1890,7 +1891,7 @@ class MaterialTable extends BaseComponent{
                                 
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-4].name} arrow>
-                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t2Material[i-4].id}/>
+                            <span className={'material spriteMT-4 material-MT-'+this.state.t2Material[i-4].id}/>
                                 
                                 {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-4].id+'.png')}/> */}
                                  </Tooltip>
@@ -1907,7 +1908,7 @@ class MaterialTable extends BaseComponent{
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
                                                                         <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                            <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                            <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         </Tooltip>)})
                                                             }
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
@@ -1932,7 +1933,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)})
                                                         }
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
@@ -1952,7 +1953,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'balancedStage'>{stages.code}</p>
@@ -1975,7 +1976,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'dropRateFirstStage'>{stages.code}</p>
@@ -1996,7 +1997,7 @@ class MaterialTable extends BaseComponent{
                         
                         <TableCell colSpan={5}>
                             <Tooltip title = {this.state.t1Material[i-4].name} arrow>
-                            <span className={'sprite spriteMT-4 sprite-MT-'+this.state.t1Material[i-4].id}></span>
+                            <span className={'material spriteMT-4 material-MT-'+this.state.t1Material[i-4].id}></span>
                                 
                                  </Tooltip>
                                 <p className = {'M4Values'+(this.state.considerEventStages?this.state.t1Material[i-4].Notes.event:this.state.t1Material[i-4].Notes.normal)}>{`${(this.state.considerEventStages?this.state.t1Material[i-4].credit_store_value.event:this.state.t1Material[i-4].credit_store_value.normal)}`}</p>
@@ -2012,7 +2013,7 @@ class MaterialTable extends BaseComponent{
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
                                                                         <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                            <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                            <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         </Tooltip>)})
                                                             }
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
@@ -2037,7 +2038,7 @@ class MaterialTable extends BaseComponent{
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
                                                                     <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                        <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)})
                                                         }
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
@@ -2057,7 +2058,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'balancedStage'>{stages.code}</p>
@@ -2080,7 +2081,7 @@ class MaterialTable extends BaseComponent{
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
                                                             <Tooltip title = {"额外掉落："+loots.name} arrow>
-                                                                <span className={'sprite extraDropWrap sprite-MT-'+loots.id}></span>
+                                                                <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
                                                 <p className = 'dropRateFirstStage'>{stages.code}</p>

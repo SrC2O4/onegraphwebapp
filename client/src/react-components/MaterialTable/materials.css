@@ -1,0 +1,397 @@
+.material {
+  background-image: url(./static/materials.png);
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+.material-ESS-32001 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 0% 0%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-GACHATICKET {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 14.286% 0%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MISC-2002 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 0% 16.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MISC-3003 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 14.286% 16.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MISC-3112 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 28.571% 0%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MISC-3113 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 28.571% 16.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MISC-3301 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 0% 33.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MISC-3302 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 14.286% 33.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MISC-3303 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 28.571% 33.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MISC-3401 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 42.857% 0%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MISC-4001 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 42.857% 16.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MISC-7001 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 42.857% 33.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-2001 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 0% 50%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-2002 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 14.286% 50%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-2003 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 28.571% 50%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30011 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 42.857% 50%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30012 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 57.143% 0%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30013 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 57.143% 16.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30014 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 57.143% 33.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30021 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 57.143% 50%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30022 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 0% 66.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30023 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 14.286% 66.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30024 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 28.571% 66.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30031 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 42.857% 66.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30032 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 57.143% 66.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30033 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 71.429% 0%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30034 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 71.429% 16.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30041 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 71.429% 33.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30042 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 71.429% 50%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30043 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 71.429% 66.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30044 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 0% 83.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30051 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 14.286% 83.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30052 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 28.571% 83.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30053 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 42.857% 83.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30054 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 57.143% 83.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30061 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 71.429% 83.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30062 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 85.714% 0%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30063 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 85.714% 16.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30064 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 85.714% 33.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30073 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 85.714% 50%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30074 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 85.714% 66.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30083 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 85.714% 83.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30084 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 0% 100%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30093 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 14.286% 100%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30094 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 28.571% 100%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30103 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 42.857% 100%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30104 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 57.143% 100%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30115 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 71.429% 100%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30125 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 85.714% 100%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-30135 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 100% 0%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-31013 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 100% 16.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-31014 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 100% 33.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-31023 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 100% 50%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-31024 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 100% 66.667%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-MT-4001 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 100% 83.333%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
+.material-placeholder {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 100% 100%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
