@@ -5,7 +5,7 @@ import {getAll} from '../../actions/material';
 import Tooltip from '@material-ui/core/Tooltip';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import StagesModal from "./../StagesModal";
-import {setState,getState} from 'statezero';
+import {setState} from 'statezero';
 import { IconButton, TableContainer, Paper, Table, TableRow, TableCell, CircularProgress } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
