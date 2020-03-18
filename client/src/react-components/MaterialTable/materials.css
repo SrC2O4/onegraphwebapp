@@ -80,6 +80,13 @@
   width: var(--icon-w);
   height: var(--icon-h);
 }
+.material-MT-3401 {
+  --icon-h: calc(var(--icon-w) * 1);
+  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
+  background-position: 42.857% 0%;
+  width: var(--icon-w);
+  height: var(--icon-h);
+}
 .material-MISC-4001 {
   --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
