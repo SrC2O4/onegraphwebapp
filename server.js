@@ -27,7 +27,7 @@ app.get("/activity", (req, res) => {
         if(events){
             res.send({eventStatus: {'status':true, 'event':events}})
         } else {
-            res.send({'status':false})
+            res.send({eventStatus: {'status':false, 'event':events}})
         }
 
     })

@@ -19,11 +19,13 @@ export const setEmptyState = () => {
     setState("plan", {});
     setState("modalOpen", false);
     setState("stageModalOpen", false);
+    setState("listOpen", false);
     setState("detailMode", true);
     setState("showBestOnly", false);
     setState("itemToRender", {name: "", id: "",Notes:{"event":"", "normal":""},credit_store_value: {"event":0, "normal":0},lowest_ap_stages:{"event":[], "normal":[]},balanced_stages: {"event":[], "normal":[]},drop_rate_first_stages:{"event":[], "normal":[]}});
     setState("ifEventNow", false);
     setState("considerEventStages", false);
     setState("currentTheme", 'light');
+    setState("stages", []);
 
 };
