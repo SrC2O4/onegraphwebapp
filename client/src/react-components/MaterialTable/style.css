@@ -8,6 +8,14 @@ span{
     display: block;
     
 }
+.MuiPaper-root{
+    background-color: rgba(255,255,255,0.7);
+}
+body{
+    background-image: url(./static/Avg_char_1505_frstar_4-min.png);
+    background-size: cover;
+    background-position: center;
+}
 @media only screen and (min-width: 320px)  { body{ font-size: 10px; } 
 .M3Materials{
     width: calc(100vw - 45%);

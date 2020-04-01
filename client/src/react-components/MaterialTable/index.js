@@ -6,7 +6,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import StagesModal from "./../StagesModal";
 import {setState} from 'statezero';
-import { IconButton, TableContainer, Paper, Table, TableRow, TableCell, CircularProgress } from '@material-ui/core';
+import { IconButton, TableContainer, Paper, Table, TableRow, TableCell, CircularProgress, MuiThemeProvider, createMuiTheme} from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -14,7 +14,15 @@ import './chip.css';
 import './contingencyMiscs.css';
 import './materials.css';
 
-
+const theme = createMuiTheme({
+            overrides: {
+              MuiPaper: {
+                root: {
+                    backgroundColor: "rgba(255,255,255,0.7)"
+                },
+              },
+            }
+          });
 class MaterialTable extends BaseComponent{
     
     filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender, considerEventStages, contingencyStore, eventType}){
@@ -29,8 +37,9 @@ class MaterialTable extends BaseComponent{
     
     indices = [0,1,2,3,4,5,6,7,8,9,10,11]
     render(){
-        getAll();
         
+          
+        getAll();
         if(this.state.t4Material.length===0||this.state.t3Material.length===0 ||this.state.t1Material.length===0 || this.state.t2Material.length===0 || this.state.t5Material.length===0  ){
             return (
             <Modal
@@ -60,10 +69,10 @@ class MaterialTable extends BaseComponent{
         return(
             
             // The 3 tier 5 materials
-            
+            <MuiThemeProvider theme={theme}>
             <div className = 'outLayer'>
             <h2 style={{textAlign: "right", marginRight: "1%"}}>上次数据更新时间：{new Date(this.state.gacha.last_updated).toLocaleString('zh', {hour12: true,timeZone: "Asia/Shanghai"})}</h2>
-            <TableContainer component = {Paper}>
+            <TableContainer component = {Paper} className="tableGrid">
                 <Table size="small" aria-label="spanning table">
                     {/* Header */}
                     <TableRow>
@@ -2154,6 +2163,7 @@ class MaterialTable extends BaseComponent{
                     
                 <StagesModal open={this.state.stageModalOpen}/>  
             </div>
+            </MuiThemeProvider>
         );
     }
 
