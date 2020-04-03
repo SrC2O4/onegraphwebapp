@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import BaseComponent from "./../Base";
-import {getAll} from '../../actions/material';
+//import {getAll} from '../../actions/material';
 import Tooltip from '@material-ui/core/Tooltip';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import StagesModal from "./../StagesModal";
@@ -39,7 +39,7 @@ class MaterialTable extends BaseComponent{
     render(){
         
           
-        getAll();
+        //getAll();
         if(this.state.t4Material.length===0||this.state.t3Material.length===0 ||this.state.t1Material.length===0 || this.state.t2Material.length===0 || this.state.t5Material.length===0  ){
             return (
             <Modal
@@ -64,7 +64,7 @@ class MaterialTable extends BaseComponent{
     }
     const finite_items = this.state.contingencyStore.filter(obj => obj.contingency_store_value.finite !=="0.0");
         const infinite_items = this.state.contingencyStore.filter(obj => obj.contingency_store_value.infinite !=="0.0");
-        console.log(this.state.eventType)
+        // console.log(this.state.eventType)
 
         return(
             

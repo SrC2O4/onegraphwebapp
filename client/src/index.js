@@ -4,9 +4,11 @@ import './index.css';
 import App from './App'
 import * as serviceWorker from './serviceWorker';
 import { initialization} from './actions/material';
+import {getAll} from './actions/material';
 
 
 initialization();
+getAll(); //该函数放置于MaterialTable会导致API被多次重复请求，放置于此又略显不妥，故标记
 
 
 
