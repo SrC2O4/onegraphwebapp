@@ -2,6 +2,7 @@
   background-image: url(./static/materials.png);
   background-repeat: no-repeat;
   display: inline-block;
+  filter: grayscale(80);
 }
 .material-ESS-32001 {
   --icon-h: calc(var(--icon-w) * 1);
@@ -17,84 +18,70 @@
   width: var(--icon-w);
   height: var(--icon-h);
 }
-.material-MISC-2002 {
+.material-MISC-2002,.material-MT-2002 {
   --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
   background-position: 0% 16.667%;
   width: var(--icon-w);
   height: var(--icon-h);
 }
-.material-MISC-3003 {
+.material-MISC-3003,.material-MT-3003 {
   --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
   background-position: 14.286% 16.667%;
   width: var(--icon-w);
   height: var(--icon-h);
 }
-.material-MISC-3112 {
+.material-MISC-3112,.material-MT-3112 {
   --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
   background-position: 28.571% 0%;
   width: var(--icon-w);
   height: var(--icon-h);
 }
-.material-MISC-3113 {
+.material-MISC-3113,.material-MT-3113 {
   --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
   background-position: 28.571% 16.667%;
   width: var(--icon-w);
   height: var(--icon-h);
 }
-.material-MISC-3301 {
+.material-MISC-3301,.material-MT-3301 {
   --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
   background-position: 0% 33.333%;
   width: var(--icon-w);
   height: var(--icon-h);
 }
-.material-MISC-3302 {
+.material-MISC-3302,.material-MT-3302 {
   --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
   background-position: 14.286% 33.333%;
   width: var(--icon-w);
   height: var(--icon-h);
 }
-.material-MT-3302 {
-  --icon-h: calc(var(--icon-w) * 1);
-  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
-  background-position: 14.286% 33.333%;
-  width: var(--icon-w);
-  height: var(--icon-h);
-}
-.material-MISC-3303 {
+.material-MISC-3303,.material-MT-3303 {
   --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
   background-position: 28.571% 33.333%;
   width: var(--icon-w);
   height: var(--icon-h);
 }
-.material-MISC-3401 {
+.material-MISC-3401,.material-MT-3401 {
   --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
   background-position: 42.857% 0%;
   width: var(--icon-w);
   height: var(--icon-h);
 }
-.material-MT-3401 {
-  --icon-h: calc(var(--icon-w) * 1);
-  background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
-  background-position: 42.857% 0%;
-  width: var(--icon-w);
-  height: var(--icon-h);
-}
-.material-MISC-4001 {
+.material-MISC-4001,.material-MT-4001 {
   --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
   background-position: 42.857% 16.667%;
   width: var(--icon-w);
   height: var(--icon-h);
 }
-.material-MISC-7001 {
+.material-MISC-7001,.material-MT-7001 {
   --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 8) calc(var(--icon-h) * 7);
   background-position: 42.857% 33.333%;

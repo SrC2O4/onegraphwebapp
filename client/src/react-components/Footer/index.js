@@ -97,6 +97,12 @@ export default function AppFooter() {
               <li className={classes.listItem}>
                 <Link href="https://gachasalt.github.io/ArkToolDemo/#/">ArkTools</Link>
               </li>
+              {process.env.REACT_APP_ICP ?
+              <li className={classes.listItem}>
+                <Link href="https://arkonegraph.herokuapp.com">AOG源站</Link>
+              </li>
+              :''
+              }
             </ul>
           </Grid>
           <Grid item xs={6} sm={4} md={2}>
