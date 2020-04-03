@@ -1,15 +1,25 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Ark One Graph",
+  "name": "明日方舟刷素材一图流",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "icon-100.png",
       "type": "image/png",
       "sizes": "100x100"
+    },
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#3f51b5",
   "background_color": "#ffffff"
 }
