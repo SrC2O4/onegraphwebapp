@@ -1,6 +1,6 @@
 /**
  * @description Ark One Graph server worker
- * @version 0.1.1
+ * @version 0.1.2
  */
 
 importScripts('https://cdn.jsdelivr.net/npm/workbox-cdn@4.3.1/workbox/workbox-sw.js');
@@ -109,3 +109,12 @@ workbox.routing.registerRoute(
 );
 
 // Cache data (BETA)
+workbox.routing.registerRoute(
+  new RegExp('^https://api.aog.wiki/\\.*'),
+  new workbox.strategies.NetworkFirst({
+    cacheName:'aog:data',
+    plugins:[
+      new workbox.cacheableResponse.Plugin({statuses: [0, 200]})
+    ]
+  })
+)
