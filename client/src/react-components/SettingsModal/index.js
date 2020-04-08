@@ -6,6 +6,7 @@ import Fade from '@material-ui/core/Fade';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
+import memory from "../../actions/memory";
 import {setState} from 'statezero';
 import './style.css';
 
@@ -19,14 +20,17 @@ class SettingsModal extends BaseComponent {
 
   handleOpen = () => {
     setState("modalOpen", true);
+    memory.setItem("modalOpen",true);
   };
 
   handleClose = () => {
     setState("modalOpen", false);
+    memory.setItem("modalOpen",false);
   };
 
   handleChange = name => event => {
     setState(name,event.target.checked);
+    memory.setItem(name,event.target.checked);
   };
 
 
