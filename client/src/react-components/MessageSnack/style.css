@@ -1,0 +1,20 @@
+.snack{
+    background-color: white;
+    border: 2px solid #000;
+    width: fit-content;
+    box-shadow: 5px 5px lightblue;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    margin:0 auto;
+    padding: 5px 15px 5px 15px;
+    display: flex;
+}
+
+.message{
+    font-size: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 5px;
+}
