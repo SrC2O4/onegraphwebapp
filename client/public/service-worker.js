@@ -1,9 +1,9 @@
 /**
  * @description Ark One Graph server worker
- * @version 0.1.3
+ * @version 0.2.0
  */
 
-importScripts('https://cdn.jsdelivr.net/npm/workbox-cdn@4.3.1/workbox/workbox-sw.js');
+importScripts('https://cdn.jsdelivr.net/npm/workbox-cdn@5.1.2/workbox/workbox-sw.js');
 
 /**
  * Configure
@@ -11,7 +11,7 @@ importScripts('https://cdn.jsdelivr.net/npm/workbox-cdn@4.3.1/workbox/workbox-sw
 
 // Set workbox config
 workbox.setConfig({
-  modulePathPrefix: 'https://cdn.jsdelivr.net/npm/workbox-cdn@4.3.1/workbox/',
+  modulePathPrefix: 'https://cdn.jsdelivr.net/npm/workbox-cdn@5.1.2/workbox/',
   debug: false
 });
 
@@ -48,7 +48,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkFirst({
     cacheName: 'aog:html',
     plugins: [
-      new workbox.cacheableResponse.Plugin({
+      new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [0, 200]
       })
     ]
@@ -61,10 +61,10 @@ workbox.routing.registerRoute(
   new workbox.strategies.CacheFirst({
     cacheName: 'aog:static',
     plugins: [
-      new workbox.cacheableResponse.Plugin({
+      new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [0, 200]
       }),
-      new workbox.expiration.Plugin({
+      new workbox.expiration.ExpirationPlugin({
         maxAgeSeconds: 60 * 24 * 60 * 60
       })
     ]
@@ -82,10 +82,10 @@ workbox.routing.registerRoute(
   new workbox.strategies.CacheFirst({
     cacheName: 'aog:static',
     plugins: [
-      new workbox.cacheableResponse.Plugin({
+      new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [0, 200]
       }),
-      new workbox.expiration.Plugin({
+      new workbox.expiration.ExpirationPlugin({
         maxAgeSeconds: 60 * 24 * 60 * 60
       })
     ]
@@ -98,10 +98,24 @@ workbox.routing.registerRoute(
   new workbox.strategies.CacheFirst({
     cacheName: 'aog:font',
     plugins: [
-      new workbox.cacheableResponse.Plugin({
+      new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [0, 200]
       }),
-      new workbox.expiration.Plugin({
+      new workbox.expiration.ExpirationPlugin({
+        maxAgeSeconds: 30 * 24 * 60 * 60
+      })
+    ]
+  })
+);
+workbox.routing.registerRoute(
+  new RegExp('^https://fonts.googleapis.com/css\\.*'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'aog:font',
+    plugins: [
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [0, 200]
+      }),
+      new workbox.expiration.ExpirationPlugin({
         maxAgeSeconds: 30 * 24 * 60 * 60
       })
     ]
@@ -114,13 +128,13 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate({
     cacheName:'aog:data',
     plugins:[
-      new workbox.cacheableResponse.Plugin({
+      new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [0, 200]
       }),
-      new workbox.expiration.Plugin({
+      new workbox.expiration.ExpirationPlugin({
         maxAgeSeconds: 60 * 24 * 60 * 60
       }),
-      new workbox.broadcastUpdate.Plugin({ channelName: 'data-update' })
+      new workbox.broadcastUpdate.BroadcastUpdatePlugin()
     ]
   })
 )
