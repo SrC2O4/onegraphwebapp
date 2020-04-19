@@ -10,6 +10,7 @@ import { IconButton, TableContainer, Paper, Table, TableRow, TableCell, Circular
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import Anime from 'animejs';
 import './chip.css';
 import './contingencyMiscs.css';
 import './materials.css';
@@ -22,7 +23,11 @@ const theme = createMuiTheme({
                 },
               },
             }
-          });
+});
+
+const Random = (min, max)=> {
+    return Math.round(Math.random() * (max - min)) + min;
+}
 class MaterialTable extends BaseComponent{
     
     filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender, considerEventStages, contingencyStore, eventType}){
@@ -34,6 +39,25 @@ class MaterialTable extends BaseComponent{
         setState("stageModalOpen", true)
 
     }
+    componentDidUpdate() {
+        if (this.state.t4Material.length !== 0 || this.state.t3Material.length !== 0 || this.state.t1Material.length !== 0 || this.state.t2Material.length !== 0 || this.state.t5Material.length !== 0) {
+            Anime({
+                targets: ['.material.spriteMT-4','.M4Valuesred','.M4Valuesyellow','.M4Valuesgreen','.M4Values','.material.spriteMT-5','.material.extraDropWrap','.stageWrapper','.CreditValuered','CreditValueyellow','CreditValuegreen','.synthesis'],
+                opacity: [
+                    { value: '0', duration: 0, easing: 'linear' },
+                    { value: '1', duration: 200, easing: 'linear' },
+                ],
+                scale: [
+                    { value: '0', duration: 0, easing: 'linear' },
+                    { value: '1', duration: 200, easing: 'easeInOutBack' },
+                ],
+                autoplay: true,
+                delay: function () {
+                    return Random(200,2000);
+                }
+            });
+        }
+    }
     
     indices = [0,1,2,3,4,5,6,7,8,9,10,11]
     render(){
@@ -44,7 +68,7 @@ class MaterialTable extends BaseComponent{
             return (
             <Modal
                 aria-labelledby="transition-modal-preloader"
-                className = "modal2"
+                className = "modal2 modalBlur"
                 open={this.state.t5Material.length===0}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
@@ -140,7 +164,7 @@ class MaterialTable extends BaseComponent{
                                     
                             </TableCell>
                             <TableCell colSpan={2}>
-                                        {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
+                                        {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}} className='synthesis'>建议合成</h3>}
                                         
                                         {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                             return (
@@ -249,7 +273,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='synthesis'>建议合成</h3>}
                                             
                                             {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
@@ -578,7 +602,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='synthesis'>建议合成</h3>}
                                             
                                             {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
@@ -900,7 +924,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='synthesis'>建议合成</h3>}
                                             
                                             {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
@@ -1001,7 +1025,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='synthesis'>建议合成</h3>}
                                             
                                             {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
@@ -1312,7 +1336,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='synthesis'>建议合成</h3>}
                                             
                                             {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
@@ -1411,7 +1435,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='synthesis'>建议合成</h3>}
                                             
                                             {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
@@ -1522,7 +1546,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}} className='synthesis'>建议合成</h3>}
                                             
                                             {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (
@@ -1831,7 +1855,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
+                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}} className='synthesis'>建议合成</h3>}
                                             
                                             {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
                                                 return (

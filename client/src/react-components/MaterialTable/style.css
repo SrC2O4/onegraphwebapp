@@ -11,7 +11,9 @@ span{
 .MuiPaper-root{
     background-color: rgba(255,255,255,0.7);
 }
-
+.modalBlur{
+    backdrop-filter: blur(10px);
+}
 @media only screen and (min-width: 320px)  { body{ font-size: 10px; } 
 .M3Materials{
     width: calc(100vw - 45%);
