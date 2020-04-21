@@ -36,6 +36,7 @@ export const setEmptyState = () => {
     setState("considerEventStages", false);
     setState("currentTheme", 'light');
     setState("stages", []);
-    setState("updateEvent",false)
+    setState("updateEvent", false);
+    setState("animeOnce", true);
 
 };

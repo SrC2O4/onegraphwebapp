@@ -10,7 +10,7 @@ import { IconButton, TableContainer, Paper, Table, TableRow, TableCell, Circular
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Anime, { stagger } from 'animejs';
+import Anime from 'animejs';
 import './chip.css';
 import './contingencyMiscs.css';
 import './materials.css';
@@ -30,9 +30,9 @@ const Random = (min, max)=> {
 }
 class MaterialTable extends BaseComponent{
     
-    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender, considerEventStages, contingencyStore, eventType}){
+    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender, considerEventStages, contingencyStore, eventType, animeOnce}){
          
-        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly,stageModalOpen, itemToRender, considerEventStages, contingencyStore, eventType};
+        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly,stageModalOpen, itemToRender, considerEventStages, contingencyStore, eventType,animeOnce};
     }
     handleChange = name => event =>{
         setState("itemToRender",  name)
@@ -40,7 +40,8 @@ class MaterialTable extends BaseComponent{
 
     }
     componentDidUpdate() {
-        if (this.state.t4Material.length !== 0 || this.state.t3Material.length !== 0 || this.state.t1Material.length !== 0 || this.state.t2Material.length !== 0 || this.state.t5Material.length !== 0) {
+        if ((this.state.t4Material.length !== 0 || this.state.t3Material.length !== 0 || this.state.t1Material.length !== 0 || this.state.t2Material.length !== 0 || this.state.t5Material.length !== 0) && this.state.animeOnce) {
+            setState("animeOnce", false)
             Anime({
                 targets: ['.material.spriteMT-4','.M4Valuesred','.M4Valuesyellow','.M4Valuesgreen','.M4Values','.material.spriteMT-5','.material.extraDropWrap','.stageWrapper','.CreditValuered','.CreditValueyellow','.CreditValuegreen','.textTips','.CatalystValue','.PlanValue','.GachaValue'],
                 opacity: [
@@ -49,22 +50,22 @@ class MaterialTable extends BaseComponent{
                 ],
                 scale: [
                     { value: '0', duration: 0, easing: 'linear' },
-                    { value: '1', duration: 200, easing: 'easeInOutBack' },
+                    { value: '1', duration: 500, easing: 'easeInOutBack' },
                 ],
                 autoplay: true,
                 delay: function () {
-                    return Random(100,1500);
+                    return Random(600,1500);
                 }
             });
             Anime({
                 targets: '.instructions',
                 opacity: [
                     { value: '0', duration: 0, easing: 'linear' },
-                    { value: '1', duration: 400, easing: 'linear' },
+                    { value: '1', duration: 200, easing: 'linear' },
                 ],
-                translateY: [
-                    { value: '80px', duration: 0 },
-                    { value: '0px', duration: 600, easing: 'easeOutBack' }
+                scale: [
+                    { value: '0', duration: 0, easing: 'linear' },
+                    { value: '1', duration: 500, easing: 'easeInOutBack' },
                 ],
                 autoplay: true,
                 delay: Anime.stagger(100, {start:600})

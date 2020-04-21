@@ -43,7 +43,7 @@ function Snack(props) {
     }, 10000);
     return (
       <div className="snack">
-        <div className="message">数据更新已就绪</div>
+        <span className="message">数据更新已就绪</span>
         <IconButton aria-label="replay" onClick={eventChange}>
           <ReplayIcon />
         </IconButton>
