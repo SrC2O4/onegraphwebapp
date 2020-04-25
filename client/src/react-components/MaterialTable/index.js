@@ -10,6 +10,7 @@ import { IconButton, TableContainer, Paper, Table, TableRow, TableCell, Circular
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import Anime from 'animejs';
 import './chip.css';
 import './contingencyMiscs.css';
 import './materials.css';
@@ -22,20 +23,61 @@ const theme = createMuiTheme({
                 },
               },
             }
-          });
+});
+
+const Random = (min, max)=> {
+    return Math.round(Math.random() * (max - min)) + min;
+}
 class MaterialTable extends BaseComponent{
     
-    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender, considerEventStages, contingencyStore, eventType}){
+    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender, considerEventStages, contingencyStore, eventType, animeOnce}){
          
-        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly,stageModalOpen, itemToRender, considerEventStages, contingencyStore, eventType};
+        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly,stageModalOpen, itemToRender, considerEventStages, contingencyStore, eventType,animeOnce};
     }
     handleChange = name => event =>{
         setState("itemToRender",  name)
         setState("stageModalOpen", true)
 
     }
+    componentDidUpdate() {
+        if ((this.state.t4Material.length !== 0 || this.state.t3Material.length !== 0 || this.state.t1Material.length !== 0 || this.state.t2Material.length !== 0 || this.state.t5Material.length !== 0) && this.state.animeOnce) {
+            setState("animeOnce", false)
+            Anime({
+                targets: ['.material.spriteMT-4','.M4Valuesred','.M4Valuesyellow','.M4Valuesgreen','.M4Values','.material.spriteMT-5','.material.extraDropWrap','.stageWrapper','.CreditValuered','.CreditValueyellow','.CreditValuegreen','.textTips','.CatalystValue','.PlanValue','.GachaValue'],
+                opacity: [
+                    { value: '0', duration: 0, easing: 'linear' },
+                    { value: '1', duration: 200, easing: 'linear' },
+                ],
+                scale: [
+                    { value: '0', duration: 0, easing: 'linear' },
+                    { value: '1', duration: 500, easing: 'easeInOutBack' },
+                ],
+                autoplay: true,
+                delay: function () {
+                    return Random(600,1500);
+                }
+            });
+            Anime({
+                targets: '.instructions',
+                opacity: [
+                    { value: '0', duration: 0, easing: 'linear' },
+                    { value: '1', duration: 200, easing: 'linear' },
+                ],
+                scale: [
+                    { value: '0', duration: 0, easing: 'linear' },
+                    { value: '1', duration: 500, easing: 'easeInOutBack' },
+                ],
+                autoplay: true,
+                delay: Anime.stagger(100, {start:600})
+            })
+        }
+    }
+    
     
     indices = [0,1,2,3,4,5,6,7,8,9,10,11]
+
+
+
     render(){
         
           
@@ -44,7 +86,7 @@ class MaterialTable extends BaseComponent{
             return (
             <Modal
                 aria-labelledby="transition-modal-preloader"
-                className = "modal2"
+                className = "modal2 modalBlur"
                 open={this.state.t5Material.length===0}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
@@ -78,14 +120,14 @@ class MaterialTable extends BaseComponent{
                     <TableRow>
                         <TableCell/>
                         <TableCell >
-                            <h3 > 黄票商店</h3>
+                            <h3 className='textTips'> 黄票商店</h3>
                             <Tooltip title = "芯片助剂" arrow>
                                 <span className='material material-ESS-32001 spriteMT-4'></span>
                             </Tooltip>
                             <p className = 'CatalystValue'> {this.state.considerEventStages?this.state.catalyst.golden_ticket_value.event:this.state.catalyst.golden_ticket_value.normal}</p>
                         </TableCell>
                         <TableCell colSpan={3}>
-                            <h3> 绿票商店-二层</h3>
+                            <h3 className='textTips'> 绿票商店-二层</h3>
                             <Tooltip title = "寻访凭证" arrow>
                                 <span className='spriteMT-4 material material-GACHATICKET'></span>
                             </Tooltip>
@@ -96,17 +138,17 @@ class MaterialTable extends BaseComponent{
                             <p className = {'PlanValue'}> {this.state.considerEventStages?this.state.plan.green_ticket_value.event:this.state.plan.green_ticket_value.normal}</p>
                         </TableCell> 
                         <TableCell rowSpan={4} >
-                            <h2>信用商店</h2>
+                            <h2 className='textTips'>信用商店</h2>
                         </TableCell>
                         <TableCell colSpan={8} rowSpan={4} >
                         <div>
-                        <h2>说明</h2>
-                        <p>绿票，黄票，信用商店里的数值指1绿票/1黄票/100信用的理智价值<span style = {{color: 'red'}}>数值<strong>越高</strong>，则兑换优先级越高</span></p>
-                        <p>关卡代号后的三个数字从上到下为：材料掉落率，理智转换效率，每个物品所需的期望理智</p>
-                        <p style = {{color: 'red'}}> 红色：效率>99%, 刷此图毕业所需理智最低</p>
-                        <p style = {{color: 'goldenrod'}}> 橙色：效率>90%, 且掉率比效率最高的图高</p>
-                        <p style = {{color: 'blue'}}> 蓝色：掉率最高, 以毕业为目标理智消耗多</p>
-                        <p> <strong>毕业指全角色全技能专精三，掉率按照刷到材料所需的期望理智计算</strong></p>
+                        <h2 className='instructions'>说明</h2>
+                        <p className='instructions'> 绿票，黄票，信用商店里的数值指1绿票/1黄票/100信用的理智价值<span style = {{color: 'red'}}>数值<strong>越高</strong>，则兑换优先级越高</span></p>
+                        <p className='instructions'>关卡代号后的三个数字从上到下为：材料掉落率，理智转换效率，每个物品所需的期望理智</p>
+                        <p style = {{color: 'red'}} className='instructions'> 红色：效率>99%, 刷此图毕业所需理智最低</p>
+                        <p style = {{color: 'goldenrod'}} className='instructions'> 橙色：效率>90%, 且掉率比效率最高的图高</p>
+                        <p style = {{color: 'blue'}} className='instructions'> 蓝色：掉率最高, 以毕业为目标理智消耗多</p>
+                        <p className='instructions'> <strong>毕业指全角色全技能专精三，掉率按照刷到材料所需的期望理智计算</strong></p>
                     </div>
                         </TableCell>
                     </TableRow> {/*Catalyst ends*/}
@@ -140,7 +182,7 @@ class MaterialTable extends BaseComponent{
                                     
                             </TableCell>
                             <TableCell colSpan={2}>
-                                        {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
+                                        {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}} className='textTips'>建议合成</h3>}
                                         
                                         {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                             return (
@@ -249,9 +291,9 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
                                             
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -578,9 +620,9 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
                                             
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -900,9 +942,9 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
                                             
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1001,9 +1043,9 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
                                             
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1312,9 +1354,9 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
                                             
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1411,9 +1453,9 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }}>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
                                             
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1522,9 +1564,9 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}} className='textTips'>建议合成</h3>}
                                             
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
@@ -1831,9 +1873,9 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}}>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}} className='textTips'>建议合成</h3>}
                                             
-                                            {this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal.map((stages) => {
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{

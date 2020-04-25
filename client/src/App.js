@@ -2,6 +2,7 @@ import React from 'react';
 import Navigation from './react-components/Navigation/';
 import AppFooter from './react-components/Footer/';
 import MaterialTable from './react-components/MaterialTable';
+import MessageSnack from './react-components/MessageSnack';
 import { createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import { getState } from "statezero";
 import { CssBaseline } from '@material-ui/core';
@@ -16,6 +17,7 @@ class App extends React.Component {
         <CssBaseline/>
         <Navigation/>
         <MaterialTable/>
+        <MessageSnack/>
         <AppFooter/> 
         </MuiThemeProvider>
       </div>
