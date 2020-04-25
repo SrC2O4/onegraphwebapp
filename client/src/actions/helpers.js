@@ -33,7 +33,7 @@ export const setEmptyState = () => {
     setState("showBestOnly", getMenory("showBestOnly",false));
     setState("itemToRender", {name: "", id: "",Notes:{"event":"", "normal":""},credit_store_value: {"event":0, "normal":0},lowest_ap_stages:{"event":[], "normal":[]},balanced_stages: {"event":[], "normal":[]},drop_rate_first_stages:{"event":[], "normal":[]}});
     setState("ifEventNow", false);
-    setState("considerEventStages", false);
+    setState("considerEventStages", getMenory("considerEventStages",false));
     setState("currentTheme", 'light');
     setState("stages", []);
     setState("updateEvent", false);
