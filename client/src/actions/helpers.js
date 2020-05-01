@@ -38,5 +38,6 @@ export const setEmptyState = () => {
     setState("stages", []);
     setState("updateEvent", false);
     setState("animeOnce", true);
+    setState("orangeStore",getMenory("orangeStore",true))
 
 };
