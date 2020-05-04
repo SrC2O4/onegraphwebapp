@@ -19,7 +19,7 @@ const theme = createMuiTheme({
             overrides: {
               MuiPaper: {
                 root: {
-                    backgroundColor: "rgba(255,255,255,0.7)"
+                    backgroundColor: "rgba(255,255,255,0.1)"
                 },
               },
             }
@@ -143,7 +143,7 @@ class MaterialTable extends BaseComponent{
                         <TableCell colSpan={8} rowSpan={4} >
                         <div>
                         <h2 className='instructions'>说明</h2>
-                        <p className='instructions'> 绿票，黄票，参数模型，信用商店里的数值指1绿票/1黄票/1橙票/100信用的理智价值<span style = {{color: 'red'}}>数值<strong>越高</strong>，则兑换优先级越高</span></p>
+                        <p className='instructions'> 绿票，黄票，橙票，信用商店里的数值指1绿票/1黄票/1橙票/100信用的理智价值<span style = {{color: 'red'}}>数值<strong>越高</strong>，则兑换优先级越高</span></p>
                         <p className='instructions'>关卡代号后的三个数字从上到下为：材料掉落率，理智转换效率，每个物品所需的期望理智</p>
                         <p style = {{color: 'red'}} className='instructions'> 红色：效率>99%, 刷此图毕业所需理智最低</p>
                         <p style = {{color: 'goldenrod'}} className='instructions'> 橙色：效率>90%, 且掉率比效率最高的图高</p>

@@ -5,6 +5,7 @@ import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Typography from './Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import { getState } from 'statezero';
 
 function Copyright() {
   return (
@@ -21,7 +22,7 @@ function Copyright() {
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    backgroundColor: 'darkgrey',
+    backgroundColor: getState("currentTheme")==='dark'?'#303030':'#a9a9a9',
     color: 'white',
   },
   container: {

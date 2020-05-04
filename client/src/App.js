@@ -3,12 +3,14 @@ import Navigation from './react-components/Navigation/';
 import AppFooter from './react-components/Footer/';
 import MaterialTable from './react-components/MaterialTable';
 import MessageSnack from './react-components/MessageSnack';
-import { createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
-import { getState } from "statezero";
+import { MuiThemeProvider } from '@material-ui/core/styles';
+//import { getState } from "statezero";
 import { CssBaseline } from '@material-ui/core';
+import BaseComponent from "./react-components/Base";
+import { getCurrentTheme,updateTheme } from "./actions/theme";
 
 
-class App extends React.Component {
+class App extends BaseComponent {
   
   componentDidMount () {
     // Include the Crisp code here, without the <script></script> tags
@@ -23,11 +25,17 @@ class App extends React.Component {
       s.async = 1;
       d.getElementsByTagName("head")[0].appendChild(s);
     })();
-   }
+    updateTheme();
+  }
+
+  filterState({ currentTheme,userTheme }) {
+    return { currentTheme,userTheme }
+  }
+  
   render (){
     return(
       <div>
-        <MuiThemeProvider muiTheme={createMuiTheme({palette: {type: getState('currentTheme')}})}> 
+        <MuiThemeProvider theme={getCurrentTheme(this.state.currentTheme)}> 
         <CssBaseline/>
         <Navigation/>
         <MaterialTable/>
