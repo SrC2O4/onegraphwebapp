@@ -275,19 +275,19 @@ span{
 
 .M4Valuesgreen{
     margin-top: 3.6rem;
-    color: forestgreen !important;
+    color: #26A69Af5 !important;
     vertical-align: middle;
     display: inline;
 }
 .M4Valuesred{
     margin-top: 3.6rem;
-    color: red !important;
+    color: #d81b60f5 !important;
     vertical-align: middle;
     display: inline;
 }
 .M4Valuesyellow{
     margin-top: 3.6rem;
-    color: goldenrod !important;
+    color: #fb8c00f5 !important;
     vertical-align: middle;
     display: inline;
 
@@ -308,7 +308,7 @@ span{
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
-    color: goldenrod !important;
+    color: #fb8c00f5 !important;
     vertical-align: middle;
 }
 
@@ -317,7 +317,7 @@ span{
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
-    color: red !important;
+    color: #d81b60f5 !important;
     vertical-align: middle;
 }
 
@@ -326,7 +326,7 @@ span{
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
-    color: red !important;
+    color: #d81b60f5 !important;
     vertical-align: middle;
 }
 
@@ -343,7 +343,7 @@ span{
     margin-left: 1%;
     margin-top: 1rem;
     vertical-align: middle;
-    color: red !important;
+    color: #d81b60f5 !important;
 }
 
 .CreditValuegreen{
@@ -352,7 +352,7 @@ span{
     margin-left: 1%;
     margin-top: 1rem;
     vertical-align: middle;
-    color: forestgreen !important;
+    color: #26A69Af5 !important;
 }
 
 .CreditValueyellow{
@@ -361,7 +361,7 @@ span{
     margin-left: 1%;
     margin-top: 1rem;
     vertical-align: middle;
-    color: goldenrod !important;
+    color: #fb8c00f5 !important;
 }
 
 .Credit-wrapper{
@@ -374,7 +374,7 @@ span{
     margin-left: 3%;
     font-family: 'Overpass', sans-serif;
     display: inline;
-    color: red !important;
+    color: #d81b60f5 !important;
     /* border-left:1px solid;
     border-image: 
       linear-gradient(
@@ -388,7 +388,7 @@ span{
     margin-left: 3%;
     /* font-family: 'Overpass', sans-serif; */
     display: table-caption;
-    color: red !important;
+    color: #d81b60f5 !important;
 
 }
 
@@ -396,13 +396,13 @@ span{
     font-family: 'Overpass', sans-serif;
     margin-left: 3%;
     display: inline;
-    color: goldenrod !important;
+    color: #fb8c00f5 !important;
 }
 .balancedStageDetails{
     /* font-family: 'Overpass', sans-serif; */
     margin-left: 3%;
     display:  table-caption;
-    color: goldenrod !important;
+    color: #fb8c00f5 !important;
 
 }
 
@@ -410,14 +410,14 @@ span{
     font-family: 'Overpass', sans-serif;
     margin-left: 3%;
     display: inline;
-    color: blue !important;
+    color: #039be5f5 !important;
 }
 
 .dropRateFirstStageDetails{
     /* font-family: 'Overpass', sans-serif; */
     margin-left: 3%;
     display:  table-caption;
-    color: blue !important;
+    color: #039be5f5 !important;
 
 }
 .stageWrapper{

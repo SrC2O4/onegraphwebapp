@@ -44,7 +44,7 @@ export const getAll = ()=>{
         setState("contingencyStore", res11.material);
         setState('stages', res12.stages);
 
-    })
+    }).catch(e => { console.error('req fail') })
 }
 export const initialization = () => {
     setEmptyState();

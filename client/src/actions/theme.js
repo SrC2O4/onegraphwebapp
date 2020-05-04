@@ -19,8 +19,10 @@ export function getCurrentTheme(themeType) {
   switch (themeType) {
     default:
     case 'light':
+      setThemeClass('light');
       return themeLight;
     case 'dark':
+      setThemeClass('dark');
       return themeDark;
     case 'system':
       if (window.matchMedia) {

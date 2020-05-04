@@ -41,8 +41,8 @@ const BlueSwitch = withStyles({
 
 class SettingsModal extends BaseComponent {
   
-  filterState({modalOpen, detailMode, showBestOnly, considerEventStages, ifEventNow, eventType, userTheme}){
-    return{modalOpen, detailMode, showBestOnly, considerEventStages, ifEventNow, eventType, userTheme};
+  filterState({modalOpen, detailMode, showBestOnly, considerEventStages, ifEventNow, eventType, userTheme,currentTheme}){
+    return{modalOpen, detailMode, showBestOnly, considerEventStages, ifEventNow, eventType, userTheme,currentTheme};
 
   }
 
@@ -106,6 +106,11 @@ class SettingsModal extends BaseComponent {
                   <FormControlLabel value="light" control={<BlueRadio color="default" />} label="浅色模式" />
                   <FormControlLabel value="dark" control={<BlueRadio color="default" />} label="深色模式" />
                 </RadioGroup>
+                <div style={{width:'100%',height:'1px',paddingLeft:'4px',paddingRight:'4px',marginTop:'4px',marginBottom:'4px',backgroundColor:this.state.currentTheme==='dark'?'#f5f5f5':'#1e1e1e'}} />
+                <FormControlLabel
+                    control={<BlueSwitch disabled className="showBestOnly" checked={this.state.showBestOnly} /* onChange={ this.handleChange("showBestOnly") } */ aria-label="show best only switch" />}
+                    label={/* this.state.showBestOnly ? '只显示最优' : '显示全部' */'正常色彩'}
+                  />
               </div>
             </Fade>
           </Modal>
