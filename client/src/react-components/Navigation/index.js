@@ -51,14 +51,14 @@ class Navigation extends BaseComponent {
             <Typography className={this.classes.title} variant="h6" noWrap>
               ArkOneGraph - 明日方舟刷素材推荐一图流
             </Typography>
-            <IconButton className={this.classes.nightModeButton} color="inherit">
-              <SettingsIcon onClick={()=>{this.handleChange("modalOpen")}} />
+            <IconButton className={this.classes.nightModeButton} color="inherit" onClick={()=>{this.handleChange("modalOpen")}}>
+              <SettingsIcon />
             </IconButton>
-            <IconButton className={this.classes.nightModeButton} color="inherit">
-              <NotesIcon onClick={()=>{this.handleChange("listOpen")}} />
+            <IconButton className={this.classes.nightModeButton} color="inherit" onClick={()=>{this.handleChange("listOpen")}}>
+              <NotesIcon />
             </IconButton>
             <IconButton className={this.classes.nightModeButton} color="inherit" style={{ padding: '0' }} onClick={() => { this.stroeToggle()}}>
-              <svg width="50px" height="50px" version="1.1" viewBox="0 0 339 339" >
+              <svg width="50px" height="50px" version="1.1" viewBox="0 0 339 339" style={{textShadow:'#f00 0 0 10px'}} >
                 <defs>
                   <filter id="f3" x="-110%" y="-110%" width="400%" height="400%">
                     <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0"></feOffset>

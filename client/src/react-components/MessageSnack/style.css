@@ -1,8 +1,22 @@
-.snack{
-    background-color: white;
+.theme--light .snack{
+    background-color: #f5f5f5;
     border: 2px solid #000;
     width: fit-content;
-    box-shadow: 5px 5px lightblue;
+    box-shadow: 5px 5px #add8e6;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    margin:0 auto;
+    padding: 5px 15px 5px 15px;
+    display: flex;
+}
+
+.theme--dark .snack{
+    background-color: #454545;
+    border: 2px solid #000;
+    width: fit-content;
+    box-shadow: 5px 5px #728d96;
     position: fixed;
     left: 0;
     right: 0;

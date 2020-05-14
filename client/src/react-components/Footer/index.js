@@ -5,6 +5,7 @@ import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Typography from './Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import { getState } from 'statezero';
 
 function Copyright() {
   return (
@@ -21,7 +22,7 @@ function Copyright() {
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    backgroundColor: 'darkgrey',
+    backgroundColor: getState("currentTheme")==='dark'?'#303030':'#a9a9a9',
     color: 'white',
   },
   container: {
@@ -63,6 +64,9 @@ const useStyles = makeStyles(theme => ({
   },
   gitHubIcon: {
     fontSize: 'medium',
+  },
+  linkColor: {
+    color:getState("currentTheme")==='dark'? '#039be5f5 !important':'#3f51b5'
   }
 }));
 
@@ -92,14 +96,14 @@ export default function AppFooter() {
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                <Link href="https://penguin-stats.io/">企鹅物流</Link>
+                <Link className={classes.linkColor} href="https://penguin-stats.io/">企鹅物流</Link>
               </li>
               <li className={classes.listItem}>
-                <Link href="https://gachasalt.github.io/ArkToolDemo/#/">ArkTools</Link>
+                <Link className={classes.linkColor} href="https://gachasalt.github.io/ArkToolDemo/#/">ArkTools</Link>
               </li>
               {process.env.REACT_APP_ICP ?
               <li className={classes.listItem}>
-                <Link href="https://arkonegraph.herokuapp.com">AOG源站</Link>
+                <Link className={classes.linkColor} href="https://arkonegraph.herokuapp.com">AOG源站</Link>
               </li>
               :''
               }
@@ -111,7 +115,7 @@ export default function AppFooter() {
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                <Link href="https://github.com/ycremar/ArkPlanner">ArkPlanner<GitHubIcon className = {classes.gitHubIcon}/></Link>
+                <Link className={classes.linkColor} href="https://github.com/ycremar/ArkPlanner">ArkPlanner<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
             </ul>
           </Grid>
@@ -121,16 +125,16 @@ export default function AppFooter() {
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                <Link href="https://bbs.nga.cn/read.php?tid=19069337">NGA 一图流</Link>
+                <Link className={classes.linkColor} href="https://bbs.nga.cn/read.php?tid=19069337">NGA 一图流</Link>
               </li>
               <li className={classes.listItem}>
-                <Link href="https://ak.graueneko.xyz/">明日方舟工具箱</Link>
+                <Link className={classes.linkColor} href="https://ak.graueneko.xyz/">明日方舟工具箱</Link>
               </li>
               <li className={classes.listItem}>
-                <Link href="http://ak.mooncell.wiki/w/%E9%A6%96%E9%A1%B5">PRTS wiki</Link>
+                <Link className={classes.linkColor} href="http://ak.mooncell.wiki/w/%E9%A6%96%E9%A1%B5">PRTS wiki</Link>
               </li>
               <li className={classes.listItem}>
-                <Link href="https://github.com/Evealicemier">水晶泡芙工坊<GitHubIcon className = {classes.gitHubIcon}/></Link>
+                <Link className={classes.linkColor} className={classes.linkColor} href="https://github.com/Evealicemier">水晶泡芙工坊<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
             </ul>
           </Grid>
@@ -140,13 +144,13 @@ export default function AppFooter() {
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                前端Repo <Link href="https://github.com/Strontium233/onegraphwebapp">Strontium233<GitHubIcon className = {classes.gitHubIcon}/></Link>
+                前端Repo <Link className={classes.linkColor} href="https://github.com/Strontium233/onegraphwebapp">Strontium233<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
               <li className={classes.listItem}>
-                前端协助 <Link href="https://github.com/YanAndFish">YanAndFish<GitHubIcon className = {classes.gitHubIcon}/></Link>
+                前端协助 <Link className={classes.linkColor} href="https://github.com/YanAndFish">YanAndFish<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
               <li className={classes.listItem}>
-                后端Repo <Link href="https://github.com/SQRPI/ArkOneGraph">SQRPI<GitHubIcon className = {classes.gitHubIcon}/></Link>
+                后端Repo <Link className={classes.linkColor} href="https://github.com/SQRPI/ArkOneGraph">SQRPI<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
               
             </ul>
@@ -159,6 +163,7 @@ export default function AppFooter() {
                 title="CC BY-NC 4.0"
                 target="_blank"
                 rel="noopener noreferrer"
+                className={classes.linkColor}
               >
                 知识共享 署名-非商业性使用 4.0 国际 许可协议
               </Link>
@@ -171,6 +176,7 @@ export default function AppFooter() {
                   href="http://www.beian.miit.gov.cn/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className={classes.linkColor}
                 >
                   {process.env.REACT_APP_ICP}
                 </Link>

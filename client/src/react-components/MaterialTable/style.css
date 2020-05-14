@@ -1,12 +1,26 @@
 p{
     margin: 0;
 }
+.theme--dark p{
+color: #f5f5f5;
+}
+.theme--dark h2{
+    color: #f5f5f5;
+}
 h3{
     margin-top: 0;
 }
+.theme--dark h3{
+    color: #f5f5f5;
+}
 span{
     display: block;
-    
+}
+.theme--dark span{
+    color: #f5f5f5;
+}
+.theme--dark .textTips{
+    color: #f5f5f5;
 }
 .MuiPaper-root{
     background-color: rgba(255,255,255,0.7);
@@ -16,6 +30,9 @@ span{
 }
 .instructions{
     transform-origin: left center;
+}
+.theme--dark .material{
+    filter: brightness(0.9);
 }
 @media only screen and (min-width: 320px)  { body{ font-size: 10px; } 
 .M3Materials{
@@ -258,19 +275,19 @@ span{
 
 .M4Valuesgreen{
     margin-top: 3.6rem;
-    color: forestgreen;
+    color: #26A69Af5 !important;
     vertical-align: middle;
     display: inline;
 }
 .M4Valuesred{
     margin-top: 3.6rem;
-    color: red;
+    color: #d81b60f5 !important;
     vertical-align: middle;
     display: inline;
 }
 .M4Valuesyellow{
     margin-top: 3.6rem;
-    color: goldenrod;
+    color: #fb8c00f5 !important;
     vertical-align: middle;
     display: inline;
 
@@ -291,7 +308,7 @@ span{
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
-    color: goldenrod;
+    color: #fb8c00f5 !important;
     vertical-align: middle;
 }
 
@@ -300,7 +317,7 @@ span{
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
-    color: red;
+    color: #d81b60f5 !important;
     vertical-align: middle;
 }
 
@@ -309,7 +326,7 @@ span{
     display: inline;
     margin-left: 1%;
     margin-top: 1rem;
-    color: red;
+    color: #d81b60f5 !important;
     vertical-align: middle;
 }
 
@@ -326,7 +343,7 @@ span{
     margin-left: 1%;
     margin-top: 1rem;
     vertical-align: middle;
-    color: red;
+    color: #d81b60f5 !important;
 }
 
 .CreditValuegreen{
@@ -335,7 +352,7 @@ span{
     margin-left: 1%;
     margin-top: 1rem;
     vertical-align: middle;
-    color: forestgreen;
+    color: #26A69Af5 !important;
 }
 
 .CreditValueyellow{
@@ -344,7 +361,7 @@ span{
     margin-left: 1%;
     margin-top: 1rem;
     vertical-align: middle;
-    color: goldenrod;
+    color: #fb8c00f5 !important;
 }
 
 .Credit-wrapper{
@@ -357,7 +374,7 @@ span{
     margin-left: 3%;
     font-family: 'Overpass', sans-serif;
     display: inline;
-    color: red;
+    color: #d81b60f5 !important;
     /* border-left:1px solid;
     border-image: 
       linear-gradient(
@@ -371,7 +388,7 @@ span{
     margin-left: 3%;
     /* font-family: 'Overpass', sans-serif; */
     display: table-caption;
-    color: red;
+    color: #d81b60f5 !important;
 
 }
 
@@ -379,13 +396,13 @@ span{
     font-family: 'Overpass', sans-serif;
     margin-left: 3%;
     display: inline;
-    color: goldenrod;
+    color: #fb8c00f5 !important;
 }
 .balancedStageDetails{
     /* font-family: 'Overpass', sans-serif; */
     margin-left: 3%;
     display:  table-caption;
-    color: goldenrod;
+    color: #fb8c00f5 !important;
 
 }
 
@@ -393,14 +410,14 @@ span{
     font-family: 'Overpass', sans-serif;
     margin-left: 3%;
     display: inline;
-    color: blue;
+    color: #039be5f5 !important;
 }
 
 .dropRateFirstStageDetails{
     /* font-family: 'Overpass', sans-serif; */
     margin-left: 3%;
     display:  table-caption;
-    color: blue;
+    color: #039be5f5 !important;
 
 }
 .stageWrapper{
