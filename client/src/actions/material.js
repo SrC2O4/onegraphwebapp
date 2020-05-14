@@ -27,11 +27,12 @@ export const getAll = ()=>{
         if(res1.eventStatus.status){
             console.log(res1.eventStatus.event.type)
             setState("eventType", res1.eventStatus.event.type)
+            if(res1.eventStatus.event.type === "Casual"){
+                setState("ifEventNow", res1.eventStatus.status);
+                console.log("Event Now!!")
+            }
         }
-        if(res1.eventStatus.event.type === "Casual"){
-        setState("ifEventNow", res1.eventStatus.status);
-        console.log("Event Now!!")
-        }
+        
         setState("t5Material", res6.material);
         setState("t4Material", res5.material);
         setState("t3Material", res4.material);
