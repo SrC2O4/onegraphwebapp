@@ -31,6 +31,8 @@ export const getAll = ()=>{
                 setState("ifEventNow", res1.eventStatus.status);
                 console.log("Event Now!!")
             }
+        } else {
+            setState("considerEventStages", false);
         }
         
         setState("t5Material", res6.material);
