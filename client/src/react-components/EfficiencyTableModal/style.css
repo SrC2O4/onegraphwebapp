@@ -7,7 +7,9 @@
 .Stagespaper{
     background-color: white;
     border: 2px solid #000;
-    width: fit-content;
     box-shadow: 5px 5px lightblue;
     padding: 1%;
+    max-height: 50%;
+    max-width: fit-content;
+    overflow:auto;
 }
