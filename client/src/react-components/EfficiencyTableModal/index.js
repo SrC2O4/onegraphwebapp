@@ -1,16 +1,17 @@
 import React from 'react';
 import BaseComponent from "../Base";
-import MaterialTable from 'material-table';
+// import MaterialTable from 'material-table';
+import {TableContainer, Paper, Table, TableRow, TableCell, TableHead, TableBody} from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import {setState} from 'statezero';
-
+import './style.css'
 
 class EfficiencyTableModal extends BaseComponent{
     
-    filterState({stages}){
-        return ({stages})
+    filterState({stages,listOpen}){
+        return ({stages,listOpen})
     }
 
     handleOpen = () => {
@@ -23,7 +24,7 @@ class EfficiencyTableModal extends BaseComponent{
     
     render(){
         return( 
-            <Modal aria-labelledby="transition-modal-stages"
+            <Modal aria-labelledby="material-table"
             className='Stagesmodal'
             open={this.state.listOpen}
             onClose={this.handleClose}
@@ -34,11 +35,32 @@ class EfficiencyTableModal extends BaseComponent{
             }}>
             <Fade in={this.state.listOpen}>
               <div className='Stagespaper'>
-            <MaterialTable 
-            title="关卡效率一览" 
-            columns={{columns:[{title:'副本',field:'code'},{title:'效率',field:'efficiency'}]}} 
-            data={this.state.stages}>
-            </MaterialTable>
+                {/* <MaterialTable 
+                title="关卡效率一览" 
+                columns={[{title:'副本',field:'code'},{title:'效率',field:'efficiency', type: "numeric"}]}
+                data={this.state.stages}/> */}
+<TableContainer component = {Paper} >
+      <Table stickyHeader aria-label="sticky table">
+        <TableHead>
+          <TableRow>
+            <TableCell>副本</TableCell>
+            <TableCell numeric>效率</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {this.state.stages.map(n => {
+            return (
+              <TableRow>
+                <TableCell>
+                  {n.code}
+                </TableCell>
+                <TableCell numeric>{(n.efficiency).toFixed(2)}</TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </TableContainer>
             </div>
             </Fade>
 

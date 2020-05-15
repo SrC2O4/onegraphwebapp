@@ -15,8 +15,8 @@ import memory from "../../actions/memory";
 
 
 class Navigation extends BaseComponent {
-  filterState({ modalOpen,orangeStore}) {
-    return { modalOpen,orangeStore};
+  filterState({ modalOpen,orangeStore,listOpen}) {
+    return { modalOpen,orangeStore,listOpen};
   }
 
   
@@ -74,7 +74,8 @@ class Navigation extends BaseComponent {
           </Toolbar>
         </AppBar>
         <SettingsModal open={this.state.modalOpen} />
-        {/* <EfficiencyTableModal open={this.state.listOpen} /> */}
+        <EfficiencyTableModal open={this.state.listOpen} />
+        {console.log(this.state.listOpen)}
       </div>
     );
   }
