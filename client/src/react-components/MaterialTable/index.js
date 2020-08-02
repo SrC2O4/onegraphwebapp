@@ -79,9 +79,7 @@ class MaterialTable extends BaseComponent{
 
 
     render(){
-        
-          
-        //getAll();
+
         if(this.state.t4Material.length===0||this.state.t3Material.length===0 ||this.state.t1Material.length===0 || this.state.t2Material.length===0 || this.state.t5Material.length===0  ){
             return (
             <Modal
@@ -106,11 +104,8 @@ class MaterialTable extends BaseComponent{
     }
     const finite_items = this.state.contingencyStore.filter(obj => obj.contingency_store_value.finite !=="0.0");
         const infinite_items = this.state.contingencyStore.filter(obj => obj.contingency_store_value.infinite !=="0.0");
-        // console.log(this.state.eventType)
 
         return(
-            
-            // The 3 tier 5 materials
             <MuiThemeProvider theme={theme}>
             <div className = 'outLayer'>
             <h2 style={{textAlign: "right", marginRight: "1%"}}>上次数据更新时间：{new Date(this.state.gacha.last_updated).toLocaleString('zh', {hour12: true,timeZone: "Asia/Shanghai"})}</h2>
@@ -1095,8 +1090,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
-                                            
+                                          
                                             {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
@@ -1168,7 +1162,7 @@ class MaterialTable extends BaseComponent{
                         <TableCell colSpan={4}>
                             <Tooltip title = {this.state.t2Material[i-4].name} arrow>
                             <span className={'material spriteMT-4 material-MT-'+this.state.t2Material[i-4].id}/>
-                                {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-4].id+'.png')}/> */}
+                                
                                  </Tooltip>
                                         {this.state.orangeStore ?
                                             <p className={'M4Values' + (this.state.considerEventStages ? this.state.t2Material[i - 4].orange_note.event : this.state.t2Material[i - 4].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${(this.state.considerEventStages ? this.state.t2Material[i - 4].orange_store_value.event : this.state.t2Material[i - 4].orange_store_value.normal)}`}<strong style={{ color: 'orange' }}>]</strong></p>
@@ -1422,7 +1416,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
+                                            {/* {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>} */}
                                             
                                             {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
@@ -1529,7 +1523,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
+                                            {/* {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>} */}
                                             
                                             {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
@@ -2270,7 +2264,7 @@ class MaterialTable extends BaseComponent{
                 })}
 
                                 {/* contingency store */}
-                                {this.state.eventType ==="Contingency Contract" && 
+                    {this.state.eventType ==="Contingency Contract" && 
                     <TableRow>
                         <TableCell>
                             <h2>有限池</h2>
