@@ -39,6 +39,8 @@ export const setEmptyState = () => {
     setState("stages", []);
     setState("updateEvent", false);
     setState("animeOnce", true);
-    setState("orangeStore",getMenory("orangeStore",true))
+    setState("orangeStore",getMenory("orangeStore",true));
+    setState("server", 'CN');
+    setState("serverListOpen", false);
 
 };

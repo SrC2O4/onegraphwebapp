@@ -1,7 +1,6 @@
 import React from 'react';
 import './style.css';
 import BaseComponent from "./../Base";
-//import {getAll} from '../../actions/material';
 import Tooltip from '@material-ui/core/Tooltip';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import StagesModal from "./../StagesModal";
@@ -14,6 +13,8 @@ import Anime from 'animejs';
 import './chip.css';
 import './contingencyMiscs.css';
 import './materials.css';
+import OrangeTicket from './orangeTicket.js'
+import './tokens.css'
 
 const theme = createMuiTheme({
             overrides: {
@@ -113,16 +114,19 @@ class MaterialTable extends BaseComponent{
                 <Table size="small" aria-label="spanning table">
                     {/* Header */}
                     <TableRow>
-                        <TableCell/>
-                        <TableCell >
-                                    <h3 className='textTips'> {this.state.orangeStore ? <strong style = {{color:'orange'}}>[橙票商店]</strong> : '黄票商店' }</h3>
-                            <Tooltip title = "芯片助剂" arrow>
-                                <span className='material material-ESS-32001 spriteMT-4'></span>
-                            </Tooltip>
-                            <p className = 'CatalystValue'> {this.state.considerEventStages?this.state.catalyst.golden_ticket_value.event:this.state.catalyst.golden_ticket_value.normal}</p>
+                        <TableCell colSpan={2}>
+                                    {/* <h3 className='textTips'> {this.state.orangeStore ? <strong style = {{color:'orange'}}>[橙票商店]</strong> : '黄票商店' }</h3> */}
+                            <h3 className='textTips'> 商店价值</h3> 
+                            <div style={{display:'flex'}}>
+                                <Tooltip title = "芯片助剂" arrow>
+                                    <span className='material material-ESS-32001 spriteMT-4'></span>
+                                </Tooltip>
+                                <p className = 'CatalystValue'><span className = 'text'>{this.state.considerEventStages?this.state.catalyst.golden_ticket_value.event:this.state.catalyst.golden_ticket_value.normal}</span></p>
+                            </div>
                         </TableCell>
                         <TableCell colSpan={3}>
-                            <h3 className='textTips'> {this.state.orangeStore?<strong style = {{color:'orange'}}>[橙票商店]</strong>:'绿票商店-二层'}</h3>
+                            {/* <h3 className='textTips'> {this.state.orangeStore?<strong style = {{color:'orange'}}>[橙票商店]</strong>:'绿票商店-二层'}</h3> */}
+                            <h3 className='textTips'> 商店价值</h3>
                             <Tooltip title = "寻访凭证" arrow>
                                 <span className='spriteMT-4 material material-GACHATICKET'></span>
                             </Tooltip>
@@ -133,7 +137,7 @@ class MaterialTable extends BaseComponent{
                             <p className = {'PlanValue'}> {this.state.considerEventStages?this.state.plan.green_ticket_value.event:this.state.plan.green_ticket_value.normal}</p>
                         </TableCell> 
                         <TableCell rowSpan={4} >
-                            <h2 className='textTips'>信用商店</h2>
+                            <h2 className='textTips'>商店价值</h2>
                         </TableCell>
                         <TableCell colSpan={8} rowSpan={4} >
                         <div>
@@ -146,7 +150,7 @@ class MaterialTable extends BaseComponent{
                         <p className='instructions'> <strong>毕业指全角色全技能专精三，掉率按照刷到材料所需的期望理智计算</strong></p>
                     </div>
                         </TableCell>
-                    </TableRow> {/*Catalyst ends*/}
+                    </TableRow> 
 
                 {/* Read the matrix and then generate the table */}
                 {this.indices.map((i) => {
@@ -164,10 +168,19 @@ class MaterialTable extends BaseComponent{
                                 <Tooltip title = {this.state.t4Material[i].name} arrow>
                                 <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                 </Tooltip>
-                                    {this.state.orangeStore ?
-                                    <p className={'M4Values' + (this.state.considerEventStages ? this.state.t4Material[i].orange_note.event : this.state.t4Material[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{this.state.considerEventStages ? this.state.t4Material[i].orange_store_value.event : this.state.t4Material[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
-                                    :
-                                    <p className={'M4Values' + (this.state.considerEventStages ? this.state.t4Material[i].Notes.event : this.state.t4Material[i].Notes.normal)}>{this.state.considerEventStages ? this.state.t4Material[i].golden_ticket_value.event : this.state.t4Material[i].golden_ticket_value.normal}</p>}
+                                    {/* {this.state.orangeStore ?
+                                    
+                                    : */}
+                                    <p className={'M4Values' + (this.state.considerEventStages ? this.state.t4Material[i].orange_note.event : this.state.t4Material[i].orange_note.normal)}>
+                                        <OrangeTicket />
+                                        <span className = 'text'>
+                                            {this.state.considerEventStages ? this.state.t4Material[i].orange_store_value.event : this.state.t4Material[i].orange_store_value.normal}
+                                        </span>
+                                    </p>
+                                    <p className={'M4Values' + (this.state.considerEventStages ? this.state.t4Material[i].Notes.event : this.state.t4Material[i].Notes.normal)}>
+                                       
+                                            {this.state.considerEventStages ? this.state.t4Material[i].golden_ticket_value.event : this.state.t4Material[i].golden_ticket_value.normal}
+                                    </p>
                             </TableCell>
     
                             <TableCell>

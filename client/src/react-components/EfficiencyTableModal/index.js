@@ -35,10 +35,7 @@ class EfficiencyTableModal extends BaseComponent{
             }}>
             <Fade in={this.state.listOpen}>
               <div className='Stagespaper'>
-                {/* <MaterialTable 
-                title="关卡效率一览" 
-                columns={[{title:'副本',field:'code'},{title:'效率',field:'efficiency', type: "numeric"}]}
-                data={this.state.stages}/> */}
+                
 <TableContainer component = {Paper} >
       <Table stickyHeader aria-label="sticky table">
         <TableHead>

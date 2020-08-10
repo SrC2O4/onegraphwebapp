@@ -1,0 +1,19 @@
+.bg-goldTicket {
+    width: 177px; height: 177px;
+    background: url('css_sprites.png') -10px -10px;
+}
+
+.bg-redTicket {
+    width: 177px; height: 177px;
+    background: url('css_sprites.png') -207px -10px;
+}
+
+.bg-greenTicket {
+    width: 177px; height: 177px;
+    background: url('css_sprites.png') -10px -207px;
+}
+
+.bg-creditTicket {
+    width: 177px; height: 177px;
+    background: url('css_sprites.png') -207px -207px;
+}
