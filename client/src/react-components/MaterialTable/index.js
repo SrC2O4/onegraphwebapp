@@ -1,7 +1,6 @@
 import React from 'react';
 import './style.css';
 import BaseComponent from "./../Base";
-//import {getAll} from '../../actions/material';
 import Tooltip from '@material-ui/core/Tooltip';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import StagesModal from "./../StagesModal";
@@ -14,6 +13,7 @@ import Anime from 'animejs';
 import './chip.css';
 import './contingencyMiscs.css';
 import './materials.css';
+import {FormattedMessage} from 'react-intl';
 
 const theme = createMuiTheme({
             overrides: {
@@ -30,9 +30,11 @@ const Random = (min, max)=> {
 }
 class MaterialTable extends BaseComponent{
     
-    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender, considerEventStages, contingencyStore, eventType, animeOnce,orangeStore}){
+    filterState({t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc, detailMode, showBestOnly,stageModalOpen,itemToRender, 
+        considerEventStages, contingencyStore, eventType, animeOnce,orangeStore,server,lang}){
          
-        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly,stageModalOpen, itemToRender, considerEventStages, contingencyStore, eventType,animeOnce,orangeStore};
+        return {t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha,plan, misc,detailMode, showBestOnly,stageModalOpen, itemToRender, 
+            considerEventStages, contingencyStore, eventType,animeOnce,orangeStore, server,lang};
     }
     handleChange = name => event =>{
         setState("itemToRender",  name)
@@ -79,9 +81,7 @@ class MaterialTable extends BaseComponent{
 
 
     render(){
-        
-          
-        //getAll();
+
         if(this.state.t4Material.length===0||this.state.t3Material.length===0 ||this.state.t1Material.length===0 || this.state.t2Material.length===0 || this.state.t5Material.length===0  ){
             return (
             <Modal
@@ -107,48 +107,50 @@ class MaterialTable extends BaseComponent{
     const finite_items = this.state.contingencyStore.filter(obj => obj.contingency_store_value.finite !=="0.0");
         const infinite_items = this.state.contingencyStore.filter(obj => obj.contingency_store_value.infinite !=="0.0");
         // console.log(this.state.eventType)
-
+        if(this.state.server!='CN'){
+            setState('orangeStore', false)
+        }
         return(
             
             // The 3 tier 5 materials
             <MuiThemeProvider theme={theme}>
             <div className = 'outLayer'>
-            <h2 style={{textAlign: "right", marginRight: "1%"}}>上次数据更新时间：{new Date(this.state.gacha.last_updated).toLocaleString('zh', {hour12: true,timeZone: "Asia/Shanghai"})}</h2>
+            <h2 style={{textAlign: "right", marginRight: "1%"}}><FormattedMessage id='last'/>：{new Date(this.state.gacha.last_updated).toLocaleString()}</h2>
             <TableContainer component = {Paper} className="tableGrid">
                 <Table size="small" aria-label="spanning table">
                     {/* Header */}
                     <TableRow>
                         <TableCell/>
                         <TableCell >
-                                    <h3 className='textTips'> {this.state.orangeStore ? <strong style = {{color:'orange'}}>[橙票商店]</strong> : '黄票商店' }</h3>
-                            <Tooltip title = "芯片助剂" arrow>
+                                    <h3 className='textTips'> {this.state.orangeStore ? <strong style = {{color:'orange'}}>[橙票商店]</strong> : <FormattedMessage id='yellowStore'/> }</h3>
+                            <Tooltip title = {<FormattedMessage id='32001'/>} arrow>
                                 <span className='material material-ESS-32001 spriteMT-4'></span>
                             </Tooltip>
                             <p className = 'CatalystValue'> {this.state.considerEventStages?this.state.catalyst.golden_ticket_value.event:this.state.catalyst.golden_ticket_value.normal}</p>
                         </TableCell>
                         <TableCell colSpan={3}>
-                            <h3 className='textTips'> {this.state.orangeStore?<strong style = {{color:'orange'}}>[橙票商店]</strong>:'绿票商店-二层'}</h3>
-                            <Tooltip title = "寻访凭证" arrow>
+                            <h3 className='textTips'> {this.state.orangeStore?<strong style = {{color:'orange'}}>[橙票商店]</strong>: <FormattedMessage id='greenStore'/>}</h3>
+                            <Tooltip title = {<FormattedMessage id='7003'/>} arrow>
                                 <span className='spriteMT-4 material material-GACHATICKET'></span>
                             </Tooltip>
                             <p className = {'GachaValue'}> {this.state.considerEventStages?this.state.gacha.green_ticket_value.event:this.state.gacha.green_ticket_value.normal}</p>
-                            <Tooltip title = "招聘许可" arrow>
+                            <Tooltip title = {<FormattedMessage id='7001'/>} arrow>
                                 <span className='material material-MISC-7001 spriteMT-4'></span>
                             </Tooltip>
                             <p className = {'PlanValue'}> {this.state.considerEventStages?this.state.plan.green_ticket_value.event:this.state.plan.green_ticket_value.normal}</p>
                         </TableCell> 
                         <TableCell rowSpan={4} >
-                            <h2 className='textTips'>信用商店</h2>
+                            <h2 className='textTips'><FormattedMessage id='creditStore'/></h2>
                         </TableCell>
                         <TableCell colSpan={8} rowSpan={4} >
                         <div>
-                        <h2 className='instructions'>说明</h2>
-                        <p className='instructions'> 绿票，黄票，橙票，信用商店里的数值指1绿票/1黄票/1橙票/100信用的理智价值<span style = {{color: '#d81b60e4'}}>数值<strong>越高</strong>，则兑换优先级越高</span></p>
-                        <p className='instructions'>关卡代号后的三个数字从上到下为：材料掉落率，理智转换效率，每个物品所需的期望理智</p>
-                        <p style = {{color: '#d81b60e4'}} className='instructions'> 红色：效率>99%, 刷此图毕业所需理智最低</p>
-                        <p style = {{color: '#fb8c00e4'}} className='instructions'> 橙色：效率>90%, 且掉率比效率最高的图高</p>
-                        <p style = {{color: '#039be5e4'}} className='instructions'> 蓝色：掉率最高, 以毕业为目标理智消耗多</p>
-                        <p className='instructions'> <strong>毕业指全角色全技能专精三，掉率按照刷到材料所需的期望理智计算</strong></p>
+                        <h2 className='instructions'><FormattedMessage id='notes'/></h2>
+                        <p className='instructions'> <FormattedMessage id='noteText1'/><span style = {{color: '#d81b60e4'}}><FormattedMessage id='value'/><strong><FormattedMessage id='higher'/></strong>，<FormattedMessage id='worth'/></span></p>
+                        <p className='instructions'><FormattedMessage id='noteText2'/></p>
+                        <p style = {{color: '#d81b60e4'}} className='instructions'> <FormattedMessage id='noteText3'/></p>
+                        <p style = {{color: '#fb8c00e4'}} className='instructions'> <FormattedMessage id='noteText4'/></p>
+                        <p style = {{color: '#039be5e4'}} className='instructions'> <FormattedMessage id='noteText5'/></p>
+                        <p className='instructions'> <strong><FormattedMessage id='noteText6'/></strong></p>
                     </div>
                         </TableCell>
                     </TableRow> {/*Catalyst ends*/}
@@ -161,12 +163,12 @@ class MaterialTable extends BaseComponent{
                         
                             <TableRow>
                             <TableCell rowSpan = {3}>
-                                <Tooltip title = {this.state.t5Material[0].name} arrow>
+                        <Tooltip title = {<FormattedMessage id={this.state.t5Material[0].id}/>} arrow>
                                     <span className={'material spriteMT-5 material-MT-'+this.state.t5Material[0].id}></span>
                                 </Tooltip>
                             </TableCell>
                             <TableCell>
-                                <Tooltip title = {this.state.t4Material[i].name} arrow>
+                                <Tooltip title = {<FormattedMessage id={this.state.t4Material[i].id}/>} arrow>
                                 <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                 </Tooltip>
                                     {this.state.orangeStore ?
@@ -176,7 +178,7 @@ class MaterialTable extends BaseComponent{
                             </TableCell>
     
                             <TableCell>
-                                <Tooltip title = {this.state.t3Material[i].name} arrow>
+                                <Tooltip title = {<FormattedMessage id={this.state.t3Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                     
                                 </Tooltip>
@@ -189,14 +191,14 @@ class MaterialTable extends BaseComponent{
                                     
                             </TableCell>
                             <TableCell colSpan={2}>
-                                        {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}} className='textTips'>建议合成</h3>}
+                                        {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}} className='textTips'>{<FormattedMessage id='recommend'/>}</h3>}
                                         
                                         {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                             return (
                                                 <div className='stageWrapper'>
                                                     {stages.extra_drop.map((loots)=>{
                                                             return (
-                                                                <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                     <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     
                                                                 </Tooltip>)
@@ -206,9 +208,9 @@ class MaterialTable extends BaseComponent{
         
                                                     {this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
                                                        
-                                                       <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                        <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                        <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                       <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                        <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                        <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                     
                                                     </div>
                                                     }
@@ -220,7 +222,7 @@ class MaterialTable extends BaseComponent{
                                                 <div className='stageWrapper'>
                                                     {stages.extra_drop.map((loots)=>{
                                                             return (
-                                                                <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                     <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     
                                                                 </Tooltip>
@@ -230,9 +232,9 @@ class MaterialTable extends BaseComponent{
         
                                                    {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                        
-                                                        <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                        <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                        <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                        <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                        <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                        <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                     </div>}
                                                 </div>
                                             )
@@ -243,7 +245,7 @@ class MaterialTable extends BaseComponent{
                                                 <div className='stageWrapper'>
                                                     {stages.extra_drop.map((loots)=>{
                                                             return (
-                                                                <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                     <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
@@ -252,9 +254,9 @@ class MaterialTable extends BaseComponent{
         
                                                     {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                        
-                                                        <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                        <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                        <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                        <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                        <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                        <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                     </div>}
                                                 </div>
                                             )
@@ -274,13 +276,13 @@ class MaterialTable extends BaseComponent{
                             
                                 <TableRow>
                                 <TableCell rowSpan = {3}>
-                                    <Tooltip title = {this.state.t5Material[1].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t5Material[1].id}/>} arrow>
                                     <span className={'material spriteMT-5 material-MT-'+this.state.t5Material[1].id}></span>
                                    
                                     </Tooltip>
                                 </TableCell>
                                 <TableCell>
-                                    <Tooltip title = {this.state.t4Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t4Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
@@ -292,7 +294,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
         
                                 <TableCell>
-                                    <Tooltip title = {this.state.t3Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t3Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
@@ -306,14 +308,14 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend'/>}</h3>}
                                             
                                             {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>)
@@ -323,9 +325,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                           <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                           <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         
                                                         </div>
                                                         }
@@ -337,7 +339,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>
@@ -347,9 +349,9 @@ class MaterialTable extends BaseComponent{
             
                                                        {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -360,7 +362,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     
                                                                 </Tooltip>)})
@@ -369,9 +371,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -380,7 +382,7 @@ class MaterialTable extends BaseComponent{
 
                                 
                         <TableCell colSpan={4}>
-                            <Tooltip title = {this.state.t2Material[i-3].name} arrow>
+                            <Tooltip title = {<FormattedMessage id={this.state.t2Material[i-3].id}/>} arrow>
                                 <span className={'material spriteMT-4 material-MT-'+this.state.t2Material[i-3].id}/>
                                 {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-3].id+'.png')}/> */}
                             </Tooltip>
@@ -400,7 +402,7 @@ class MaterialTable extends BaseComponent{
                                                         <div className='stageWrapper'>
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
-                                                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                        <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                             <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                             
                                                                         </Tooltip>)})
@@ -408,12 +410,12 @@ class MaterialTable extends BaseComponent{
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                         {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                                <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                                <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                             </div>}
                                                         
-                                                        <Tooltip title="其他副本……" arrow placement='top'>
+                                                        <Tooltip title={<FormattedMessage id='otherotherStages'/>} arrow placement='top'>
                                                         <IconButton>
                                                         <KeyboardArrowRightIcon onClick={this.handleChange(this.state.t2Material[i-3])} style={{marginLeft:'25px'}}/>
                                                         </IconButton></Tooltip>
@@ -426,7 +428,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>)})
@@ -434,9 +436,9 @@ class MaterialTable extends BaseComponent{
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                     {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )}
@@ -447,7 +449,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
@@ -456,9 +458,9 @@ class MaterialTable extends BaseComponent{
 
                                                { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -471,7 +473,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
@@ -480,9 +482,9 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -493,7 +495,7 @@ class MaterialTable extends BaseComponent{
                         
                         
                         <TableCell colSpan={5}>
-                            <Tooltip title = {this.state.t1Material[i-3].name} arrow>
+                            <Tooltip title = {<FormattedMessage id={this.state.t1Material[i-3].id} />} arrow>
                                 <span className={'material spriteMT-4 material-MT-'+this.state.t1Material[i-3].id}></span>
                                 
                                  </Tooltip>
@@ -513,7 +515,7 @@ class MaterialTable extends BaseComponent{
                                                         <div className='stageWrapper'>
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
-                                                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                        <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                             <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                             
                                                                         </Tooltip>)})
@@ -521,11 +523,11 @@ class MaterialTable extends BaseComponent{
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                         {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                                <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                                <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                             </div>}
-                                                        <Tooltip title="其他副本……" arrow placement='top'>
+                                                        <Tooltip title={<FormattedMessage id='otherStages'/>} arrow placement='top'>
                                                         <IconButton>
                                                         <KeyboardArrowRightIcon onClick={this.handleChange(this.state.t1Material[i-3])} style={{marginLeft:'25px'}}/>
                                                         </IconButton></Tooltip>
@@ -539,7 +541,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>)})
@@ -547,9 +549,9 @@ class MaterialTable extends BaseComponent{
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                     {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )}
@@ -560,7 +562,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
@@ -569,9 +571,9 @@ class MaterialTable extends BaseComponent{
 
                                                { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -584,7 +586,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
@@ -593,9 +595,9 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -619,13 +621,13 @@ class MaterialTable extends BaseComponent{
                             
                                 <TableRow>
                                 <TableCell rowSpan = {2}>
-                                    <Tooltip title = {this.state.t5Material[2].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t5Material[2].id}/>} arrow>
                                     <span className={'material spriteMT-5 material-MT-'+this.state.t5Material[2].id}></span>
                                     
                                     </Tooltip>
                                 </TableCell>
                                 <TableCell>
-                                    <Tooltip title = {this.state.t4Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t4Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
@@ -637,7 +639,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
         
                                 <TableCell>
-                                    <Tooltip title = {this.state.t3Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t3Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
@@ -651,14 +653,14 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend'/>}</h3>}
                                             
                                             {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>)
@@ -668,9 +670,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
                                                             
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         
                                                         </div>
                                                         }
@@ -682,7 +684,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>
@@ -692,9 +694,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                             
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -705,7 +707,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     
                                                                 </Tooltip>)})
@@ -714,9 +716,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                             
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -725,7 +727,7 @@ class MaterialTable extends BaseComponent{
 
                                 
                         <TableCell colSpan={4}>
-                            <Tooltip title = {this.state.t2Material[i-3].name} arrow>
+                            <Tooltip title = {<FormattedMessage id={this.state.t2Material[i-3].id}/>} arrow>
                                 <span className={'material spriteMT-4 material-MT-'+this.state.t2Material[i-3].id}></span>
                                 
                                     </Tooltip>
@@ -745,7 +747,7 @@ class MaterialTable extends BaseComponent{
                                                         <div className='stageWrapper'>
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
-                                                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                        <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                             <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                             
                                                                         </Tooltip>)})
@@ -753,12 +755,12 @@ class MaterialTable extends BaseComponent{
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                         {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                                <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                                <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                             </div>}
                                                         
-                                                        <Tooltip title="其他副本……" arrow placement='top'>
+                                                        <Tooltip title={<FormattedMessage id='otherStages'/>} arrow placement='top'>
                                                         <IconButton>
                                                         <KeyboardArrowRightIcon onClick={this.handleChange(this.state.t2Material[i-3])} style={{marginLeft:'25px'}}/>
                                                         </IconButton></Tooltip>
@@ -771,7 +773,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>)})
@@ -779,9 +781,9 @@ class MaterialTable extends BaseComponent{
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                     {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )}
@@ -792,7 +794,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
@@ -801,9 +803,9 @@ class MaterialTable extends BaseComponent{
 
                                                 { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -816,7 +818,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
@@ -825,9 +827,9 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -838,7 +840,7 @@ class MaterialTable extends BaseComponent{
                         
                         
                         <TableCell colSpan={5}>
-                            <Tooltip title = {this.state.t1Material[i-3].name} arrow>
+                            <Tooltip title = {<FormattedMessage id={this.state.t1Material[i-3].id} />} arrow>
                             <span className={'material spriteMT-4 material-MT-'+this.state.t1Material[i-3].id}></span>
                                 
                                     </Tooltip>
@@ -858,7 +860,7 @@ class MaterialTable extends BaseComponent{
                                                         <div className='stageWrapper'>
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
-                                                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                        <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                             <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                             
                                                                         </Tooltip>)})
@@ -866,11 +868,11 @@ class MaterialTable extends BaseComponent{
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                         {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                                <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                                <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                             </div>}
-                                                        <Tooltip title="其他副本……" arrow placement='top'>
+                                                        <Tooltip title={<FormattedMessage id='otherStages'/>} arrow placement='top'>
                                                         <IconButton>
                                                         <KeyboardArrowRightIcon onClick={this.handleChange(this.state.t1Material[i-3])} style={{marginLeft:'25px'}}/>
                                                         </IconButton></Tooltip>
@@ -884,7 +886,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         
                                                                     </Tooltip>)})
@@ -892,9 +894,9 @@ class MaterialTable extends BaseComponent{
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                     {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )}
@@ -905,7 +907,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 
                                                             </Tooltip>)})
@@ -914,9 +916,9 @@ class MaterialTable extends BaseComponent{
 
                                                 { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -929,7 +931,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -937,9 +939,9 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                     
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -963,7 +965,7 @@ class MaterialTable extends BaseComponent{
                             
                                 <TableRow>
                                 <TableCell>
-                                    <Tooltip title = {this.state.t4Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t4Material[i].id}/>} arrow>
                                         <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
@@ -975,7 +977,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
         
                                 <TableCell>
-                                    <Tooltip title = {this.state.t3Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t3Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
@@ -988,14 +990,14 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend'/>}</h3>}
                                             
                                             {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)
                                                             })
@@ -1004,9 +1006,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
                                                             
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         
                                                         </div>
                                                         }
@@ -1018,7 +1020,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>
                                                                 )})
@@ -1027,9 +1029,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                             
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -1040,7 +1042,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                     <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 </Tooltip>)})
                                                         }
@@ -1048,9 +1050,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                             
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -1070,7 +1072,7 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                 <TableCell rowSpan = {4}/>
                                 <TableCell>
-                                    <Tooltip title = {this.state.t4Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t4Material[i].id}/>} arrow>
                                         <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     
@@ -1082,7 +1084,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
         
                                 <TableCell>
-                                    <Tooltip title = {this.state.t3Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t3Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
@@ -1095,14 +1097,14 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend'/>}</h3>}
                                             
                                             {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)
                                                             })
@@ -1111,9 +1113,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                           <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                           <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         
                                                         </div>
                                                         }
@@ -1125,7 +1127,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>
                                                                 )})
@@ -1134,9 +1136,9 @@ class MaterialTable extends BaseComponent{
             
                                                        {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -1147,7 +1149,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                     <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 </Tooltip>)})
                                                         }
@@ -1155,9 +1157,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -1166,7 +1168,7 @@ class MaterialTable extends BaseComponent{
 
                                 
                         <TableCell colSpan={4}>
-                            <Tooltip title = {this.state.t2Material[i-4].name} arrow>
+                            <Tooltip title = {<FormattedMessage id={this.state.t2Material[i-4].id}/>} arrow>
                             <span className={'material spriteMT-4 material-MT-'+this.state.t2Material[i-4].id}/>
                                 {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-4].id+'.png')}/> */}
                                  </Tooltip>
@@ -1186,19 +1188,19 @@ class MaterialTable extends BaseComponent{
                                                         <div className='stageWrapper'>
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
-                                                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                        <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                             <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         </Tooltip>)})
                                                             }
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                         {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                                <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                                <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                             </div>}
                                                         
-                                                        <Tooltip title="其他副本……" arrow placement='top'>
+                                                        <Tooltip title={<FormattedMessage id='otherStages'/>} arrow placement='top'>
                                                         <IconButton>
                                                         <KeyboardArrowRightIcon onClick={this.handleChange(this.state.t2Material[i-4])} style={{marginLeft:'25px'}}/>
                                                         </IconButton></Tooltip>
@@ -1211,16 +1213,16 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)})
                                                         }
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                     {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )}
@@ -1231,7 +1233,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -1239,9 +1241,9 @@ class MaterialTable extends BaseComponent{
 
                                                { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -1254,7 +1256,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -1262,9 +1264,9 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -1275,7 +1277,7 @@ class MaterialTable extends BaseComponent{
                         
                         
                         <TableCell colSpan={5}>
-                            <Tooltip title = {this.state.t1Material[i-4].name} arrow>
+                            <Tooltip title = {<FormattedMessage id={this.state.t1Material[i-4].id}/>} arrow>
                             <span className={'material spriteMT-4 material-MT-'+this.state.t1Material[i-4].id}></span>
                                 
                                  </Tooltip>
@@ -1295,18 +1297,18 @@ class MaterialTable extends BaseComponent{
                                                         <div className='stageWrapper'>
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
-                                                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                        <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                             <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         </Tooltip>)})
                                                             }
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                         {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                                <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                                <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                             </div>}
-                                                        <Tooltip title="其他副本……" arrow placement='top'>
+                                                        <Tooltip title={<FormattedMessage id='otherStages'/>} arrow placement='top'>
                                                         <IconButton>
                                                         <KeyboardArrowRightIcon onClick={this.handleChange(this.state.t1Material[i-4])} style={{marginLeft:'25px'}}/>
                                                         </IconButton></Tooltip>
@@ -1320,16 +1322,16 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)})
                                                         }
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                     {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )}
@@ -1340,7 +1342,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -1348,9 +1350,9 @@ class MaterialTable extends BaseComponent{
 
                                                { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -1363,7 +1365,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -1371,9 +1373,9 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -1396,7 +1398,7 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                
                                 <TableCell>
-                                    <Tooltip title = {this.state.t4Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t4Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
@@ -1408,7 +1410,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
         
                                 <TableCell>
-                                    <Tooltip title = {this.state.t3Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t3Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
@@ -1422,14 +1424,14 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend'/>}</h3>}
                                             
                                             {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)
                                                             })
@@ -1438,9 +1440,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                           <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                           <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         
                                                         </div>
                                                         }
@@ -1452,7 +1454,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>
                                                                 )})
@@ -1461,9 +1463,9 @@ class MaterialTable extends BaseComponent{
             
                                                        {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -1474,7 +1476,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                     <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 </Tooltip>)})
                                                         }
@@ -1482,9 +1484,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -1503,7 +1505,7 @@ class MaterialTable extends BaseComponent{
                                 <TableRow>
                                
                                 <TableCell >
-                                    <Tooltip title = {this.state.t4Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t4Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
@@ -1515,7 +1517,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
         
                                 <TableCell>
-                                    <Tooltip title = {this.state.t3Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t3Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
@@ -1529,14 +1531,14 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend'/>}</h3>}
                                             
                                             {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)
                                                             })
@@ -1545,9 +1547,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                           <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                           <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         
                                                         </div>
                                                         }
@@ -1559,7 +1561,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>
                                                                 )})
@@ -1568,9 +1570,9 @@ class MaterialTable extends BaseComponent{
             
                                                        {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -1581,7 +1583,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                     <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 </Tooltip>)})
                                                         }
@@ -1589,9 +1591,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -1602,7 +1604,7 @@ class MaterialTable extends BaseComponent{
                                     this.state.misc.map((item) => {
                                         return (
                                         <TableCell rowSpan={2}>
-                                            <Tooltip title = {item.name} arrow>
+                                            <Tooltip title = {<FormattedMessage id={item.id}/>} arrow>
                                             <span className={'spriteMT-4 material material-MISC-'+item.id}></span>
                                             
                                                 </Tooltip>
@@ -1622,7 +1624,7 @@ class MaterialTable extends BaseComponent{
                             return(
                                 <TableRow>
                                 <TableCell>
-                                    <Tooltip title = {this.state.t4Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t4Material[i].id}/>} arrow>
                                         <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
@@ -1634,7 +1636,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
         
                                 <TableCell>
-                                    <Tooltip title = {this.state.t3Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t3Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
@@ -1648,14 +1650,14 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}} className='textTips'>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}} className='textTips'>{<FormattedMessage id='recommend'/>}</h3>}
                                             
                                             {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)
                                                             })
@@ -1664,9 +1666,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                           <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                           <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         
                                                         </div>
                                                         }
@@ -1678,7 +1680,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>
                                                                 )})
@@ -1687,9 +1689,9 @@ class MaterialTable extends BaseComponent{
             
                                                        {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -1700,7 +1702,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                     <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 </Tooltip>)})
                                                         }
@@ -1708,9 +1710,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -1719,7 +1721,7 @@ class MaterialTable extends BaseComponent{
 
                                 
                         <TableCell colSpan={4}>
-                            <Tooltip title = {this.state.t2Material[i-3].name} arrow>
+                            <Tooltip title = {<FormattedMessage id={this.state.t2Material[i-3].id}/>} arrow>
                             <span className={'material spriteMT-4 material-MT-'+this.state.t2Material[i-3].id}/>
                                 {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-3].id+'.png')}/> */}
                                  </Tooltip>
@@ -1739,19 +1741,19 @@ class MaterialTable extends BaseComponent{
                                                         <div className='stageWrapper'>
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
-                                                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                        <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                             <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         </Tooltip>)})
                                                             }
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                         {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                                <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                                <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                             </div>}
                                                         
-                                                        <Tooltip title="其他副本……" arrow placement='top'>
+                                                        <Tooltip title={<FormattedMessage id='otherStages'/>} arrow placement='top'>
                                                         <IconButton>
                                                         <KeyboardArrowRightIcon onClick={this.handleChange(this.state.t2Material[i-3])} style={{marginLeft:'25px'}}/>
                                                         </IconButton></Tooltip>
@@ -1764,16 +1766,16 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)})
                                                         }
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                     {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )}
@@ -1784,7 +1786,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -1792,9 +1794,9 @@ class MaterialTable extends BaseComponent{
 
                                                { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -1807,7 +1809,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -1815,9 +1817,9 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -1828,7 +1830,7 @@ class MaterialTable extends BaseComponent{
                         
                         
                         <TableCell colSpan={5}>
-                            <Tooltip title = {this.state.t1Material[i-3].name} arrow>
+                            <Tooltip title = {<FormattedMessage id={this.state.t1Material[i-3].id} />} arrow>
                             <span className={'material spriteMT-4 material-MT-'+this.state.t1Material[i-3].id}></span>
                                 
                                  </Tooltip>
@@ -1848,18 +1850,18 @@ class MaterialTable extends BaseComponent{
                                                         <div className='stageWrapper'>
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
-                                                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                        <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                             <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         </Tooltip>)})
                                                             }
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                         {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                                <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                                <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                             </div>}
-                                                        <Tooltip title="其他副本……" arrow placement='top'>
+                                                        <Tooltip title={<FormattedMessage id='otherStages'/>} arrow placement='top'>
                                                         <IconButton>
                                                         <KeyboardArrowRightIcon onClick={this.handleChange(this.state.t1Material[i-3])} style={{marginLeft:'25px'}}/>
                                                         </IconButton></Tooltip>
@@ -1873,16 +1875,16 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)})
                                                         }
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                     {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )}
@@ -1893,7 +1895,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -1901,9 +1903,9 @@ class MaterialTable extends BaseComponent{
 
                                                { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -1916,7 +1918,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -1924,9 +1926,9 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -1947,7 +1949,7 @@ class MaterialTable extends BaseComponent{
                             return(
                                 <TableRow>
                                 <TableCell>
-                                    <Tooltip title = {this.state.t4Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t4Material[i].id}/>} arrow>
                                         <span className={'material spriteMT-4 material-MT-'+this.state.t4Material[i].id}></span>
                                     
                                     </Tooltip>
@@ -1959,7 +1961,7 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
         
                                 <TableCell>
-                                    <Tooltip title = {this.state.t3Material[i].name} arrow>
+                                    <Tooltip title = {<FormattedMessage id={this.state.t3Material[i].id}/>} arrow>
                                     <span className={'material spriteMT-4 material-MT-'+this.state.t3Material[i].id}></span>
                                         
                                     </Tooltip>
@@ -1973,14 +1975,14 @@ class MaterialTable extends BaseComponent{
                                 </TableCell>
                                 <TableCell colSpan={2}>
                                         
-                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}} className='textTips'>建议合成</h3>}
+                                            {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).length===0 && <h3 style={{display: 'inline', whiteSpace: 'nowrap'}} className='textTips'>{<FormattedMessage id='recommend'/>}</h3>}
                                             
                                             {(this.state.considerEventStages?this.state.t3Material[i].lowest_ap_stages.event:this.state.t3Material[i].lowest_ap_stages.normal).map((stages) => {
                                                 return (
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)
                                                             })
@@ -1989,9 +1991,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                           <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                           <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         
                                                         </div>
                                                         }
@@ -2003,7 +2005,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>
                                                                 )})
@@ -2012,9 +2014,9 @@ class MaterialTable extends BaseComponent{
             
                                                        {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -2025,7 +2027,7 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                     <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                 </Tooltip>)})
                                                         }
@@ -2033,9 +2035,9 @@ class MaterialTable extends BaseComponent{
             
                                                         {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                            
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )
@@ -2044,7 +2046,7 @@ class MaterialTable extends BaseComponent{
 
                                 
                         <TableCell colSpan={4}>
-                            <Tooltip title = {this.state.t2Material[i-4].name} arrow>
+                            <Tooltip title = {<FormattedMessage id={this.state.t2Material[i-4].id}/>} arrow>
                             <span className={'material spriteMT-4 material-MT-'+this.state.t2Material[i-4].id}/>
                                 
                                 {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+this.state.t2Material[i-4].id+'.png')}/> */}
@@ -2063,19 +2065,19 @@ class MaterialTable extends BaseComponent{
                                                         <div className='stageWrapper'>
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
-                                                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                        <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                             <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         </Tooltip>)})
                                                             }
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                         {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                                <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                                <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                             </div>}
                                                         
-                                                        <Tooltip title="其他副本……" arrow placement='top'>
+                                                        <Tooltip title={<FormattedMessage id='otherStages'/>} arrow placement='top'>
                                                         <IconButton>
                                                         <KeyboardArrowRightIcon onClick={this.handleChange(this.state.t2Material[i-4])} style={{marginLeft:'25px'}}/>
                                                         </IconButton></Tooltip>
@@ -2088,16 +2090,16 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)})
                                                         }
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                     {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )}
@@ -2108,7 +2110,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -2116,9 +2118,9 @@ class MaterialTable extends BaseComponent{
 
                                                { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -2131,7 +2133,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -2139,9 +2141,9 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -2152,7 +2154,7 @@ class MaterialTable extends BaseComponent{
                         
                         
                         <TableCell colSpan={5}>
-                            <Tooltip title = {this.state.t1Material[i-4].name} arrow>
+                            <Tooltip title = {<FormattedMessage id={this.state.t1Material[i-4].id}/>} arrow>
                             <span className={'material spriteMT-4 material-MT-'+this.state.t1Material[i-4].id}></span>
                                 
                                  </Tooltip>
@@ -2170,18 +2172,18 @@ class MaterialTable extends BaseComponent{
                                                         <div className='stageWrapper'>
                                                             {stages.extra_drop.map((loots)=>{
                                                                     return (
-                                                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                        <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                             <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                         </Tooltip>)})
                                                             }
                                                             <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                         {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                                <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                                <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                             </div>}
-                                                        <Tooltip title="其他副本……" arrow placement='top'>
+                                                        <Tooltip title={<FormattedMessage id='otherStages'/>} arrow placement='top'>
                                                         <IconButton>
                                                         <KeyboardArrowRightIcon onClick={this.handleChange(this.state.t1Material[i-4])} style={{marginLeft:'25px'}}/>
                                                         </IconButton></Tooltip>
@@ -2195,16 +2197,16 @@ class MaterialTable extends BaseComponent{
                                                     <div className='stageWrapper'>
                                                         {stages.extra_drop.map((loots)=>{
                                                                 return (
-                                                                    <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                                    <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                         <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                                     </Tooltip>)})
                                                         }
                                                         <p className = 'lowestAPStage'>{stages.code}</p>
 
                                                     {   this.state.detailMode && <div style = {{display: 'inline', position: 'absolute'}}> 
-                                                            <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                            <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                            <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                            <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                         </div>}
                                                     </div>
                                                 )}
@@ -2215,7 +2217,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -2223,9 +2225,9 @@ class MaterialTable extends BaseComponent{
 
                                                { this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -2238,7 +2240,7 @@ class MaterialTable extends BaseComponent{
                                             <div className='stageWrapper'>
                                                 {stages.extra_drop.map((loots)=>{
                                                         return (
-                                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                                             </Tooltip>)})
                                                 }
@@ -2246,9 +2248,9 @@ class MaterialTable extends BaseComponent{
 
                                                 {this.state.detailMode &&<div style = {{display: 'inline', position: 'absolute'}}> 
                                                    
-                                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
                                                 
                                                 </div>}
                                             </div>
@@ -2273,12 +2275,12 @@ class MaterialTable extends BaseComponent{
                                 {this.state.eventType ==="Contingency Contract" && 
                     <TableRow>
                         <TableCell>
-                            <h2>有限池</h2>
+                            <h2><FormattedMessage id='finite'/></h2>
                         </TableCell>
                         {finite_items.map((contingencyItems) =>{
                             return(
                             <TableCell>
-                            <Tooltip title = {contingencyItems.name} arrow>
+                            <Tooltip title = {<FormattedMessage id={contingencyItems.id}/>} arrow>
                                 
                             <span className={(contingencyItems.id==="bipeak"?'contingencyMiscs spriteMT-4 material-MT-':'material spriteMT-4 material-MT-')+contingencyItems.id}></span>
                             </Tooltip>
@@ -2292,12 +2294,12 @@ class MaterialTable extends BaseComponent{
                     <TableRow>
                                                   
                             <TableCell>
-                                <h2>无限池</h2>
+                                <h2><FormattedMessage id='infinite'/></h2>
                             </TableCell>
                         {infinite_items.map((contingencyItems) =>{
                             return(
                             <TableCell>
-                            <Tooltip title = {contingencyItems.name} arrow>
+                            <Tooltip title = {<FormattedMessage id={contingencyItems.id}/>} arrow>
                             <span className={(contingencyItems.id==="superiors"||contingencyItems.id==="inferiors"?'contingencyMiscs spriteMT-4 material-MT-':'material spriteMT-4 material-MT-')+contingencyItems.id}></span>
                             </Tooltip>
                             <p className = 'M4Values'>{contingencyItems.contingency_store_value.infinite}</p>

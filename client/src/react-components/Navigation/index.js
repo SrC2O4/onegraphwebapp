@@ -11,13 +11,23 @@ import SettingsModal from "./../SettingsModal";
 import EfficiencyTableModal from "./../EfficiencyTableModal";
 import BaseComponent from "./../Base";
 import memory from "../../actions/memory";
-
-
+import DnsIcon from '@material-ui/icons/Dns';
+import TranslateIcon from '@material-ui/icons/Translate';
+import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import {FormattedMessage} from 'react-intl';
 
 class Navigation extends BaseComponent {
-  filterState({ modalOpen,orangeStore,listOpen}) {
-    return { modalOpen,orangeStore,listOpen};
+  filterState({ modalOpen,orangeStore,listOpen, server,serverListOpen,lang,langMenuOpen}) {
+    return { modalOpen,orangeStore,listOpen,server,serverListOpen,lang,langMenuOpen};
   }
+
+  
+  anchor = null
+  selected = 0
+  anchor2 = null
+  selected2 = 0
 
   
 
@@ -43,13 +53,61 @@ class Navigation extends BaseComponent {
     setState('orangeStore', !this.state.orangeStore);
   };
 
+  
+  
+  handleServerList = (e) => {
+    this.anchor = e.target
+    setState('serverListOpen', true)
+  }
+  handleClose = (option,index) =>{
+    if (option != null){
+      memory.setItem("server",option);
+      setState('server', option)
+    }
+    this.selected = index
+    setState('serverListOpen', false)
+  }
+
+  handleLangList = (e) => {
+    this.anchor2 = e.target
+    setState('langMenuOpen', true)
+  }
+  handleLangClose = (option,index) =>{
+    if (option != null){
+      if(option =='简体中文'){
+        memory.setItem("lang",'zh_Hans');
+        setState('lang', 'zh_Hans')
+      } else if (option =='繁體中文'){
+        memory.setItem("lang",'zh_Hant');
+        setState('lang', 'zh_Hant')
+      } 
+      else if  (option =='日本語'){
+        memory.setItem("lang",'ja');
+        setState('lang', 'ja')
+      } else if  (option =='한국어'){
+        memory.setItem("lang",'ko');
+        setState('lang', 'ko')
+      } else {
+        memory.setItem("lang",'en');
+        setState('lang', 'en')
+      }
+      
+    }
+    console.log(this.state.lang)
+    this.selected2 = index
+    setState('langMenuOpen', false)
+  }
+
   render() {
+    const options =['CN','JP/EN/KR', 'TW']
+    const lang =['简体中文','繁體中文','日本語','English', '한국어']
+    const table = { 'en': 'English', 'zh_Hans':'简体中文','zh_Hant':'繁體中文', 'ja':'日本語', 'ko':'한국어'}
     return (
       <div className={this.classes.root}>
         <AppBar position="static">
           <Toolbar>
             <Typography className={this.classes.title} variant="h6" noWrap>
-              ArkOneGraph - 明日方舟刷素材推荐一图流
+              ArkOneGraph <FormattedMessage id='title'/>
             </Typography>
             <IconButton className={this.classes.nightModeButton} color="inherit" onClick={()=>{this.handleChange("modalOpen")}}>
               <SettingsIcon />
@@ -57,7 +115,7 @@ class Navigation extends BaseComponent {
             <IconButton className={this.classes.nightModeButton} color="inherit" onClick={()=>{this.handleChange("listOpen")}}>
               <NotesIcon />
             </IconButton>
-            <IconButton className={this.classes.nightModeButton} color="inherit" style={{ padding: '0' }} onClick={() => { this.stroeToggle()}}>
+            <IconButton className={this.classes.nightModeButton} color="inherit" style={{ padding: '0' }} disabled={this.state.server!='CN'} onClick={() => { this.stroeToggle()}}>
               <svg width="50px" height="50px" version="1.1" viewBox="0 0 339 339" style={{textShadow:'#f00 0 0 10px'}} >
                 <defs>
                   <filter id="f3" x="-110%" y="-110%" width="400%" height="400%">
@@ -71,6 +129,50 @@ class Navigation extends BaseComponent {
                 </g>
               </svg>
             </IconButton>
+            <Button aria-controls="simple-menu"  color="inherit" className={this.classes.nightModeButton} startIcon={<DnsIcon />} onClick={this.handleServerList}>
+              {this.state.server}
+            </Button>
+            <Menu
+              id="simple-menu"
+              keepMounted
+              open={this.state.serverListOpen}
+              anchorEl={this.anchor}
+              onClose={()=>{this.handleClose(null)}}
+            >
+            {options.map((option, index) => (
+              <MenuItem
+                key={option}
+                selected={this.selected === index}
+                onClick={()=>{this.handleClose(option,index)}}
+              >
+                {option}
+              </MenuItem>
+            ))}
+            </Menu>
+            
+            <Button aria-controls="lang-menu"  color="inherit" className={this.classes.nightModeButton} startIcon={<TranslateIcon />} onClick={this.handleLangList}>
+              {
+                table[this.state.lang]
+              }
+            </Button>
+            <Menu
+              id="lang-menu"
+              keepMounted
+              open={this.state.langMenuOpen}
+              anchorEl={this.anchor2}
+              onClose={()=>{this.handleLangClose(null)}}
+            >
+            {lang.map((option, index) => (
+              <MenuItem
+                key={option}
+                selected={this.selected2 === index}
+                onClick={()=>{this.handleLangClose(option,index)}}
+              >
+                {option}
+              </MenuItem>
+            ))}
+            </Menu>
+
           </Toolbar>
         </AppBar>
         <SettingsModal open={this.state.modalOpen} />

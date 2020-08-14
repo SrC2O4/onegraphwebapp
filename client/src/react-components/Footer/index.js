@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 import Typography from './Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { getState } from 'statezero';
+import {FormattedMessage} from 'react-intl';
 
 function Copyright() {
   return (
@@ -92,18 +93,18 @@ export default function AppFooter() {
           </Grid>
           <Grid item xs={6} sm={4} md={2}>
             <Typography variant="h6" marked="left" gutterBottom>
-              数据来源
+              <FormattedMessage id='dataSource'/>
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                <Link className={classes.linkColor} href="https://penguin-stats.io/">企鹅物流</Link>
+                <Link className={classes.linkColor} href="https://penguin-stats.io/"><FormattedMessage id='penguin'/></Link>
               </li>
               <li className={classes.listItem}>
                 <Link className={classes.linkColor} href="https://gachasalt.github.io/ArkToolDemo/#/">ArkTools</Link>
               </li>
               {process.env.REACT_APP_ICP ?
               <li className={classes.listItem}>
-                <Link className={classes.linkColor} href="https://arkonegraph.herokuapp.com">AOG源站</Link>
+                <Link className={classes.linkColor} href="https://arkonegraph.herokuapp.com">AOG origin</Link>
               </li>
               :''
               }
@@ -111,7 +112,7 @@ export default function AppFooter() {
           </Grid>
           <Grid item xs={6} sm={4} md={2}>
             <Typography variant="h6" marked="left" gutterBottom>
-              算法
+              <FormattedMessage id='algorithm'/>
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
@@ -121,14 +122,14 @@ export default function AppFooter() {
           </Grid>
           <Grid item xs={6} sm={4} md={2}>
             <Typography variant="h6" marked="left" gutterBottom>
-              素材来源
+              <FormattedMessage id='source'/>
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                <Link className={classes.linkColor} href="https://bbs.nga.cn/read.php?tid=19069337">NGA 一图流</Link>
+                <Link className={classes.linkColor} href="https://bbs.nga.cn/read.php?tid=19069337"><FormattedMessage id='nga'/></Link>
               </li>
               <li className={classes.listItem}>
-                <Link className={classes.linkColor} href="https://ak.graueneko.xyz/">明日方舟工具箱</Link>
+                <Link className={classes.linkColor} href="https://ak.graueneko.xyz/"><FormattedMessage id='arknights'/></Link>
               </li>
               <li className={classes.listItem}>
                 <Link className={classes.linkColor} href="http://ak.mooncell.wiki/w/%E9%A6%96%E9%A1%B5">PRTS wiki</Link>
@@ -140,24 +141,27 @@ export default function AppFooter() {
           </Grid>
           <Grid item xs={6} sm={4} md={2}>
             <Typography variant="h6" marked="left" gutterBottom>
-              开发者
+              <FormattedMessage id='developers'/>
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-                前端Repo <Link className={classes.linkColor} href="https://github.com/Strontium233/onegraphwebapp">Strontium233<GitHubIcon className = {classes.gitHubIcon}/></Link>
+              <FormattedMessage id='frontend'/> <Link className={classes.linkColor} href="https://github.com/Strontium233/onegraphwebapp">Strontium233<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
               <li className={classes.listItem}>
-                前端协助 <Link className={classes.linkColor} href="https://github.com/YanAndFish">YanAndFish<GitHubIcon className = {classes.gitHubIcon}/></Link>
+              <FormattedMessage id='frontend2'/> <Link className={classes.linkColor} href="https://github.com/YanAndFish">YanAndFish<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
               <li className={classes.listItem}>
-                后端Repo <Link className={classes.linkColor} href="https://github.com/SQRPI/ArkOneGraph">SQRPI<GitHubIcon className = {classes.gitHubIcon}/></Link>
+              <FormattedMessage id='backend'/> <Link className={classes.linkColor} href="https://github.com/SQRPI/ArkOneGraph">SQRPI<GitHubIcon className = {classes.gitHubIcon}/></Link>
+              </li>
+              <li className={classes.listItem}>
+              <FormattedMessage id='local1'/> IKAROS
               </li>
               
             </ul>
           </Grid>
           <Grid item>
             <Typography variant="caption">
-              {'明日方舟素材一图流采用'}
+            <FormattedMessage id='license1'/>
               <Link
                 href="https://creativecommons.org/licenses/by-nc/4.0/"
                 title="CC BY-NC 4.0"
@@ -165,9 +169,9 @@ export default function AppFooter() {
                 rel="noopener noreferrer"
                 className={classes.linkColor}
               >
-                知识共享 署名-非商业性使用 4.0 国际 许可协议
+                <FormattedMessage id='license2'/>
               </Link>
-              {'进行许可'}
+              {<FormattedMessage id='license3'/>}
               {
                 process.env.REACT_APP_ICP ?
                 <div>

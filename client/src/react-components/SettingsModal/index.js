@@ -14,6 +14,7 @@ import memory from "../../actions/memory";
 import { setUserTheme } from "../../actions/theme";
 import {setState} from 'statezero';
 import './style.css';
+import {FormattedMessage} from 'react-intl';
 
 const BlueRadio = withStyles({
   root: {
@@ -83,34 +84,30 @@ class SettingsModal extends BaseComponent {
           >
             <Fade in={this.state.modalOpen}>
               <div className='paper'>
-                <h2 id="transition-modal-settings">图表设定</h2>
+                <h2 id="transition-modal-settings"><FormattedMessage id='settings'/></h2>
                 <FormGroup>
                   <FormControlLabel
                     control={<BlueSwitch className="detailMode" checked={this.state.detailMode} onChange={this.handleChange("detailMode")} aria-label="detail mode switch" />}
-                    label={this.state.detailMode ?'详细模式':  '省略模式' }
+                    label={this.state.detailMode ?<FormattedMessage id='settings1'/>:  <FormattedMessage id='settings4'/> }
                   />
 
                 <FormControlLabel
                     control={<BlueSwitch className="showBestOnly" checked={this.state.showBestOnly} onChange={this.handleChange("showBestOnly")} aria-label="show best only switch" />}
-                    label={this.state.showBestOnly ? '只显示最优' : '显示全部'}
+                    label={this.state.showBestOnly ? <FormattedMessage id='settings5'/> : <FormattedMessage id='settings2'/>}
                   />
 
                   {this.state.eventType==="Casual" && <FormControlLabel
                     control={<BlueSwitch className="considerEventStages" checked={this.state.considerEventStages} onChange={this.handleChange("considerEventStages")} aria-label="event stages switch" />}
-                    label={this.state.considerEventStages ? '包含活动图' : '仅考虑主线'}
+                    label={this.state.considerEventStages ? <FormattedMessage id='settings3'/> : <FormattedMessage id='settings6'/>}
                   />}
                 </FormGroup>
-                <h2 id="transition-modal-settings">主题设定</h2>
+                <h2 id="transition-modal-settings"><FormattedMessage id='theme'/></h2>
                 <RadioGroup aria-label="gender" name="gender1" value={this.state.userTheme} onChange={this.themeChange("userTheme")}>
-                  <FormControlLabel value="system" control={<BlueRadio color="default" />} label="系统跟随" />
-                  <FormControlLabel value="light" control={<BlueRadio color="default" />} label="浅色模式" />
-                  <FormControlLabel value="dark" control={<BlueRadio color="default" />} label="深色模式" />
+          <FormControlLabel value="system" control={<BlueRadio color="default" />} label={<FormattedMessage id='theme1'/>} />
+                  <FormControlLabel value="light" control={<BlueRadio color="default" />} label={<FormattedMessage id='theme2'/>} />
+                  <FormControlLabel value="dark" control={<BlueRadio color="default" />} label={<FormattedMessage id='theme3'/>} />
                 </RadioGroup>
                 <div style={{width:'100%',height:'1px',paddingLeft:'4px',paddingRight:'4px',marginTop:'4px',marginBottom:'4px',backgroundColor:this.state.currentTheme==='dark'?'#f5f5f5':'#1e1e1e'}} />
-                <FormControlLabel
-                    control={<BlueSwitch disabled className="showBestOnly" checked={this.state.showBestOnly} /* onChange={ this.handleChange("showBestOnly") } */ aria-label="show best only switch" />}
-                    label={/* this.state.showBestOnly ? '只显示最优' : '显示全部' */'正常色彩'}
-                  />
               </div>
             </Fade>
           </Modal>

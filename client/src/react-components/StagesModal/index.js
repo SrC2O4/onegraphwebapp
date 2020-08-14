@@ -7,6 +7,7 @@ import {setState} from 'statezero';
 import Tooltip from '@material-ui/core/Tooltip';
 import '../MaterialTable/materials.css';
 import '../MaterialTable/chip.css';
+import {FormattedMessage} from 'react-intl';
 
 class StagesModal extends BaseComponent {
 
@@ -39,11 +40,11 @@ class StagesModal extends BaseComponent {
             >
               <Fade in={this.state.stageModalOpen}>
                 <div className='paper'>
-                <h2 id="transition-modal-title">{this.state.itemToRender.name}</h2>
+                <h2 id="transition-modal-title"><FormattedMessage id={this.state.itemToRender.id}/></h2>
                     <span className={'material spriteMT-4 material-MT-'+this.state.itemToRender.id}></span>
                   <div style={{display: "inline-block"}}>
                         
-                        <p>信用商店价值：</p>
+                        <p><FormattedMessage id='creditStore'/></p>
                         <p className = {'CreditValue'+this.state.considerEventStages?this.state.itemToRender.Notes.event:this.state.itemToRender.Notes.normal}>{this.state.considerEventStages?this.state.itemToRender.credit_store_value.event:this.state.itemToRender.credit_store_value.normal}</p>
                     </div>
                     <br/>
@@ -53,7 +54,7 @@ class StagesModal extends BaseComponent {
                             <div style={{marginBlockEnd:'1%' }}>
                                 {stages.extra_drop.length >0 && stages.extra_drop.map((loots)=>{
                                         return (
-                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                             </Tooltip>)
                                     })
@@ -62,10 +63,10 @@ class StagesModal extends BaseComponent {
 
                                 <div style = {{display: 'inline', position: 'absolute'}}> 
                                     {/* TODO: refine here!!! */}
-                                <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
-                                
+                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                    
                                 </div>
                             </div>
                         </div>
@@ -77,7 +78,7 @@ class StagesModal extends BaseComponent {
                             <div style={{marginBlockEnd:'1%' }}>
                                 {stages.extra_drop.length >0 && stages.extra_drop.map((loots)=>{
                                         return (
-                                            <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                            <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                                 <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                             </Tooltip>
                                         )})
@@ -86,10 +87,10 @@ class StagesModal extends BaseComponent {
 
                             <div style = {{display: 'inline', position: 'absolute'}}> 
                                     {/* TODO: refine here!!! */}
-                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
-                                </div>
+                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                      </div>
                             </div>
                         </div>
                         )
@@ -101,7 +102,7 @@ class StagesModal extends BaseComponent {
                             <div style={{marginBlockEnd:'1%' }}>
                                 {stages.extra_drop.length >0 &&stages.extra_drop.map((loots)=>{
                                         return (
-                                        <Tooltip title = {"额外掉落："+loots.name} arrow>
+                                        <Tooltip title = {<span><FormattedMessage id='extraDrop'/>: <FormattedMessage id={loots.id}/></span>} arrow>
                                            <span className={'material extraDropWrap material-MT-'+loots.id}></span>
                                         </Tooltip>)})
                                 }
@@ -109,10 +110,10 @@ class StagesModal extends BaseComponent {
 
                                 <div style = {{display: 'inline', position: 'absolute'}}> 
                                     {/* TODO: refine here!!! */}
-                                    <Tooltip title="材料掉率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
-                                    <Tooltip title="理智转化效率" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
-                                    <Tooltip title="单个材料期望理智" arrow placement='right'><span className = ""><p className = 'dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
-                                </div>
+                                    <Tooltip title={<FormattedMessage id='dropRate'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{`${(stages.drop_rate*100).toFixed()}%`}</p></span></Tooltip>
+                                    <Tooltip title={<FormattedMessage id='efficiency'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                    <Tooltip title={<FormattedMessage id='expected'/>} arrow placement='right'><span className = ""><p className = 'lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                      </div>
                             </div>
                         </div>
                         )

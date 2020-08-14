@@ -4,11 +4,45 @@ import AppFooter from './react-components/Footer/';
 import MaterialTable from './react-components/MaterialTable';
 import MessageSnack from './react-components/MessageSnack';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-//import { getState } from "statezero";
 import { CssBaseline } from '@material-ui/core';
 import BaseComponent from "./react-components/Base";
 import { getCurrentTheme,updateTheme } from "./actions/theme";
+import {setState, getState} from 'statezero';
+import memory from "./actions/memory";
 
+//i18N basis
+import {IntlProvider} from "react-intl";
+
+//i18N texts
+import texts_en from './lang/en_US.json'
+import texts_ja from './lang/ja_JP.json'
+import texts_ko from './lang/ko_KR.json'
+import texts_zh_Hans from './lang/zh_Hans.json'
+import texts_zh_Hant from './lang/zh_Hant.json'
+
+
+//check browser lang
+var browserLanguage = window.navigator.userLanguage || window.navigator.language
+var language = browserLanguage.split(/[-_]/)[0]
+if (language == 'zh_Hans'||language == 'zh_Hant'||language == 'ja' || language == 'kr'){
+    setState('lang', language)
+    memory.setItem('lang', language)
+} else {
+    setState('lang', 'en')
+    memory.setItem('lang', 'en')
+}
+
+
+const contentText ={
+    'en': texts_en,
+    'ja': texts_ja,
+    'ko': texts_ko,
+    'zh_Hans': texts_zh_Hans,
+    'zh_Hant': texts_zh_Hant,
+    'zh_TW': texts_zh_Hant,
+    'zh_CN': texts_zh_Hans, //idk. hope it works, lol
+    'zh':texts_zh_Hans 
+}
 
 class App extends BaseComponent {
   
@@ -28,13 +62,13 @@ class App extends BaseComponent {
     updateTheme();
   }
 
-  filterState({ currentTheme,userTheme }) {
-    return { currentTheme,userTheme }
+  filterState({ currentTheme,userTheme,lang }) {
+    return { currentTheme,userTheme,lang }
   }
   
   render (){
     return(
-      <div>
+      <IntlProvider locale ={this.state.lang.substr(0,2)} defaultLocale='en' messages={contentText[this.state.lang]}>
         <MuiThemeProvider theme={getCurrentTheme(this.state.currentTheme)}> 
         <CssBaseline/>
         <Navigation/>
@@ -42,7 +76,7 @@ class App extends BaseComponent {
         <MessageSnack/>
         <AppFooter/> 
         </MuiThemeProvider>
-      </div>
+      </IntlProvider>
     );
   }
 

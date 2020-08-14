@@ -26,19 +26,52 @@ export const setEmptyState = () => {
     setState("catalyst", {});
     setState("gacha", {});
     setState("plan", {});
+    setState("ifEventNow", false);
+    setState("stages", []);
+
+    setState("t5MaterialEN", []);
+    setState("t4MaterialEN", []);
+    setState("t3MaterialEN", []);
+    setState("t2MaterialEN", []);
+    setState("t1MaterialEN", []);
+    setState("contingencyStoreEN", []);
+    setState("eventTypeEN", "");
+    setState("miscEN", []);
+    setState("catalystEN", {});
+    setState("gachaEN", {});
+    setState("planEN", {});
+    setState("ifEventNowEN", false);
+    setState("stagesEN", []);
+
+    setState("t5MaterialTW", []);
+    setState("t4MaterialTW", []);
+    setState("t3MaterialTW", []);
+    setState("t2MaterialTW", []);
+    setState("t1MaterialTW", []);
+    setState("contingencyStoreTW", []);
+    setState("eventTypeTW", "");
+    setState("miscTW", []);
+    setState("catalystTW", {});
+    setState("gachaTW", {});
+    setState("planTW", {});
+    setState("ifEventNowTW", false);
+    setState("stagesTW", []);
+
     setState("modalOpen", getMenory("modalOpen",false));
     setState("stageModalOpen", false);
     setState("listOpen", false);
     setState("detailMode", getMenory("detailMode",true));
     setState("showBestOnly", getMenory("showBestOnly",false));
     setState("itemToRender", {name: "", id: "",Notes:{"event":"", "normal":""},credit_store_value: {"event":0, "normal":0},lowest_ap_stages:{"event":[], "normal":[]},balanced_stages: {"event":[], "normal":[]},drop_rate_first_stages:{"event":[], "normal":[]}});
-    setState("ifEventNow", false);
     setState("considerEventStages", getMenory("considerEventStages",true));
     setState("userTheme", getMenory("userTheme", 'system'));
     setState("currentTheme", 'light');
-    setState("stages", []);
+    
     setState("updateEvent", false);
     setState("animeOnce", true);
     setState("orangeStore",getMenory("orangeStore",true))
-
+    setState("server", getMenory("server",'CN'));
+    setState("serverListOpen", false);
+    setState("lang", getMenory("lang",'en'));
+    setState("langMenuOpen", false);
 };

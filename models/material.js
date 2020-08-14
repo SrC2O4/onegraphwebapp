@@ -149,8 +149,15 @@ function getActual(value) {
   return value;
 }
 
-let MaterialSchema = mongoose.model("Material_Event", Material, "Material_Event");
+let MaterialSchema = mongoose.model("Material_Event", Material,"Material_Event");
+let MaterialSchemaENJPKR = mongoose.model("Material_ENJPKR", Material,"Material_ENJPKR");
+let MaterialSchemaTW = mongoose.model("Material_TW", Material,"Material_TW");
 let StagesSchema = mongoose.model("Stages", Stages, "Stages");
+let StagesSchemaENJPKR = mongoose.model("StagesENJPKR", Stages, "StagesENJPKR");
+let StagesSchemaTW = mongoose.model("StagesTW", Stages, "StagesTW");
 let ActivitiesSchema = mongoose.model("Activities", Activities, "Activities")
-module.exports = { MaterialSchema, StagesSchema, ActivitiesSchema};
+let ActivitiesSchemaENJPKR = mongoose.model("Activities_ENJPKR", Activities,"Activities_ENJPKR")
+let ActivitiesSchemaTW = mongoose.model("Activities_TW", Activities,"Activities_TW")
+
+module.exports = { MaterialSchema, MaterialSchemaENJPKR, MaterialSchemaTW, StagesSchema, StagesSchemaENJPKR, StagesSchemaTW, ActivitiesSchema, ActivitiesSchemaENJPKR, ActivitiesSchemaTW};
 

@@ -9,7 +9,7 @@ const app = express();
 const { mongoose } = require("./db/mongoose");
 
 // import the mongoose models
-const { MaterialSchema, StagesSchema, ActivitiesSchema } = require("./models/material");
+const { MaterialSchema, MaterialSchemaENJPKR, MaterialSchemaTW, StagesSchema, StagesSchemaENJPKR, StagesSchemaTW, ActivitiesSchema, ActivitiesSchemaENJPKR, ActivitiesSchemaTW } = require("./models/material");
 
 // to validate object IDs
 const { ObjectID } = require("mongodb");
@@ -19,7 +19,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+// activity api without any parameters, default to be CN server data
 app.get("/activity", (req, res) => {
     const currentTime = new Date().getTime();
     ActivitiesSchema.findOne({'openTime': {$lt: currentTime}, 'closeTime':{$gt: currentTime}})
@@ -33,33 +33,159 @@ app.get("/activity", (req, res) => {
     })
 });
 
+// activity api with parameters, sever should be 'CN', 'EN', 'JP','KR', or 'TW'
+// if the server parameter is invalid, 404 would be sent
+app.get("/activity/:server", (req, res) => {
+    const currentTime = new Date().getTime();
+    const server = req.params.server
+    const serverList = ['CN', 'EN', 'JP','KR', 'TW']
+
+    if (server == 'EN' ||server == 'JP'|| server =='KR' ){
+        ActivitiesSchemaENJPKR.findOne({'openTime': {$lt: currentTime}, 'closeTime':{$gt: currentTime}})
+        .then((events)=> {
+            if(events){
+                res.send({eventStatus: {'status':true, 'event':events}})
+            } else {
+                res.send({eventStatus: {'status':false, 'event':events}})
+            }
+
+        })
+    } else if(server == 'TW'){
+        ActivitiesSchemaTW.findOne({'openTime': {$lt: currentTime}, 'closeTime':{$gt: currentTime}})
+        .then((events)=> {
+            if(events){
+                res.send({eventStatus: {'status':true, 'event':events}})
+            } else {
+                res.send({eventStatus: {'status':false, 'event':events}})
+            }
+
+        })
+
+    } else {
+        ActivitiesSchema.findOne({'openTime': {$lt: currentTime}, 'closeTime':{$gt: currentTime}})
+        .then((events)=> {
+            if(events){
+                res.send({eventStatus: {'status':true, 'event':events}})
+            } else {
+                res.send({eventStatus: {'status':false, 'event':events}})
+            }
+
+        })
+    }
+});
+
 
 app.get("/stages", (req, res) => {
     StagesSchema.find({},{'_id':0}).then((stages) =>{
         res.send({stages});
-    }
+    })
+});
 
-    )
+app.get("/stages/:server", (req, res) => {
+    const server = req.params.server
+    const serverList = ['CN', 'EN', 'JP','KR', 'TW']
+
+    if (server == 'EN' ||server == 'JP'|| server =='KR' ){
+        StagesSchemaENJPKR.find({},{'_id':0}).then((stages) =>{
+            res.send({stages});
+        })
+    }  else if(server == 'TW'){
+        StagesSchemaTW.find({},{'_id':0}).then((stages) =>{
+            res.send({stages});
+        })
+    } else{
+        StagesSchema.find({},{'_id':0}).then((stages) =>{
+            res.send({stages});
+        })
+    }
 });
 
 
 app.get("/materials", (req, res) => {
+    const matrix = {'CN':{}, 'JPENKR':{}, 'TW':{}}
     MaterialSchema.find({},{'_id':0,'Order_id':0,'last_updated':0})
     .then(
         (materials) => {
-            res.send({ materials }); // can wrap in object if want to add more properties
+            matrix.CN = materials; // can wrap in object if want to add more properties
         },
         error => {
             res.status(500).send(error); // server error
         }
     );
+    MaterialSchemaENJPKR.find({},{'_id':0,'Order_id':0,'last_updated':0})
+    .then(
+        (materials) => {
+            matrix.JPENKR = materials; // can wrap in object if want to add more properties
+        },
+        error => {
+            res.status(500).send(error); // server error
+        }
+    );
+    MaterialSchemaTW.find({},{'_id':0,'Order_id':0,'last_updated':0})
+    .then(
+        (materials) => {
+            matrix.TW = materials; // can wrap in object if want to add more properties
+        },
+        error => {
+            res.status(500).send(error); // server error
+        }
+    );
+    res.send(matrix)
 });
+
+
+// app.get("/materials/:server", (req, res) => {
+//     const server = req.params.server
+//     const serverList = ['CN', 'EN', 'JP','KR', 'TW']
+//     // if (!serverList.includes(server)){
+//     //     res.status(404).send(); // could not find this material
+//     // } 
+//     if (server == 'EN' ||server == 'JP'|| server =='KR' ){
+//         MaterialSchemaENJPKR.find({},{'_id':0,'Order_id':0,'last_updated':0})
+//         .then(
+//             (materials) => {
+//                 res.send({ materials }); // can wrap in object if want to add more properties
+//             },
+//             error => {
+//                 res.status(500).send(error); // server error
+//             }
+//         );
+//     } else if (server == 'TW' ){
+//         MaterialSchemaTW.find({},{'_id':0,'Order_id':0,'last_updated':0})
+//         .then(
+//             (materials) => {
+//                 res.send({ materials }); // can wrap in object if want to add more properties
+//             },
+//             error => {
+//                 res.status(500).send(error); // server error
+//             }
+//         );
+//     } else {
+//         MaterialSchema.find({},{'_id':0,'Order_id':0,'last_updated':0})
+//         .then(
+//             (materials) => {
+//                 res.send({ materials }); // can wrap in object if want to add more properties
+//             },
+//             error => {
+//                 res.status(500).send(error); // server error
+//             }
+//         );
+//     }
+// });
 
 // Get the material list by tier
-app.get("/materials/tier/:tier", (req, res) => {
+app.get("/materials/tier/:tier/:server", (req, res) => {
     const tier = req.params.tier;
-
-    MaterialSchema.find({'tier': tier, 'type': 'Material'},{'_id':0,'Order_id':0,'last_updated':0}).sort({'Order_id':1})
+    const server = req.params.server
+    var schema = null;
+    if (server == "EN" ||server == "JP" || server == "KR"){
+        schema = MaterialSchemaENJPKR
+    } else if (server == "TW"){
+        schema = MaterialSchemaTW
+    } else {
+        schema = MaterialSchema
+    }
+    schema.find({'tier': tier, 'type': 'Material'},{'_id':0,'Order_id':0,'last_updated':0}).sort({'Order_id':1})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
@@ -73,9 +199,17 @@ app.get("/materials/tier/:tier", (req, res) => {
         });
 });
 
-app.get("/materials/catalyst", (req, res) => {
-
-    MaterialSchema.find({'id': '32001'},{'_id':0,'Order_id':0,'last_updated':0})
+app.get("/materials/catalyst/:server", (req, res) => {
+    const server = req.params.server
+    var schema = null;
+    if (server == "EN" ||server == "JP" || server == "KR"){
+        schema = MaterialSchemaENJPKR
+    } else if (server == "TW"){
+        schema = MaterialSchemaTW
+    } else {
+        schema = MaterialSchema
+    }
+    schema.find({'id': '32001'},{'_id':0,'Order_id':0,'last_updated':0})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
@@ -89,8 +223,17 @@ app.get("/materials/catalyst", (req, res) => {
         });
 });
 
-app.get("/materials/gacha", (req, res) => {
-    MaterialSchema.find({'id': '7003'},{'_id':0,'Order_id':0})
+app.get("/materials/gacha/:server", (req, res) => {
+    const server = req.params.server
+    var schema = null;
+    if (server == "EN" ||server == "JP" || server == "KR"){
+        schema = MaterialSchemaENJPKR
+    } else if (server == "TW"){
+        schema = MaterialSchemaTW
+    } else {
+        schema = MaterialSchema
+    }
+    schema.find({'id': '7003'},{'_id':0,'Order_id':0})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
@@ -104,8 +247,17 @@ app.get("/materials/gacha", (req, res) => {
         });
 });
 
-app.get("/materials/plan", (req, res) => {
-    MaterialSchema.find({'id': '7001'},{'_id':0,'Order_id':0,'last_updated':0})
+app.get("/materials/plan/:server", (req, res) => {
+    const server = req.params.server
+    var schema = null;
+    if (server == "EN" ||server == "JP" || server == "KR"){
+        schema = MaterialSchemaENJPKR
+    } else if (server == "TW"){
+        schema = MaterialSchemaTW
+    } else {
+        schema = MaterialSchema
+    }
+    schema.find({'id': '7001'},{'_id':0,'Order_id':0,'last_updated':0})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
@@ -119,8 +271,17 @@ app.get("/materials/plan", (req, res) => {
         });
 });
 
-app.get("/materials/misc", (req, res) => {
-    MaterialSchema.find({'credit_store_value': {$ne: null}, 'type': { $not: { $regex: "Material" } } },{'_id':0,'Order_id':0,'last_updated':0})
+app.get("/materials/misc/:server", (req, res) => {
+    const server = req.params.server
+    var schema = null;
+    if (server == "EN" ||server == "JP" || server == "KR"){
+        schema = MaterialSchemaENJPKR
+    } else if (server == "TW"){
+        schema = MaterialSchemaTW
+    } else {
+        schema = MaterialSchema
+    }
+    schema.find({'credit_store_value': {$ne: null}, 'type': { $not: { $regex: "Material" } } },{'_id':0,'Order_id':0,'last_updated':0})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
@@ -134,8 +295,17 @@ app.get("/materials/misc", (req, res) => {
         });
 });
 
-app.get("/contingency", (req, res) => {
-    MaterialSchema.find({'contingency_store_value': {$type:3}})
+app.get("/contingency/:server", (req, res) => {
+    const server = req.params.server
+    var schema = null;
+    if (server == "EN" ||server == "JP" || server == "KR"){
+        schema = MaterialSchemaENJPKR
+    } else if (server == "TW"){
+        schema = MaterialSchemaTW
+    } else {
+        schema = MaterialSchema
+    }
+    schema.find({'contingency_store_value': {$type:3}})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
