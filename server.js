@@ -22,15 +22,34 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // activity api without any parameters, default to be CN server data
 app.get("/activity", (req, res) => {
     const currentTime = new Date().getTime();
+    var matrix = {'CN':null, 'EN':null, 'TW':null}
     ActivitiesSchema.findOne({'openTime': {$lt: currentTime}, 'closeTime':{$gt: currentTime}})
     .then((events)=> {
         if(events){
-            res.send({eventStatus: {'status':true, 'event':events}})
+            matrix.CN = {eventStatus: {'status':true, 'event':events}}
         } else {
-            res.send({eventStatus: {'status':false, 'event':events}})
+            matrix.CN = {eventStatus: {'status':false, 'event':events}}
         }
-
     })
+
+    ActivitiesSchemaENJPKR.findOne({'openTime': {$lt: currentTime}, 'closeTime':{$gt: currentTime}})
+    .then((events)=> {
+        if(events){
+            matrix.EN = {eventStatus: {'status':true, 'event':events}}
+        } else {
+            matrix.EN = {eventStatus: {'status':false, 'event':events}}
+        }
+    })
+
+    ActivitiesSchemaTW.findOne({'openTime': {$lt: currentTime}, 'closeTime':{$gt: currentTime}})
+    .then((events)=> {
+        if(events){
+            matrix.TW = {eventStatus: {'status':true, 'event':events}}
+        } else {
+            matrix.TW = {eventStatus: {'status':false, 'event':events}}
+        }
+    })
+    res.send(matrix)
 });
 
 // activity api with parameters, sever should be 'CN', 'EN', 'JP','KR', or 'TW'
@@ -102,7 +121,7 @@ app.get("/stages/:server", (req, res) => {
 
 
 app.get("/materials", (req, res) => {
-    const matrix = {'CN':{}, 'JPENKR':{}, 'TW':{}}
+    var matrix = {'CN':{}, 'JPENKR':{}, 'TW':{}}
     MaterialSchema.find({},{'_id':0,'Order_id':0,'last_updated':0})
     .then(
         (materials) => {
@@ -132,46 +151,6 @@ app.get("/materials", (req, res) => {
     );
     res.send(matrix)
 });
-
-
-// app.get("/materials/:server", (req, res) => {
-//     const server = req.params.server
-//     const serverList = ['CN', 'EN', 'JP','KR', 'TW']
-//     // if (!serverList.includes(server)){
-//     //     res.status(404).send(); // could not find this material
-//     // } 
-//     if (server == 'EN' ||server == 'JP'|| server =='KR' ){
-//         MaterialSchemaENJPKR.find({},{'_id':0,'Order_id':0,'last_updated':0})
-//         .then(
-//             (materials) => {
-//                 res.send({ materials }); // can wrap in object if want to add more properties
-//             },
-//             error => {
-//                 res.status(500).send(error); // server error
-//             }
-//         );
-//     } else if (server == 'TW' ){
-//         MaterialSchemaTW.find({},{'_id':0,'Order_id':0,'last_updated':0})
-//         .then(
-//             (materials) => {
-//                 res.send({ materials }); // can wrap in object if want to add more properties
-//             },
-//             error => {
-//                 res.status(500).send(error); // server error
-//             }
-//         );
-//     } else {
-//         MaterialSchema.find({},{'_id':0,'Order_id':0,'last_updated':0})
-//         .then(
-//             (materials) => {
-//                 res.send({ materials }); // can wrap in object if want to add more properties
-//             },
-//             error => {
-//                 res.status(500).send(error); // server error
-//             }
-//         );
-//     }
-// });
 
 // Get the material list by tier
 app.get("/materials/tier/:tier/:server", (req, res) => {
@@ -331,7 +310,7 @@ app.get("*", (req, res) => {
 
 /*************************************************/
 // Express server listening...
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3001 || 3002;
 app.listen(port, () => {
     log(`Listening on port ${port}...`);
 });

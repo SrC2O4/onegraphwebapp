@@ -26,7 +26,6 @@ export const setEmptyState = () => {
     setState("catalyst", {});
     setState("gacha", {});
     setState("plan", {});
-    setState("ifEventNow", false);
     setState("stages", []);
 
     setState("t5MaterialEN", []);
@@ -40,7 +39,6 @@ export const setEmptyState = () => {
     setState("catalystEN", {});
     setState("gachaEN", {});
     setState("planEN", {});
-    setState("ifEventNowEN", false);
     setState("stagesEN", []);
 
     setState("t5MaterialTW", []);
@@ -54,7 +52,6 @@ export const setEmptyState = () => {
     setState("catalystTW", {});
     setState("gachaTW", {});
     setState("planTW", {});
-    setState("ifEventNowTW", false);
     setState("stagesTW", []);
 
     setState("modalOpen", getMenory("modalOpen",false));
@@ -69,7 +66,7 @@ export const setEmptyState = () => {
     
     setState("updateEvent", false);
     setState("animeOnce", true);
-    setState("orangeStore",getMenory("orangeStore",true))
+    setState("orangeStore",getMenory("orangeStore",false))
     setState("server", getMenory("server",'CN'));
     setState("serverListOpen", false);
     setState("lang", getMenory("lang",'en'));
