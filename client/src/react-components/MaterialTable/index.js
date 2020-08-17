@@ -1481,7 +1481,7 @@ class MaterialTable extends BaseComponent {
 
                                     )
 
-                                } else if (i < 3 || i > 10) {
+                                } else if (i < 3) {
                                     return (
 
                                         <TableRow>
@@ -1590,12 +1590,13 @@ class MaterialTable extends BaseComponent {
 
                                     )
 
-                                } else if (i === 10) {
+                                } else if (i > 10) {
                                     return (
 
                                         <TableRow>
-
-                                            <TableCell >
+                                            {this.state.server === 'TW'  && <TableCell colSpan= {4}></TableCell>
+                                            }
+                                            {this.state.server != 'TW' && <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
@@ -1605,9 +1606,9 @@ class MaterialTable extends BaseComponent {
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
                                                 }
-                                            </TableCell>
+                                            </TableCell>}
 
-                                            <TableCell>
+                                            {this.state.server != 'TW' && <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t3[i].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
@@ -1617,10 +1618,9 @@ class MaterialTable extends BaseComponent {
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
                                                 }
-
-
                                             </TableCell>
-                                            <TableCell colSpan={2}>
+                                            }
+                                            {this.state.server != 'TW' &&<TableCell colSpan={2}>
 
                                                 {(currentData.considerEventStages ? currentData.t3[i].lowest_ap_stages.event : currentData.t3[i].lowest_ap_stages.normal).length === 0 && <h3 style={{ display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend' />}</h3>}
 
@@ -1691,7 +1691,118 @@ class MaterialTable extends BaseComponent {
                                                         </div>
                                                     )
                                                 })}
+                                            </TableCell>}
+
+
+                                        </TableRow>
+
+
+                                    )
+
+                                } else if (i === 10) {
+                                    return (
+
+                                        <TableRow>
+                                            {this.state.server === 'TW'  && <TableCell colSpan= {4}></TableCell>
+                                            }
+                                            {this.state.server != 'TW' && <TableCell >
+                                                <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
+                                                    <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
+
+                                                </Tooltip>
+                                                {this.state.orangeStore ?
+                                                    <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
+                                                    :
+                                                    <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
+                                                }
+                                            </TableCell>}
+
+                                            {this.state.server != 'TW' &&<TableCell>
+                                                <Tooltip title={<FormattedMessage id={currentData.t3[i].id} />} arrow>
+                                                    <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
+
+                                                </Tooltip>
+                                                {this.state.orangeStore ?
+                                                    <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p>
+                                                    :
+                                                    <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
+                                                }
+
+
                                             </TableCell>
+                                            }
+                                            {this.state.server != 'TW' &&<TableCell colSpan={2}>
+
+                                                {(currentData.considerEventStages ? currentData.t3[i].lowest_ap_stages.event : currentData.t3[i].lowest_ap_stages.normal).length === 0 && <h3 style={{ display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend' />}</h3>}
+
+                                                {(currentData.considerEventStages ? currentData.t3[i].lowest_ap_stages.event : currentData.t3[i].lowest_ap_stages.normal).map((stages) => {
+                                                    return (
+                                                        <div className='stageWrapper'>
+                                                            {stages.extra_drop.map((loots) => {
+                                                                return (
+                                                                    <Tooltip title={<span><FormattedMessage id='extraDrop' />: <FormattedMessage id={loots.id} /></span>} arrow>
+                                                                        <span className={'material extraDropWrap material-MT-' + loots.id}></span>
+                                                                    </Tooltip>)
+                                                            })
+                                                            }
+                                                            <p className='lowestAPStage'>{stages.code}</p>
+
+                                                            {this.state.detailMode && <div style={{ display: 'inline', position: 'absolute' }}>
+
+                                                                <Tooltip title={<FormattedMessage id='dropRate' />} arrow placement='right'><span className=""><p className='lowestAPStageDetails'>{`${(stages.drop_rate * 100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency' />} arrow placement='right'><span className=""><p className='lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected' />} arrow placement='right'><span className=""><p className='lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+
+                                                            </div>
+                                                            }
+                                                        </div>
+                                                    )
+                                                })}
+                                                {!this.state.showBestOnly && (currentData.considerEventStages ? currentData.t3[i].balanced_stages.event : currentData.t3[i].balanced_stages.normal).map((stages) => {
+                                                    return (
+                                                        <div className='stageWrapper'>
+                                                            {stages.extra_drop.map((loots) => {
+                                                                return (
+                                                                    <Tooltip title={<span><FormattedMessage id='extraDrop' />: <FormattedMessage id={loots.id} /></span>} arrow>
+                                                                        <span className={'material extraDropWrap material-MT-' + loots.id}></span>
+                                                                    </Tooltip>
+                                                                )
+                                                            })
+                                                            }
+                                                            <p className='balancedStage'>{stages.code}</p>
+
+                                                            {this.state.detailMode && <div style={{ display: 'inline', position: 'absolute' }}>
+
+                                                                <Tooltip title={<FormattedMessage id='dropRate' />} arrow placement='right'><span className=""><p className='balancedStageDetails'>{`${(stages.drop_rate * 100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency' />} arrow placement='right'><span className=""><p className='balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected' />} arrow placement='right'><span className=""><p className='balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            </div>}
+                                                        </div>
+                                                    )
+                                                })}
+
+                                                {!this.state.showBestOnly && (currentData.considerEventStages ? currentData.t3[i].drop_rate_first_stages.event : currentData.t3[i].drop_rate_first_stages.normal).map((stages) => {
+                                                    return (
+                                                        <div className='stageWrapper'>
+                                                            {stages.extra_drop.map((loots) => {
+                                                                return (
+                                                                    <Tooltip title={<span><FormattedMessage id='extraDrop' />: <FormattedMessage id={loots.id} /></span>} arrow>
+                                                                        <span className={'material extraDropWrap material-MT-' + loots.id}></span>
+                                                                    </Tooltip>)
+                                                            })
+                                                            }
+                                                            <p className='dropRateFirstStage'>{stages.code}</p>
+
+                                                            {this.state.detailMode && <div style={{ display: 'inline', position: 'absolute' }}>
+
+                                                                <Tooltip title={<FormattedMessage id='dropRate' />} arrow placement='right'><span className=""><p className='dropRateFirstStageDetails'>{`${(stages.drop_rate * 100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency' />} arrow placement='right'><span className=""><p className='dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected' />} arrow placement='right'><span className=""><p className='dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            </div>}
+                                                        </div>
+                                                    )
+                                                })}
+                                            </TableCell>}
 
                                             {
                                                 currentData.misc.map((item) => {
