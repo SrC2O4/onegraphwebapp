@@ -104,5 +104,6 @@
   "recommend": "권장 합성",
   "finite":"유한 태환",
   "infinite":"무한 태환",
-  "dataSource": "데이터 출처"
+  "dataSource": "데이터 출처",
+  "discord":"Discord"
 }

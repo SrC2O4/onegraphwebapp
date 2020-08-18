@@ -7,6 +7,11 @@ import Typography from './Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { getState } from 'statezero';
 import {FormattedMessage} from 'react-intl';
+import Chip from '@material-ui/core/Chip';
+import { Icon, InlineIcon } from '@iconify/react';
+import discordIcon from '@iconify/icons-simple-icons/discord';
+import Avatar from '@material-ui/core/Avatar';
+
 
 function Copyright() {
   return (
@@ -88,6 +93,8 @@ export default function AppFooter() {
             >
               <Grid item>
                 <Copyright />
+                <br/>
+                <Chip avatar={<Avatar><Icon icon={discordIcon} /></Avatar>} label={<FormattedMessage id='discord'/>} component="a" href="https://discord.gg/nsvXU6" clickable />
               </Grid>
             </Grid>
           </Grid>

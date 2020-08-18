@@ -104,5 +104,6 @@
   "recommend": "合成が推奨",
   "finite":"有限の交換",
   "infinite":"無限の交換",
-  "dataSource":"情報元"
+  "dataSource":"情報元",
+  "discord":"Discord"
 }

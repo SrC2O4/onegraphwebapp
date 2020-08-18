@@ -14,6 +14,7 @@ import './chip.css';
 import './contingencyMiscs.css';
 import './materials.css';
 import { FormattedMessage } from 'react-intl';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 const theme = createMuiTheme({
     overrides: {
@@ -167,6 +168,11 @@ class MaterialTable extends BaseComponent {
 
             // The 3 tier 5 materials
             <MuiThemeProvider theme={theme}>
+                <Alert severity="info"  >
+                <AlertTitle>Info as Aug.17</AlertTitle>
+                    We now have server difference and i18N translation. If you have any questions, feel free to join us in Discord!
+                    (Check out the link at footer!)
+                </Alert>
                 <div className='outLayer'>
                     <h2 style={{ textAlign: "right", marginRight: "1%" }}><FormattedMessage id='last' />：{new Date(currentData.gacha.last_updated).toLocaleString()}</h2>
                     <TableContainer component={Paper} className="tableGrid">
