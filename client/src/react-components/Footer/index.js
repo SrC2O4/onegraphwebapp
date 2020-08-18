@@ -11,6 +11,7 @@ import Chip from '@material-ui/core/Chip';
 import { Icon, InlineIcon } from '@iconify/react';
 import discordIcon from '@iconify/icons-simple-icons/discord';
 import Avatar from '@material-ui/core/Avatar';
+import TwitterIcon from '@material-ui/icons/Twitter';
 
 
 function Copyright() {
@@ -162,6 +163,9 @@ export default function AppFooter() {
               </li>
               <li className={classes.listItem}>
               <FormattedMessage id='local1'/> IKAROS
+              </li>
+              <li className={classes.listItem}>
+              <FormattedMessage id='local2'/> <Link className={classes.linkColor} href="https://twitter.com/mitei_ark">mitei<TwitterIcon className = {classes.gitHubIcon}/></Link>
               </li>
               
             </ul>

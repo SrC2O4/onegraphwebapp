@@ -105,5 +105,6 @@
   "finite":"유한 태환",
   "infinite":"무한 태환",
   "dataSource": "데이터 출처",
-  "discord":"Discord"
+  "discord":"Discord",
+  "local2": "일본 현지화 제공"
 }

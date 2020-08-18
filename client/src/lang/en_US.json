@@ -105,5 +105,6 @@
   "finite":"finite exchange",
   "infinite":"infinite exchange",
   "dataSource":"Data Source",
-  "discord":"Join us on Discord"
+  "discord":"Join us on Discord",
+  "local2": "Japanese Localization"
 }
