@@ -229,7 +229,7 @@ class MaterialTable extends BaseComponent {
                                                 <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>}
@@ -240,7 +240,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t3[i].orange_note && currentData.t3[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
@@ -344,7 +344,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
@@ -356,7 +356,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t3[i].orange_note && currentData.t3[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
@@ -445,7 +445,7 @@ class MaterialTable extends BaseComponent {
                                                 <Tooltip title={<FormattedMessage id={currentData.t2[i - 3].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t2[i - 3].id} />
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t2[i-3].orange_note && currentData.t2[i-3].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t2[i - 3].orange_note.event : currentData.t2[i - 3].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${(currentData.considerEventStages ? currentData.t2[i - 3].orange_store_value.event : currentData.t2[i - 3].orange_store_value.normal)}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t2[i - 3].Notes.event : currentData.t2[i - 3].Notes.normal)}>{`${(currentData.considerEventStages ? currentData.t2[i - 3].credit_store_value.event : currentData.t2[i - 3].credit_store_value.normal)}`}</p>
@@ -563,7 +563,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t1[i - 3].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t1[i-3].orange_note && currentData.t1[i-3].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t1[i - 3].orange_note.event : currentData.t1[i - 3].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${(currentData.considerEventStages ? currentData.t1[i - 3].orange_store_value.event : currentData.t1[i - 3].orange_store_value.normal)}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t1[i - 3].Notes.event : currentData.t1[i - 3].Notes.normal)}>{`${(currentData.considerEventStages ? currentData.t1[i - 3].credit_store_value.event : currentData.t1[i - 3].credit_store_value.normal)}`}</p>
@@ -700,7 +700,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
@@ -712,7 +712,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t3[i].orange_note && currentData.t3[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
@@ -802,7 +802,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t2[i - 3].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t2[i-3].orange_note && currentData.t2[i-3].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t2[i - 3].orange_note.event : currentData.t2[i - 3].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${(currentData.considerEventStages ? currentData.t2[i - 3].orange_store_value.event : currentData.t2[i - 3].orange_store_value.normal)}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t2[i - 3].Notes.event : currentData.t2[i - 3].Notes.normal)}>{`${(currentData.considerEventStages ? currentData.t2[i - 3].credit_store_value.event : currentData.t2[i - 3].credit_store_value.normal)}`}</p>
@@ -920,7 +920,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t1[i - 3].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t1[i-3].orange_note && currentData.t1[i-3].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t1[i - 3].orange_note.event : currentData.t1[i - 3].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${(currentData.considerEventStages ? currentData.t1[i - 3].orange_store_value.event : currentData.t1[i - 3].orange_store_value.normal)}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t1[i - 3].Notes.event : currentData.t1[i - 3].Notes.normal)}>{`${(currentData.considerEventStages ? currentData.t1[i - 3].credit_store_value.event : currentData.t1[i - 3].credit_store_value.normal)}`}</p>
@@ -1050,7 +1050,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
@@ -1062,7 +1062,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ? <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p>
+                                                {(this.state.orangeStore && currentData.t3[i].orange_note && currentData.t3[i].orange_store_value) ? <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
                                                 }
@@ -1160,7 +1160,7 @@ class MaterialTable extends BaseComponent {
 
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p> :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
                                                 }
@@ -1171,7 +1171,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t3[i].orange_note && currentData.t3[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p> :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
                                                 }
@@ -1257,7 +1257,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t2[i - 4].id} />
                                                     {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+currentData.t2[i-4].id+'.png')}/> */}
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t2[i-4].orange_note && currentData.t2[i-4].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t2[i - 4].orange_note.event : currentData.t2[i - 4].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${(currentData.considerEventStages ? currentData.t2[i - 4].orange_store_value.event : currentData.t2[i - 4].orange_store_value.normal)}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t2[i - 4].Notes.event : currentData.t2[i - 4].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t2[i - 4].credit_store_value.event : currentData.t2[i - 4].credit_store_value.normal}`}</p>
@@ -1371,7 +1371,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t1[i - 4].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t1[i-4].orange_note && currentData.t1[i-4].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t1[i - 4].orange_note.event : currentData.t1[i - 4].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${(currentData.considerEventStages ? currentData.t1[i - 4].orange_store_value.event : currentData.t1[i - 4].orange_store_value.normal)}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t1[i - 4].Notes.event : currentData.t1[i - 4].Notes.normal)}>{`${(currentData.considerEventStages ? currentData.t1[i - 4].credit_store_value.event : currentData.t1[i - 4].credit_store_value.normal)}`}</p>
@@ -1497,7 +1497,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
@@ -1509,7 +1509,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t3[i].orange_note && currentData.t3[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
@@ -1607,7 +1607,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
@@ -1619,7 +1619,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t3[i].orange_note && currentData.t3[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
@@ -1716,7 +1716,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
@@ -1728,7 +1728,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t3[i].orange_note && currentData.t3[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
@@ -1838,7 +1838,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
@@ -1850,7 +1850,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t3[i].orange_note && currentData.t3[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
@@ -1937,7 +1937,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t2[i - 3].id} />
                                                     {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+currentData.t2[i-3].id+'.png')}/> */}
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t2[i-3].orange_note && currentData.t2[i-3].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t2[i - 3].orange_note.event : currentData.t2[i - 3].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${(currentData.considerEventStages ? currentData.t2[i - 3].orange_store_value.event : currentData.t2[i - 3].orange_store_value.normal)}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t2[i - 3].Notes.event : currentData.t2[i - 3].Notes.normal)}>{`${(currentData.considerEventStages ? currentData.t2[i - 3].credit_store_value.event : currentData.t2[i - 3].credit_store_value.normal)}`}</p>
@@ -2051,7 +2051,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t1[i - 3].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t1[i-3].orange_note && currentData.t1[i-3].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t1[i - 3].orange_note.event : currentData.t1[i - 3].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${(currentData.considerEventStages ? currentData.t1[i - 3].orange_store_value.event : currentData.t1[i - 3].orange_store_value.normal)}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t1[i - 3].Notes.event : currentData.t1[i - 3].Notes.normal)}>{`${(currentData.considerEventStages ? currentData.t1[i - 3].credit_store_value.event : currentData.t1[i - 3].credit_store_value.normal)}`}</p>
@@ -2175,7 +2175,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
@@ -2187,7 +2187,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t3[i].orange_note && currentData.t3[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
@@ -2275,7 +2275,7 @@ class MaterialTable extends BaseComponent {
 
                                                     {/* <img alt = "" className = 'spriteMT-4' src= {require('./static/MT-'+currentData.t2[i-4].id+'.png')}/> */}
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t2[i-4].orange_note && currentData.t2[i-4].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t2[i - 4].orange_note.event : currentData.t2[i - 4].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${(currentData.considerEventStages ? currentData.t2[i - 4].orange_store_value.event : currentData.t2[i - 4].orange_store_value.normal)}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t2[i - 4].Notes.event : currentData.t2[i - 4].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t2[i - 4].credit_store_value.event : currentData.t2[i - 4].credit_store_value.normal}`}</p>
@@ -2387,7 +2387,7 @@ class MaterialTable extends BaseComponent {
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t1[i - 4].id}></span>
 
                                                 </Tooltip>
-                                                {this.state.orangeStore ?
+                                                {(this.state.orangeStore && currentData.t1[i-4].orange_note && currentData.t1[i-4].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t1[i - 4].orange_note.event : currentData.t1[i - 4].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${(currentData.considerEventStages ? currentData.t1[i - 4].orange_store_value.event : currentData.t1[i - 4].orange_store_value.normal)}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t1[i - 4].Notes.event : currentData.t1[i - 4].Notes.normal)}>{`${(currentData.considerEventStages ? currentData.t1[i - 4].credit_store_value.event : currentData.t1[i - 4].credit_store_value.normal)}`}</p>
