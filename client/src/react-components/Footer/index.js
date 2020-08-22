@@ -95,7 +95,7 @@ export default function AppFooter() {
               <Grid item>
                 <Copyright />
                 <br/>
-                <Chip avatar={<Avatar><Icon icon={discordIcon} /></Avatar>} label={<FormattedMessage id='discord'/>} component="a" href="https://discord.gg/nsvXU6" clickable />
+                <Chip avatar={<Avatar><Icon icon={discordIcon} /></Avatar>} label={<FormattedMessage id='discord'/>} component="a" href="https://discord.gg/aFH3sHh" clickable />
               </Grid>
             </Grid>
           </Grid>
