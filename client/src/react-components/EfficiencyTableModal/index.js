@@ -7,6 +7,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import {setState} from 'statezero';
 import './style.css'
+import { FormattedMessage } from 'react-intl';
 
 class EfficiencyTableModal extends BaseComponent{
     
@@ -43,8 +44,8 @@ class EfficiencyTableModal extends BaseComponent{
       <Table stickyHeader aria-label="sticky table">
         <TableHead>
           <TableRow>
-            <TableCell>副本</TableCell>
-            <TableCell numeric>效率</TableCell>
+            <TableCell><FormattedMessage id='stageText'/></TableCell>
+            <TableCell numeric><FormattedMessage id='effiText'/></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
