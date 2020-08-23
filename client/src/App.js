@@ -31,7 +31,11 @@ if (language == 'zh_Hans'||language == 'zh_Hant'||language == 'ja' || language =
     setState('lang', 'en')
     memory.setItem('lang', 'en')
 }
-
+const titleText = {
+ 'zh':"明日方舟刷素材推荐图一图流",
+ 'en':"ArkOneGraph"
+}
+document.title = browserLanguage.includes('zh')?titleText.zh:titleText.en
 
 const contentText ={
     'en': texts_en,
