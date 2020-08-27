@@ -28,7 +28,7 @@ export const getAllCN = ()=>{
             console.log(res1.eventStatus.event.type)
             setState("eventType", res1.eventStatus.event.type)
             if(res1.eventStatus.event.type === "Casual"){
-                setState("ifEventNow", res1.eventStatus.status);
+                setState("considerEventStages", res1.eventStatus.status);
                 console.log("Event Now!!")
             }
         }
@@ -72,7 +72,7 @@ export const getAllEN = ()=>{
             console.log(res1.eventStatus.event.type)
             setState("eventTypeEN", res1.eventStatus.event.type)
             if(res1.eventStatus.event.type === "Casual"){
-                setState("ifEventNowEN", res1.eventStatus.status);
+                setState("considerEventStagesEN", res1.eventStatus.status);
                 console.log("Event Now!!")
             }
         }
@@ -116,7 +116,7 @@ export const getAllTW = ()=>{
             console.log(res1.eventStatus.event.type)
             setState("eventTypeTW", res1.eventStatus.event.type)
             if(res1.eventStatus.event.type === "Casual"){
-                setState("ifEventNowTW", res1.eventStatus.status);
+                setState("considerEventStagesTW", res1.eventStatus.status);
                 console.log("Event Now!!")
             }
         }

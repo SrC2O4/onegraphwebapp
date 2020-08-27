@@ -162,6 +162,9 @@ class MaterialTable extends BaseComponent {
             currentData.contingencyStore = this.state.contingencyStore
             currentData.eventType = this.state.eventType
         }
+        console.log('check')
+        console.log(currentData.considerEventStages)
+        console.log('bee pee')
         const finite_items = currentData.contingencyStore.filter(obj => obj.contingency_store_value.finite !== "0.0");
         const infinite_items = currentData.contingencyStore.filter(obj => obj.contingency_store_value.infinite !== "0.0");
         return (
