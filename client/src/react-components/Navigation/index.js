@@ -80,8 +80,7 @@ class Navigation extends BaseComponent {
       } else if (option =='繁體中文'){
         memory.setItem("lang",'zh_Hant');
         setState('lang', 'zh_Hant')
-      } 
-      else if  (option =='日本語'){
+      } else if  (option =='日本語'){
         memory.setItem("lang",'ja');
         setState('lang', 'ja')
       } else if  (option =='한국어'){

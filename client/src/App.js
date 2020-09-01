@@ -22,20 +22,13 @@ import texts_zh_Hant from './lang/zh_Hant.json'
 
 
 //check browser lang
-var browserLanguage = window.navigator.userLanguage || window.navigator.language
-var language = browserLanguage.split(/[-_]/)[0]
-if (language == 'zh_Hans'||language == 'zh_Hant'||language == 'ja' || language == 'kr'){
-    setState('lang', language)
-    memory.setItem('lang', language)
-} else {
-    setState('lang', 'en')
-    memory.setItem('lang', 'en')
-}
+const browserLanguage = window.navigator.userLanguage || window.navigator.language
+const language = browserLanguage.split(/[-_]/)[0]
+
 const titleText = {
- 'zh':"明日方舟刷素材推荐图一图流",
+ 'zh':"明日方舟刷素材推荐一图流",
  'en':"ArkOneGraph"
 }
-document.title = browserLanguage.includes('zh')?titleText.zh:titleText.en
 
 const contentText ={
     'en': texts_en,
@@ -49,7 +42,23 @@ const contentText ={
 }
 
 class App extends BaseComponent {
-  
+
+  constructor() {
+    super();
+    if(!memory.getItem('lang')){
+      if (language === 'zh_Hans' || language === 'zh_Hant' || language === 'ja' || language === 'kr'){
+        setState('lang', language)
+      } else if (browserLanguage === 'zh-CN'){
+        setState('lang','zh_Hans')
+      } else if (browserLanguage === 'zh-TW'){
+        setState('lang','zh_Hant')
+      } else {
+        setState('lang', 'en')
+      }
+    }
+    document.title = browserLanguage.includes('zh')?titleText.zh:titleText.en
+  }
+
   componentDidMount () {
     // Include the Crisp code here, without the <script></script> tags
     window.$crisp = [];
@@ -69,6 +78,7 @@ class App extends BaseComponent {
   filterState({ currentTheme,userTheme,lang }) {
     return { currentTheme,userTheme,lang }
   }
+
   
   render (){
     return(

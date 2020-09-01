@@ -130,6 +130,15 @@
     "@babel/helper-annotate-as-pure" "^7.10.4"
     "@babel/types" "^7.10.4"
 
+"@babel/helper-call-delegate@^7.10.4":
+  version "7.10.4"
+  resolved "https://registry.yarnpkg.com/@babel/helper-call-delegate/-/helper-call-delegate-7.10.4.tgz#300ae262c6ad7e4da91d47e20d77152e84a8201e"
+  integrity sha512-Tn9r7FUOcBYJi7gZOcYZQtMgh/EzGQ13Z8Bc2Mwzlcuo/edUcwt9YneF/hHs7mv8GJv64VqXErClQLQeGDxDlg==
+  dependencies:
+    "@babel/helper-hoist-variables" "^7.10.4"
+    "@babel/traverse" "^7.10.4"
+    "@babel/types" "^7.10.4"
+
 "@babel/helper-compilation-targets@^7.10.4", "@babel/helper-compilation-targets@^7.8.7":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/helper-compilation-targets/-/helper-compilation-targets-7.10.4.tgz#804ae8e3f04376607cc791b9d47d540276332bd2"
