@@ -39,9 +39,9 @@ export const getAllCN = ()=>{
         setState("t2Material", res3.material);
         setState("t1Material", res2.material);
         setState("misc", res10.material);
-        setState("catalyst", res7.material[0]);
-        setState("gacha",res9.material[0]);
-        setState("plan", res8.material[0]);
+        setState("catalyst", res7.material);
+        setState("gacha",res9.material);
+        setState("plan", res8.material);
         setState("contingencyStore", res11.material);
         setState('stages', res12.stages);
 
@@ -83,9 +83,9 @@ export const getAllEN = ()=>{
         setState("t2MaterialEN", res3.material);
         setState("t1MaterialEN", res2.material);
         setState("miscEN", res10.material);
-        setState("catalystEN", res7.material[0]);
-        setState("gachaEN",res9.material[0]);
-        setState("planEN", res8.material[0]);
+        setState("catalystEN", res7.material);
+        setState("gachaEN",res9.material);
+        setState("planEN", res8.material);
         setState("contingencyStoreEN", res11.material);
         setState('stagesEN', res12.stages);
 
@@ -127,9 +127,9 @@ export const getAllTW = ()=>{
         setState("t2MaterialTW", res3.material);
         setState("t1MaterialTW", res2.material);
         setState("miscTW", res10.material);
-        setState("catalystTW", res7.material[0]);
-        setState("gachaTW",res9.material[0]);
-        setState("planTW", res8.material[0]);
+        setState("catalystTW", res7.material);
+        setState("gachaTW",res9.material);
+        setState("planTW", res8.material);
         setState("contingencyStoreTW", res11.material);
         setState('stagesTW', res12.stages);
 
@@ -290,7 +290,7 @@ export const getCatalyst = () =>{
             }
         })
         .then((json) =>{
-                setState('catalyst', json.material[0]);
+                setState('catalyst', json.material);
         })
         .catch(error => {
             console.log(error);
@@ -311,7 +311,7 @@ export const getGacha = () =>{
             }
         })
         .then((json) =>{
-                setState('gacha', json.material[0]);
+                setState('gacha', json.material);
         })
         .catch(error => {
             console.log(error);
@@ -331,7 +331,7 @@ export const getPlan = () =>{
             }
         })
         .then((json) =>{
-            setState('plan', json.material[0]);
+            setState('plan', json.material);
         })
         .catch(error => {
             console.log(error);

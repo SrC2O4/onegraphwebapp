@@ -10,6 +10,7 @@
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "animejs": "^3.2.0",
+    "axios": "^0.20.0",
     "crypto-js": "^4.0.0",
     "lodash-es": "^4.17.15",
     "material-table": "^1.57.2",
