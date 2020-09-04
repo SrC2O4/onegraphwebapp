@@ -5,7 +5,8 @@ import App from './App'
 
 import * as serviceWorker from './serviceWorker'
 import { initialization } from './actions/material'
-import api from './actions/api'
+//import { getState } from 'statezero'
+//import api from './actions/api'
 
 // //i18N basis
 // import {IntlProvider} from "react-intl";
@@ -22,10 +23,6 @@ import api from './actions/api'
 
 //initialization and fetch data from db
 initialization()
-api.getAllData('CN')
-api.getAllData('EN')
-api.getAllData('TW')
-
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
@@ -34,4 +31,3 @@ ReactDOM.render(<App />, document.getElementById('root'))
 // Learn more about service workers: https://bit.ly/CRA-PWA
 if (process.env.REACT_APP_SW !== 'true' || process.env.NODE_ENV !== 'production') serviceWorker.unregister()
 else serviceWorker.register()
- 

@@ -1,5 +1,4 @@
-import { setState, getState } from 'statezero'
-import { setEmptyState } from './helpers'
+import { setState } from 'statezero'
 import axios from 'axios'
 
 const baseUrl = process.env.NODE_ENV === 'development' ? '' : process.env.REACT_APP_API_HOST || ''
@@ -12,7 +11,6 @@ const baseUrl = process.env.NODE_ENV === 'development' ? '' : process.env.REACT_
  * @return { Promise<any> }
  */
 async function getMaterials(url, stateKey, server) {
-  console.log(this)
   const res = await axios.get(baseUrl + url + '/' + server)
   setState(stateKey + (server === 'CN' ? '' : server), res.data.material || res.data.stages)
 }
@@ -37,7 +35,7 @@ async function getEvent(server) {
  * @param { String } server server tag {CN,EN,TW}
  * @return { Promise<any>[] }
  */
-async function getAllData(server) {
+function getAllData(server) {
   return [
     getEvent(server),
     getMaterials('/materials/tier/1', 't1Material', server),

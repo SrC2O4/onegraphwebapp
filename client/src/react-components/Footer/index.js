@@ -8,7 +8,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import { getState } from 'statezero';
 import {FormattedMessage} from 'react-intl';
 import Chip from '@material-ui/core/Chip';
-import { Icon, InlineIcon } from '@iconify/react';
+import { Icon, /* InlineIcon */ } from '@iconify/react';
 import discordIcon from '@iconify/icons-simple-icons/discord';
 import Avatar from '@material-ui/core/Avatar';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -143,7 +143,7 @@ export default function AppFooter() {
                 <Link className={classes.linkColor} href="http://ak.mooncell.wiki/w/%E9%A6%96%E9%A1%B5">PRTS wiki</Link>
               </li>
               <li className={classes.listItem}>
-                <Link className={classes.linkColor} className={classes.linkColor} href="https://github.com/Evealicemier">水晶泡芙工坊<GitHubIcon className = {classes.gitHubIcon}/></Link>
+                <Link className={classes.linkColor} href="https://github.com/Evealicemier">水晶泡芙工坊<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
             </ul>
           </Grid>

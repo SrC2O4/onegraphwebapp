@@ -5,11 +5,11 @@ import Tooltip from '@material-ui/core/Tooltip';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import StagesModal from "./../StagesModal";
 import { setState } from 'statezero';
+import api from '../../actions/api';
 import { IconButton, TableContainer, Paper, Table, TableRow, TableCell, CircularProgress, MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Anime from 'animejs';
 import './chip.css';
 import './contingencyMiscs.css';
 import './materials.css';
@@ -26,12 +26,8 @@ const theme = createMuiTheme({
     }
 });
 
-const Random = (min, max) => {
-    return Math.round(Math.random() * (max - min)) + min;
-}
 class MaterialTable extends BaseComponent {
-
-    
+ 
     filterState({ t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha, plan, misc, considerEventStages, contingencyStore, eventType,
                 detailMode, showBestOnly, stageModalOpen, itemToRender, animeOnce, orangeStore, server, lang,
                 t5MaterialEN, t4MaterialEN, t3MaterialEN, t2MaterialEN, t1MaterialEN, catalystEN, gachaEN, planEN, miscEN, considerEventStagesEN, contingencyStoreEN, eventTypeEN,
@@ -44,67 +40,87 @@ class MaterialTable extends BaseComponent {
             t5MaterialTW, t4MaterialTW, t3MaterialTW, t2MaterialTW, t1MaterialTW, catalystTW, gachaTW, planTW, miscTW, considerEventStagesTW, contingencyStoreTW, eventTypeTW}
     }
 
-
     //I know this is shooty but it works, whatever :0
     handleChange = name => event => {
         setState("itemToRender", name)
         setState("stageModalOpen", true)
     }
-    componentDidUpdate() {
-        if ((this.state.t4Material.length !== 0 || this.state.t3Material.length !== 0 || this.state.t1Material.length !== 0 || this.state.t2Material.length !== 0 || this.state.t5Material.length !== 0) && this.state.animeOnce) {
-            setState("animeOnce", false)
-            Anime({
-                targets: ['.material.spriteMT-4', '.M4Valuesred', '.M4Valuesyellow', '.M4Valuesgreen', '.M4Values', '.material.spriteMT-5', '.material.extraDropWrap', '.stageWrapper', '.CreditValuered', '.CreditValueyellow', '.CreditValuegreen', '.textTips', '.CatalystValue', '.PlanValue', '.GachaValue'],
-                opacity: [
-                    { value: '0', duration: 0, easing: 'linear' },
-                    { value: '1', duration: 200, easing: 'linear' },
-                ],
-                scale: [
-                    { value: '0', duration: 0, easing: 'linear' },
-                    { value: '1', duration: 500, easing: 'easeInOutBack' },
-                ],
-                autoplay: true,
-                delay: function () {
-                    return Random(600, 1500);
-                }
-            });
-            Anime({
-                targets: '.instructions',
-                opacity: [
-                    { value: '0', duration: 0, easing: 'linear' },
-                    { value: '1', duration: 200, easing: 'linear' },
-                ],
-                scale: [
-                    { value: '0', duration: 0, easing: 'linear' },
-                    { value: '1', duration: 500, easing: 'easeInOutBack' },
-                ],
-                autoplay: true,
-                delay: Anime.stagger(100, { start: 600 })
-            })
-        }
-    }
 
+    async componentDidMount(){
+        const serverList = ['CN','JP/EN/KR','TW'];
+        //first,get the data for the currect server.
+        await Promise.all(api.getAllData(this.state.server === 'JP/EN/KR' ? 'EN' : this.state.server))
+        //then,get the data for the other server.
+        serverList.filter(e => {return e !== this.state.server}).map(e => {
+            return api.getAllData(e === 'JP/EN/KR' ? 'EN' : e)
+        })
+    }
 
     indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
-
-
     render() {
 
-        if (this.state.t4Material.length === 0 || this.state.t3Material.length === 0 || this.state.t1Material.length === 0 || this.state.t2Material.length === 0 || this.state.t5Material.length === 0
-            ||this.state.t4MaterialTW.length === 0 || this.state.t3MaterialTW.length === 0 || this.state.t1MaterialTW.length === 0 || this.state.t2MaterialTW.length === 0 || this.state.t5MaterialTW.length === 0
-            ||this.state.t4MaterialEN.length === 0 || this.state.t3MaterialEN.length === 0 || this.state.t1MaterialEN.length === 0 || this.state.t2MaterialEN.length === 0 || this.state.t5MaterialEN.length === 0) {
+        let isLoading = true
+        switch(this.state.server){
+            case 'CN':
+                if(
+                    this.state.t4Material.length !== 0 &&
+                    this.state.t3Material.length !== 0 &&
+                    this.state.t1Material.length !== 0 && 
+                    this.state.t2Material.length !== 0 && 
+                    this.state.t5Material.length !== 0 &&
+                    this.state.catalyst.length !== 0 &&
+                    this.state.plan.length !== 0 &&
+                    this.state.gacha.length !== 0 &&
+                    this.state.misc.length !== 0
+                    ){
+                    isLoading = false
+                }
+                break
+            case 'TW':
+                if(
+                    this.state.t4MaterialTW.length !== 0 &&
+                    this.state.t3MaterialTW.length !== 0 &&
+                    this.state.t1MaterialTW.length !== 0 && 
+                    this.state.t2MaterialTW.length !== 0 && 
+                    this.state.t5MaterialTW.length !== 0 &&
+                    this.state.catalystTW.length !== 0 &&
+                    this.state.planTW.length !== 0 &&
+                    this.state.gachaTW.length !== 0 &&
+                    this.state.miscTW.length !== 0
+                ){
+                    isLoading = false
+                }
+                break
+            case 'JP/EN/KR':
+                if(                    
+                    this.state.t4MaterialEN.length !== 0 &&
+                    this.state.t3MaterialEN.length !== 0 &&
+                    this.state.t1MaterialEN.length !== 0 && 
+                    this.state.t2MaterialEN.length !== 0 && 
+                    this.state.t5MaterialEN.length !== 0 &&
+                    this.state.catalystEN.length !== 0 &&
+                    this.state.planEN.length !== 0 &&
+                    this.state.gachaEN.length !== 0 &&
+                    this.state.miscEN.length !== 0
+                    ){
+                    isLoading = false
+                }
+                break
+            default:
+                break
+        }
+
+        if (isLoading) {
             return (
                 <Modal
                     aria-labelledby="transition-modal-preloader"
                     className="modal2 modalBlur"
-                    open={this.state.t5Material.length === 0}
+                    open={true}
                     closeAfterTransition
                     BackdropComponent={Backdrop}
-                    BackdropProps={{
-                        timeout: 1000,
-                    }}>
-                    <Fade in={this.state.t5Material.length === 0}>
+                >
+                    <Fade in={true}>
                         <div style={{
                             position: 'absolute', left: '50%', top: '50%',
                             transform: 'translate(-50%, -50%)'
@@ -113,16 +129,15 @@ class MaterialTable extends BaseComponent {
                         </div>
                     </Fade>
                 </Modal>)
-
         }
         
-        if (this.state.server != 'CN') {
+        if (this.state.server !== 'CN') {
             setState('orangeStore', false)
         }
         var currentData = {'t5':{},'t4':{},'t3':{}, 't2':{}, 't1':{}, 'catalyst':{}, 'gacha':{}, 'plan':{}, 'misc':{}, 
         'considerEventStages':false, 'contingencyStore':{}, 'eventType':''}
         console.log(this.state.server)
-        if (this.state.server == 'TW') {
+        if (this.state.server === 'TW') {
             currentData.t5 = this.state.t5MaterialTW
             currentData.t4 = this.state.t4MaterialTW
             currentData.t3 = this.state.t3MaterialTW
@@ -135,7 +150,7 @@ class MaterialTable extends BaseComponent {
             currentData.considerEventStages = this.state.considerEventStagesTW
             currentData.contingencyStore = this.state.contingencyStoreTW
             currentData.eventType = this.state.eventTypeTW
-        } else if (this.state.server == 'JP/EN/KR') {
+        } else if (this.state.server === 'JP/EN/KR') {
             currentData.t5 = this.state.t5MaterialEN
             currentData.t4 = this.state.t4MaterialEN
             currentData.t3 = this.state.t3MaterialEN
@@ -1605,7 +1620,7 @@ class MaterialTable extends BaseComponent {
                                         <TableRow>
                                             {this.state.server === 'TW'  && <TableCell colSpan= {4}></TableCell>
                                             }
-                                            {this.state.server != 'TW' && <TableCell>
+                                            {this.state.server !== 'TW' && <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
@@ -1617,7 +1632,7 @@ class MaterialTable extends BaseComponent {
                                                 }
                                             </TableCell>}
 
-                                            {this.state.server != 'TW' && <TableCell>
+                                            {this.state.server !== 'TW' && <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t3[i].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
@@ -1629,7 +1644,7 @@ class MaterialTable extends BaseComponent {
                                                 }
                                             </TableCell>
                                             }
-                                            {this.state.server != 'TW' &&<TableCell colSpan={2}>
+                                            {this.state.server !== 'TW' &&<TableCell colSpan={2}>
 
                                                 {(currentData.considerEventStages ? currentData.t3[i].lowest_ap_stages.event : currentData.t3[i].lowest_ap_stages.normal).length === 0 && <h3 style={{ display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend' />}</h3>}
 
@@ -1714,7 +1729,7 @@ class MaterialTable extends BaseComponent {
                                         <TableRow>
                                             {this.state.server === 'TW'  && <TableCell colSpan= {4}></TableCell>
                                             }
-                                            {this.state.server != 'TW' && <TableCell >
+                                            {this.state.server !== 'TW' && <TableCell >
                                                 <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
@@ -1726,7 +1741,7 @@ class MaterialTable extends BaseComponent {
                                                 }
                                             </TableCell>}
 
-                                            {this.state.server != 'TW' &&<TableCell>
+                                            {this.state.server !== 'TW' &&<TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t3[i].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
@@ -1740,7 +1755,7 @@ class MaterialTable extends BaseComponent {
 
                                             </TableCell>
                                             }
-                                            {this.state.server != 'TW' &&<TableCell colSpan={2}>
+                                            {this.state.server !== 'TW' &&<TableCell colSpan={2}>
 
                                                 {(currentData.considerEventStages ? currentData.t3[i].lowest_ap_stages.event : currentData.t3[i].lowest_ap_stages.normal).length === 0 && <h3 style={{ display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend' />}</h3>}
 

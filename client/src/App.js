@@ -7,7 +7,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 import BaseComponent from "./react-components/Base";
 import { getCurrentTheme,updateTheme } from "./actions/theme";
-import {setState, getState} from 'statezero';
+import { setState } from 'statezero';
 import memory from "./actions/memory";
 
 //i18N basis
