@@ -58,60 +58,33 @@ class MaterialTable extends BaseComponent {
 
     indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
-    render() {
+    dataLoading(server){
+        let serverTag = ''
 
-        let isLoading = true
-        switch(this.state.server){
-            case 'CN':
-                if(
-                    this.state.t4Material.length !== 0 &&
-                    this.state.t3Material.length !== 0 &&
-                    this.state.t1Material.length !== 0 && 
-                    this.state.t2Material.length !== 0 && 
-                    this.state.t5Material.length !== 0 &&
-                    this.state.catalyst.length !== 0 &&
-                    this.state.plan.length !== 0 &&
-                    this.state.gacha.length !== 0 &&
-                    this.state.misc.length !== 0
-                    ){
-                    isLoading = false
-                }
-                break
-            case 'TW':
-                if(
-                    this.state.t4MaterialTW.length !== 0 &&
-                    this.state.t3MaterialTW.length !== 0 &&
-                    this.state.t1MaterialTW.length !== 0 && 
-                    this.state.t2MaterialTW.length !== 0 && 
-                    this.state.t5MaterialTW.length !== 0 &&
-                    this.state.catalystTW.length !== 0 &&
-                    this.state.planTW.length !== 0 &&
-                    this.state.gachaTW.length !== 0 &&
-                    this.state.miscTW.length !== 0
-                ){
-                    isLoading = false
-                }
-                break
-            case 'JP/EN/KR':
-                if(                    
-                    this.state.t4MaterialEN.length !== 0 &&
-                    this.state.t3MaterialEN.length !== 0 &&
-                    this.state.t1MaterialEN.length !== 0 && 
-                    this.state.t2MaterialEN.length !== 0 && 
-                    this.state.t5MaterialEN.length !== 0 &&
-                    this.state.catalystEN.length !== 0 &&
-                    this.state.planEN.length !== 0 &&
-                    this.state.gachaEN.length !== 0 &&
-                    this.state.miscEN.length !== 0
-                    ){
-                    isLoading = false
-                }
-                break
-            default:
-                break
+        if(server === 'CN'){
+            serverTag = ''
+        } else if(server === 'JP/EN/KR'){
+            serverTag = 'EN'
+        } else {
+            serverTag = 'TW'
         }
 
-        if (isLoading) {
+        return (
+            this.state['t4Material' + serverTag].length === 0 ||
+            this.state['t3Material' + serverTag].length === 0 ||
+            this.state['t1Material' + serverTag].length === 0 || 
+            this.state['t2Material' + serverTag].length === 0 || 
+            this.state['t5Material' + serverTag].length === 0 ||
+            this.state['catalyst' + serverTag].length === 0 ||
+            this.state['plan' + serverTag].length === 0 ||
+            this.state['gacha' + serverTag].length === 0 ||
+            this.state['misc' + serverTag].length === 0
+        )
+    }
+
+    render() {
+
+        if (this.dataLoading(this.state.server)) {
             return (
                 <Modal
                     aria-labelledby="transition-modal-preloader"

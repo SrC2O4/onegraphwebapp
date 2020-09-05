@@ -11,8 +11,8 @@ import { FormattedMessage } from 'react-intl';
 
 class EfficiencyTableModal extends BaseComponent{
     
-    filterState({stages,listOpen}){
-        return ({stages,listOpen})
+    filterState({stages,stagesEN,stagesTW,listOpen,server}){
+        return ({stages,stagesEN,stagesTW,listOpen,server})
     }
 
     handleOpen = () => {
@@ -24,6 +24,15 @@ class EfficiencyTableModal extends BaseComponent{
       };
     
     render(){
+      let currectStages = [];
+      if(this.state.server === 'TW'){
+        currectStages = this.state.stagesTW;
+      } else if (this.state.server === 'JP/EN/KR') {
+        currectStages = this.state.stagesEN;
+      } else {
+        currectStages = this.state.stages;
+      }
+
         return( 
             <Modal aria-labelledby="material-table"
             className='Stagesmodal'
@@ -49,13 +58,13 @@ class EfficiencyTableModal extends BaseComponent{
           </TableRow>
         </TableHead>
         <TableBody>
-          {this.state.stages.map(n => {
+          {currectStages.map(n => {
             return (
               <TableRow>
                 <TableCell>
                   {n.code}
                 </TableCell>
-                <TableCell numeric>{(n.efficiency).toFixed(2)}</TableCell>
+                <TableCell numeric>{n.efficiency ? n.efficiency.toFixed(2) : 0}</TableCell>
               </TableRow>
             );
           })}
