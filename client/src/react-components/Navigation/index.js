@@ -60,7 +60,7 @@ class Navigation extends BaseComponent {
     setState('serverListOpen', true)
   }
   handleClose = (option,index) =>{
-    if (option != null){
+    if (option !== null){
       memory.setItem("server",option);
       setState('server', option)
     }
@@ -74,17 +74,16 @@ class Navigation extends BaseComponent {
   }
   handleLangClose = (option,index) =>{
     if (option != null){
-      if(option =='简体中文'){
+      if(option === '简体中文'){
         memory.setItem("lang",'zh_Hans');
         setState('lang', 'zh_Hans')
-      } else if (option =='繁體中文'){
+      } else if (option === '繁體中文'){
         memory.setItem("lang",'zh_Hant');
         setState('lang', 'zh_Hant')
-      } 
-      else if  (option =='日本語'){
+      } else if  (option === '日本語'){
         memory.setItem("lang",'ja');
         setState('lang', 'ja')
-      } else if  (option =='한국어'){
+      } else if  (option === '한국어'){
         memory.setItem("lang",'ko');
         setState('lang', 'ko')
       } else {
@@ -115,7 +114,7 @@ class Navigation extends BaseComponent {
             <IconButton className={this.classes.nightModeButton} color="inherit" onClick={()=>{this.handleChange("listOpen")}}>
               <NotesIcon />
             </IconButton>
-            <IconButton className={this.classes.nightModeButton} color="inherit" style={{ padding: '0' }} disabled={this.state.server!='CN'} onClick={() => { this.stroeToggle()}}>
+            <IconButton className={this.classes.nightModeButton} color="inherit" style={{ padding: '0' }} disabled={this.state.server !== 'CN'} onClick={() => { this.stroeToggle()}}>
               <svg width="50px" height="50px" version="1.1" viewBox="0 0 339 339" style={{textShadow:'#f00 0 0 10px'}} >
                 <defs>
                   <filter id="f3" x="-110%" y="-110%" width="400%" height="400%">

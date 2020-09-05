@@ -188,7 +188,7 @@ app.get("/materials/catalyst/:server", (req, res) => {
     } else {
         schema = MaterialSchema
     }
-    schema.find({'id': '32001'},{'_id':0,'Order_id':0,'last_updated':0})
+    schema.findOne({'id': '32001'},{'_id':0,'Order_id':0,'last_updated':0})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
@@ -212,7 +212,7 @@ app.get("/materials/gacha/:server", (req, res) => {
     } else {
         schema = MaterialSchema
     }
-    schema.find({'id': '7003'},{'_id':0,'Order_id':0})
+    schema.findOne({'id': '7003'},{'_id':0,'Order_id':0})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
@@ -236,7 +236,7 @@ app.get("/materials/plan/:server", (req, res) => {
     } else {
         schema = MaterialSchema
     }
-    schema.find({'id': '7001'},{'_id':0,'Order_id':0,'last_updated':0})
+    schema.findOne({'id': '7001'},{'_id':0,'Order_id':0,'last_updated':0})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
@@ -284,7 +284,7 @@ app.get("/contingency/:server", (req, res) => {
     } else {
         schema = MaterialSchema
     }
-    schema.find({'contingency_store_value': {$type:3}})
+    schema.find({'contingency_store_value': {$type:3}},{_id:0})
         .then(material => {
             if (!material) {
                 res.status(404).send(); // could not find this material
