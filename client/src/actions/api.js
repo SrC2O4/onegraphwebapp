@@ -31,6 +31,35 @@ async function getEvent(server) {
 }
 
 /**
+ * get all data in once request
+ * @param { String } server
+ * @return { Promise<any> }
+ */
+async function getTotal(server) {
+  const res = await axios.get(baseUrl + '/total/' + server)
+  const data = res.data
+
+  setState('t1Material' + (server === 'CN' ? '' : server), data.tier.t1)
+  setState('t2Material' + (server === 'CN' ? '' : server), data.tier.t2)
+  setState('t3Material' + (server === 'CN' ? '' : server), data.tier.t3)
+  setState('t4Material' + (server === 'CN' ? '' : server), data.tier.t4)
+  setState('t5Material' + (server === 'CN' ? '' : server), data.tier.t5)
+  setState('catalyst' + (server === 'CN' ? '' : server), data.catalyst)
+  setState('plan' + (server === 'CN' ? '' : server), data.plan)
+  setState('misc' + (server === 'CN' ? '' : server), data.misc)
+  setState('gacha' + (server === 'CN' ? '' : server), data.gacha)
+  setState('contingencyStore' + (server === 'CN' ? '' : server), data.contingency)
+  setState('stages' + (server === 'CN' ? '' : server), data.stages)
+
+  if (data.activity.eventStatus.status) {
+    setState('eventType' + (server === 'CN' ? '' : server), data.activity.eventStatus.event.type)
+    if (data.activity.eventStatus.event.type === 'Casual') {
+      setState('considerEventStages' + (server === 'CN' ? '' : server), data.activity.eventStatus.status)
+    }
+  }
+}
+
+/**
  * get all data
  * @param { String } server server tag {CN,EN,TW}
  * @return { Promise<any>[] }
@@ -53,5 +82,6 @@ function getAllData(server) {
 }
 
 export default {
-  getAllData
+  getAllData,
+  getTotal,
 }
