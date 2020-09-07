@@ -49,10 +49,10 @@ class MaterialTable extends BaseComponent {
     async componentDidMount(){
         const serverList = ['CN','JP/EN/KR','TW'];
         //first,get the data for the currect server.
-        await Promise.all(api.getAllData(this.state.server === 'JP/EN/KR' ? 'EN' : this.state.server))
+        await api.getTotal(this.state.server === 'JP/EN/KR' ? 'EN' : this.state.server)
         //then,get the data for the other server.
         serverList.filter(e => {return e !== this.state.server}).map(e => {
-            return api.getAllData(e === 'JP/EN/KR' ? 'EN' : e)
+            return api.getTotal(e === 'JP/EN/KR' ? 'EN' : e)
         })
     }
 
