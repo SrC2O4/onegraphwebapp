@@ -48,9 +48,9 @@ class App extends BaseComponent {
     if(!memory.getItem('lang')){
       if (language === 'zh_Hans' || language === 'zh_Hant' || language === 'ja' || language === 'kr'){
         setState('lang', language)
-      } else if (browserLanguage === 'zh-CN'){
+      } else if (browserLanguage.toLowerCase() === 'zh-cn'){
         setState('lang','zh_Hans')
-      } else if (browserLanguage === 'zh-TW'){
+      } else if (browserLanguage.toLowerCase() === 'zh-tw'){
         setState('lang','zh_Hant')
       } else {
         setState('lang', 'en')
