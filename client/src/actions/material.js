@@ -28,9 +28,12 @@ export const getAllCN = ()=>{
             console.log(res1.eventStatus.event.type)
             setState("eventType", res1.eventStatus.event.type)
             if(res1.eventStatus.event.type === "Casual"){
-                setState("considerEventStages", res1.eventStatus.status);
                 console.log("Event Now!!")
+            } else {
+                setState("considerEventStages", false);
             }
+        } else {
+            setState("considerEventStages", false);
         }
         
         setState("t5Material", res6.material);
@@ -71,10 +74,13 @@ export const getAllEN = ()=>{
         if(res1.eventStatus.status){
             console.log(res1.eventStatus.event.type)
             setState("eventTypeEN", res1.eventStatus.event.type)
-            if(res1.eventStatus.event.type === "Casual"){
-                setState("considerEventStagesEN", res1.eventStatus.status);
+            if(res1.eventStatus.event.type === "Casual"){ 
                 console.log("Event Now!!")
+            } else {
+                setState("considerEventStagesEN", false);
             }
+        } else {
+            setState("considerEventStagesEN", false);
         }
         
         setState("t5MaterialEN", res6.material);
@@ -116,9 +122,12 @@ export const getAllTW = ()=>{
             console.log(res1.eventStatus.event.type)
             setState("eventTypeTW", res1.eventStatus.event.type)
             if(res1.eventStatus.event.type === "Casual"){
-                setState("considerEventStagesTW", res1.eventStatus.status);
                 console.log("Event Now!!")
+            } else {
+                setState("considerEventStagesTW", false);
             }
+        } else {
+            setState("considerEventStagesTW", false);
         }
         
         setState("t5MaterialTW", res6.material);

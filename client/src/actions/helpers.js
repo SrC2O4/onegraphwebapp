@@ -61,6 +61,8 @@ export const setEmptyState = () => {
     setState("showBestOnly", getMenory("showBestOnly",false));
     setState("itemToRender", {name: "", id: "",Notes:{"event":"", "normal":""},credit_store_value: {"event":0, "normal":0},lowest_ap_stages:{"event":[], "normal":[]},balanced_stages: {"event":[], "normal":[]},drop_rate_first_stages:{"event":[], "normal":[]}});
     setState("considerEventStages", getMenory("considerEventStages",true));
+    setState("considerEventStagesEN", getMenory("considerEventStagesEN",true));
+    setState("considerEventStagesTW", getMenory("considerEventStagesTW",true));
     setState("userTheme", getMenory("userTheme", 'system'));
     setState("currentTheme", 'light');
     

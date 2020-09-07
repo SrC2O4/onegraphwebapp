@@ -24,9 +24,11 @@ async function getEvent(server) {
   const res = await axios.get(baseUrl + '/activity/' + server)
   if (res.data.eventStatus.status) {
     setState('eventType' + (server === 'CN' ? '' : server), res.data.eventStatus.event.type)
-    if (res.data.eventStatus.event.type === 'Casual') {
-      setState('considerEventStages' + (server === 'CN' ? '' : server), res.data.eventStatus.status)
+    if (res.data.eventStatus.event.type !== 'Casual') {
+      setState('considerEventStages' + (server === 'CN' ? '' : server), false)
     }
+  } else {
+    setState('considerEventStages' + (server === 'CN' ? '' : server), false)
   }
 }
 
@@ -53,9 +55,11 @@ async function getTotal(server) {
 
   if (data.activity.eventStatus.status) {
     setState('eventType' + (server === 'CN' ? '' : server), data.activity.eventStatus.event.type)
-    if (data.activity.eventStatus.event.type === 'Casual') {
-      setState('considerEventStages' + (server === 'CN' ? '' : server), data.activity.eventStatus.status)
+    if (data.activity.eventStatus.event.type !== 'Casual') {
+      setState('considerEventStages' + (server === 'CN' ? '' : server), false)
     }
+  } else {
+    setState('considerEventStages' + (server === 'CN' ? '' : server), false)
   }
 }
 

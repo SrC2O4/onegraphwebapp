@@ -42,8 +42,8 @@ const BlueSwitch = withStyles({
 
 class SettingsModal extends BaseComponent {
   
-  filterState({modalOpen, detailMode, showBestOnly, considerEventStages, ifEventNow, eventType, userTheme,currentTheme}){
-    return{modalOpen, detailMode, showBestOnly, considerEventStages, ifEventNow, eventType, userTheme,currentTheme};
+  filterState({modalOpen, detailMode, showBestOnly, considerEventStages,considerEventStagesEN,considerEventStagesTW, server, ifEventNow, eventType,eventTypeEN,eventTypeTW, userTheme,currentTheme}){
+    return{modalOpen, detailMode, showBestOnly, considerEventStages,considerEventStagesEN,considerEventStagesTW, server, ifEventNow, eventType,eventTypeEN,eventTypeTW, userTheme,currentTheme};
 
   }
 
@@ -69,6 +69,14 @@ class SettingsModal extends BaseComponent {
 
 
   render(){
+      let serverTag;
+      if(this.state.server === 'CN'){
+        serverTag = ''
+      } else if(this.state.server === 'JP/EN/KR' ) {
+        serverTag = 'EN'
+      } else {
+        serverTag = 'TW'
+      }
       return (
         <div>
           <Modal
@@ -96,9 +104,9 @@ class SettingsModal extends BaseComponent {
                     label={this.state.showBestOnly ? <FormattedMessage id='settings5'/> : <FormattedMessage id='settings2'/>}
                   />
 
-                  {this.state.eventType==="Casual" && <FormControlLabel
-                    control={<BlueSwitch className="considerEventStages" checked={this.state.considerEventStages} onChange={this.handleChange("considerEventStages")} aria-label="event stages switch" />}
-                    label={this.state.considerEventStages ? <FormattedMessage id='settings3'/> : <FormattedMessage id='settings6'/>}
+                  {this.state['eventType'+serverTag]==="Casual" && <FormControlLabel
+                    control={<BlueSwitch className="considerEventStages" checked={this.state['considerEventStages'+serverTag]} onChange={this.handleChange("considerEventStages"+serverTag)} aria-label="event stages switch" />}
+                    label={this.state['considerEventStages'+serverTag] ? <FormattedMessage id='settings3'/> : <FormattedMessage id='settings6'/>}
                   />}
                 </FormGroup>
                 <h2 id="transition-modal-settings"><FormattedMessage id='theme'/></h2>
