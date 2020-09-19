@@ -34,7 +34,18 @@ span{
 .theme--dark .material{
     filter: brightness(0.9);
 }
-@media only screen and (min-width: 320px)  { body{ font-size: 10px; } 
+
+@media only screen and (min-width: 320px) {
+.history-icon{
+    position: absolute;
+    opacity: 0.1;
+    font-size: 200px !important;
+    top: 0px;
+    left: 0px; 
+} 
+body{
+     font-size: 10px; 
+}
 .M3Materials{
     width: calc(100vw - 45%);
 } 
@@ -72,7 +83,17 @@ span{
 }
 
 }
-@media only screen and (min-width: 768px)  { body{ font-size: 12px; } 
+@media only screen and (min-width: 768px) {
+body{ 
+    font-size: 12px; 
+} 
+.history-icon{
+    position: absolute;
+    opacity: 0.1;
+    font-size: 300px !important;
+    top: 0px;
+    left: 30px; 
+} 
 .M3Materials, .M2Materials{
     width: calc(100vw - 25%);
 }
@@ -107,7 +128,17 @@ span{
 }
 
  }
-@media only screen and (min-width: 1024px) { body{ font-size: 14px; }
+@media only screen and (min-width: 1024px) {
+body{ 
+    font-size: 14px;
+}
+.history-icon{
+    position: absolute;
+    opacity: 0.1;
+    font-size: 300px !important;
+    top: 0px;
+    left: 30px; 
+} 
 .M3Materials, .M2Materials{
     width: calc(100vw - 23%);
 } 
@@ -141,7 +172,17 @@ span{
 }
 
 }
-@media only screen and (min-width: 1300px) { body{ font-size: 16px; }
+@media only screen and (min-width: 1300px) {
+body{ 
+    font-size: 16px; 
+}
+.history-icon{
+    position: absolute;
+    opacity: 0.1;
+    font-size: 400px !important;
+    top: 0px;
+    left: 50px; 
+} 
 .dividers{
     display: none;
 }

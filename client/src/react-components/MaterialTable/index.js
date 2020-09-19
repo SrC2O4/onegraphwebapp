@@ -7,6 +7,7 @@ import StagesModal from "./../StagesModal";
 import { setState } from 'statezero';
 import api from '../../actions/api';
 import { IconButton, TableContainer, Paper, Table, TableRow, TableCell, CircularProgress, MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import HistoryIcon from '@material-ui/icons/History';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -31,13 +32,13 @@ class MaterialTable extends BaseComponent {
     filterState({ t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha, plan, misc, considerEventStages, contingencyStore, eventType,
                 detailMode, showBestOnly, stageModalOpen, itemToRender, animeOnce, orangeStore, server, lang,
                 t5MaterialEN, t4MaterialEN, t3MaterialEN, t2MaterialEN, t1MaterialEN, catalystEN, gachaEN, planEN, miscEN, considerEventStagesEN, contingencyStoreEN, eventTypeEN,
-                t5MaterialTW, t4MaterialTW, t3MaterialTW, t2MaterialTW, t1MaterialTW, catalystTW, gachaTW, planTW, miscTW, considerEventStagesTW, contingencyStoreTW, eventTypeTW
+                t5MaterialTW, t4MaterialTW, t3MaterialTW, t2MaterialTW, t1MaterialTW, catalystTW, gachaTW, planTW, miscTW, considerEventStagesTW, contingencyStoreTW, eventTypeTW,isHistoryData,isHistoryDataEN,isHistoryDataTW
              }){
         return {
             t5Material, t4Material, t3Material, t2Material, t1Material, catalyst, gacha, plan, misc, detailMode, showBestOnly, stageModalOpen, itemToRender,
             considerEventStages, contingencyStore, eventType, animeOnce, orangeStore, server, lang,
             t5MaterialEN, t4MaterialEN, t3MaterialEN, t2MaterialEN, t1MaterialEN, catalystEN, gachaEN, planEN, miscEN, considerEventStagesEN, contingencyStoreEN, eventTypeEN,
-            t5MaterialTW, t4MaterialTW, t3MaterialTW, t2MaterialTW, t1MaterialTW, catalystTW, gachaTW, planTW, miscTW, considerEventStagesTW, contingencyStoreTW, eventTypeTW}
+            t5MaterialTW, t4MaterialTW, t3MaterialTW, t2MaterialTW, t1MaterialTW, catalystTW, gachaTW, planTW, miscTW, considerEventStagesTW, contingencyStoreTW, eventTypeTW,isHistoryData,isHistoryDataEN,isHistoryDataTW}
     }
 
     //I know this is shooty but it works, whatever :0
@@ -58,26 +59,27 @@ class MaterialTable extends BaseComponent {
 
     indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
-    dataLoading(server){
-        let serverTag = ''
-
+    getServerTag(server){
         if(server === 'CN'){
-            serverTag = ''
+            return ''
         } else if(server === 'JP/EN/KR'){
-            serverTag = 'EN'
+            return 'EN'
         } else {
-            serverTag = 'TW'
+            return 'TW'
         }
+    }
 
+    dataLoading(server){
+        let serverTag = this.getServerTag(server)
         return (
             this.state['t4Material' + serverTag].length === 0 ||
             this.state['t3Material' + serverTag].length === 0 ||
             this.state['t1Material' + serverTag].length === 0 || 
             this.state['t2Material' + serverTag].length === 0 || 
             this.state['t5Material' + serverTag].length === 0 ||
-            this.state['catalyst' + serverTag].length === 0 ||
-            this.state['plan' + serverTag].length === 0 ||
-            this.state['gacha' + serverTag].length === 0 ||
+            Object.keys(this.state['catalyst' + serverTag]).length === 0 ||
+            Object.keys(this.state['plan' + serverTag]).length === 0 ||
+            Object.keys(this.state['gacha' + serverTag]).length === 0 ||
             this.state['misc' + serverTag].length === 0
         )
     }
@@ -150,9 +152,9 @@ class MaterialTable extends BaseComponent {
             currentData.contingencyStore = this.state.contingencyStore
             currentData.eventType = this.state.eventType
         }
-        console.log('check')
-        console.log(currentData.considerEventStages)
-        console.log('bee pee')
+        //console.log('check')
+        //console.log(currentData.considerEventStages)
+        //console.log('bee pee')
         const finite_items = currentData.contingencyStore.filter(obj => parseFloat(obj.contingency_store_value.finite) !== 0 ).sort((a,b) => {return parseFloat(b.contingency_store_value.finite) - parseFloat(a.contingency_store_value.finite)});
         const infinite_items = currentData.contingencyStore.filter(obj => parseFloat(obj.contingency_store_value.infinite) !== 0 ).sort((a,b) => {return parseFloat(b.contingency_store_value.infinite) - parseFloat(a.contingency_store_value.infinite)});
         return (
@@ -166,7 +168,11 @@ class MaterialTable extends BaseComponent {
                 </Alert>
                 <div className='outLayer'>
                     <h2 style={{ textAlign: "right", marginRight: "1%" }}><FormattedMessage id='last' />：{new Date(currentData.gacha.last_updated).toLocaleString()}</h2>
-                    <TableContainer component={Paper} className="tableGrid">
+                    <TableContainer component={Paper} className="tableGrid" style={{position:'relative'}}>
+                    {
+                        this.state['isHistoryData'+this.getServerTag(this.state.server)]?<HistoryIcon className='history-icon'/>
+                        :''
+                    }
                         <Table size="small" aria-label="spanning table">
                             <TableRow>
                                 <TableCell />

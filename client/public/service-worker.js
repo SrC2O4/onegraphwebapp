@@ -1,6 +1,6 @@
 /**
  * @description Ark One Graph server worker
- * @version 0.3.0
+ * @version 0.3.1
  */
 
 importScripts('https://cdn.jsdelivr.net/npm/workbox-cdn@5.1.2/workbox/workbox-sw.js');
@@ -124,7 +124,7 @@ workbox.routing.registerRoute(
 
 // Cache data
 workbox.routing.registerRoute(
-  new RegExp('^https://api.aog.wiki/v2/(?:data|history)/\\.*'),
+  new RegExp('^https://api.aog.wiki/v2/data/\\.*'),
   //new workbox.strategies.StaleWhileRevalidate({
   new workbox.strategies.NetworkFirst({
     cacheName: 'aog:data',
@@ -136,6 +136,23 @@ workbox.routing.registerRoute(
         maxAgeSeconds: 60 * 24 * 60 * 60,
       }),
       // new workbox.broadcastUpdate.BroadcastUpdatePlugin()
+    ],
+  })
+);
+
+workbox.routing.registerRoute(
+  new RegExp('^https://api.aog.wiki/v2/history/total\\.*'),
+  //new workbox.strategies.StaleWhileRevalidate({
+  new workbox.strategies.NetworkFirst({
+    cacheName: 'aog:history',
+    plugins: [
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [0, 200],
+      }),
+      new workbox.expiration.ExpirationPlugin({
+        maxAgeSeconds: 60 * 24 * 60 * 60,
+        maxEntries: 20,
+      }),
     ],
   })
 );

@@ -5,13 +5,16 @@ import Link from '@material-ui/core/Link';
 import Container from '@material-ui/core/Container';
 import Typography from './Typography';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import { getState } from 'statezero';
+import { getState,setState } from 'statezero';
 import {FormattedMessage} from 'react-intl';
 import Chip from '@material-ui/core/Chip';
 import { Icon, /* InlineIcon */ } from '@iconify/react';
 import discordIcon from '@iconify/icons-simple-icons/discord';
 import Avatar from '@material-ui/core/Avatar';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import HistoryIcon from '@material-ui/icons/History';
+import Calendar from "../Calendar";
+import api from "../../actions/api";
 
 
 function Copyright() {
@@ -77,6 +80,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+async function toggleCalendar(){
+  await api.getHistoryList()
+  setState('calendarOpen',!getState('calendarOpen'))
+}
+
 export default function AppFooter() {
   const classes = useStyles();
 
@@ -95,7 +103,12 @@ export default function AppFooter() {
               <Grid item>
                 <Copyright />
                 <br/>
-                <Chip avatar={<Avatar><Icon icon={discordIcon} /></Avatar>} label={<FormattedMessage id='discord'/>} component="a" href="https://discord.gg/aFH3sHh" clickable />
+                <Chip avatar={<Avatar><Icon icon={discordIcon} /></Avatar>} label={<FormattedMessage id='discord'/>} component="a" href="https://discord.gg/aFH3sHh" clickable target="_bleak" />
+                <br/>
+                {process.env.REACT_APP_ICP ?
+                <Chip avatar={<Avatar><HistoryIcon/></Avatar>} label={'Time machine'} style={{marginTop:'10px'}} onClick={toggleCalendar} />
+                :''
+                }
               </Grid>
             </Grid>
           </Grid>
@@ -202,6 +215,7 @@ export default function AppFooter() {
           </Grid>
         </Grid>
       </Container>
+      <Calendar/>
     </Typography>
   );
 }

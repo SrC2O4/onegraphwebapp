@@ -1,0 +1,24 @@
+.theme--light .activity-box {
+  background-color: #3e50b3;
+}
+
+.theme--dark .activity-box {
+  background-color: #303030;
+}
+
+.activity-list {
+  min-width: 250px;
+  margin-top: 0px;
+}
+
+@media screen and (min-width:650px){
+  .activity-box{
+    display: flex;
+  }
+  .activity-list {
+    min-width: 250px;
+    height: 305px;
+    margin-top: 92px;
+    overflow-y: auto;
+  }
+}

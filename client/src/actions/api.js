@@ -1,4 +1,4 @@
-import { setState } from 'statezero'
+import { setState, getState } from 'statezero'
 import axios from 'axios'
 
 const baseUrl = process.env.NODE_ENV === 'development' ? '' : process.env.REACT_APP_API_HOST || ''
@@ -34,7 +34,7 @@ async function getEvent(server) {
 
 /**
  * get all data in once request
- * @param { String } server
+ * @param { String } server server tag {CN,EN,TW}
  * @return { Promise<any> }
  */
 async function getTotal(server) {
@@ -85,7 +85,55 @@ function getAllData(server) {
   ]
 }
 
+/**
+ * get history list
+ * @param { String } date ISO date string
+ * @param { String } server server tag {CN,EN,TW}
+ * @return { Promise<any> }
+ */
+async function getHistoryList(
+  date = getState('selectDate'),
+  server = getState('server') === 'JP/EN/KR' ? 'EN' : getState('server')
+) {
+  const res = await axios.get(process.env.REACT_APP_HISTORY_API_HOST + '/list/' + date + '/' + server)
+  setState('historyList', res.data)
+}
+
+/**
+ * get all data in once request form history data
+ * @param { String } updateId
+ * @return { Promise<any> }
+ */
+async function getTotalFormHistory(updateId) {
+  const res = await axios.get(process.env.REACT_APP_HISTORY_API_HOST + '/total/' + updateId)
+  const data = res.data
+  const server = res.data.server
+
+  setState('t1Material' + (server === 'CN' ? '' : server), data.tier.t1)
+  setState('t2Material' + (server === 'CN' ? '' : server), data.tier.t2)
+  setState('t3Material' + (server === 'CN' ? '' : server), data.tier.t3)
+  setState('t4Material' + (server === 'CN' ? '' : server), data.tier.t4)
+  setState('t5Material' + (server === 'CN' ? '' : server), data.tier.t5)
+  setState('catalyst' + (server === 'CN' ? '' : server), data.catalyst)
+  setState('plan' + (server === 'CN' ? '' : server), data.plan)
+  setState('misc' + (server === 'CN' ? '' : server), data.misc)
+  setState('gacha' + (server === 'CN' ? '' : server), data.gacha)
+  setState('contingencyStore' + (server === 'CN' ? '' : server), data.contingency)
+  setState('stages' + (server === 'CN' ? '' : server), data.stages)
+
+  if (data.activity.eventStatus.status) {
+    setState('eventType' + (server === 'CN' ? '' : server), data.activity.eventStatus.event.type)
+    if (data.activity.eventStatus.event.type !== 'Casual') {
+      setState('considerEventStages' + (server === 'CN' ? '' : server), false)
+    }
+  } else {
+    setState('considerEventStages' + (server === 'CN' ? '' : server), false)
+  }
+}
+
 export default {
   getAllData,
   getTotal,
+  getHistoryList,
+  getTotalFormHistory
 }
