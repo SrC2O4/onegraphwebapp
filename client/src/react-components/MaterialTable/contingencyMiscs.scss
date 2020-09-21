@@ -3,25 +3,23 @@
   background-repeat: no-repeat;
   display: inline-block;
 }
+
+@mixin contingency-miscs-size($size) {
+  background-size: $size * 4 $size * 4;
+  width: $size;
+  height: $size;
+}
+
 .material-MT-bipeak {
-  --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 4) calc(var(--icon-h) * 4);
   background-position: 0% 0%;
-  width: var(--icon-w);
-  height: var(--icon-h);
 }
 
 .material-MT-superiors {
-  --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 4) calc(var(--icon-h) * 4);
   background-position: 0% 33.333%;
-  width: var(--icon-w);
-  height: var(--icon-h);
 }
 .material-MT-inferiors {
-  --icon-h: calc(var(--icon-w) * 1);
   background-size: calc(var(--icon-w) * 4) calc(var(--icon-h) * 4);
   background-position: 0% 66.667%;
-  width: var(--icon-w);
-  height: var(--icon-h);
 }
