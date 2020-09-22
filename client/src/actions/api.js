@@ -107,7 +107,7 @@ async function getHistoryList(
 async function getTotalFormHistory(updateId) {
   const res = await axios.get(process.env.REACT_APP_HISTORY_API_HOST + '/total/' + updateId)
   const data = res.data
-  const server = res.data.server
+  const server = res.data.server === 'EN_JP_KR' ? 'EN' : res.data.server
 
   setState('t1Material' + (server === 'CN' ? '' : server), data.tier.t1)
   setState('t2Material' + (server === 'CN' ? '' : server), data.tier.t2)
@@ -135,5 +135,5 @@ export default {
   getAllData,
   getTotal,
   getHistoryList,
-  getTotalFormHistory
+  getTotalFormHistory,
 }

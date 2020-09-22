@@ -54,5 +54,5 @@
       "ie > 9"
     ]
   },
-  "proxy": "http://10.0.0.168:7001/v2/data"
+  "proxy": "https://localhost:3000"
 }
