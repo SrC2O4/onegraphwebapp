@@ -13,16 +13,22 @@
     "@material-ui/pickers": "^3.2.10",
     "animejs": "^3.2.0",
     "axios": "^0.20.0",
+    "core-js": "^3.6.5",
     "crypto-js": "^4.0.0",
     "dayjs": "^1.8.36",
     "lodash-es": "^4.17.15",
     "material-table": "^1.57.2",
+    "node-sass": "^4.14.1",
+    "raf": "^3.4.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-intl": "^5.4.7",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "react-uid": "^2.2.0",
+    "regenerator-runtime": "^0.13.7",
+    "sass": "^1.26.11",
+    "sass-loader": "^10.0.2",
     "statezero": "^0.5.4"
   },
   "scripts": {
@@ -38,12 +44,14 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "ie > 9"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "ie > 9"
     ]
   },
   "proxy": "http://10.0.0.168:7001/v2/data"

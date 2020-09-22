@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';
+import './style.scss';
 import BaseComponent from "./../Base";
 import Tooltip from '@material-ui/core/Tooltip';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
@@ -11,9 +11,6 @@ import HistoryIcon from '@material-ui/icons/History';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import './chip.css';
-import './contingencyMiscs.css';
-import './materials.css';
 import { FormattedMessage } from 'react-intl';
 import { Alert, AlertTitle } from '@material-ui/lab';
 
@@ -2513,7 +2510,7 @@ class MaterialTable extends BaseComponent {
                                             <TableCell>
                                                 <Tooltip title={<FormattedMessage id={contingencyItems.id} />} arrow>
 
-                                                    <span className={(contingencyItems.id === "bipeak" ? 'contingencyMiscs spriteMT-4 material-MT-' : 'material spriteMT-4 material-MT-') + contingencyItems.id}></span>
+                                                    <span className={(contingencyItems.id === "bipeak" ? 'contingencyMiscs spriteCM-4 material-MT-' : 'material spriteMT-4 material-MT-') + contingencyItems.id}></span>
                                                 </Tooltip>
                                                 <p className='M4Values'>{contingencyItems.contingency_store_value.finite}</p>
                                             </TableCell>
@@ -2531,7 +2528,7 @@ class MaterialTable extends BaseComponent {
                                         return (
                                             <TableCell>
                                                 <Tooltip title={<FormattedMessage id={contingencyItems.id} />} arrow>
-                                                    <span className={(contingencyItems.id === "superiors" || contingencyItems.id === "inferiors" ? 'contingencyMiscs spriteMT-4 material-MT-' : 'material spriteMT-4 material-MT-') + contingencyItems.id}></span>
+                                                    <span className={(contingencyItems.id === "superiors" || contingencyItems.id === "inferiors" ? 'contingencyMiscs spriteCM-4 material-MT-' : 'material spriteMT-4 material-MT-') + contingencyItems.id}></span>
                                                 </Tooltip>
                                                 <p className='M4Values'>{contingencyItems.contingency_store_value.infinite}</p>
                                             </TableCell>)

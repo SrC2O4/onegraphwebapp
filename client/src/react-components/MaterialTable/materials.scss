@@ -1,0 +1,191 @@
+.material {
+  background-image: url(./static/materials.png);
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+@mixin material-size($size) {
+  background-size: $size * 8 $size * 7;
+  width: $size;
+  height: $size;
+}
+
+.material-ESS-32001,
+.material-MT-32001 {
+  background-position: 0% 0%;
+}
+.material-GACHATICKET {
+  background-position: 14.286% 0%;
+}
+.material-MISC-2002,
+.material-MT-2002 {
+  background-position: 0% 16.667%;
+}
+.material-MISC-3003,
+.material-MT-3003 {
+  background-position: 14.286% 16.667%;
+}
+.material-MISC-3112,
+.material-MT-3112 {
+  background-position: 28.571% 0%;
+}
+.material-MISC-3113,
+.material-MT-3113 {
+  background-position: 28.571% 16.667%;
+}
+.material-MISC-3301,
+.material-MT-3301 {
+  background-position: 0% 33.333%;
+}
+.material-MISC-3302,
+.material-MT-3302 {
+  background-position: 14.286% 33.333%;
+}
+.material-MISC-3303,
+.material-MT-3303 {
+  background-position: 28.571% 33.333%;
+}
+.material-MISC-3401,
+.material-MT-3401 {
+  background-position: 42.857% 0%;
+}
+.material-MISC-4001,
+.material-MT-4001 {
+  background-position: 42.857% 16.667%;
+}
+.material-MISC-7001,
+.material-MT-7001 {
+  background-position: 42.857% 33.333%;
+}
+.material-MT-2001 {
+  background-position: 0% 50%;
+}
+.material-MT-2002 {
+  background-position: 14.286% 50%;
+}
+.material-MT-2003 {
+  background-position: 28.571% 50%;
+}
+.material-MT-30011 {
+  background-position: 42.857% 50%;
+}
+.material-MT-30012 {
+  background-position: 57.143% 0%;
+}
+.material-MT-30013 {
+  background-position: 57.143% 16.667%;
+}
+.material-MT-30014 {
+  background-position: 57.143% 33.333%;
+}
+.material-MT-30021 {
+  background-position: 57.143% 50%;
+}
+.material-MT-30022 {
+  background-position: 0% 66.667%;
+}
+.material-MT-30023 {
+  background-position: 14.286% 66.667%;
+}
+.material-MT-30024 {
+  background-position: 28.571% 66.667%;
+}
+.material-MT-30031 {
+  background-position: 42.857% 66.667%;
+}
+.material-MT-30032 {
+  background-position: 57.143% 66.667%;
+}
+.material-MT-30033 {
+  background-position: 71.429% 0%;
+}
+.material-MT-30034 {
+  background-position: 71.429% 16.667%;
+}
+.material-MT-30041 {
+  background-position: 71.429% 33.333%;
+}
+.material-MT-30042 {
+  background-position: 71.429% 50%;
+}
+.material-MT-30043 {
+  background-position: 71.429% 66.667%;
+}
+.material-MT-30044 {
+  background-position: 0% 83.333%;
+}
+.material-MT-30051 {
+  background-position: 14.286% 83.333%;
+}
+.material-MT-30052 {
+  background-position: 28.571% 83.333%;
+}
+.material-MT-30053 {
+  background-position: 42.857% 83.333%;
+}
+.material-MT-30054 {
+  background-position: 57.143% 83.333%;
+}
+.material-MT-30061 {
+  background-position: 71.429% 83.333%;
+}
+.material-MT-30062 {
+  background-position: 85.714% 0%;
+}
+.material-MT-30063 {
+  background-position: 85.714% 16.667%;
+}
+.material-MT-30064 {
+  background-position: 85.714% 33.333%;
+}
+.material-MT-30073 {
+  background-position: 85.714% 50%;
+}
+.material-MT-30074 {
+  background-position: 85.714% 66.667%;
+}
+.material-MT-30083 {
+  background-position: 85.714% 83.333%;
+}
+.material-MT-30084 {
+  background-position: 0% 100%;
+}
+.material-MT-30093 {
+  background-position: 14.286% 100%;
+}
+.material-MT-30094 {
+  background-position: 28.571% 100%;
+}
+.material-MT-30103 {
+  background-position: 42.857% 100%;
+}
+.material-MT-30104 {
+  background-position: 57.143% 100%;
+}
+.material-MT-30115 {
+  background-position: 71.429% 100%;
+}
+.material-MT-30125 {
+  background-position: 85.714% 100%;
+}
+.material-MT-30135 {
+  background-position: 100% 0%;
+}
+.material-MT-31013 {
+  background-position: 100% 16.667%;
+}
+.material-MT-31014 {
+  background-position: 100% 33.333%;
+}
+.material-MT-31023 {
+  background-position: 100% 50%;
+}
+.material-MT-31024 {
+  background-position: 100% 66.667%;
+}
+.material-MT-4001 {
+  background-position: 100% 83.333%;
+}
+.material-placeholder {
+  background-position: 100% 100%;
+}

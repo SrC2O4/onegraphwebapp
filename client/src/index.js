@@ -1,3 +1,6 @@
+import "core-js/stable"
+import "regenerator-runtime/runtime"
+import 'raf/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
