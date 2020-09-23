@@ -1,0 +1,60 @@
+.chip {
+  background-image: url(./static/chip.png);
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+@mixin chip-size($size) {
+  background-size: $size * 4 $size * 4;
+  width: $size;
+  height: $size;
+}
+
+.chip-CHIP-3211 {
+  background-position: 0% 0%;
+}
+.chip-CHIP-3212 {
+  background-position: 33.333% 0%;
+}
+.chip-CHIP-3221 {
+  background-position: 0% 33.333%;
+}
+.chip-CHIP-3222 {
+  background-position: 33.333% 33.333%;
+}
+.chip-CHIP-3231 {
+  background-position: 66.667% 0%;
+}
+.chip-CHIP-3232 {
+  background-position: 66.667% 33.333%;
+}
+.chip-CHIP-3241 {
+  background-position: 0% 66.667%;
+}
+.chip-CHIP-3242 {
+  background-position: 33.333% 66.667%;
+}
+.chip-CHIP-3251 {
+  background-position: 66.667% 66.667%;
+}
+.chip-CHIP-3252 {
+  background-position: 100% 0%;
+}
+.chip-CHIP-3261 {
+  background-position: 100% 33.333%;
+}
+.chip-CHIP-3262 {
+  background-position: 100% 66.667%;
+}
+.chip-CHIP-3271 {
+  background-position: 0% 100%;
+}
+.chip-CHIP-3272 {
+  background-position: 33.333% 100%;
+}
+.chip-CHIP-3281 {
+  background-position: 66.667% 100%;
+}
+.chip-CHIP-3282 {
+  background-position: 100% 100%;
+}

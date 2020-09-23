@@ -2,7 +2,7 @@ import { isPlainObject } from "lodash-es";
 import React from "react";
 import { getState, subscribe, unsubscribe } from "statezero";
 
-class BaseComponent extends React.Component {
+export default class extends React.Component {
     componentWillMount() {
         const callback = state => {
             this.setState(state);
@@ -24,5 +24,3 @@ class BaseComponent extends React.Component {
         throw new Error("filterState() is not implemented");
     }
 }
-
-export default BaseComponent;

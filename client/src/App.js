@@ -56,7 +56,7 @@ class App extends BaseComponent {
         setState('lang', 'en')
       }
     }
-    document.title = browserLanguage.includes('zh')?titleText.zh:titleText.en
+    document.title = browserLanguage.toLowerCase().indexOf('zh')!==-1?titleText.zh:titleText.en
   }
 
   componentDidMount () {
