@@ -1,5 +1,6 @@
 import { setState } from "statezero";
 import memory from "./memory";
+import dayjs from "dayjs"
 
 // Initialize all state paths used by your app as empty.
 // These are the states that you can filter using filterState()
@@ -68,9 +69,16 @@ export const setEmptyState = () => {
     
     setState("updateEvent", false);
     setState("animeOnce", true);
-    setState("orangeStore",getMenory("orangeStore",false))
+    setState("orangeStore",getMenory("orangeStore",false));
     setState("server", getMenory("server",'CN'));
     setState("serverListOpen", false);
     setState("lang", getMenory("lang",'en'));
     setState("langMenuOpen", false);
+
+    setState("historyList",[]);
+    setState("selectDate",dayjs().format());
+    setState("calendarOpen",false);
+    setState("isHistoryData",false);
+    setState("isHistoryDataEN",false);
+    setState("isHistoryDataTW",false);
 };

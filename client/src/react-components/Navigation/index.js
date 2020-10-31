@@ -176,7 +176,6 @@ class Navigation extends BaseComponent {
         </AppBar>
         <SettingsModal open={this.state.modalOpen} />
         <EfficiencyTableModal open={this.state.listOpen} />
-        {console.log(this.state.listOpen)}
       </div>
     );
   }

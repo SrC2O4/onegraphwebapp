@@ -49,6 +49,14 @@ span {
 }
 
 @media only screen and (min-width: 320px) {
+  .history-icon {
+    position: absolute;
+    opacity: 0.1;
+    font-size: 200px !important;
+    top: 0px;
+    left: 0px;
+  }
+
   body {
     font-size: 10px;
   }
@@ -107,6 +115,14 @@ span {
 }
 
 @media only screen and (min-width: 768px) {
+  .history-icon {
+    position: absolute;
+    opacity: 0.1;
+    font-size: 300px !important;
+    top: 0px;
+    left: 30px;
+  }
+
   body {
     font-size: 12px;
   }
@@ -161,6 +177,14 @@ span {
 }
 
 @media only screen and (min-width: 1024px) {
+  .history-icon {
+    position: absolute;
+    opacity: 0.1;
+    font-size: 300px !important;
+    top: 0px;
+    left: 30px;
+  }
+
   body {
     font-size: 14px;
   }
@@ -216,6 +240,14 @@ span {
   }
 }
 @media only screen and (min-width: 1300px) {
+  .history-icon {
+    position: absolute;
+    opacity: 0.1;
+    font-size: 400px !important;
+    top: 0px;
+    left: 50px;
+  }
+
   body {
     font-size: 16px;
   }
