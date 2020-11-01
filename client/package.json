@@ -4,15 +4,18 @@
   "private": true,
   "dependencies": {
     "@babel/helper-call-delegate": "^7.10.4",
+    "@date-io/dayjs": "1.x",
     "@iconify/icons-simple-icons": "^1.0.46",
     "@iconify/react": "^1.1.3",
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
+    "@material-ui/pickers": "^3.2.10",
     "animejs": "^3.2.0",
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
     "crypto-js": "^4.0.0",
+    "dayjs": "^1.8.36",
     "lodash-es": "^4.17.15",
     "material-table": "^1.57.2",
     "node-sass": "^4.14.1",
@@ -51,5 +54,5 @@
       "ie > 9"
     ]
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "https://localhost:3000"
 }

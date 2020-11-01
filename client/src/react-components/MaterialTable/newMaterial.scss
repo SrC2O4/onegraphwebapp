@@ -1,0 +1,25 @@
+.components {
+    background-image: url(./static/components.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+@mixin component-size($size) {
+    background-size: $size * 4 $size * 4;
+    width: $size;
+    height: $size;
+}
+
+.materials-MT-31034 {
+    background-size: calc(var(--icon-w) * 4) calc(var(--icon-h) * 4);
+    background-position: 0% 0%;
+  }
+  
+  .materials-MT-30145 {
+    background-size: calc(var(--icon-w) * 4) calc(var(--icon-h) * 4);
+    background-position: 0% 33.333%;
+  }
+  .materials-MT-31033 {
+    background-size: calc(var(--icon-w) * 4) calc(var(--icon-h) * 4);
+    background-position: 0% 66.667%;
+  }
