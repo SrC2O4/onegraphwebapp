@@ -1590,7 +1590,7 @@ class MaterialTable extends BaseComponent {
                                         <TableRow>
                                             {this.state.server === 'TW'  && <TableCell colSpan= {4}></TableCell>
                                             }
-                                            {this.state.server !== 'TW' && <TableCell>
+                                            {this.state.server === 'CN' && <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
                                                     <span className={(i===12?'components spriteNW-4 materials-MT-':'material spriteMT-4 material-MT-') + currentData.t4[i].id}></span>
 
@@ -1602,7 +1602,7 @@ class MaterialTable extends BaseComponent {
                                                 }
                                             </TableCell>}
 
-                                            {this.state.server !== 'TW' && <TableCell>
+                                            {this.state.server === 'CN' && <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t3[i].id} />} arrow>
                                                     <span className={(i===12?'components spriteNW-4 materials-MT-':'material spriteMT-4 material-MT-' )+ currentData.t3[i].id}></span>
 
@@ -1614,7 +1614,7 @@ class MaterialTable extends BaseComponent {
                                                 }
                                             </TableCell>
                                             }
-                                            {this.state.server !== 'TW' &&<TableCell colSpan={2}>
+                                            {this.state.server === 'CN' &&<TableCell colSpan={2}>
 
                                                 {(currentData.considerEventStages ? currentData.t3[i].lowest_ap_stages.event : currentData.t3[i].lowest_ap_stages.normal).length === 0 && <h3 style={{ display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend' />}</h3>}
 
@@ -1698,11 +1698,13 @@ class MaterialTable extends BaseComponent {
 
                                         <TableRow>
                                             {this.state.server === 'TW'  && <TableCell colSpan= {4}></TableCell>}
-                                            {this.state.server !=='TW' &&<TableCell rowSpan={3}>
+                                            {this.state.server === 'CN' ? <TableCell rowSpan={3}>
                                                 <Tooltip title={<FormattedMessage id={currentData.t5[3].id} />} arrow>
                                                     <span className={'components spriteNW-5 materials-MT-'+currentData.t5[3].id}></span>
                                                 </Tooltip>
-                                            </TableCell>}
+                                            </TableCell>:
+                                            <TableCell rowSpan={3}></TableCell>
+                                            }
                                             {this.state.server !== 'TW' && 
                                             
                                             <TableCell>
