@@ -54,5 +54,5 @@
       "ie > 9"
     ]
   },
-  "proxy": "https://localhost:3000"
+  "proxy": "https://api.aog.wiki/v2/data"
 }

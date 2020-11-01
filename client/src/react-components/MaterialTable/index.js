@@ -1598,7 +1598,7 @@ class MaterialTable extends BaseComponent {
                                                 {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
-                                                    <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
+                                                    <p className={'M4Values' + (currentData.considerEventStages ? (currentData.t4[i].Notes ? currentData.t4[i].Notes.event : '') : (currentData.t4[i].Notes ? currentData.t4[i].Notes.normal : ''))}>{currentData.considerEventStages ? (currentData.t4[i].golden_ticket_value ? currentData.t4[i].golden_ticket_value.event : 'N/A') : (currentData.t4[i].golden_ticket_value?currentData.t4[i].golden_ticket_value.normal:'N/A')}</p>
                                                 }
                                             </TableCell>}
 
@@ -1610,7 +1610,7 @@ class MaterialTable extends BaseComponent {
                                                 {(this.state.orangeStore && currentData.t3[i].orange_note && currentData.t3[i].orange_store_value) ?
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].orange_note.event : currentData.t3[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{`${currentData.considerEventStages ? currentData.t3[i].orange_store_value.event : currentData.t3[i].orange_store_value.normal}`}<strong style={{ color: 'orange' }}>]</strong></p>
                                                     :
-                                                    <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
+                                                    <p className={'M4Values' + (currentData.considerEventStages ? (currentData.t3[i].Notes ? currentData.t3[i].Notes.event : '') : (currentData.t3[i].Notes ? currentData.t3[i].Notes.normal : ''))}>{`${currentData.considerEventStages ? (currentData.t3[i].green_ticket_value?currentData.t3[i].green_ticket_value.event : 'N/A') : (currentData.t3[i].green_ticket_value ? currentData.t3[i].green_ticket_value.normal : 'N/A')}`}</p>
                                                 }
                                             </TableCell>
                                             }
@@ -1624,7 +1624,7 @@ class MaterialTable extends BaseComponent {
                                                             {stages.extra_drop.map((loots) => {
                                                                 return (
                                                                     <Tooltip title={<span><FormattedMessage id='extraDrop' />: <FormattedMessage id={loots.id} /></span>} arrow>
-                                                                        <span className={'material extraDropWrap material-MT-' + loots.id}></span>
+                                                                        <span className={'components extraDropWrapNW material-MT-' + loots.id}></span>
                                                                     </Tooltip>)
                                                             })
                                                             }
@@ -1647,7 +1647,7 @@ class MaterialTable extends BaseComponent {
                                                             {stages.extra_drop.map((loots) => {
                                                                 return (
                                                                     <Tooltip title={<span><FormattedMessage id='extraDrop' />: <FormattedMessage id={loots.id} /></span>} arrow>
-                                                                        <span className={'material extraDropWrap material-MT-' + loots.id}></span>
+                                                                        <span className={'components extraDropWrapNW material-MT-' + loots.id}></span>
                                                                     </Tooltip>
                                                                 )
                                                             })
@@ -1670,7 +1670,7 @@ class MaterialTable extends BaseComponent {
                                                             {stages.extra_drop.map((loots) => {
                                                                 return (
                                                                     <Tooltip title={<span><FormattedMessage id='extraDrop' />: <FormattedMessage id={loots.id} /></span>} arrow>
-                                                                        <span className={'material extraDropWrap material-MT-' + loots.id}></span>
+                                                                        <span className={'components extraDropWrapNW material-MT-' + loots.id}></span>
                                                                     </Tooltip>)
                                                             })
                                                             }
