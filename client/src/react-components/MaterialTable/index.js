@@ -1592,7 +1592,7 @@ class MaterialTable extends BaseComponent {
                                             }
                                             {this.state.server !== 'TW' && <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
-                                                    <span className={(i==12?'components spriteNW-4 materials-MT-':'material spriteMT-4 material-MT-') + currentData.t4[i].id}></span>
+                                                    <span className={(i===12?'components spriteNW-4 materials-MT-':'material spriteMT-4 material-MT-') + currentData.t4[i].id}></span>
 
                                                 </Tooltip>
                                                 {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
@@ -1604,7 +1604,7 @@ class MaterialTable extends BaseComponent {
 
                                             {this.state.server !== 'TW' && <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t3[i].id} />} arrow>
-                                                    <span className={(i==12?'components spriteNW-4 materials-MT-':'material spriteMT-4 material-MT-' )+ currentData.t3[i].id}></span>
+                                                    <span className={(i===12?'components spriteNW-4 materials-MT-':'material spriteMT-4 material-MT-' )+ currentData.t3[i].id}></span>
 
                                                 </Tooltip>
                                                 {(this.state.orangeStore && currentData.t3[i].orange_note && currentData.t3[i].orange_store_value) ?
