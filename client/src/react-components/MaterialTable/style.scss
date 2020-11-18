@@ -548,9 +548,3 @@ span {
   background-size: 44px auto;
 }
 
-.extraDropWrapNW {
-  @include component-size(18px);
-  position: absolute;
-  margin-left: 0px;
-  margin-top: 0px;
-}
