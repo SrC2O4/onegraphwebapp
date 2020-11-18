@@ -1627,7 +1627,7 @@ class MaterialTable extends BaseComponent {
                                                             {stages.extra_drop.map((loots) => {
                                                                 return (
                                                                     <Tooltip title={<span><FormattedMessage id='extraDrop' />: <FormattedMessage id={loots.id} /></span>} arrow>
-                                                                        <span className={'material extraDropWrapNW material-MT-' + loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-' + loots.id}></span>
                                                                     </Tooltip>)
                                                             })
                                                             }
@@ -1650,7 +1650,7 @@ class MaterialTable extends BaseComponent {
                                                             {stages.extra_drop.map((loots) => {
                                                                 return (
                                                                     <Tooltip title={<span><FormattedMessage id='extraDrop' />: <FormattedMessage id={loots.id} /></span>} arrow>
-                                                                        <span className={'material extraDropWrapNW material-MT-' + loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-' + loots.id}></span>
                                                                     </Tooltip>
                                                                 )
                                                             })
@@ -1673,7 +1673,7 @@ class MaterialTable extends BaseComponent {
                                                             {stages.extra_drop.map((loots) => {
                                                                 return (
                                                                     <Tooltip title={<span><FormattedMessage id='extraDrop' />: <FormattedMessage id={loots.id} /></span>} arrow>
-                                                                        <span className={'material extraDropWrapNW material-MT-' + loots.id}></span>
+                                                                        <span className={'material extraDropWrap material-MT-' + loots.id}></span>
                                                                     </Tooltip>)
                                                             })
                                                             }
@@ -1703,7 +1703,7 @@ class MaterialTable extends BaseComponent {
                                             {this.state.server === 'TW' && <TableCell colSpan={4}></TableCell>}
                                             {this.state.server === 'CN' ? <TableCell rowSpan={3}>
                                                 <Tooltip title={<FormattedMessage id={currentData.t5[3].id} />} arrow>
-                                                    <span className={'material spriteNW-5 materials-MT-' + currentData.t5[3].id}></span>
+                                                    <span className={'material sprite-MT5 materials-MT-' + currentData.t5[3].id}></span>
                                                 </Tooltip>
                                             </TableCell> :
                                                 <TableCell rowSpan={3}></TableCell>

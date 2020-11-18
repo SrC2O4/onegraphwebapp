@@ -77,9 +77,6 @@ span {
     @include material-size(55px);
   }
 
-  .spriteNW-5 {
-    @include component-size(55px);
-  }
 
   .sprite {
     &MT-4 {
@@ -90,9 +87,6 @@ span {
     }
     &CP-4 {
       @include chip-size(45px);
-    }
-    &NW-4 {
-      @include component-size(45px);
     }
   }
 
@@ -136,9 +130,6 @@ span {
   .spriteMT-5 {
     @include material-size(55px);
   }
-  .spriteNW-5 {
-    @include component-size(55px);
-  }
 
   .sprite {
     &MT-4 {
@@ -149,9 +140,6 @@ span {
     }
     &CP-4 {
       @include chip-size(45px);
-    }
-    &NW-4 {
-      @include component-size(45px);
     }
   }
   .extraDropWrap {
@@ -191,10 +179,6 @@ span {
   .spriteMT-5 {
     @include material-size(55px);
   }
-  .spriteNW-5 {
-    @include component-size(55px);
-  }
-
   .sprite {
     &MT-4 {
       @include material-size(45px);
@@ -204,9 +188,6 @@ span {
     }
     &CP-4 {
       @include chip-size(45px);
-    }
-    &NW-4 {
-      @include component-size(45px);
     }
   }
   .extraDropWrap {
@@ -264,9 +245,6 @@ span {
   .spriteMT-5 {
     @include material-size(55px);
   }
-  .spriteNW-5 {
-    @include component-size(55px);
-  }
 
   .sprite {
     &MT-4 {
@@ -277,9 +255,6 @@ span {
     }
     &CP-4 {
       @include chip-size(45px);
-    }
-    &NW-4 {
-      @include component-size(45px);
     }
   }
 
