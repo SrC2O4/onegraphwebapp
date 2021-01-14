@@ -1587,7 +1587,7 @@ class MaterialTable extends BaseComponent {
 
                                     )
 
-                                } else if (i === 11) { // 11 12
+                                } else if (i === 12) { // 11 12
                                     return (
 
                                         <TableRow>
@@ -1697,7 +1697,7 @@ class MaterialTable extends BaseComponent {
                                     )
 
                                 }
-                                 else if (i === 12) { // 11 12
+                                 else if (i === 11) { // 11 12
                                     return (
 
                                         <TableRow>
