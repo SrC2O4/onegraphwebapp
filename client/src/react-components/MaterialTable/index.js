@@ -319,7 +319,7 @@ class MaterialTable extends BaseComponent {
                                     )
 
                                 }
-                                // The 
+                                // Second row -> 
                                 else if (i === 3) {
                                     return (
 
@@ -1591,8 +1591,7 @@ class MaterialTable extends BaseComponent {
                                     return (
 
                                         <TableRow>
-                                            {this.state.server === 'TW' && <TableCell colSpan={4}></TableCell>
-                                            }
+
                                             {this.state.server === 'CN' && <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
@@ -1701,9 +1700,6 @@ class MaterialTable extends BaseComponent {
                                     return (
 
                                         <TableRow>
-                                            {this.state.server === 'TW' && <TableCell colSpan={4}></TableCell>
-                                            }
-                                            {/* {this.state.server === 'CN' && */}
                                             <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
@@ -1816,10 +1812,9 @@ class MaterialTable extends BaseComponent {
                                     return (
 
                                         <TableRow>
-                                            {this.state.server === 'TW' && <TableCell colSpan={4}></TableCell>}
                                             {this.state.server === 'CN' ? <TableCell rowSpan={3}>
                                                 <Tooltip title={<FormattedMessage id={currentData.t5[3].id} />} arrow>
-                                                    <span className={'material sprite-MT5 materials-MT-' + currentData.t5[3].id}></span>
+                                                    <span className={'material sprite-MT5 material-MT-' + currentData.t5[3].id}></span>
                                                 </Tooltip>
                                             </TableCell> :
                                                 <TableCell rowSpan={3}></TableCell>
