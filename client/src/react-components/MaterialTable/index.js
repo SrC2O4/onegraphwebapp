@@ -1814,14 +1814,12 @@ class MaterialTable extends BaseComponent {
                                         <TableRow>
                                             {this.state.server === 'CN' ? <TableCell rowSpan={3}>
                                                 <Tooltip title={<FormattedMessage id={currentData.t5[3].id} />} arrow>
-                                                    <span className={'material sprite-MT5 material-MT-' + currentData.t5[3].id}></span>
+                                                    <span className={'material spriteMT-5 material-MT-' + currentData.t5[3].id}></span>
                                                 </Tooltip>
                                             </TableCell> :
                                                 <TableCell rowSpan={3}></TableCell>
                                             }
-                                            {this.state.server !== 'TW' &&
-
-                                                <TableCell>
+                                            <TableCell>
                                                     <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
                                                         <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
@@ -1831,9 +1829,9 @@ class MaterialTable extends BaseComponent {
                                                         :
                                                         <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].Notes.event : currentData.t4[i].Notes.normal)}>{currentData.considerEventStages ? currentData.t4[i].golden_ticket_value.event : currentData.t4[i].golden_ticket_value.normal}</p>
                                                     }
-                                                </TableCell>}
+                                                </TableCell>
 
-                                            {this.state.server !== 'TW' && <TableCell>
+                                                <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t3[i].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
 
@@ -1843,11 +1841,8 @@ class MaterialTable extends BaseComponent {
                                                     :
                                                     <p className={'M4Values' + (currentData.considerEventStages ? currentData.t3[i].Notes.event : currentData.t3[i].Notes.normal)}>{`${currentData.considerEventStages ? currentData.t3[i].green_ticket_value.event : currentData.t3[i].green_ticket_value.normal}`}</p>
                                                 }
-
-
-                                            </TableCell>
-                                            }
-                                            {this.state.server !== 'TW' && <TableCell colSpan={2}>
+                                                 </TableCell>
+                                            <TableCell colSpan={2}>
 
                                                 {(currentData.considerEventStages ? currentData.t3[i].lowest_ap_stages.event : currentData.t3[i].lowest_ap_stages.normal).length === 0 && <h3 style={{ display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend' />}</h3>}
 
@@ -1918,8 +1913,7 @@ class MaterialTable extends BaseComponent {
                                                         </div>
                                                     )
                                                 })}
-                                            </TableCell>}
-
+                                            </TableCell>
                                             {
                                                 currentData.misc.map((item) => {
                                                     return (
