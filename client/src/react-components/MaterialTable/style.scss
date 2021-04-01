@@ -1,5 +1,16 @@
 @import './chip', './materials.scss', './contingencyMiscs.scss';
-
+.Artboard_1 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 1920px;
+  height: 1080px;
+  z-index: 3;
+}
+.outLayer{
+  content: "";
+  background-image: url("./static/Artboard_1.png");
+}
 p {
   margin: 0;
 }
