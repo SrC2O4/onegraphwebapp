@@ -159,10 +159,10 @@ class MaterialTable extends BaseComponent {
 
             // The 3 tier 5 materials
             <MuiThemeProvider theme={theme}>
-                <Alert severity="error"  >
+                {/* <Alert severity="error"  >
                     <AlertTitle>Info as April 1st</AlertTitle>
                     This website was hacked :(
-                </Alert>
+                </Alert> */}
                 <div className='outLayer'>
                     <h2 style={{ textAlign: "right", marginRight: "1%" }}><FormattedMessage id='last' />：{new Date(currentData.gacha.last_updated).toLocaleString()}</h2>
                     <TableContainer component={Paper} className="tableGrid">
