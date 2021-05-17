@@ -106,5 +106,8 @@
   "infinite":"無限兌換",
   "dataSource": "數據來源",
   "discord":"加入我們的Discord",
-  "local2": "日語化"
+  "local2": "日語化",
+  "effiEventText": "效率（包含活動）",
+  "effiBaseText": "效率（包含基建）",
+  "effiEventBaseText": "效率（包含活動/基建）"
 }

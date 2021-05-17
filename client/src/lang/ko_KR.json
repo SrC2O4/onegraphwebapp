@@ -106,5 +106,8 @@
   "infinite":"무한 태환",
   "dataSource": "데이터 출처",
   "discord":"Discord",
-  "local2": "일본 현지화 제공"
+  "local2": "일본 현지화 제공",
+  "effiEventText": "Efficiency (Event Stages)",
+  "effiBaseText": "Efficiency (Including base)",
+  "effiEventBaseText": "Efficiency (Event Stages & Including base)"
 }

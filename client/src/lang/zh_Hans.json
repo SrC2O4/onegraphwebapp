@@ -110,5 +110,8 @@
   "finite": "有限池",
   "infinite": "无限池",
   "discord": "加入我们的Discord",
-  "local2": "日语化"
+  "local2": "日语化",
+  "effiEventText": "效率（包含活动）",
+  "effiBaseText": "效率（包含基建）",
+  "effiEventBaseText": "效率（包含活动/基建）"
 }
