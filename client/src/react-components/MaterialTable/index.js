@@ -101,6 +101,10 @@ class MaterialTable extends BaseComponent {
                     </Fade>
                 </Modal>)
         }
+
+        if (this.state.server === 'TW') {
+            setState('orangeStore', false)
+        }
         var currentData = {
             't5': {}, 't4': {}, 't3': {}, 't2': {}, 't1': {}, 'catalyst': {}, 'gacha': {}, 'plan': {}, 'misc': {},
             'considerEventStages': false, 'contingencyStore': {}, 'eventType': ''
@@ -166,14 +170,14 @@ class MaterialTable extends BaseComponent {
                             <TableRow>
                                 <TableCell />
                                 <TableCell >
-                                    <h3 className='textTips'> {this.state.orangeStore ? <strong style={{ color: 'orange' }}>[橙票商店]</strong> : <FormattedMessage id='yellowStore' />}</h3>
+                                    <h3 className='textTips'> {this.state.orangeStore ? <strong style={{ color: 'orange' }}>[<FormattedMessage id='orange' />]</strong> : <FormattedMessage id='yellowStore' />}</h3>
                                     <Tooltip title={<FormattedMessage id='32001' />} arrow>
                                         <span className='material material-ESS-32001 spriteMT-4'></span>
                                     </Tooltip>
                                     <p className='CatalystValue'> {currentData.considerEventStages ? currentData.catalyst.golden_ticket_value.event : currentData.catalyst.golden_ticket_value.normal}</p>
                                 </TableCell>
                                 <TableCell colSpan={3}>
-                                    <h3 className='textTips'> {this.state.orangeStore ? <strong style={{ color: 'orange' }}>[橙票商店]</strong> : <FormattedMessage id='greenStore' />}</h3>
+                                    <h3 className='textTips'> {this.state.orangeStore ? <strong style={{ color: 'orange' }}>[<FormattedMessage id='orange' />]</strong> : <FormattedMessage id='greenStore' />}</h3>
                                     <Tooltip title={<FormattedMessage id='7003' />} arrow>
                                         <span className='spriteMT-4 material material-GACHATICKET'></span>
                                     </Tooltip>

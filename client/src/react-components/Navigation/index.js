@@ -114,7 +114,7 @@ class Navigation extends BaseComponent {
             <IconButton className={this.classes.nightModeButton} color="inherit" onClick={()=>{this.handleChange("listOpen")}}>
               <NotesIcon />
             </IconButton>
-            <IconButton className={this.classes.nightModeButton} color="inherit" style={{ padding: '0' }} disabled={this.state.server !== 'CN'} onClick={() => { this.stroeToggle()}}>
+            <IconButton className={this.classes.nightModeButton} color="inherit" style={{ padding: '0' }} disabled={this.state.server === 'TW'} onClick={() => { this.stroeToggle()}}>
               <svg width="50px" height="50px" version="1.1" viewBox="0 0 339 339" style={{textShadow:'#f00 0 0 10px'}} >
                 <defs>
                   <filter id="f3" x="-110%" y="-110%" width="400%" height="400%">
