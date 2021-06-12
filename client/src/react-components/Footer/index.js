@@ -83,8 +83,8 @@ export default function AppFooter() {
   return (
     <Typography component="footer" className={classes.root}>
       <Container className={classes.container}>
-        <Grid container spacing={5}>
-          <Grid item xs={6} sm={4} md={3}>
+        <Grid container spacing={4}>
+          <Grid item xs={6} sm={4} md={2}>
             <Grid
               container
               direction="column"
@@ -167,9 +167,21 @@ export default function AppFooter() {
               <li className={classes.listItem}>
               <FormattedMessage id='local2'/> <Link className={classes.linkColor} href="https://twitter.com/mitei_ark">mitei<TwitterIcon className = {classes.gitHubIcon}/></Link>
               </li>
+            </ul>
+          </Grid>
+
+          <Grid item xs={6} sm={4} md={2}>
+            <Typography variant="h6" marked="left" gutterBottom>
+              <FormattedMessage id='friend-link'/>
+            </Typography>
+            <ul className={classes.list}>
+              <li className={classes.listItem}>
+              <FormattedMessage id='mew'/> <Link className={classes.linkColor} href="https://mew.fun/n/arknights">Mew-Arknights</Link>
+              </li>
               
             </ul>
           </Grid>
+
           <Grid item>
             <Typography variant="caption">
             <FormattedMessage id='license1'/>

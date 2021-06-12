@@ -113,5 +113,7 @@
   "local2": "日语化",
   "effiEventText": "效率（包含活动）",
   "effiBaseText": "效率（包含基建）",
-  "effiEventBaseText": "效率（包含活动/基建）"
+  "effiEventBaseText": "效率（包含活动/基建）",
+  "orange": "橙票商店",
+  "friend-link":"友情链接"
 }

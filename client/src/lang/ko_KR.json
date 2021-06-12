@@ -109,5 +109,7 @@
   "local2": "일본 현지화 제공",
   "effiEventText": "Efficiency (Event Stages)",
   "effiBaseText": "Efficiency (Including base)",
-  "effiEventBaseText": "Efficiency (Event Stages & Including base)"
+  "effiEventBaseText": "Efficiency (Event Stages & Including base)",
+  "orange": "Model Store",
+  "friend-link":"Friend Links"
 }
