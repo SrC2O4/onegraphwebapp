@@ -153,8 +153,16 @@ class MaterialTable extends BaseComponent {
         console.log('check')
         console.log(currentData.considerEventStages)
         console.log('bee pee')
-        const finite_items = currentData.contingencyStore.filter(obj => obj.contingency_store_value.finite !== "0.0");
-        const infinite_items = currentData.contingencyStore.filter(obj => obj.contingency_store_value.infinite !== "0.0");
+        const finite_items = currentData.contingencyStore
+          .filter((obj) => parseFloat(obj.contingency_store_value.finite) !== 0)
+          .sort((a, b) => {
+            return parseFloat(b.contingency_store_value.finite) - parseFloat(a.contingency_store_value.finite)
+          })
+        const infinite_items = currentData.contingencyStore
+          .filter((obj) => parseFloat(obj.contingency_store_value.infinite) !== 0)
+          .sort((a, b) => {
+            return parseFloat(b.contingency_store_value.infinite) - parseFloat(a.contingency_store_value.infinite)
+          })
         return (
 
             // The 3 tier 5 materials
