@@ -102,9 +102,6 @@ class MaterialTable extends BaseComponent {
                 </Modal>)
         }
 
-        if (this.state.server === 'TW') {
-            setState('orangeStore', false)
-        }
         var currentData = {
             't5': {}, 't4': {}, 't3': {}, 't2': {}, 't1': {}, 'catalyst': {}, 'gacha': {}, 'plan': {}, 'misc': {},
             'considerEventStages': false, 'contingencyStore': {}, 'eventType': ''
