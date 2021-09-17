@@ -153,7 +153,7 @@ export default function AppFooter() {
             </Typography>
             <ul className={classes.list}>
               <li className={classes.listItem}>
-              <FormattedMessage id='frontend'/> <Link className={classes.linkColor} href="https://github.com/Strontium233/onegraphwebapp">Strontium233<GitHubIcon className = {classes.gitHubIcon}/></Link>
+              <FormattedMessage id='frontend'/> <Link className={classes.linkColor} href="https://github.com/SrC2O4/onegraphwebapp">SrC2O4<GitHubIcon className = {classes.gitHubIcon}/></Link>
               </li>
               <li className={classes.listItem}>
               <FormattedMessage id='frontend2'/> <Link className={classes.linkColor} href="https://github.com/YanAndFish">YanAndFish<GitHubIcon className = {classes.gitHubIcon}/></Link>

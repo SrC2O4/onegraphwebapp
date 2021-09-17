@@ -16,6 +16,7 @@ import TranslateIcon from '@material-ui/icons/Translate';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import EventNoteIcon from '@material-ui/icons/EventNote';
 import {FormattedMessage} from 'react-intl';
 
 class Navigation extends BaseComponent {

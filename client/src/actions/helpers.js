@@ -73,4 +73,6 @@ export const setEmptyState = () => {
     setState("serverListOpen", false);
     setState("lang", getMenory("lang",'en'));
     setState("langMenuOpen", false);
+    setState("oldModalOpen", false);
+    
 };

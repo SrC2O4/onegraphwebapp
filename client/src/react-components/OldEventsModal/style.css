@@ -1,0 +1,21 @@
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme--light .paper{
+    background-color: #f5f5f5;
+    border: 2px solid #000;
+    width: fit-content;
+    box-shadow: 5px 5px #add8e6;
+    padding: 1%;
+}
+
+.theme--dark .paper{
+    background-color: #454545;
+    border: 2px solid #000;
+    width: fit-content;
+    box-shadow: 5px 5px #728d96;
+    padding: 1%;
+}

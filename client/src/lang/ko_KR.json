@@ -111,5 +111,6 @@
   "effiBaseText": "Efficiency (Including base)",
   "effiEventBaseText": "Efficiency (Event Stages & Including base)",
   "orange": "Model Store",
-  "friend-link":"Friend Links"
+  "friend-link":"Friend Links",
+  "oldeventtitle":"Events"
 }
