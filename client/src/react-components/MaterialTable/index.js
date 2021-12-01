@@ -54,7 +54,7 @@ class MaterialTable extends BaseComponent {
         })
     }
 
-    indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 
     dataLoading(server) {
         let serverTag = ''
@@ -2275,7 +2275,104 @@ class MaterialTable extends BaseComponent {
 
                                     )
 
-                                } else {
+                                } else if ((i === 13 || i === 14) && this.state.server == 'CN') {
+                                    return (
+                                        <TableRow>
+                                            <TableCell/>
+                                            <TableCell>
+                                                <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
+                                                    <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
+
+                                                </Tooltip>
+                                            </TableCell>
+
+                                            <TableCell>
+                                                <Tooltip title={<FormattedMessage id={currentData.t3[i].id} />} arrow>
+                                                    <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
+
+                                                </Tooltip>
+                                            </TableCell>
+                                            <TableCell colSpan={2}>
+
+                                                {(currentData.considerEventStages ? currentData.t3[i].lowest_ap_stages.event : currentData.t3[i].lowest_ap_stages.normal).length === 0 && <h3 style={{ display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend' />}</h3>}
+
+                                                {(currentData.considerEventStages ? currentData.t3[i].lowest_ap_stages.event : currentData.t3[i].lowest_ap_stages.normal).map((stages) => {
+                                                    return (
+                                                        <div className='stageWrapper'>
+                                                            {stages.extra_drop.map((loots) => {
+                                                                return (
+                                                                    <Tooltip title={<span><FormattedMessage id='extraDrop' />: <FormattedMessage id={loots.id} /></span>} arrow>
+                                                                        <span className={'material extraDropWrap material-MT-' + loots.id}></span>
+                                                                    </Tooltip>)
+                                                            })
+                                                            }
+                                                            <p className='lowestAPStage'>{stages.code}</p>
+
+                                                            {this.state.detailMode && <div style={{ display: 'inline', position: 'absolute' }}>
+
+                                                                <Tooltip title={<FormattedMessage id='dropRate' />} arrow placement='right'><span className=""><p className='lowestAPStageDetails'>{`${(stages.drop_rate * 100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency' />} arrow placement='right'><span className=""><p className='lowestAPStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected' />} arrow placement='right'><span className=""><p className='lowestAPStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+
+                                                            </div>
+                                                            }
+                                                        </div>
+                                                    )
+                                                })}
+                                                {!this.state.showBestOnly && (currentData.considerEventStages ? currentData.t3[i].balanced_stages.event : currentData.t3[i].balanced_stages.normal).map((stages) => {
+                                                    return (
+                                                        <div className='stageWrapper'>
+                                                            {stages.extra_drop.map((loots) => {
+                                                                return (
+                                                                    <Tooltip title={<span><FormattedMessage id='extraDrop' />: <FormattedMessage id={loots.id} /></span>} arrow>
+                                                                        <span className={'material extraDropWrap material-MT-' + loots.id}></span>
+                                                                    </Tooltip>
+                                                                )
+                                                            })
+                                                            }
+                                                            <p className='balancedStage'>{stages.code}</p>
+
+                                                            {this.state.detailMode && <div style={{ display: 'inline', position: 'absolute' }}>
+
+                                                                <Tooltip title={<FormattedMessage id='dropRate' />} arrow placement='right'><span className=""><p className='balancedStageDetails'>{`${(stages.drop_rate * 100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency' />} arrow placement='right'><span className=""><p className='balancedStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected' />} arrow placement='right'><span className=""><p className='balancedStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            </div>}
+                                                        </div>
+                                                    )
+                                                })}
+
+                                                {!this.state.showBestOnly && (currentData.considerEventStages ? currentData.t3[i].drop_rate_first_stages.event : currentData.t3[i].drop_rate_first_stages.normal).map((stages) => {
+                                                    return (
+                                                        <div className='stageWrapper'>
+                                                            {stages.extra_drop.map((loots) => {
+                                                                return (
+                                                                    <Tooltip title={<span><FormattedMessage id='extraDrop' />: <FormattedMessage id={loots.id} /></span>} arrow>
+                                                                        <span className={'material extraDropWrap material-MT-' + loots.id}></span>
+                                                                    </Tooltip>)
+                                                            })
+                                                            }
+                                                            <p className='dropRateFirstStage'>{stages.code}</p>
+
+                                                            {this.state.detailMode && <div style={{ display: 'inline', position: 'absolute' }}>
+
+                                                                <Tooltip title={<FormattedMessage id='dropRate' />} arrow placement='right'><span className=""><p className='dropRateFirstStageDetails'>{`${(stages.drop_rate * 100).toFixed()}%`}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='efficiency' />} arrow placement='right'><span className=""><p className='dropRateFirstStageDetails'>{stages.efficiency}</p></span></Tooltip>
+                                                                <Tooltip title={<FormattedMessage id='expected' />} arrow placement='right'><span className=""><p className='dropRateFirstStageDetails'>{stages.ap_per_item}</p></span></Tooltip>
+                                                            </div>}
+                                                        </div>
+                                                    )
+                                                })}
+                                            </TableCell>
+
+                                        </TableRow>
+
+
+                                    )
+
+                                }
+
+                                else if (i<13) {
                                     return (
                                         <TableRow>
                                             <TableCell>
