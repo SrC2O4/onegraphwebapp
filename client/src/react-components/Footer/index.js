@@ -167,6 +167,9 @@ export default function AppFooter() {
               <li className={classes.listItem}>
               <FormattedMessage id='local2'/> <Link className={classes.linkColor} href="https://twitter.com/mitei_ark">mitei<TwitterIcon className = {classes.gitHubIcon}/></Link>
               </li>
+              <li className={classes.listItem}>
+              <FormattedMessage id='local2'/> <Link className={classes.linkColor} href="https://twitter.com/Clark__AK">KarlC<TwitterIcon className = {classes.gitHubIcon}/></Link>
+              </li>
             </ul>
           </Grid>
 
