@@ -16,7 +16,7 @@
     "core-js": "^3.6.5",
     "crypto-js": "^4.0.0",
     "dayjs": "^1.8.36",
-    "lodash-es": "^4.17.15",
+    "lodash-es": "^4.17.21",
     "material-table": "^1.57.2",
     "node-sass": "^4.14.1",
     "raf": "^3.4.1",
