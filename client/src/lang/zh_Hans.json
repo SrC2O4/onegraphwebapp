@@ -77,11 +77,11 @@
   "frontend2": "前端协助",
   "backend": "后端Repo",
   "last": "上次数据更新时间",
-  "yellowStore": "黄票商店",
-  "greenStore": "绿票商店-二层",
-  "creditStore": "信用商店",
+  "yellowStore": "黄票兑换",
+  "greenStore": "绿票兑换-二层",
+  "creditStore": "信用兑换",
   "notes": "说明",
-  "noteText1": "绿票，黄票，信用商店里的数值指1绿票/1黄票/100信用的理智价值",
+  "noteText1": "绿票，黄票，信用兑换里的数值指1绿票/1黄票/100信用的理智价值",
   "noteText2": "关卡代号后的三个数字从上到下为：材料掉落率，理智转换效率，每个物品所需的期望理智",
   "noteText3": "红色：效率>99%, 刷此图毕业所需理智最低",
   "noteText4": "橙色：效率>90%, 且掉率比效率最高的图高",
@@ -118,6 +118,6 @@
   "effiEventText": "效率（包含活动）",
   "effiBaseText": "效率（包含基建）",
   "effiEventBaseText": "效率（包含活动/基建）",
-  "orange": "橙票商店",
+  "orange": "橙票兑换",
   "friend-link":"友情链接"
 }
