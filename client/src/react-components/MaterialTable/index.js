@@ -2738,8 +2738,7 @@ class MaterialTable extends BaseComponent {
                                         return (
                                             <TableCell>
                                                 <Tooltip title={<FormattedMessage id={contingencyItems.id} />} arrow>
-
-                                                    <span className={(contingencyItems.id === "bipeak" ? 'contingencyMiscs spriteCM-4 material-MT-' : 'material spriteMT-4 material-MT-') + contingencyItems.id}></span>
+                                                    <span className={(contingencyItems.id === "7003" ? 'spriteMT-4 material material-GACHATICKET' : 'material spriteMT-4 material-MT-') + contingencyItems.id}></span>
                                                 </Tooltip>
                                                 <p className='M4Values'>{contingencyItems.contingency_store_value.finite}</p>
                                             </TableCell>
