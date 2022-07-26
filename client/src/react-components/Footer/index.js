@@ -203,7 +203,7 @@ export default function AppFooter() {
                 <div>
                 {'互联网ICP备案：'}
                 <Link
-                  href="http://www.beian.miit.gov.cn/"
+                  href="https://beian.miit.gov.cn/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={classes.linkColor}
