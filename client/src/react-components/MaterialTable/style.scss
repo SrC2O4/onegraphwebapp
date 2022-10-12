@@ -104,6 +104,7 @@ span {
   .extraDropWrap {
     @include material-size(18px);
     position: absolute;
+    display: inline;
     margin-left: 0px;
     margin-top: 0px;
   }
@@ -156,7 +157,7 @@ span {
   .extraDropWrap {
     @include material-size(18px);
     position: absolute;
-    /* display: inline; */
+    display: inline;
     margin-left: 0px;
     margin-top: 0px;
   }
@@ -204,7 +205,7 @@ span {
   .extraDropWrap {
     @include material-size(18px);
     position: absolute;
-    /* display: inline; */
+    display: inline; 
     margin-left: 0px;
     margin-top: 0px;
   }
@@ -272,7 +273,7 @@ span {
   .extraDropWrap {
     @include material-size(18px);
     position: absolute;
-    /* display: inline; */
+    display: inline;
     margin-left: 0px;
     margin-top: 0px;
   }

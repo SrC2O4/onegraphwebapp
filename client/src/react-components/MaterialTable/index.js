@@ -54,7 +54,8 @@ class MaterialTable extends BaseComponent {
         })
     }
 
-    indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15]
+    
 
     dataLoading(server) {
         let serverTag = ''
@@ -106,7 +107,6 @@ class MaterialTable extends BaseComponent {
             't5': {}, 't4': {}, 't3': {}, 't2': {}, 't1': {}, 'catalyst': {}, 'gacha': {}, 'plan': {}, 'misc': {},
             'considerEventStages': false, 'contingencyStore': {}, 'eventType': ''
         }
-        console.log(this.state.server)
         if (this.state.server === 'TW') {
             currentData.t5 = this.state.t5MaterialTW
             currentData.t4 = this.state.t4MaterialTW
@@ -147,9 +147,6 @@ class MaterialTable extends BaseComponent {
             currentData.contingencyStore = this.state.contingencyStore
             currentData.eventType = this.state.eventType
         }
-        console.log('check')
-        console.log(currentData.considerEventStages)
-        console.log('bee pee')
         const finite_items = currentData.contingencyStore
           .filter((obj) => parseFloat(obj.contingency_store_value.finite) !== 0)
           .sort((a, b) => {
@@ -160,6 +157,8 @@ class MaterialTable extends BaseComponent {
           .sort((a, b) => {
             return parseFloat(b.contingency_store_value.infinite) - parseFloat(a.contingency_store_value.infinite)
           })
+
+          console.log(this.state.t5Material);
         return (
 
             // The 3 tier 5 materials
@@ -2275,11 +2274,15 @@ class MaterialTable extends BaseComponent {
 
                                     )
 
-                                } else if ((i === 13 || i === 14) && this.state.server == 'CN') { // 11 12
+                                } else if ((i === 13 || i === 14 || i==15) && this.state.server == 'CN') { // 11 12
                                     return (
 
                                         <TableRow>
-                                            <TableCell></TableCell>
+                                            {(i==13) && <TableCell rowSpan={3}>
+                                                <Tooltip title={<FormattedMessage id={currentData.t5[0].id} />} arrow>
+                                                    <span className={'material spriteMT-5 material-MT-' + currentData.t5[4].id}></span>
+                                                </Tooltip>
+                                            </TableCell> }
                                             <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
