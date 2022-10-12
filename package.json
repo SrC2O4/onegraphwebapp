@@ -19,6 +19,9 @@
     "mongoose": "^5.8.3",
     "nodemon": "^2.0.4"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "author": "Strontium",
   "license": "MIT"
 }

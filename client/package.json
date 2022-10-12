@@ -28,8 +28,11 @@
     "react-uid": "^2.2.0",
     "regenerator-runtime": "^0.13.7",
     "sass": "^1.26.11",
-    "sass-loader": "^10.0.2",
+    "sass-loader": "^13.1.0",
     "statezero": "^0.5.4"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "scripts": {
     "start": "react-scripts start",
