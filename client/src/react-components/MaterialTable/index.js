@@ -2398,8 +2398,18 @@ class MaterialTable extends BaseComponent {
                                     <TableRow>
                                     <TableCell rowSpan={3}>
                                     </TableCell>
+                                    <TableCell>
+                                                <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
+                                                    <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
 
-                                     {/* {this.state.server === 'CN' && */}
+                                                </Tooltip>
+                                                {(this.state.orangeStore && currentData.t4[i].orange_note && currentData.t4[i].orange_store_value) ?
+                                                    <p className={'M4Values' + (currentData.considerEventStages ? currentData.t4[i].orange_note.event : currentData.t4[i].orange_note.normal)}><strong style={{ color: 'orange' }}>[</strong>{currentData.considerEventStages ? currentData.t4[i].orange_store_value.event : currentData.t4[i].orange_store_value.normal}<strong style={{ color: 'orange' }}>]</strong></p>
+                                                    :
+                                                    <p className={'M4Values' + (currentData.considerEventStages ? (currentData.t4[i].Notes ? currentData.t4[i].Notes.event : '') : (currentData.t4[i].Notes ? currentData.t4[i].Notes.normal : ''))}>{currentData.considerEventStages ? (currentData.t4[i].golden_ticket_value ? currentData.t4[i].golden_ticket_value.event : 'N/A') : (currentData.t4[i].golden_ticket_value ? currentData.t4[i].golden_ticket_value.normal : 'N/A')}</p>
+                                                }
+                                            </TableCell>
+
                                      <TableCell>
                                         <Tooltip title={<FormattedMessage id={currentData.t3[i].id} />} arrow>
                                             <span className={'material spriteMT-4 material-MT-' + currentData.t3[i].id}></span>
@@ -2411,8 +2421,6 @@ class MaterialTable extends BaseComponent {
                                             <p className={'M4Values' + (currentData.considerEventStages ? (currentData.t3[i].Notes ? currentData.t3[i].Notes.event : '') : (currentData.t3[i].Notes ? currentData.t3[i].Notes.normal : ''))}>{`${currentData.considerEventStages ? (currentData.t3[i].green_ticket_value ? currentData.t3[i].green_ticket_value.event : 'N/A') : (currentData.t3[i].green_ticket_value ? currentData.t3[i].green_ticket_value.normal : 'N/A')}`}</p>
                                         }
                                     </TableCell>
-                                     {/* } */}
-                                    {/* {this.state.server === 'CN' &&  */}
                                     <TableCell colSpan={2}>
 
                                         {(currentData.considerEventStages ? currentData.t3[i].lowest_ap_stages.event : currentData.t3[i].lowest_ap_stages.normal).length === 0 && <h3 style={{ display: 'inline', whiteSpace: 'nowrap' }} className='textTips'>{<FormattedMessage id='recommend' />}</h3>}
