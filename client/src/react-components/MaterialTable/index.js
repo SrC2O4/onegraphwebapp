@@ -2392,12 +2392,10 @@ class MaterialTable extends BaseComponent {
                                     )
 
                                 }
-                                else if (i === 16 || i==17){
+                                else if ((i === 16 || i==17) && this.state.server == 'CN'){
                                     return(
-                                    
-                                    <TableRow>
-                                    <TableCell rowSpan={3}>
-                                    </TableCell>
+                                        <TableRow>
+                                        {(i==16) && <TableCell rowSpan={2}> </TableCell>}
                                     <TableCell>
                                                 <Tooltip title={<FormattedMessage id={currentData.t4[i].id} />} arrow>
                                                     <span className={'material spriteMT-4 material-MT-' + currentData.t4[i].id}></span>
@@ -2494,7 +2492,6 @@ class MaterialTable extends BaseComponent {
                                             )
                                         })}
                                     </TableCell>
-                                    {/* } */}
 
 
                                 </TableRow>
