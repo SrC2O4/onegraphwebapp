@@ -2279,7 +2279,7 @@ class MaterialTable extends BaseComponent {
 
                                         <TableRow>
                                             {(i==13) && <TableCell rowSpan={3}>
-                                                <Tooltip title={<FormattedMessage id={currentData.t5[0].id} />} arrow>
+                                                <Tooltip title={<FormattedMessage id={currentData.t5[4].id} />} arrow>
                                                     <span className={'material spriteMT-5 material-MT-' + currentData.t5[4].id}></span>
                                                 </Tooltip>
                                             </TableCell> }
