@@ -2274,7 +2274,7 @@ class MaterialTable extends BaseComponent {
 
                                     )
 
-                                } else if ((i === 13 || i === 14 || i==15) && this.state.server == 'CN') { // 11 12
+                                } else if ((i === 13 || i === 14 || i==15) && this.state.server != 'TW') { // 11 12
                                     return (
 
                                         <TableRow>
